@@ -41,13 +41,15 @@ if(_create isEqualType 1) then {
     	{
     		private _res = (_x call {
                 params ["_building"];
-                private _type = typeof _building;
+                private _type = typeOf _building;
     			if((damage _building) > 0.95) exitWith { []; };
     			if(
-                    (_type == "Land_Cargo_HQ_V1_F")
-                    || (_type == "Land_Cargo_HQ_V2_F")
-                    || (_type == "Land_Cargo_HQ_V3_F")
-                    || (_type == "Land_Cargo_HQ_V4_F")
+                    _type in [
+                        "Land_Cargo_HQ_V1_F",
+                        "Land_Cargo_HQ_V2_F",
+                        "Land_Cargo_HQ_V3_F",
+                        "Land_Cargo_HQ_V4_F"
+                    ]
                 ) exitWith {
                     private _p = (_building buildingPos 8);
                     private _guns = ({alive _x} count (nearestObjects [_p, ["I_HMG_01_high_F","I_GMG_01_high_F"], 5]));
@@ -57,14 +59,17 @@ if(_create isEqualType 1) then {
                         [];
                     };
                 };
+
                 if(
-                    (_type == "Land_Cargo_Patrol_V1_F")
-                    || (_type == "Land_Cargo_Patrol_V2_F")
-                    || (_type == "Land_Cargo_Patrol_V3_F")
-                    || (_type == "Land_Cargo_Patrol_V4_F")
+                    _type in [
+                        "Land_Cargo_Patrol_V1_F",
+                        "Land_Cargo_Patrol_V2_F",
+                        "Land_Cargo_Patrol_V3_F",
+                        "Land_Cargo_Patrol_V4_F"
+                    ]
                 ) exitWith {
                     private _ang = (getDir _building) - 190;
-                    private _p = (_building buildingPos 1) getPos [2.3, _ang];
+                    private _p = [_building buildingPos 1, 2.3, _ang] call BIS_fnc_relPos; // Not equivalent to getPos alt syntax!
     				private _dir = (getDir _building) - 180;
 
                     private _guns = {alive _x} count(nearestObjects [_p, ["I_HMG_01_high_F","I_GMG_01_high_F"], 5]);
@@ -94,7 +99,7 @@ if(_create isEqualType 1) then {
                 _dir = _res select 0;
                 _p = _res select 1;
             };
-        }foreach(_buildings);
+        }forEach(_buildings);
 
         private _class_obj = "";
         private _class_price = "";
@@ -115,11 +120,11 @@ if(_create isEqualType 1) then {
                 //put sandbags
                 private _sp = _p getPos [1.5,_dir];
                 _veh =  OT_NATO_Sandbag_Curved createVehicle _sp;
-                _veh setpos _sp;
+                _veh setPos _sp;
                 _veh setDir (_dir-180);
                 _sp = _p getPos [-1.5,_dir];
                 _veh =  OT_NATO_Sandbag_Curved createVehicle _sp;
-                _veh setpos _sp;
+                _veh setPos _sp;
                 _veh setDir (_dir);
             };
 
@@ -132,14 +137,14 @@ if(_create isEqualType 1) then {
             if(_money < _cost) exitWith {_doit = false;format ["You need $%1",_cost] call OT_fnc_notifyMinor};
             [-_cost] call OT_fnc_money;
             _garrison = server getVariable [format["resgarrison%1",_code],[]];
-            _garrison pushback [_create,[]];
+            _garrison pushBack [_create,[]];
             server setVariable [format["resgarrison%1",_code],_garrison,true];
         };
 
         if(_doit) then {
             private _gun = _class_obj createVehicle _p;
             _gun setVariable ["OT_garrison",true,true];
-            [_gun,getplayeruid player] call OT_fnc_setOwner;
+            [_gun,getPlayerUID player] call OT_fnc_setOwner;
             _gun setDir _dir;
             _gun setPosATL _p;
 

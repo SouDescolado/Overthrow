@@ -67,7 +67,7 @@ lbClear 1501;
 	_x params ["_cls","_qty"];
 	_idx = lbAdd [1501,format["%1 x %2",_qty,_cls call OT_fnc_getClassDisplayName]];
 	lbSetData [1501,_idx,_cls];
-}foreach(server getVariable ["factoryQueue",[]]);
+}forEach(server getVariable ["factoryQueue",[]]);
 
 private _index = lbCurSel 1500;
 private _cls = lbData [1500,_index];
@@ -127,5 +127,5 @@ if(count _cost > 0) then {
 
 ((findDisplay 8000) displayCtrl 1100) ctrlSetStructuredText parseText format["
 	<t align='center' size='0.9'>%1</t><br/>
-	%3
-",_txt,_desc,_recipe];
+	%2
+",_txt,_recipe];

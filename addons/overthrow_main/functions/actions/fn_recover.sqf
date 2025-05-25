@@ -23,7 +23,7 @@ if (isPlayer _user) then {
     format ["Looting all bodies and item piles within %1m", _range] call OT_fnc_notifyMinor;
     [_time, false] call OT_fnc_progressBar;
 } else {
-    _user globalchat format["Looting bodies and item piles within %1m using Recovery vehicle", _range];
+    _user globalChat format["Looting bodies and item piles within %1m using Recovery vehicle", _range];
 };
 
 sleep _time;
@@ -44,7 +44,7 @@ private _weaponHolders = (_veh nearObjects ["WeaponHolder", _range]) + (_veh nea
 
     deleteVehicle _weaponHolder;
     _countWeaponHolders = _countWeaponHolders + 1;
-} foreach _weaponHolders;
+} forEach _weaponHolders;
 
 // Get the bodies. This code can be simplified in Arma 3 version 2.18 with the new syntax 3 of
 // nearEntities. https://community.bistudio.com/wiki/nearEntities
@@ -68,5 +68,5 @@ if (isPlayer _user) then {
     _veh enableSimulation true;
     format["Looted %1 item piles and %2 bodies into this truck", _countWeaponHolders, _countBodies] call OT_fnc_notifyMinor;
 } else {
-    _user globalchat format["All done! Looted %1 item piles and %2 bodies", _countWeaponHolders, _countBodies];
+    _user globalChat format["All done! Looted %1 item piles and %2 bodies", _countWeaponHolders, _countBodies];
 };

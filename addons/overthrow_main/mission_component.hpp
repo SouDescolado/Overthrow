@@ -6,7 +6,7 @@
 #include "\overthrow_main\script_component.hpp"
 
 author=QUOTE(MOD_AUTHOR);
-OnLoadMission=QUOTE(VERSION - Read the wiki at overthrow.fandom.com for more information);
+OnLoadMission=QUOTE(VERSION_STR - Read the wiki at overthrow.fandom.com for more information);
 
 onLoadMissionTime = 1;
 allowSubordinatesTakeWeapons = 1;
@@ -16,7 +16,7 @@ briefing = 0;
 
 class Header
 {
-	gameType = Coop;
+	gameType = "Coop";
 	minPlayers = 1;
 	maxPlayers = 32;
 };
@@ -153,4 +153,16 @@ class Params {
         texts[] = {"None", "Players Only", "All"};
         default = 1;
     };
+};
+
+// ZEN integration
+// This will do nothing if ZEN is loaded
+class zen_context_menu_actions {
+    class ot_setmoney {
+        displayName = "Overthrow: Set Money";
+        icon = "\overthrow_main\ui\markers\shop-General.paa";
+        statement = "[_hoveredEntity] call OT_fnc_zenSetMoney";
+        condition = "_hoveredEntity isKindOf 'CAManBase' && {isPlayer _hoveredEntity}";
+        priority = 50;
+    };  
 };

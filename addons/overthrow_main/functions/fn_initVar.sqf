@@ -1,6 +1,6 @@
-private _cfgVehicles = configfile >> "CfgVehicles";
+private _cfgVehicles = configFile >> "CfgVehicles";
 private _cfgWeapons = configFile >> "CfgWeapons";
-private _cfgMagazines = configFIle >> "CfgMagazines";
+private _cfgMagazines = configFile >> "CfgMagazines";
 
 OT_ACEremoveAction = [
 	"OT_Remove",
@@ -30,11 +30,11 @@ OT_ferryDestinations = [];
 OT_NATO_control = [];
 OT_regions = [];
 {
-	if((_x select [0,12]) isEqualTo "destination_") then {OT_ferryDestinations pushback _x; continue};
-	if((_x select [0,8]) isEqualTo "control_") then {OT_NATO_control pushback _x; continue};
-	if((_x select [0,7]) isEqualTo "island_") then {OT_regions pushback _x; continue};
-	if((_x select [0,7]) isEqualTo "region_") then {OT_regions pushback _x};
-}foreach(allMapMarkers);
+	if((_x select [0,12]) isEqualTo "destination_") then {OT_ferryDestinations pushBack _x; continue};
+	if((_x select [0,8]) isEqualTo "control_") then {OT_NATO_control pushBack _x; continue};
+	if((_x select [0,7]) isEqualTo "island_") then {OT_regions pushBack _x; continue};
+	if((_x select [0,7]) isEqualTo "region_") then {OT_regions pushBack _x};
+}forEach(allMapMarkers);
 
 OT_missions = [];
 OT_localMissions = [];
@@ -42,14 +42,14 @@ OT_localMissions = [];
 	_name = configName _x;
 	_script = getText (_x >> "script");
 	_code = compileScript [_script, true];
-	OT_missions pushback _code;
-}foreach("true" configClasses ( configFile >> "CfgOverthrowMissions" ));
+	OT_missions pushBack _code;
+}forEach("true" configClasses ( configFile >> "CfgOverthrowMissions" ));
 
 OT_tutorialMissions = [];
-OT_tutorialMissions pushback (compileScript ["\overthrow_main\missions\tutorial\tut_NATO.sqf", true]); // index 0
+OT_tutorialMissions pushBack (compileScript ["\overthrow_main\missions\tutorial\tut_NATO.sqf", true]); // index 0
 //OT_tutorialMissions pushback (compileFinal preprocessFileLineNumbers "\overthrow_main\missions\tutorial\tut_CRIM.sqf");
-OT_tutorialMissions pushback (compileScript ["\overthrow_main\missions\tutorial\tut_Drugs.sqf", true]); // index 1
-OT_tutorialMissions pushback (compileScript ["\overthrow_main\missions\tutorial\tut_Economy.sqf", true]); // index 2
+OT_tutorialMissions pushBack (compileScript ["\overthrow_main\missions\tutorial\tut_Drugs.sqf", true]); // index 1
+OT_tutorialMissions pushBack (compileScript ["\overthrow_main\missions\tutorial\tut_Economy.sqf", true]); // index 2
 
 OT_NATO_HQ_garrisonPos = [];
 OT_NATO_HQ_garrisonDir = 0;
@@ -70,20 +70,20 @@ OT_faces_western = [];
 OT_faces_eastern = [];
 {
     private _types = getArray(_x >> "identityTypes");
-	if(OT_identity_local in _types) then {OT_faces_local pushback configName _x};
-	if(OT_identity_western in _types) then {OT_faces_western pushback configName _x};
-	if(OT_identity_eastern in _types) then {OT_faces_eastern pushback configName _x};
-}foreach("getNumber(_x >> 'disabled') isEqualTo 0" configClasses (configfile >> "CfgFaces" >> "Man_A3"));
+	if(OT_identity_local in _types) then {OT_faces_local pushBack configName _x};
+	if(OT_identity_western in _types) then {OT_faces_western pushBack configName _x};
+	if(OT_identity_eastern in _types) then {OT_faces_eastern pushBack configName _x};
+}forEach("getNumber(_x >> 'disabled') isEqualTo 0" configClasses (configFile >> "CfgFaces" >> "Man_A3"));
 
 OT_voices_local = [];
 OT_voices_western = [];
 OT_voices_eastern = [];
 {
     private _types = getArray(_x >> "identityTypes");
-	if(OT_language_local in _types) then {OT_voices_local pushback configName _x};
-	if(OT_language_western in _types) then {OT_voices_western pushback configName _x};
-	if(OT_language_eastern in _types) then {OT_voices_eastern pushback configName _x};
-}foreach("getNumber(_x >> 'scope') isEqualTo 2" configClasses (configfile >> "CfgVoice"));
+	if(OT_language_local in _types) then {OT_voices_local pushBack configName _x};
+	if(OT_language_western in _types) then {OT_voices_western pushBack configName _x};
+	if(OT_language_eastern in _types) then {OT_voices_eastern pushBack configName _x};
+}forEach("getNumber(_x >> 'scope') isEqualTo 2" configClasses (configFile >> "CfgVoice"));
 
 //Find houses
 OT_hugePopHouses = ["Land_MultistoryBuilding_01_F","Land_MultistoryBuilding_03_F","Land_MultistoryBuilding_04_F","Land_House_2W04_F","Land_House_2W03_F"]; //buildings with potentially lots of people living in them
@@ -100,7 +100,7 @@ OT_highPopHouses = [];
         if(_cost > 25000) exitWith {OT_medPopHouses pushBack _name;};
         OT_lowPopHouses pushBack _name;
     };
-}foreach("(getNumber (_x >> 'scope') isEqualTo 2) && {(configName _x isKindOf 'House') && {'_house' in (toLowerANSI (configName _x))}}" configClasses (_cfgVehicles));
+}forEach("(getNumber (_x >> 'scope') isEqualTo 2) && {(configName _x isKindOf 'House') && {'_house' in (toLowerANSI (configName _x))}}" configClasses (_cfgVehicles));
 
 OT_allBuyableBuildings = OT_lowPopHouses + OT_medPopHouses + OT_highPopHouses + OT_hugePopHouses + OT_mansions + [OT_item_Tent,OT_flag_IND];
 
@@ -117,7 +117,7 @@ OT_allTownPositions = [];
 	if(isServer) then {
 		server setVariable [_name,_pos,true];
 	};
-}foreach(OT_townData);
+}forEach(OT_townData);
 
 OT_allAirports = OT_airportData apply { _x select 1 };
 
@@ -269,7 +269,7 @@ OT_spawnHouses = [];
 	OT_spawnHouses pushBack _cls;
 	OT_allBuyableBuildings pushBackUnique _cls;
 	OT_allRealEstate pushBackUnique _cls;
-}foreach( "getNumber ( _x >> ""ot_isPlayerHouse"" ) isEqualTo 1" configClasses ( _cfgVehicles ) );
+}forEach( "getNumber ( _x >> ""ot_isPlayerHouse"" ) isEqualTo 1" configClasses ( _cfgVehicles ) );
 
 //Mission house overrides
 {
@@ -278,7 +278,7 @@ OT_spawnHouses = [];
 	OT_allBuyableBuildings pushBackUnique _cls;
 	OT_allRealEstate pushBackUnique _cls;
 	templates setVariable [_cls,_template,true];
-}foreach(OT_spawnHouseBuildings);
+}forEach(OT_spawnHouseBuildings);
 
 OT_gunDealerHouses = OT_spawnHouses;
 
@@ -290,7 +290,7 @@ OT_shops = _allShops apply {configName _x};
 	_x params ["_cls","_template"];
 	OT_shops pushBack _cls;
 	templates setVariable [_cls,_template,true];
-}foreach(OT_shopBuildings);
+}forEach(OT_shopBuildings);
 
 private _allCarShops = "getNumber ( _x >> ""ot_isCarDealer"" ) isEqualTo 1" configClasses ( _cfgVehicles );
 OT_carShops = _allCarShops apply {configName _x};
@@ -300,7 +300,7 @@ OT_carShops = _allCarShops apply {configName _x};
 	_x params ["_cls","_template"];
 	OT_carShops pushBack _cls;
 	templates setVariable [_cls,_template,true];
-}foreach(OT_carShopBuildings);
+}forEach(OT_carShopBuildings);
 
 //Calculate prices
 //First, load the hardcoded prices from data/prices.sqf
@@ -308,7 +308,7 @@ if(isServer) then {
 	OT_loadedPrices = [];
 	call compileScript ["\overthrow_main\data\prices.sqf", false];
 	{
-		OT_loadedPrices pushback (_x select 0);
+		OT_loadedPrices pushBack (_x select 0);
 		cost setVariable[_x select 0,_x select 1, true];
 	}forEach(OT_priceData);
 	OT_priceData = nil; //free memory
@@ -316,25 +316,20 @@ if(isServer) then {
 	call compileScript ["\overthrow_main\data\gangnames.sqf", false];
 };
 
-// note: Kamaz MRL is a special case: it has threat = 0 even though it is armed. This is probably an arma bug. Filtering it out separately.
 private _allVehs = "
-    ( getNumber ( _x >> ""scope"" ) isEqualTo 2
-    &&
-	{ (getArray ( _x >> ""threat"" ) select 0) < 0.5}
+	( getNumber ( _x >> 'scope' ) isEqualTo 2
 	&&
-    { (toLowerANSI getText ( _x >> ""vehicleClass"" ) isEqualTo ""car"") || (toLowerANSI getText ( _x >> ""vehicleClass"" ) isEqualTo ""support"")}
+	{ (getArray ( _x >> 'threat' ) # 0) < 0.5 }
 	&&
-    { (getText ( _x >> ""faction"" ) isEqualTo ""CIV_F"") or
-     (getText ( _x >> ""faction"" ) isEqualTo ""IND_F"")}
+	{ toLowerANSI getText ( _x >> 'vehicleClass' ) in ['car', 'support'] }
 	&&
-	{ configName _x isNotEqualTo ""I_Truck_02_MRL_F""})
-
+	{ toLowerANSI getText ( _x >> 'faction' ) in ['civ_f', 'ind_f'] })
 " configClasses ( _cfgVehicles );
 
 private _mostExpensive = 0;
 {
 	private _cls = configName _x;
-	private _clsConfig = _cfgVehicles >> _cls;
+	private _clsConfig = _x;
 	private _cost = round(getNumber (_clsConfig >> "armor") + (getNumber (_clsConfig >> "enginePower") * 2));
 	_cost = _cost + round(getNumber (_clsConfig >> "maximumLoad") * 0.1);
 
@@ -342,11 +337,11 @@ private _mostExpensive = 0;
 	if(getText (_clsConfig >> "faction") != "CIV_F") then {_cost = _cost * 1.5};
 
 
-	OT_vehicles pushback [_cls,_cost,0,getNumber (_clsConfig >> "armor"),2];
-	OT_allVehicles pushback _cls;
+	OT_vehicles pushBack [_cls,_cost,0,getNumber (_clsConfig >> "armor"),2];
+	OT_allVehicles pushBack _cls;
 	if(getText (_clsConfig >> "faction") == "CIV_F") then {
 		if(getText(_clsConfig >> "textSingular") != "truck" && getText(_clsConfig >> "driverAction") != "Kart_driver") then {
-			OT_vehTypes_civ pushback _cls;
+			OT_vehTypes_civ pushBack _cls;
 
 			if(_cost > _mostExpensive)then {
 				_mostExpensive = _cost;
@@ -354,37 +349,35 @@ private _mostExpensive = 0;
 			};
 		};
 	};
-}foreach(_allVehs);
+}forEach(_allVehs);
 
 //Determine vehicle threats
 _allVehs = "
-	( getNumber ( _x >> ""scope"" ) > 0
+	( getNumber ( _x >> 'scope' ) isEqualTo 2
 	&&
-	{ (getArray ( _x >> ""threat"" ) select 0) > 0}
+	{ (getArray ( _x >> 'threat' ) # 0) > 0}
 	&&
-	{ (getText ( _x >> ""vehicleClass"" ) isEqualTo ""Car"") or
-	 (getText ( _x >> ""vehicleClass"" ) isEqualTo ""Armored"")})
+	{ toLowerANSI getText ( _x >> 'vehicleClass' ) in ['car', 'armored']})
 
 " configClasses ( _cfgVehicles );
 
 {
-	OT_allVehicleThreats pushback (configName _x);
-}foreach(_allVehs);
+	OT_allVehicleThreats pushBack (configName _x);
+}forEach(_allVehs);
 
 private _allHelis = "
-    ( getNumber ( _x >> ""scope"" ) > 1
+    ( getNumber ( _x >> 'scope' ) isEqualTo 2
     &&
-	{ (getArray ( _x >> ""threat"" ) select 0) < 0.5}
+	{ (getArray ( _x >> 'threat' ) select 0) < 0.5}
 	&&
-    { getText ( _x >> ""vehicleClass"" ) isEqualTo ""Air""}
+    { toLowerANSI getText ( _x >> 'vehicleClass' ) isEqualTo 'air'}
 	&&
-    { (getText ( _x >> ""faction"" ) isEqualTo ""CIV_F"") or
-     (getText ( _x >> ""faction"" ) isEqualTo ""IND_F"")})
+    { toLowerANSI getText ( _x >> 'faction' ) in ['civ_f', 'ind_f'] })
 " configClasses ( _cfgVehicles );
 
 {
 	private _cls = configName _x;
-	private _clsConfig = _cfgVehicles >> _cls;
+	private _clsConfig = _x;
 	private _multiply = 3;
 	if(_cls isKindOf "Plane") then {_multiply = 6};
 	private _cost = (getNumber (_clsConfig >> "armor") + getNumber (_clsConfig >> "enginePower")) * _multiply;
@@ -402,33 +395,33 @@ private _allHelis = "
 		cost setVariable [_cls,[_cost,0,_steel,_plastic],true];
 	};
 
-	OT_helis pushback [_cls,[_cost,0,_steel,_plastic],true];
-	OT_allVehicles pushback _cls;
-}foreach(_allHelis);
+	OT_helis pushBack [_cls,[_cost,0,_steel,_plastic],true];
+	OT_allVehicles pushBack _cls;
+}forEach(_allHelis);
 
 //Determine aircraft threats
 _allHelis = "
-    ( getNumber ( _x >> ""scope"" ) > 0
+    ( getNumber ( _x >> 'scope' ) isEqualTo 2
     &&
-	{ (getArray ( _x >> ""threat"" ) select 0) >= 0.5}
+	{ (getArray ( _x >> 'threat' ) select 0) >= 0.5}
 	&&
-    { getText ( _x >> ""vehicleClass"" ) isEqualTo ""Air""})
+    { toLowerANSI getText ( _x >> 'vehicleClass' ) isEqualTo 'air'})
 " configClasses ( _cfgVehicles );
 
 {
 	private _cls = configName _x;
-	private _clsConfig = _cfgVehicles >> _cls;
-	private _numturrets = count("true" configClasses(_clsConfig >> "Turrets"));
+	// private _clsConfig = _x;
+	// private _numturrets = count("true" configClasses(_clsConfig >> "Turrets"));
 
 	if(_cls isKindOf "Plane") then {
-		OT_allPlaneThreats pushback _cls;
+		OT_allPlaneThreats pushBack _cls;
 	}else{
-		OT_allHeliThreats pushback _cls;
+		OT_allHeliThreats pushBack _cls;
 	};
-}foreach(_allHelis);
+}forEach(_allHelis);
 
 //Chinook (unarmed) special case for production logistics
-OT_helis pushback ["B_Heli_Transport_03_unarmed_F",[150000,0,110,5],true];
+OT_helis pushBack ["B_Heli_Transport_03_unarmed_F",[150000,0,110,5],true];
 OT_allVehicles pushBackUnique "B_Heli_Transport_03_unarmed_F";
 if(isServer) then {
 	cost setVariable ["B_Heli_Transport_03_unarmed_F",[150000,0,110,5],true];
@@ -440,10 +433,10 @@ if(isServer) then {
 		cost setVariable [_cls,[_x select 1,_x select 2,_x select 3,_x select 4],true];
 	};
 	if(_cls in OT_vehTypes_civ) then {
-		OT_vehWeights_civ pushback (_mostExpensive - (_x select 1)) + 1; //This will make whatever is the most expensive car very rare
+		OT_vehWeights_civ pushBack (_mostExpensive - (_x select 1)) + 1; //This will make whatever is the most expensive car very rare
 	};
 	OT_allVehicles pushBack _cls;
-}foreach(OT_vehicles);
+}forEach(OT_vehicles);
 
 // Filter the scope only once
 private _filteredWeaponConfigs = "
@@ -472,19 +465,19 @@ private _allHelmets = [];
 _filteredWeaponConfigs = nil;
 
 private _allAmmo = "
-    ( getNumber ( _x >> ""scope"" ) isEqualTo 2 )
+    ( getNumber ( _x >> 'scope' ) isEqualTo 2 )
 " configClasses ( configFile >> "cfgMagazines" );
 
 private _allVehicles = "
-    ( getNumber ( _x >> ""scope"" ) > 0 )
+    ( getNumber ( _x >> 'scope' ) > 0 )
 " configClasses ( _cfgVehicles );
 
 private _allFactions = "
-    ( getNumber ( _x >> ""side"" ) < 3 )
+    ( getNumber ( _x >> 'side' ) < 3 )
 " configClasses ( configFile >> "cfgFactionClasses" );
 
 private _allGlasses = "
-    ( getNumber ( _x >> ""scope"" ) isEqualTo 2 )
+    ( getNumber ( _x >> 'scope' ) isEqualTo 2 )
 " configClasses ( configFile >> "CfgGlasses" );
 
 OT_allFactions = [];
@@ -530,7 +523,7 @@ OT_allBLURifleMagazines = [];
 	private _m = getNumber(_x >> "mass");
 	private _ignore = getNumber(_x >> "ot_shopignore");
 	if(_ignore != 1) then {
-		if((_name find "Balaclava_TI_") > -1) then {
+		if("Balaclava_TI_" in _name) then {
 			_m = _m * 2;
 		};
 
@@ -541,27 +534,35 @@ OT_allBLURifleMagazines = [];
 
 		[_name,_title] call {
 			params ["_name","_title"];
-			if(_name == "None") exitWith {};
-			if(_name == "G_Goggles_VR") exitWith {};
-			if((_title find "Tactical") > -1 || (_title find "Diving") > -1 || (_title find "Goggles") > -1) exitWith {
-				OT_allGoggles pushback _name;
+			_name = toLowerANSI _name;
+			if(_name == "none") exitWith {};
+			if(_name == "g_goggles_vr") exitWith {};
+
+			if (
+				"respirator" in _name
+				|| "blindfold" in _name
+				|| "regulator" in _name
+			) exitWith {};
+
+			if("Tactical" in _title || "Diving" in _title || "Goggles" in _title) exitWith {
+				OT_allGoggles pushBack _name;
 			};
-			if((_title find "Balaclava") > -1 || (_title find "Bandana") > -1) exitWith {
-				OT_allFacewear pushback _name;
+			if("Balaclava" in _title || "Bandana" in _title) exitWith {
+				OT_allFacewear pushBack _name;
 			};
-			OT_allGlasses pushback _name;
+			OT_allGlasses pushBack _name;
 		};
 		if(isServer && _name != "None" && isNil {cost getVariable _name}) then {
 			cost setVariable [_name,[_m*3,0,0,ceil(_m*0.5)],true];
 		};
 	};
-}foreach(_allGlasses);
+}forEach(_allGlasses);
 
 {
 	private _name = configName _x;
-	private _title = getText (configFile >> "cfgFactionClasses" >> _name >> "displayName");
-	private _side = getNumber (configFile >> "cfgFactionClasses" >> _name >> "side");
-	private _flag = getText (configFile >> "cfgFactionClasses" >> _name >> "flag");
+	private _title = getText (_x >> "displayName");
+	private _side = getNumber (_x >> "side");
+	private _flag = getText (_x >> "flag");
 	private _numblueprints = 0;
 
 	//736
@@ -582,7 +583,7 @@ OT_allBLURifleMagazines = [];
 				private _base = [_x] call BIS_fnc_baseWeapon;
 				if !(_base in _blacklist) then {
 					private _muzzleEffect = getText (_cfgWeapons >> _base >> "muzzleEffect");
-					if (!(_x in _weapons) && (getNumber (_cfgWeapons >> _base >> "scope") isEqualTo 2)) then {_weapons pushback _base};
+					if (!(_x in _weapons) && (getNumber (_cfgWeapons >> _base >> "scope") isEqualTo 2)) then {_weapons pushBack _base};
 					if(_side isEqualTo 1 && !(_muzzleEffect isEqualTo "BIS_fnc_effectFiredFlares")) then {
 						if(_base isKindOf ["Rifle", _cfgWeapons]) then {
 							private _mass = getNumber (_cfgWeapons >> _base >> "WeaponSlotsInfo" >> "mass");
@@ -590,13 +591,13 @@ OT_allBLURifleMagazines = [];
 								_itemType = ([_cls] call BIS_fnc_itemType) select 1;
 								if(_itemType isEqualTo "MachineGun") exitWith {OT_allBLUMachineGuns pushBackUnique _base};
 								if((_this select [0,7]) == "srifle_" || (_this isKindOf ["Rifle_Long_Base_F", _cfgWeapons])) exitWith {OT_allBLUSniperRifles pushBackUnique _base};
-								if((_this find "_GL_") > -1) exitWith {OT_allBLUGLRifles pushBackUnique _base};
+								if("_GL_" in _this) exitWith {OT_allBLUGLRifles pushBackUnique _base};
 								private _events = "" configClasses (_cfgWeapons >> _base >> "Eventhandlers");
 								_add = true;
 								{
 									private _n = configName _x;
 									if(_n isEqualTo "RHS_BoltAction") exitWith {_add = false}; //ignore RHS bolt-action rifles
-								}foreach(_events);
+								}forEach(_events);
 								if(_add && _mass < 61) exitWith {OT_allBLUSMG pushBackUnique _base};
 								if(_add) then {
 									OT_allBLURifles pushBackUnique _base;
@@ -609,17 +610,17 @@ OT_allBLURifleMagazines = [];
 					};
 					//Get ammo
 					{
-						if ((!(_x in _blacklist) || _x in OT_allExplosives) && (getNumber (configFile >> "CfgMagazines" >> _x >> "scope") isEqualTo 2)) then {
-							_weapons pushbackUnique _x
+						if ((getNumber (configFile >> "CfgMagazines" >> _x >> "scope") isEqualTo 2) && {!(_x in _blacklist) || _x in OT_allExplosives}) then {
+							_weapons pushBackUnique _x
 						};
-					}foreach(getArray(_cfgWeapons >> _base >> "magazines"));
+					}forEach(getArray(_cfgWeapons >> _base >> "magazines"));
 				};
-			}foreach(getArray(_cfgVehicles >> _cls >> "weapons"));
+			}forEach(getArray(_cfgVehicles >> _cls >> "weapons"));
 		}else{
 			//It's a vehicle
 			if !(_cls isKindOf "Bag_Base" || _cls isKindOf "StaticWeapon") then {
 				if(_cls isKindOf "LandVehicle" || _cls isKindOf "Air" || _cls isKindOf "Ship") then {
-					_vehicles pushback _cls;
+					_vehicles pushBack _cls;
 					_numblueprints = _numblueprints + 1;
 					if(_side isEqualTo 1) then {
 						private _threat = getArray (_x >> "threat");
@@ -632,7 +633,7 @@ OT_allBLURifleMagazines = [];
 				};
 			};
 		};
-	}foreach(_all);
+	}forEach(_all);
 	_weapons = (_weapons arrayIntersect _weapons); //remove duplicates
 
 	if(isServer) then {
@@ -640,14 +641,13 @@ OT_allBLURifleMagazines = [];
 		spawner setVariable [format["facvehicles%1",_name],_vehicles,true];
 	};
 	if(_side > -1 && _numblueprints > 0) then {
-		OT_allFactions pushback [_name,_title,_side,_flag];
+		OT_allFactions pushBack [_name,_title,_side,_flag];
 	};
-}foreach(_allFactions);
+}forEach(_allFactions);
 
+private _caliberRegex = "(\d*\.\d+)\s*x\s*(\d+)|(\d+)\.(\d+)|\.(\d+)|(\d+)x(\d+)|(\d+)\s*GA/i";
 {
-	private _name = configName _x;
-	private _caliberRegex = "(\d*\.\d+)\s*x\s*(\d+)|(\d+)\.(\d+)|\.(\d+)|(\d+)x(\d+)|(\d+)\s*GA/i";
-	_name = [_name] call BIS_fnc_baseWeapon;
+	private _name = [configName _x] call BIS_fnc_baseWeapon;
 
 	private _short = getText (_cfgWeapons >> _name >> "descriptionShort");
 
@@ -679,10 +679,10 @@ OT_allBLURifleMagazines = [];
 
 	private _muzzles = getArray (_cfgWeapons >> _name >> "muzzles");
 	{
-		if((_x find "EGLM") > -1) then {
+		if("EGLM" in _x) then {
 			_haslauncher = true;
 		};
-	}foreach(_muzzles);
+	}forEach(_muzzles);
 
 	([_weaponType,_name,_caliber,_haslauncher,_short] call {
 		params ["_weaponType","_name","_caliber","_haslauncher","_short"];
@@ -710,9 +710,9 @@ OT_allBLURifleMagazines = [];
 			if(_haslauncher) then {_cost = round(_cost * 1.2)};
 			OT_allAssaultRifles pushBack _name;
 			if(_cost > 1400) then {
-				OT_allExpensiveRifles pushback _name;
+				OT_allExpensiveRifles pushBack _name;
 			} else {
-				OT_allCheapRifles pushback _name;
+				OT_allCheapRifles pushBack _name;
 			};
 			[_cost, 2]
 		};
@@ -757,7 +757,7 @@ OT_allBLURifleMagazines = [];
 	if(isServer && {isNil {cost getVariable _name}} && {! isNil {_cost}}) then {
 		cost setVariable [_name,[_cost,0,_steel,0],true];
 	};
-} foreach (_allWeapons);
+} forEach (_allWeapons);
 
 {
 	private _cost = 0;
@@ -768,13 +768,13 @@ OT_allBLURifleMagazines = [];
 		if !(_name in ["V_Press_F","V_TacVest_blk_POLICE"]) then {
 			OT_allVests pushBack _name;
 			if(_cost > 40) then {
-				OT_allProtectiveVests pushback _name;
+				OT_allProtectiveVests pushBack _name;
 			};
 			if(_cost > 300) then {
-				OT_allExpensiveVests pushback _name;
+				OT_allExpensiveVests pushBack _name;
 			};
 			if(_cost < 300 && _cost > 40) then {
-				OT_allCheapVests pushback _name;
+				OT_allCheapVests pushBack _name;
 			};
 		};
 		_steel = 2;
@@ -793,30 +793,30 @@ OT_allLegalClothing = [];
 
 	private _c = _name splitString "_";
 	if(_c select (count _c - 1) != "VR") then {
-		OT_allClothing pushback _name;
+		OT_allClothing pushBack _name;
 
 		private _side = _c select 1;
-		if((_name == "V_RebreatherIA" || _side == "C" || _side == "I") && (_c select (count _c - 1) != "VR")) then {
-			OT_allLegalClothing pushback _name;
+		if((_name == "V_RebreatherIA" || (!isNil "_side" && {_side == "C" || _side == "I"})) && (_c select (count _c - 1) != "VR")) then {
+			OT_allLegalClothing pushBack _name;
 		};
 		if (isServer && isNil {cost getVariable _name}) then {
 			cost setVariable [_name,[_cost,0,0,1],true];
 		};
 	};
-} foreach (_allUniforms);
+} forEach (_allUniforms);
 
 {
 	private _name = configName _x;
 	private _cost = 20 + (getNumber(_cfgWeapons >> _name >> "ItemInfo" >> "HitpointsProtectionInfo" >> "Head" >> "armor") * 30);
 	if(_cost > 20) then {
-		OT_allHelmets pushback _name;
+		OT_allHelmets pushBack _name;
 	}else{
-		OT_allHats pushback _name;
+		OT_allHats pushBack _name;
 	};
 	if(isServer && isNil {cost getVariable _name}) then {
 		cost setVariable [_name,[_cost,0,1,0],true];
 	};
-} foreach (_allHelmets);
+} forEach (_allHelmets);
 
 {
 	private _name = configName _x;
@@ -824,7 +824,7 @@ OT_allLegalClothing = [];
 	if(_name isKindOf ["Default",configFile >> "CfgMagazines"] && (_name != "NLAW_F") && !(_name isKindOf ["VehicleMagazine",configFile >> "CfgMagazines"])) then {
 		private _cost = round(_m * 4);
 		private _desc = getText(_x >> "descriptionShort");
-		if((_desc find ".408") > -1) then {
+		if(".408" in _desc) then {
 			_cost = _cost * 4;
 		};
 		private _exp = false;
@@ -833,15 +833,15 @@ OT_allLegalClothing = [];
 		if(getNumber(_x >> "ace_explosives_Placeable") == 1) then {
 			_exp = true;
 		};
-		if((_desc find "Smoke") > -1) then {
+		if("Smoke" in _desc) then {
 			_cost = round(_m * 0.5);
 		}else{
-			if((_desc find "Grenade") > -1) then {
+			if("Grenade" in _desc) then {
 				_cost = round(_m * 2);
 				_exp = true;
 			};
 		};
-		if((_desc find "Flare") > -1 || (_desc find "flare") > -1) then {
+		if("Flare" in _desc || "flare" in _desc) then {
 			_cost = round(_m * 0.6);
 			_exp = false;
 		};
@@ -851,16 +851,16 @@ OT_allLegalClothing = [];
 		if(_exp) then {
 			_steel = 0;
 			_plastic = round(_m * 0.5);
-			OT_allExplosives pushback _name;
-			OT_explosives pushback [_name,_cost,0,_steel,_plastic];
+			OT_allExplosives pushBack _name;
+			OT_explosives pushBack [_name,_cost,0,_steel,_plastic];
 		}else{
-			OT_allMagazines pushback _name;
+			OT_allMagazines pushBack _name;
 		};
 		if(isServer && isNil {cost getVariable _name}) then {
 			cost setVariable [_name,[_cost,0,_steel,_plastic],true];
 		};
 	};
-} foreach (_allAmmo);
+} forEach (_allAmmo);
 
 {
 	private _name = configName _x;
@@ -868,12 +868,12 @@ OT_allLegalClothing = [];
 	if(getNumber(_x >> "ace_explosives_Range") > 1000) then {
 		_m = _m * 10;
 	};
-	OT_allDetonators pushback _name;
-	OT_detonators pushback [_name,_m,0,0.1,0];
+	OT_allDetonators pushBack _name;
+	OT_detonators pushBack [_name,_m,0,0.1,0];
 	if(isServer && isNil {cost getVariable _name}) then {
 		cost setVariable [_name,[_m,0,0.1,0],true];
 	};
-} foreach (_allDetonators);
+} forEach (_allDetonators);
 
 if(isServer) then {
 	//Remaining vehicle costs
@@ -900,7 +900,7 @@ if(isServer) then {
 				cost setVariable [_name,[_cost,0,_steel,_plastic],true];
 			};
 		};
-	} foreach (_allVehicles);
+	} forEach (_allVehicles);
 };
 
 OT_attachments = [];
@@ -919,9 +919,9 @@ OT_attachments = [];
 	if(isServer && isNil {cost getVariable _name}) then {
 		cost setVariable [_name,[_cost,0,0,0.25],true];
 	};
-	OT_allAttachments pushback _name;
-	OT_attachments pushback [_name,[_cost,0,0,0.25]];
-} foreach (_allAttachments);
+	OT_allAttachments pushBack _name;
+	OT_attachments pushBack [_name,[_cost,0,0,0.25]];
+} forEach (_allAttachments);
 
 {
 	private _name = configName _x;
@@ -934,13 +934,13 @@ OT_attachments = [];
 		if(_mode == "NVS") then {_mul = 0.2};
 		if(_mode == "TWS") then {_mul = 0.5};
 		_cost = _cost + floor(_max * _mul);
-	}foreach(_allModes);
+	}forEach(_allModes);
 
-	OT_allOptics pushback _name;
+	OT_allOptics pushBack _name;
 	if(isServer && isNil {cost getVariable _name}) then {
 		cost setVariable [_name,[_cost,0,0,0.5],true];
 	};
-} foreach (_allOptics);
+} forEach (_allOptics);
 
 OT_allWeapons = OT_allSubMachineGuns + OT_allAssaultRifles + OT_allMachineGuns + OT_allSniperRifles + OT_allHandGuns + OT_allMissileLaunchers + OT_allRocketLaunchers;
 
@@ -956,20 +956,20 @@ if(isServer) then {
 		cost setVariable [_x select 0,_x select [1,4],true];
 	};
 	OT_allBackpacks pushBack (_x select 0);
-}foreach(OT_backpacks);
+}forEach(OT_backpacks);
 {
 	if(isServer && isNil {cost getVariable (_x select 0)}) then {
 		cost setVariable [_x select 0,_x select [1,4],true];
 	};
 	OT_allStaticBackpacks pushBack (_x select 0);
-}foreach(OT_staticBackpacks);
+}forEach(OT_staticBackpacks);
 
 {
 	if(isServer && isNil {cost getVariable (_x select 0)}) then {
 		cost setVariable [_x select 0,_x select [1,4],true];
 	};
 	OT_allBoats pushBack (_x select 0);
-}foreach(OT_boats);
+}forEach(OT_boats);
 
 OT_staticMachineGuns = ["I_HMG_01_F","I_HMG_01_high_F","I_HMG_01_A_F","O_HMG_01_F","O_HMG_01_high_F","O_HMG_01_A_F","B_HMG_01_F","B_HMG_01_high_F","B_HMG_01_A_F"];
 OT_staticWeapons = ["I_Mortar_01_F","I_static_AA_F","I_static_AT_F","I_GMG_01_F","I_GMG_01_high_F","I_GMG_01_A_F","I_HMG_01_F","I_HMG_01_high_F","I_HMG_01_A_F","O_static_AA_F","O_static_AT_F","O_Mortar_01_F","O_GMG_01_F","O_GMG_01_high_F","O_GMG_01_A_F","O_HMG_01_F","O_HMG_01_high_F","O_HMG_01_A_F","B_static_AA_F","B_static_AT_F","B_Mortar_01_F","B_GMG_01_F","B_GMG_01_high_F","B_GMG_01_A_F","B_HMG_01_F","B_HMG_01_high_F","B_HMG_01_A_F"];
@@ -1013,11 +1013,11 @@ OT_Buildables = [
 	private _istpl = _x select 4;
 	if(_istpl) then {
 		private _tpl = _x select 2;
-		OT_allBuyableBuildings pushback ((_tpl select 0) select 0);
+		OT_allBuyableBuildings pushBack ((_tpl select 0) select 0);
 	}else{
 		OT_allBuyableBuildings append (_x select 2);
 	}
-}foreach(OT_Buildables);
+}forEach(OT_Buildables);
 
 //Items you can place
 OT_Placeables = [
@@ -1055,8 +1055,8 @@ OT_repairableRuins = [
 OT_allRepairableRuins = [];
 {
 	_x params ["_ruin"];
-	OT_allRepairableRuins pushback _ruin;
-}foreach(OT_repairableRuins);
+	OT_allRepairableRuins pushBack _ruin;
+}forEach(OT_repairableRuins);
 
 OT_loadingMessages = ["Adding Hidden Agendas","Adjusting Bell Curves","Aesthesizing Industrial Areas","Aligning Covariance Matrices","Applying Feng Shui Shaders","Applying Theatre Soda Layer","Asserting Packed Exemplars","Attempting to Lock Back-Buffer","Binding Sapling Root System","Breeding Fauna","Building Data Trees","Bureacritizing Bureaucracies","Calculating Inverse Probability Matrices","Calculating Llama Expectoration Trajectory","Calibrating Blue Skies","Charging Ozone Layer","Coalescing Cloud Formations","Cohorting Exemplars","Collecting Meteor Particles","Compounding Inert Tessellations","Compressing Fish Files","Computing Optimal Bin Packing","Concatenating Sub-Contractors","Containing Existential Buffer","Debarking Ark Ramp","Debunching Unionized Commercial Services","Deciding What Message to Display Next","Decomposing Singular Values","Decrementing Tectonic Plates","Deleting Ferry Routes","Depixelating Inner Mountain Surface Back Faces","Depositing Slush Funds","Destabilizing Economic Indicators","Determining Width of Blast Fronts","Deunionizing Bulldozers","Dicing Models","Diluting Livestock Nutrition Variables","Downloading Satellite Terrain Data","Exposing Flash Variables to Streak System","Extracting Resources","Factoring Pay Scale","Fixing Election Outcome Matrix","Flood-Filling Ground Water","Flushing Pipe Network","Gathering Particle Sources","Generating Jobs","Gesticulating Mimes","Graphing Whale Migration","Hiding Willio Webnet Mask","Implementing Impeachment Routine","Increasing Accuracy of RCI Simulators","Increasing Magmafacation","Initializing Rhinoceros Breeding Timetable","Initializing Robotic Click-Path AI","Inserting Sublimated Messages","Integrating Curves","Integrating Illumination Form Factors","Integrating Population Graphs","Iterating Cellular Automata","Lecturing Errant Subsystems","Mixing Genetic Pool","Modeling Object Components","Mopping Occupant Leaks","Normalizing Power","Obfuscating Quigley Matrix","Overconstraining Dirty Industry Calculations","Partitioning City Grid Singularities","Perturbing Matrices","Pixellating Nude Patch","Polishing Water Highlights","Populating Lot Templates","Preparing Sprites for Random Walks","Prioritizing Landmarks","Projecting Law Enforcement Pastry Intake","Realigning Alternate Time Frames","Reconfiguring User Mental Processes","Relaxing Splines","Removing Road Network Speed Bumps","Removing Texture Gradients","Removing Vehicle Avoidance Behavior","Resolving GUID Conflict","Reticulating Splines","Retracting Phong Shader","Retrieving from Back Store","Reverse Engineering Image Consultant","Routing Neural Network Infanstructure","Scattering Rhino Food Sources","Scrubbing Terrain","Searching for Llamas","Seeding Architecture Simulation Parameters","Sequencing Particles","Setting Advisor ","Setting Inner Deity ","Setting Universal Physical Constants","Sonically Enhancing Occupant-Free Timber","Speculating Stock Market Indices","Splatting Transforms","Stratifying Ground Layers","Sub-Sampling Water Data","Synthesizing Gravity","Synthesizing Wavelets","Time-Compressing Simulator Clock","Unable to Reveal Current Activity","Weathering Buildings","Zeroing Crime Network"];
 

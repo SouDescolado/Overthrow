@@ -667,8 +667,10 @@ class CfgFunctions
 		class Integration
 		{
 			file = "\overthrow_main\functions\integration";
-			//class advancedTowingInit {};
 			class detectItems {};
+			class zenSetMoney {};
+			class zenSetStability {};
+			class zenChangeSupport {};
 		};
 	};
 };

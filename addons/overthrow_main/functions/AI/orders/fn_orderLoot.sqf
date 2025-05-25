@@ -29,7 +29,7 @@ private _target = _sortedTargets # 0;
             waitUntil {sleep 1; (isNull objectParent _looter) || (!alive _looter)};
         };
 
-        _looter doMove ASLtoAGL (getPosASL _target);
+        _looter doMove ASLToAGL (getPosASL _target);
 
         // Wait until looter reaches the target container
         private _timeout = time + 30;
@@ -70,7 +70,7 @@ private _target = _sortedTargets # 0;
                 private _body = _sortedBodies # 0;
 
                 _body setVariable ["OT_looterReserved", true, false];
-                _looter doMove ASLtoAGL (getPosASL _body);
+                _looter doMove ASLToAGL (getPosASL _body);
                 [_looter, 1] call OT_fnc_experience;
 
                 // Wait until looter reaches the body
@@ -118,7 +118,7 @@ private _target = _sortedTargets # 0;
                 [_body] call OT_fnc_cleanupUnit;
 
                 sleep 2;
-                _looter doMove ASLtoAGL (getPosASL _target);
+                _looter doMove ASLToAGL (getPosASL _target);
 
                 // Wait until looter reaches the target container
                 _timeout = time + 30;
@@ -150,7 +150,7 @@ private _target = _sortedTargets # 0;
                 private _weaponHolder = _sortedWeaponHolders # 0;
 
                 _weaponHolder setVariable ["OT_looterReserved", true, false];
-                _looter doMove ASLtoAGL (getPosASL _weaponHolder);
+                _looter doMove ASLToAGL (getPosASL _weaponHolder);
                 [_looter, 1] call OT_fnc_experience;
 
                 // Wait until looter reaches the item pile
@@ -167,7 +167,7 @@ private _target = _sortedTargets # 0;
                 // contents directly to the target container once there.
 
                 sleep 2;
-                _looter doMove ASLtoAGL (getPosASL _target);
+                _looter doMove ASLToAGL (getPosASL _target);
 
                 // Wait until looter reaches the target container
                 _timeout = time + 30;

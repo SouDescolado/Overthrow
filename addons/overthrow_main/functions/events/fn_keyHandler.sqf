@@ -34,15 +34,12 @@ if(!dialog) then {
 					waitUntil {uiSleep 1; visibleMap};
 
 					hint format[
-						"Holding RMB will pan the map, zoom with the scrollwheel. When you are finished exploring the map, close it with the Esc key.",
-						"Action" call OT_fnc_getAssignedKey
+						"Holding RMB will pan the map, zoom with the scrollwheel. When you are finished exploring the map, close it with the Esc key."
 					];
 					sleep 3;
 					[format [
 						"<t align='left'><t size='0.7' color='#000000'>Stability</t><br/>
-						<t size='0.6' color='#000000'>Yellow areas indicate towns where stability is lowest.Blue icons indicate known NATO installations.</t><br/><br/>
-						<t size='0.5' color='#101010'>%3</t>",
-						OT_tutorial_backstoryText
+						<t size='0.6' color='#000000'>Yellow areas indicate towns where stability is lowest.Blue icons indicate known NATO installations.</t><br/><br/>"
 					], -0.5, 0.5, 240, 1, 0, 2] call OT_fnc_dynamicText;
 
 					waitUntil {uiSleep 1; !visibleMap};
@@ -57,11 +54,11 @@ if(!dialog) then {
 
 					sleep 20;
 					_gundealer = spawner getVariable format["gundealer%1",player call OT_fnc_nearestTown];
-					[player,getpos _gundealer,"Gun Dealer"] call OT_fnc_givePlayerWaypoint;
+					[player,getPos _gundealer,"Gun Dealer"] call OT_fnc_givePlayerWaypoint;
 					sleep 3;
 					hint "Go and speak to the local gun dealer. Head towards the marked location, you have nothing to worry about as long as you are not carrying/wearing any illegal items.";
 
-					waitUntil {uiSleep 1; (player distance2d getPosASL _gundealer) < 5};
+					waitUntil {uiSleep 1; (player distance2D getPosASL _gundealer) < 5};
 
 
 					_lines = [
@@ -192,8 +189,7 @@ if(!dialog) then {
 											"No problem! See you around."
 										],
 										{
-											hint format["Wrecked vehicles can be salvaged with a toolkit, there should be one in your ammo crate at home. Shops on your map are marked with a circle and icon representing what they buy/sell. Towns with lower stability and population will pay higher prices for all items.",
-												"Gear" call OT_fnc_getAssignedKey
+											hint format["Wrecked vehicles can be salvaged with a toolkit, there should be one in your ammo crate at home. Shops on your map are marked with a circle and icon representing what they buy/sell. Towns with lower stability and population will pay higher prices for all items."
 											];
 											[{
 												playSound "3DEN_notificationDefault";
@@ -216,12 +212,12 @@ if(!dialog) then {
 			if(hcShownBar && count (hcSelected player) > 0) exitWith {
 				createDialog "OT_dialog_squad";
 			};
-			if(!hcShownBar && ((groupSelectedUnits player) findIf {!isplayer _x} != -1)) exitWith {
+			if(!hcShownBar && ((groupSelectedUnits player) findIf {!isPlayer _x} != -1)) exitWith {
 				{
 					if(isPlayer _x) then {
 						player groupSelectUnit [_x,false];
 					};
-				}foreach(groupSelectedUnits player);
+				}forEach(groupSelectedUnits player);
 				createDialog "OT_dialog_command";
 			};
 			if(vehicle player != player) exitWith {
@@ -250,8 +246,8 @@ if(!dialog) then {
 							moveOut _x;
 							_x allowDamage false;
 							_x setPos _p;
-							_e pushback _x;
-						} foreach(crew vehicle player);
+							_e pushBack _x;
+						} forEach(crew vehicle player);
 						sleep 2;
 						disableUserInput false;
 						cutText ["","BLACK IN",3];
@@ -259,7 +255,7 @@ if(!dialog) then {
 						[_driver] call OT_fnc_cleanupUnit;
 						{
 							_x allowDamage true;
-						}foreach(_e);
+						}forEach(_e);
 					};
 				};
 				call {
@@ -281,7 +277,7 @@ if(!dialog) then {
 			};
 
 			private _cTarget = cursorTarget;
-			if((_cTarget isKindOf "CAManBase") && (alive _cTarget) && (!isplayer _cTarget) && !(side _cTarget isEqualTo west) && (_cTarget distance player) < 10) exitWith {
+			if((_cTarget isKindOf "CAManBase") && (alive _cTarget) && (!isPlayer _cTarget) && !(side _cTarget isEqualTo west) && (_cTarget distance player) < 10) exitWith {
 				_cTarget call OT_fnc_talkToCiv;
 			};
 			[] spawn OT_fnc_mainMenu;

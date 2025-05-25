@@ -10,7 +10,7 @@ while {sleep (5+(random 5)); ("8Rnd_82mm_Mo_shells" in getArtilleryAmmo[_mortar]
     private _mortarpos = position _mortar;
 
     if(_attacking != "" && !(_attacking in OT_allTowns)) then {
-        _pos = server getvariable _attacking;
+        _pos = server getVariable _attacking;
         _distance = (_pos distance _mortar);
 
         _timesince = time - (server getVariable ["NATOattackstart",time]);
@@ -33,9 +33,9 @@ while {sleep (5+(random 5)); ("8Rnd_82mm_Mo_shells" in getArtilleryAmmo[_mortar]
                             _x set [1,_range];
                             _x set [2,_mortarpos getPos [_range, random 360]];
                         };
-                    }foreach(_icons);
+                    }forEach(_icons);
                     if !(_found) then {
-                        _icons pushback [_mortarpos,1500,_mortarpos getPos [1500, random 360]];
+                        _icons pushBack [_mortarpos,1500,_mortarpos getPos [1500, random 360]];
                     };
                     spawner setVariable ["NATOmortars",_icons,true];
                 };
@@ -49,13 +49,13 @@ while {sleep (5+(random 5)); ("8Rnd_82mm_Mo_shells" in getArtilleryAmmo[_mortar]
             _town = _pos call OT_fnc_nearestTown;
 
             // Make sure we don't shell towns. The safezone around a town depends on the population
-            _towndist = _pos distance2D (server getvariable [_town, _pos]);
+            _towndist = _pos distance2D (server getVariable [_town, _pos]);
             _safezone = 200 + ((server getVariable format["population%1", _town]) / 2);
 
             if (
                 !(_ty == "H" || _ty == "P" || _ty == "V") 
                 && _pri > 80 
-                && _towndist > safezone 
+                && _towndist > _safezone 
                 && _distance < 4000 
                 && _distance > 250 
                 //&& _housedist > 75
@@ -81,14 +81,14 @@ while {sleep (5+(random 5)); ("8Rnd_82mm_Mo_shells" in getArtilleryAmmo[_mortar]
                             _x set [1,_range];
                             _x set [2,_mortarpos getPos [_range, random 360]];
                         };
-                    }foreach(_icons);
+                    }forEach(_icons);
                     if !(_found) then {
-                        _icons pushback [_mortarpos,1500,_mortarpos getPos [1500, random 360]];
+                        _icons pushBack [_mortarpos,1500,_mortarpos getPos [1500, random 360]];
                     };
                     spawner setVariable ["NATOmortars",_icons,true];
                 };
             };
-        }foreach(_targets);
+        }forEach(_targets);
         spawner setVariable ["NATOknowntargets",_targets,true];
     };
 };

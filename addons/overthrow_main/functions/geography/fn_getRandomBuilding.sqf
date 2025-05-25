@@ -1,7 +1,9 @@
 private ["_found","_range","_houses","_house"];
 
-private _search = _this select 0;
-private _types = _this select 1;
+assert (params [
+	["_search", [0,0,0]],
+	["_types", []]
+]);
 
 private _found = false;
 private _range = 400;
@@ -11,10 +13,10 @@ while {!_found && _range < 1200} do {
 	_possible = [];
 	if(count _houses > 0) then {
 		{
-			if (!(_x call OT_fnc_hasOwner) && (typeof _x) in _types) then {
-				_possible pushback _x
+			if (!(_x call OT_fnc_hasOwner) && (typeOf _x) in _types) then {
+				_possible pushBack _x
 			};
-		}foreach(_houses);
+		}forEach(_houses);
 
 		if(count _possible > 0) then {
 			_house = selectRandom _possible;
