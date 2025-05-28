@@ -1,100 +1,100 @@
 #define MACRO_SALVAGEWRECK \
-	class ACE_Actions { \
-		class ACE_MainActions { \
-			class OT_Remove { \
-				condition = "!([player] call ace_repair_fnc_isInRepairFacility) && (_target call OT_fnc_hasOwner) && ((call OT_fnc_playerIsGeneral) || (_target call OT_fnc_playerIsOwner))"; \
-				displayName = "Remove"; \
-				statement = ""; \
-					class OT_Remove_Confirm { \
-						condition = "true"; \
-						displayName = "Confirm"; \
-						statement = "deleteVehicle _target"; \
-					}; \
-			}; \
-			class OT_Salvage { \
-				condition = "((damage _target) > 0.99 && ""ToolKit"" in (items player)) || [player] call ace_repair_fnc_isInRepairFacility"; \
-				displayName = "Salvage"; \
-				statement = "_target spawn OT_fnc_salvageWreck"; \
-			}; \
-			class OT_Unflip { \
-				condition = "!(canMove _target) && (alive _target) && ((vehicle player) isEqualTo player)"; \
-				displayName = "Unflip"; \
-				statement = "_target call OT_fnc_unflipVehicle"; \
-			}; \
-		}; \
-	};
+    class ACE_Actions { \
+        class ACE_MainActions { \
+            class OT_Remove { \
+                condition = "!([player] call ace_repair_fnc_isInRepairFacility) && (_target call OT_fnc_hasOwner) && ((call OT_fnc_playerIsGeneral) || (_target call OT_fnc_playerIsOwner))"; \
+                displayName = "Remove"; \
+                statement = ""; \
+                class OT_Remove_Confirm { \
+                    condition = "true"; \
+                    displayName = "Confirm"; \
+                    statement = "deleteVehicle _target"; \
+                }; \
+            }; \
+            class OT_Salvage { \
+                condition = "((damage _target) > 0.99 && ""ToolKit"" in (items player)) || [player] call ace_repair_fnc_isInRepairFacility"; \
+                displayName = "Salvage"; \
+                statement = "_target spawn OT_fnc_salvageWreck"; \
+            }; \
+            class OT_Unflip { \
+                condition = "!(canMove _target) && (alive _target) && ((vehicle player) isEqualTo player)"; \
+                displayName = "Unflip"; \
+                statement = "_target call OT_fnc_unflipVehicle"; \
+            }; \
+        }; \
+    };
 
 
 class CfgVehicles {
-	class Item_Base_F;
-	class ThingX;
-	class CargoNet_01_ammo_base_F;
+    class Item_Base_F;
+    class ThingX;
+    class CargoNet_01_ammo_base_F;
 
     // Kamaz MRL fix, can be removed if BI fixes this - https://feedback.bistudio.com/T138393
     class Truck_02_base_F;
-    class Truck_02_MRL_base_F : Truck_02_base_F {
-        threat[] = {0.8, 0.6, 0}; 
+    class Truck_02_MRL_base_F: Truck_02_base_F {
+        threat[] = {0.8, 0.6, 0};
     };
 
-	//Overthrow Vehicles
-	class I_Truck_02_box_F;
-	class OT_I_Truck_recovery : I_Truck_02_box_F {
-		scope = 2;
-		author = "ARMAzac";
-		displayName = "KamAZ Recovery";
-		class Library {
-			libTextDesc = "The Field Assistance and Recovery Truck (FART) is a specialized heavy truck used for field repairs and gear recovery after a battle. It can recover all items and bodies within a 150m radius into it's cargohold.";
-		};
-	};
+    //Overthrow Vehicles
+    class I_Truck_02_box_F;
+    class OT_I_Truck_recovery: I_Truck_02_box_F {
+        scope = 2;
+        author = "ARMAzac";
+        displayName = "KamAZ Recovery";
+        class Library {
+            libTextDesc = "The Field Assistance and Recovery Truck (FART) is a specialized heavy truck used for field repairs and gear recovery after a battle. It can recover all items and bodies within a 150m radius into it's cargohold.";
+        };
+    };
 
-	//ACE actions----
-	//Map
-	class Land_MapBoard_F : ThingX {
-		class ACE_Actions {
-			class ACE_MainActions {
-				displayName = "Interactions";
-				distance = 6;
+    //ACE actions----
+    //Map
+    class Land_MapBoard_F: ThingX {
+        class ACE_Actions {
+            class ACE_MainActions {
+                displayName = "Interactions";
+                distance = 6;
 
-				class mapinfo {
-					displayName = "Map Info";
-	                statement = "[] spawn OT_fnc_mapInfoDialog;";
-				};
-	      class resetui {
-					displayName = "Reset UI";
-	        statement = "[] spawn OT_fnc_setupPlayer;";
-				};
-	      class sleepAction {
-					displayName = "Sleep";
-	        statement = "createDialog ""OT_sleep_dialog"";";
-				};
-			};
-		};
-	};
-	//ammobox
-	class B_CargoNet_01_ammo_F : CargoNet_01_ammo_base_F {
-		class ACE_Actions {
-			class ACE_MainActions {
-				displayName = "Interactions";
-				distance = 6;
+                class mapinfo {
+                    displayName = "Map Info";
+                    statement = "[] spawn OT_fnc_mapInfoDialog;";
+                };
+                class resetui {
+                    displayName = "Reset UI";
+                    statement = "[] spawn OT_fnc_setupPlayer;";
+                };
+                class sleepAction {
+                    displayName = "Sleep";
+                    statement = "createDialog ""OT_sleep_dialog"";";
+                };
+            };
+        };
+    };
+    //ammobox
+    class B_CargoNet_01_ammo_F: CargoNet_01_ammo_base_F {
+        class ACE_Actions {
+            class ACE_MainActions {
+                displayName = "Interactions";
+                distance = 6;
 
-				class arsenal {
-					displayName = "Open Arsenal (This Ammobox)";
-					condition = "!(call OT_fnc_playerIsAtWarehouse)";
-	                statement = "[_target,_player] call OT_fnc_openArsenal;";
-				};
-				class warehouse {
-					displayName = "Open Arsenal (Warehouse)";
-					condition = "(call OT_fnc_playerIsAtWarehouse)";
-	                statement = "['WAREHOUSE',_player,_target] call OT_fnc_openArsenal;";
-				};
-			};
-		};
-	};
-	//END ACE actions----
-	class Mapboard_tanoa_F: Land_MapBoard_F {
-		displayName = "Map (Tanoa)";
-		hiddenSelectionsTextures[] = {"\overthrow_main\ui\maptanoa.paa"};
-	};
+                class arsenal {
+                    displayName = "Open Arsenal (This Ammobox)";
+                    condition = "!(call OT_fnc_playerIsAtWarehouse)";
+                    statement = "[_target,_player] call OT_fnc_openArsenal;";
+                };
+                class warehouse {
+                    displayName = "Open Arsenal (Warehouse)";
+                    condition = "(call OT_fnc_playerIsAtWarehouse)";
+                    statement = "['WAREHOUSE',_player,_target] call OT_fnc_openArsenal;";
+                };
+            };
+        };
+    };
+    //END ACE actions----
+    class Mapboard_tanoa_F: Land_MapBoard_F {
+        displayName = "Map (Tanoa)";
+        hiddenSelectionsTextures[] = {"\overthrow_main\ui\maptanoa.paa"};
+    };
     class OT_GanjaItem: Item_Base_F {
         scope = 2;
         scopeCurator = 2;
@@ -105,7 +105,7 @@ class CfgVehicles {
             MACRO_ADDITEM(OT_GanjaItem,1)
         };
     };
-	class OT_BlowItem: Item_Base_F {
+    class OT_BlowItem: Item_Base_F {
         scope = 2;
         scopeCurator = 2;
         displayName = "Blow";
@@ -116,7 +116,7 @@ class CfgVehicles {
         };
     };
 
-	//ACE Interactions
+    //ACE Interactions
     class Man;
     class CAManBase: Man {
         //fsmDanger = "overthrow_main\fsm\danger.fsm";
@@ -130,11 +130,10 @@ class CfgVehicles {
                     statement = "_target call OT_fnc_talkToCiv";
                 };
             };
-		};
+        };
         class ACE_SelfActions {
             class ACE_Equipment {
-                class OT_StartSpliff
-                {
+                class OT_StartSpliff {
                     displayName = "Smoke a spliff";
                     condition = "('OT_Ganja' in (items player)) && {!(_player getVariable ['ot_isSmoking', false])}";
                     statement = "[_player] spawn ot_fnc_startSpliff";
@@ -142,8 +141,7 @@ class CfgVehicles {
                     exceptions[] = {"isNotInside", "isNotSitting"};
                     icon = "\overthrow_main\ui\icons\light_cig.paa";
                 };
-                class OT_StopSpliff
-                {
+                class OT_StopSpliff {
                     displayName = "Ditch your spliff!";
                     condition = "(goggles _player) in OT_cigsArray && {_player getVariable ['ot_isSmoking', false]}";
                     statement = "[_player] spawn ot_fnc_stopSpliff";
@@ -153,49 +151,49 @@ class CfgVehicles {
                 };
             };
         };
-	};
+    };
 
-	class Furniture_base_F;
-	class Land_Workbench_01_F : Furniture_base_F {
-		class ACE_Actions {
-			class ACE_MainActions {
-				displayName = "Interactions";
-				distance = 4;
-				class OT_Craft {
-					condition = "true";
-					displayName = "Craft";
-					statement = "call OT_fnc_craftDialog";
-				};
-			};
-		};
-	};
+    class Furniture_base_F;
+    class Land_Workbench_01_F: Furniture_base_F {
+        class ACE_Actions {
+            class ACE_MainActions {
+                displayName = "Interactions";
+                distance = 4;
+                class OT_Craft {
+                    condition = "true";
+                    displayName = "Craft";
+                    statement = "call OT_fnc_craftDialog";
+                };
+            };
+        };
+    };
 
-	class LandVehicle;
-	class Car : LandVehicle {
-		MACRO_SALVAGEWRECK
-	};
-	class Tank : LandVehicle {
-		MACRO_SALVAGEWRECK
-	};
-	class Motorcycle : LandVehicle {
-		MACRO_SALVAGEWRECK
-	};
+    class LandVehicle;
+    class Car: LandVehicle {
+        MACRO_SALVAGEWRECK
+    };
+    class Tank: LandVehicle {
+        MACRO_SALVAGEWRECK
+    };
+    class Motorcycle: LandVehicle {
+        MACRO_SALVAGEWRECK
+    };
 
-	class Air;
-	class Helicopter : Air {
-		MACRO_SALVAGEWRECK
-	};
-	class Plane : Air {
-		MACRO_SALVAGEWRECK
-	};
+    class Air;
+    class Helicopter: Air {
+        MACRO_SALVAGEWRECK
+    };
+    class Plane: Air {
+        MACRO_SALVAGEWRECK
+    };
 
-	class Ship;
-	class Ship_F : Ship {
-		MACRO_SALVAGEWRECK
-	};
+    class Ship;
+    class Ship_F: Ship {
+        MACRO_SALVAGEWRECK
+    };
 
-	//Houses (Tanoa)
-	class House_Small_F;
+    //Houses (Tanoa)
+    class House_Small_F;
     class House_F;
     class Land_Workshop_03_F;
     class Land_Slum_01_F: House_Small_F {
@@ -206,39 +204,39 @@ class CfgVehicles {
         ot_isPlayerHouse = 1;
         ot_template = "[['Land_MetalCase_01_small_F', [-2.58489,-0.659296,0.559122],0.418328,1,0,[0,0],'','',true,false],['Land_Workbench_01_F',[2.247,2.4636,0.559122],90,1,0,[0,-0],'','',true,false],['Land_CampingChair_V2_F',[-1.65537,3.79657,0.559121],199.447,1,0,[0,0],'','',true,false],['B_CargoNet_01_ammo_F',[-1.74631,-3.67237,0.559122],0,1,0,[0,0],'','',true,false],['Mapboard_tanoa_F',[1.75104,-3.70061,0.559122],155.874,1,0,[0,-0],'','',true,false],['OfficeTable_01_new_F',[-1.34138,4.4741,0.559122],0,1,0,[0,0],'','',true,false]]";
     };
-	class Land_House_Native_01_F: House_Small_F {
-		ot_isPlayerHouse = 1;
+    class Land_House_Native_01_F: House_Small_F {
+        ot_isPlayerHouse = 1;
         ot_template = "[['Land_CampingChair_V2_F', [2.26438,-2.22928,0.2],17.5159,1,0,[0,0],'','',true,false],['OfficeTable_01_new_F',[1.97339,-2.917,0.2],178.069,1,0,[0,-0],'','',true,false],['Land_Workbench_01_F',[-2.34453,2.75383,0.200001],0,1,0,[0,0],'','',true,false],['B_CargoNet_01_ammo_F',[-3.88622,-2.36955,0.200001],0,1,0,[0,0],'','',true,false],['Mapboard_tanoa_F',[4.03968,2.56928,0.200001],32.4555,1,0,[0,0],'','',true,false],['Land_MetalCase_01_small_F',[4.28656,-2.64937,0.2],212.206,1,0,[0,0],'','',true,false]]";
-	};
+    };
     class Land_House_Native_02_F: House_Small_F {
         ot_isPlayerHouse = 1;
         ot_template = "[['Land_CampingChair_V2_F', [0.0907892,-1.587,0.103002],17.5159,1,0,[0,0],'','',true,false],['OfficeTable_01_new_F',[-0.200199,-2.27472,0.103003],178.069,1,0,[0,-0],'','',true,false],['Mapboard_tanoa_F',[1.78568,2.06457,0.103003],32.4555,1,0,[0,0],'','',true,false],['Land_MetalCase_01_small_F',[2.12703,-2.08529,0.103003],212.206,1,0,[0,0],'','',true,false],['Land_Workbench_01_F',[-2.40922,2.34683,0.103003],0,1,0,[0,0],'','',true,false],['B_CargoNet_01_ammo_F',[-3.11908,-1.7698,0.103003],0,1,0,[0,0],'','',true,false]]";
     };
-	//Houses (Altis)
-	class Land_i_House_Small_02_V1_F: House_Small_F {
-		ot_isPlayerHouse = 1;
+    //Houses (Altis)
+    class Land_i_House_Small_02_V1_F: House_Small_F {
+        ot_isPlayerHouse = 1;
         ot_template = "[['Land_MetalCase_01_small_F', [1.76559,-2.99125,0.417622],284.311,1,0,[-0.071722,-0.0182958],'','',true,false],['Land_Workbench_01_F',[3.2372,2.27116,0.422988],0,1,0,[0.195835,0],'','',true,false],['Land_CampingChair_V2_F',[4.94837,-2.23044,0.421724],19.8195,1,0,[0.0250966,-0.0696343],'','',true,false],['OfficeTable_01_new_F',[4.62998,-2.90591,0.421724],180.373,1,0,[-0.000481725,0.0740172],'','',true,false],['B_CargoNet_01_ammo_F',[6.60879,-0.956271,0.423864],0,1,0,[0,-0.0740187],'','',true,false],['MapBoard_altis_F',[6.69212,1.92874,0.423972],57.5222,1,0,[0.0624422,-0.039746],'','',true,false]]";
-	};
-	class Land_i_Stone_Shed_V1_F: House_Small_F {
+    };
+    class Land_i_Stone_Shed_V1_F: House_Small_F {
         ot_isPlayerHouse = 1;
         ot_template = "[['OfficeTable_01_new_F', [0.161512,-0.0919862,0.26],180.373,1,0,[0,0],'','',true,false],['Land_CampingChair_V2_F',[0.479908,0.583482,0.26],19.8195,1,0,[0,0],'','',true,false],['B_CargoNet_01_ammo_F',[-3.03811,0.542177,0.26],0,1,0,[0,0],'','',true,false],['Land_MetalCase_01_small_F',[0.197573,4.06797,0.26],92.8353,1,0,[0,-0],'','',true,false],['Land_Workbench_01_F',[-2.11435,3.83624,0.26],0,1,0,[0,0],'','',true,false],['MapBoard_altis_F',[2.26796,3.73339,0.26],57.5223,1,0,[0,0],'','',true,false]]";
     };
-	class Land_Slum_House02_F: House_Small_F {
+    class Land_Slum_House02_F: House_Small_F {
         ot_isPlayerHouse = 1;
         ot_template = "[['Land_Workbench_01_F', [-1.36485,0.870917,0],90,1,0,[0,-0],'','',true,false],['Land_MetalCase_01_small_F',[1.28859,-1.0394,0.23],92.8353,1,0,[0,-0],'','',true,false],['OfficeTable_01_new_F',[2.5086,-1.0345,0.23],180.373,1,0,[0,0],'','',true,false],['Land_CampingChair_V2_F',[2.71048,-0.444679,0.23],7.55273,1,0,[0,0],'','',true,false],['B_CargoNet_01_ammo_F',[1.61679,-2.76766,0],0,1,0,[0,0],'','',true,false],['MapBoard_altis_F',[2.48146,2.91809,0.23],41.3345,1,0,[0,0],'','',true,false]]";
     };
 
-	//Houses (Malden)
-	class i_House_Small_02_b_base_F : House_Small_F {
-		ot_isPlayerHouse = 1;
+    //Houses (Malden)
+    class i_House_Small_02_b_base_F: House_Small_F {
+        ot_isPlayerHouse = 1;
         ot_template = "[['Land_Workbench_01_F', [-1.36485,0.870917,0],90,1,0,[0,-0],'','',true,false],['Land_MetalCase_01_small_F',[1.28859,-1.0394,0.23],92.8353,1,0,[0,-0],'','',true,false],['OfficeTable_01_new_F',[2.5086,-1.0345,0.23],180.373,1,0,[0,0],'','',true,false],['Land_CampingChair_V2_F',[2.71048,-0.444679,0.23],7.55273,1,0,[0,0],'','',true,false],['B_CargoNet_01_ammo_F',[1.61679,-2.76766,0],0,1,0,[0,0],'','',true,false],['MapBoard_altis_F',[2.48146,2.91809,0.23],41.3345,1,0,[0,0],'','',true,false]]";
-	};
+    };
 
-	//Houses (CUP)
-	class Land_House_C_5_EP1: House_Small_F {
-		ot_isPlayerHouse = 1;
+    //Houses (CUP)
+    class Land_House_C_5_EP1: House_Small_F {
+        ot_isPlayerHouse = 1;
         ot_template = "[['Land_MetalCase_01_small_F',[-0.507421,-0.278264,0.377357],0,1,0,[],'','',true,false], ['B_CargoNet_01_ammo_F',[-1.09897,-1.48947,0.377357],0,1,0,[],'','',true,false], ['Land_Workbench_01_F',[-4.09043,2.20817,0.324941],270,1,0,[],'','',true,false], ['Land_MapBoard_F',[-4.07916,-4.87537,0.325],210,1,0,[],'','',true,false] ]";
-	};
+    };
 
     //Houses (Livonia)
     class Land_Workshop_03_grey_F: Land_Workshop_03_F {
@@ -269,36 +267,36 @@ class CfgVehicles {
         ot_shopPos = 14;
     };
 
-	//Shops (Altis)
-	class Land_i_Shop_02_V1_F: House_F {
+    //Shops (Altis)
+    class Land_i_Shop_02_V1_F: House_F {
         ot_isShop = 1;
         ot_template = "[]";
     };
-	class Land_u_Shop_02_V1_F: Land_i_Shop_02_V1_F {
+    class Land_u_Shop_02_V1_F: Land_i_Shop_02_V1_F {
         ot_isShop = 0;
     };
 
-	//Shops (Malden)
-	class i_Shop_02_b_base_f : House_F {
-		ot_isShop = 1;
-        ot_template = "[]";
-	};
-	class Land_i_Shop_02_V3_F: Land_i_Shop_02_V1_F {
+    //Shops (Malden)
+    class i_Shop_02_b_base_f: House_F {
         ot_isShop = 1;
         ot_template = "[]";
     };
-	class Land_u_Shop_02_V3_F: Land_i_Shop_02_V3_F {
+    class Land_i_Shop_02_V3_F: Land_i_Shop_02_V1_F {
+        ot_isShop = 1;
+        ot_template = "[]";
+    };
+    class Land_u_Shop_02_V3_F: Land_i_Shop_02_V3_F {
         ot_isShop = 0;
     };
 
-	//Shops (CUP)
-	class Land_A_GeneralStore_01: House_F {
+    //Shops (CUP)
+    class Land_A_GeneralStore_01: House_F {
         ot_isShop = 1;
         ot_template = "[['Land_CashDesk_F',[-6.93629,2.99194,0],180.686,1,0,[],'','',true,false]]";
     };
 
     //Car Dealers (Altis)
-	class Land_CarService_F: House_F {
+    class Land_CarService_F: House_F {
         ot_isCarDealer = 1;
         ot_template = "[]";
     };
@@ -313,8 +311,8 @@ class CfgVehicles {
         ot_template = "[['Land_CashDesk_F',[2.21226,0.566814,0.53],0,1,0,[],'','',true,false]]";
     };
 
-	//Unlocks uniforms (ace_nouniformrestrictions)
-	class Civilian;
+    //Unlocks uniforms (ace_nouniformrestrictions)
+    class Civilian;
     class B_Soldier_diver_base_F;
     class C_man_1;
     class I_G_Soldier_F;
@@ -596,8 +594,7 @@ class CfgVehicles {
     // Base class (unit class of other mod)
     class B_Gen_Commander_F;
     // Your class (unit class of your mod, which extends the other unit class)
-    class B_Gen_Soldier_Heavy_F: B_Gen_Commander_F
-    {
+    class B_Gen_Soldier_Heavy_F: B_Gen_Commander_F {
         // The name of the author of the asset, which is displayed in the editor.
         author = "ThomasAngel";
         // The name of the soldier, which is displayed in the editor.
@@ -613,17 +610,16 @@ class CfgVehicles {
         // Which items the character respawns with.
         RespawnItems[] = {"FirstAidKit", "FirstAidKit"};
         // What ammunition the character has.
-        magazines[] = {MAG_5("30Rnd_556x45_Stanag"),MAG_3("16Rnd_9x21_Mag"), "SmokeShell", "SmokeShellGreen", "Chemlight_green", "Chemlight_green", "HandGrenade", "ACE_M84"};
+        magazines[] = {MAG_5("30Rnd_556x45_Stanag"), MAG_3("16Rnd_9x21_Mag"), "SmokeShell", "SmokeShellGreen", "Chemlight_green", "Chemlight_green", "HandGrenade", "ACE_M84"};
         // What ammunition the character respawns with.
-        respawnMagazines[] = {MAG_5("30Rnd_556x45_Stanag"),MAG_3("16Rnd_9x21_Mag"), "SmokeShell", "SmokeShellGreen", "Chemlight_green", "Chemlight_green", "HandGrenade", "ACE_M84"};
+        respawnMagazines[] = {MAG_5("30Rnd_556x45_Stanag"), MAG_3("16Rnd_9x21_Mag"), "SmokeShell", "SmokeShellGreen", "Chemlight_green", "Chemlight_green", "HandGrenade", "ACE_M84"};
         // Which items the character has.
         linkedItems[] = {"V_PlateCarrier2_blk", "H_PASGT_basic_blue_F", "G_Balaclava_TI_G_blk_F", "ItemMap", "ItemCompass", "ItemWatch", "ItemRadio", "NVGoggles_OPFOR"};
         // Which items the character respawns with.
         respawnLinkedItems[] = {"V_PlateCarrier2_blk", "H_PASGT_basic_blue_F", "G_Balaclava_TI_G_blk_F", "ItemMap", "ItemCompass", "ItemWatch", "ItemRadio", "NVGoggles_OPFOR"};
     };
 
-    class B_Gen_Commander_Heavy_F: B_Gen_Soldier_Heavy_F
-    {
+    class B_Gen_Commander_Heavy_F: B_Gen_Soldier_Heavy_F {
         displayName = "Gendarmerie Commander (Heavy)";
         icon = "iconManLeader";
         weapons[] = {"arifle_SPAR_01_blk_ACO_Pointer_F", "hgun_P07_blk_F", "Throw", "Put", "Binocular"};
@@ -632,8 +628,7 @@ class CfgVehicles {
         respawnLinkedItems[] = {"V_PlateCarrier2_blk", "H_Beret_gen_F", "ItemMap", "ItemCompass", "ItemWatch", "ItemRadio", "NVGoggles_OPFOR"};
     };
 
-    class B_Gen_Medic_Heavy_F: B_Gen_Soldier_Heavy_F
-    {
+    class B_Gen_Medic_Heavy_F: B_Gen_Soldier_Heavy_F {
         displayName = "Gendarmerie Medic (Heavy)";
         backpack = "OT_B_AssaultPack_blk_MEDIC";
         icon = "iconManMedic";

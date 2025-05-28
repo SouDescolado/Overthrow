@@ -7,7 +7,7 @@ class CfgGlasses {
         displayName = "Spliff";
         model = "\overthrow_main\models\cig0.p3d";
         picture = "\overthrow_main\ui\icons\gear_cig0_x_ca";
-        identityTypes[]={};
+        identityTypes[] = {};
         ot_shopignore = 1;
     };
 

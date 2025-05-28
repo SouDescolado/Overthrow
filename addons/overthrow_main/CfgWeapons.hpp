@@ -1,11 +1,11 @@
 class CfgWeapons {
-	class ItemCore;
-	class OT_ItemCore: ItemCore {
-        type = 4096;//4;
+    class ItemCore;
+    class OT_ItemCore: ItemCore {
+        type = 4096; //4;
         detectRange = -1;
         simulation = "ItemMineDetector";
     };
-	class InventoryItem_Base_F;
+    class InventoryItem_Base_F;
     class OT_Ganja: OT_ItemCore {
         scope = 2;
         picture = "\overthrow_main\ui\items\ganja_x_ca.paa";
@@ -16,7 +16,7 @@ class CfgWeapons {
             mass = 2;
         };
     };
-	class OT_Blow: OT_ItemCore {
+    class OT_Blow: OT_ItemCore {
         scope = 2;
         picture = "\overthrow_main\ui\items\blow_x_ca.paa";
         displayName = "Blow";
@@ -26,7 +26,7 @@ class CfgWeapons {
             mass = 2;
         };
     };
-	class OT_Wood: OT_ItemCore {
+    class OT_Wood: OT_ItemCore {
         scope = 2;
         picture = "\overthrow_main\ui\items\wood_x_ca.paa";
         displayName = "Wood";
@@ -36,7 +36,7 @@ class CfgWeapons {
             mass = 250;
         };
     };
-	class OT_Lumber: OT_ItemCore {
+    class OT_Lumber: OT_ItemCore {
         scope = 2;
         picture = "\overthrow_main\ui\items\wood_x_ca.paa";
         displayName = "Lumber";
@@ -46,7 +46,7 @@ class CfgWeapons {
             mass = 200;
         };
     };
-	class OT_Steel: OT_ItemCore {
+    class OT_Steel: OT_ItemCore {
         scope = 2;
         picture = "\overthrow_main\ui\items\steel_x_ca.paa";
         displayName = "Steel";
@@ -56,7 +56,7 @@ class CfgWeapons {
             mass = 400;
         };
     };
-	class OT_Plastic: OT_ItemCore {
+    class OT_Plastic: OT_ItemCore {
         scope = 2;
         picture = "\overthrow_main\ui\items\plastic_x_ca.paa";
         displayName = "Plastic";
@@ -66,7 +66,7 @@ class CfgWeapons {
             mass = 150;
         };
     };
-	class OT_Sugarcane: OT_ItemCore {
+    class OT_Sugarcane: OT_ItemCore {
         scope = 2;
         picture = "\overthrow_main\ui\items\cane_x_ca.paa";
         displayName = "Sugarcane";
@@ -76,7 +76,7 @@ class CfgWeapons {
             mass = 50;
         };
     };
-	class OT_Sugar: OT_ItemCore {
+    class OT_Sugar: OT_ItemCore {
         scope = 2;
         picture = "\overthrow_main\ui\items\sugar_x_ca.paa";
         displayName = "Sugar";
@@ -86,7 +86,7 @@ class CfgWeapons {
             mass = 30;
         };
     };
-	class OT_Grapes: OT_ItemCore {
+    class OT_Grapes: OT_ItemCore {
         scope = 2;
         picture = "\overthrow_main\ui\items\cane_x_ca.paa";
         displayName = "Grapes";
@@ -96,7 +96,7 @@ class CfgWeapons {
             mass = 50;
         };
     };
-	class OT_Wine: OT_ItemCore {
+    class OT_Wine: OT_ItemCore {
         scope = 2;
         picture = "\overthrow_main\ui\items\cane_x_ca.paa";
         displayName = "Wine";
@@ -106,7 +106,7 @@ class CfgWeapons {
             mass = 50;
         };
     };
-	class OT_Olives: OT_ItemCore {
+    class OT_Olives: OT_ItemCore {
         scope = 2;
         picture = "\overthrow_main\ui\items\cane_x_ca.paa";
         displayName = "Olives";
@@ -116,7 +116,7 @@ class CfgWeapons {
             mass = 50;
         };
     };
-	class OT_Fertilizer: OT_ItemCore {
+    class OT_Fertilizer: OT_ItemCore {
         scope = 2;
         picture = "\overthrow_main\ui\items\fertilizer_x_ca.paa";
         displayName = "Fertilizer";
@@ -126,7 +126,7 @@ class CfgWeapons {
             mass = 80;
         };
     };
-	class OT_ammo50cal: OT_ItemCore {
+    class OT_ammo50cal: OT_ItemCore {
         scope = 2;
         picture = "\overthrow_main\ui\items\ammo50cal_x_ca.paa";
         displayName = "100 x 50 Cal BMG";
@@ -138,35 +138,35 @@ class CfgWeapons {
     };
 
 
-	//Craftable items
-	class ACE_ItemCore;
-	class ACE_fieldDressing : ACE_ItemCore {
-		ot_craftable = 1;
-		ot_craftQuantity = 5;
-		ot_craftRecipe = "[[""Uniform_Base"",1]]";
-	};
+    //Craftable items
+    class ACE_ItemCore;
+    class ACE_fieldDressing: ACE_ItemCore {
+        ot_craftable = 1;
+        ot_craftQuantity = 5;
+        ot_craftRecipe = "[[""Uniform_Base"",1]]";
+    };
 
-	class ACE_CableTie : ACE_ItemCore {
-		ot_craftable = 1;
-		ot_craftQuantity = 10;
-		ot_craftRecipe = "[[""OT_Plastic"",1]]";
-	};
+    class ACE_CableTie: ACE_ItemCore {
+        ot_craftable = 1;
+        ot_craftQuantity = 10;
+        ot_craftRecipe = "[[""OT_Plastic"",1]]";
+    };
 
-	class ACE_Clacker : ACE_ItemCore {
-		ot_craftable = 1;
-		ot_craftQuantity = 5;
-		ot_craftRecipe = "[[""OT_Steel"",1]]";
-	};
+    class ACE_Clacker: ACE_ItemCore {
+        ot_craftable = 1;
+        ot_craftQuantity = 5;
+        ot_craftRecipe = "[[""OT_Steel"",1]]";
+    };
 
-	class ACE_DeadManSwitch : ACE_ItemCore {
-		ot_craftable = 1;
-		ot_craftQuantity = 7;
-		ot_craftRecipe = "[[""OT_Steel"",1]]";
-	};
+    class ACE_DeadManSwitch: ACE_ItemCore {
+        ot_craftable = 1;
+        ot_craftQuantity = 7;
+        ot_craftRecipe = "[[""OT_Steel"",1]]";
+    };
 
-	class ACE_EarPlugs : ACE_ItemCore {
-		ot_craftable = 1;
-		ot_craftQuantity = 2;
-		ot_craftRecipe = "[[""OT_Plastic"",1]]";
-	};
+    class ACE_EarPlugs: ACE_ItemCore {
+        ot_craftable = 1;
+        ot_craftQuantity = 2;
+        ot_craftRecipe = "[[""OT_Plastic"",1]]";
+    };
 };

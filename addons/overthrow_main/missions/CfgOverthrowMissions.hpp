@@ -1,7 +1,5 @@
-class CfgOverthrowMissions
-{
-    class MedicalSupplies
-    {
+class CfgOverthrowMissions {
+    class MedicalSupplies {
         target = "Town";
         repeatable = 1;
         condition = "params['_inSpawnDistance','_stability'];_inSpawnDistance && _stability < 50";
@@ -11,8 +9,7 @@ class CfgOverthrowMissions
         requestable = 0;
     };
 
-    class Tagging
-    {
+    class Tagging {
         target = "Town";
         repeatable = 0;
         condition = "params['','','_town'];!(_town in (server getVariable ['NATOabandoned',[]])) && ((server getVariable [format['tagsin%1',_town],0]) < 6)";
@@ -22,8 +19,7 @@ class CfgOverthrowMissions
         requestable = 1;
     };
 
-    class KillNATO
-    {
+    class KillNATO {
         target = "Town";
         repeatable = 0;
         condition = "params['','','_town'];!(_town in (server getVariable ['NATOabandoned',[]]))";
@@ -33,8 +29,7 @@ class CfgOverthrowMissions
         requestable = 1;
     };
 
-    class Informant
-    {
+    class Informant {
         target = "Global";
         repeatable = 1;
         condition = "params['_numAbandoned'];_numAbandoned > 0";
@@ -44,8 +39,7 @@ class CfgOverthrowMissions
         requestable = 0;
     };
 
-    class FactionWeapons
-    {
+    class FactionWeapons {
         target = "Faction";
         repeatable = 1;
         condition = "params['_inSpawnDistance','_standing'];_inSpawnDistance";
@@ -55,8 +49,7 @@ class CfgOverthrowMissions
         requestable = 0;
     };
 
-    class Fugitive
-    {
+    class Fugitive {
         target = "Faction";
         repeatable = 1;
         condition = "params['_inSpawnDistance','_standing'];_inSpawnDistance";
@@ -66,8 +59,7 @@ class CfgOverthrowMissions
         requestable = 0;
     };
 
-    class CaptureTown
-    {
+    class CaptureTown {
         target = "Faction";
         repeatable = 0;
         condition = "params['_inSpawnDistance', '', '_town', '', '_population'];_inSpawnDistance && (_population > 100) && !(_town in (server getVariable ['NATOabandoned',[]]))";
@@ -77,8 +69,7 @@ class CfgOverthrowMissions
         requestable = 0;
     };
 
-    class TransportOperative
-    {
+    class TransportOperative {
         target = "Faction";
         repeatable = 1;
         condition = "true";
@@ -88,8 +79,7 @@ class CfgOverthrowMissions
         requestable = 1;
     };
 
-    class ReconBase
-    {
+    class ReconBase {
         target = "Base";
         repeatable = 0;
         condition = "params['_inSpawnDistance', '_name'];!(_name in (server getVariable ['NATOabandoned',[]])) && (server getVariable [format[""garrison%1"",_name],0]) > 0";
@@ -99,8 +89,7 @@ class CfgOverthrowMissions
         requestable = 1;
     };
 
-    class HVT
-    {
+    class HVT {
         target = "HVT";
         repeatable = 1;
         condition = "params['_inSpawnDistance', '_name'];!(_name in (server getVariable ['NATOabandoned',[]])) && _inSpawnDistance";
@@ -110,8 +99,7 @@ class CfgOverthrowMissions
         requestable = 0;
     };
 
-    class NATOmission
-    {
+    class NATOmission {
         target = "NATOmission";
         repeatable = 0;
         condition = "true";
@@ -121,8 +109,7 @@ class CfgOverthrowMissions
         requestable = 0;
     };
 
-    class GangDrugRun
-    {
+    class GangDrugRun {
         target = "Gang";
         repeatable = 1;
         condition = "true";
@@ -132,8 +119,7 @@ class CfgOverthrowMissions
         requestable = 1;
     };
 
-    class GangWeaponRun
-    {
+    class GangWeaponRun {
         target = "Gang";
         repeatable = 1;
         condition = "true";
@@ -143,8 +129,7 @@ class CfgOverthrowMissions
         requestable = 1;
     };
 
-    class ShopDelivery
-    {
+    class ShopDelivery {
         target = "Shop";
         repeatable = 1;
         condition = "true";
@@ -154,8 +139,7 @@ class CfgOverthrowMissions
         requestable = 1;
     };
 
-    class Transformer
-    {
+    class Transformer {
         target = "Town";
         repeatable = 0;
         condition = "params['_inSpawnDistance','_stability'];_inSpawnDistance && _stability < 50";

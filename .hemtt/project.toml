@@ -6,7 +6,7 @@ modname = "Overthrow-Community-Edition"
 [version]
 path = "addons/overthrow_main/script_version.hpp"
 
-[files] 
+[files]
 include = [
     "BUILDING.md",
     "LICENSE.md",
