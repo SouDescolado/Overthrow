@@ -103,8 +103,8 @@
 #define GUI_GRID_CENTER_HAbs  GUI_GRID_HAbs
 #define GUI_GRID_CENTER_W     GUI_GRID_W
 #define GUI_GRID_CENTER_H     GUI_GRID_H
-#define GUI_GRID_CENTER_X     (safezoneX + (safezoneW - GUI_GRID_CENTER_WAbs)/2)
-#define GUI_GRID_CENTER_Y     (safezoneY + (safezoneH - GUI_GRID_CENTER_HAbs)/2)
+#define GUI_GRID_CENTER_X     (safezoneX + (safezoneW - GUI_GRID_CENTER_WAbs) / 2)
+#define GUI_GRID_CENTER_Y     (safezoneY + (safezoneH - GUI_GRID_CENTER_HAbs) / 2)
 
 
 class RscText;
@@ -131,9 +131,9 @@ class RscEditOverthrow {
     colorText[] = {0.95, 0.95, 0.95, 1};
     colorDisabled[] = {1, 1, 1, 0.25};
     colorSelection[] = {
-        "(profilenamespace getvariable ['GUI_BCG_RGB_R',0.69])",
-        "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.75])",
-        "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.5])",
+        "(profileNamespace getVariable ['GUI_BCG_RGB_R', 0.69])",
+        "(profileNamespace getVariable ['GUI_BCG_RGB_G', 0.75])",
+        "(profileNamespace getVariable ['GUI_BCG_RGB_B', 0.5])",
         1
     };
     autocomplete = "";
@@ -233,9 +233,9 @@ class RscOverthrowEdit {
     colorText[] = {0.95, 0.95, 0.95, 1};
     colorDisabled[] = {1, 1, 1, 0.25};
     colorSelection[] = {
-        "(profilenamespace getvariable ['GUI_BCG_RGB_R',0.77])",
-        "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.51])",
-        "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.08])",
+        "(profileNamespace getVariable ['GUI_BCG_RGB_R', 0.77])",
+        "(profileNamespace getVariable ['GUI_BCG_RGB_G', 0.51])",
+        "(profileNamespace getVariable ['GUI_BCG_RGB_B', 0.08])",
         1
     };
     autocomplete = "";
@@ -348,9 +348,9 @@ class RscOverthrowListBox {
         border = "\A3\ui_f\data\gui\cfg\scrollbar\border_ca.paa";
         thumb = "\A3\ui_f\data\gui\cfg\scrollbar\thumb_ca.paa";
         color[] = {
-            "(profilenamespace getvariable ['GUI_BCG_RGB_R',0.69])",
-            "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.75])",
-            "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.5])",
+            "(profileNamespace getVariable ['GUI_BCG_RGB_R', 0.69])",
+            "(profileNamespace getVariable ['GUI_BCG_RGB_G', 0.75])",
+            "(profileNamespace getVariable ['GUI_BCG_RGB_B', 0.5])",
             1
         };
         autoScrollEnabled = 1;
@@ -530,15 +530,15 @@ class RscOverthrowShortcutButton {
     color2[] = {0.95, 0.95, 0.95, 1};
     colorDisabled[] = {1, 1, 1, 0.25};
     colorBackground[] = {
-        "(profilenamespace getvariable ['GUI_BCG_RGB_R',0.77])",
-        "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.51])",
-        "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.08])",
+        "(profileNamespace getVariable ['GUI_BCG_RGB_R', 0.77])",
+        "(profileNamespace getVariable ['GUI_BCG_RGB_G', 0.51])",
+        "(profileNamespace getVariable ['GUI_BCG_RGB_B', 0.08])",
         1
     };
     colorBackgroundFocused[] = {
-        "(profilenamespace getvariable ['GUI_BCG_RGB_R',0.77])",
-        "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.51])",
-        "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.08])",
+        "(profileNamespace getVariable ['GUI_BCG_RGB_R', 0.77])",
+        "(profileNamespace getVariable ['GUI_BCG_RGB_G', 0.51])",
+        "(profileNamespace getVariable ['GUI_BCG_RGB_B', 0.08])",
         1
     };
     colorBackground2[] = {1, 1, 1, 1};
@@ -623,7 +623,7 @@ class RscOverthrowShortcutButtonMain {
     };
     class TextPos {
         left = "(((2560 / safezoneH ) min 1.2) / 32) * 1.5";
-        top = "(((((2560 / safezoneH ) min 1.2) / 1.2) / 20)*2 - (((((2560 / safezoneH ) min 1.2) / 1.2) / 25) * 1.2)) / 2";
+        top = "(((((2560 / safezoneH ) min 1.2) / 1.2) / 20) * 2 - (((((2560 / safezoneH ) min 1.2) / 1.2) / 25) * 1.2)) / 2";
         right = 0.005;
         bottom = 0;
     };
@@ -689,10 +689,10 @@ class IGUIBack {
     h = 0.1;
 
     colorbackground[] = {
-        "(profilenamespace getvariable ['IGUI_BCG_RGB_R',0])",
-        "(profilenamespace getvariable ['IGUI_BCG_RGB_G',1])",
-        "(profilenamespace getvariable ['IGUI_BCG_RGB_B',1])",
-        "(profilenamespace getvariable ['IGUI_BCG_RGB_A',0.8])"
+        "(profileNamespace getVariable ['IGUI_BCG_RGB_R', 0])",
+        "(profileNamespace getVariable ['IGUI_BCG_RGB_G', 1])",
+        "(profileNamespace getVariable ['IGUI_BCG_RGB_B', 1])",
+        "(profileNamespace getVariable ['IGUI_BCG_RGB_A', 0.8])"
     };
 };
 class RscOverthrowCheckBox {
@@ -761,9 +761,9 @@ class RscOverthrowTextCheckBox {
     colorBackground[] = {0, 0, 1, 1};
     colorTextSelect[] = {0, 0.8, 0, 1};
     colorSelectedBg[] = {
-        "(profilenamespace getvariable ['GUI_BCG_RGB_R',0.77])",
-        "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.51])",
-        "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.08])",
+        "(profileNamespace getVariable ['GUI_BCG_RGB_R', 0.77])",
+        "(profileNamespace getVariable ['GUI_BCG_RGB_G', 0.51])",
+        "(profileNamespace getVariable ['GUI_BCG_RGB_B', 0.08])",
         1
     };
     colorSelect[] = {0, 0, 0, 1};
@@ -940,7 +940,7 @@ class RscOverthrowActiveText {
     soundPush[] = {"", 0, 1};
     soundClick[] = {"", 0, 1};
     soundEscape[] = {"", 0, 1};
-    action = "hint ""Good choice!""";
+    action = "hint 'Good choice!'";
     tooltip = "";
     text = "";
     default = 1;

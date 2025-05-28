@@ -15,9 +15,9 @@ class OT_sleep_dialog {
             w = "0.257813 * safezoneW";
             h = "0.022 * safezoneH";
             colorBackground[] = {
-                "(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])",
-                "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])",
-                "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])",
+                "(profileNamespace getVariable ['GUI_BCG_RGB_R', 0.3843])",
+                "(profileNamespace getVariable ['GUI_BCG_RGB_G', 0.7019])",
+                "(profileNamespace getVariable ['GUI_BCG_RGB_B', 0.8862])",
                 1
             };
         };
@@ -53,8 +53,8 @@ class OT_sleep_dialog {
             y = "0.5 * safezoneH + safezoneY";
             w = "0.237187 * safezoneW";
             h = "0.022 * safezoneH";
-            onLoad = "(_this#0) sliderSetRange [1, 48]; OT_sleepTime = 1;";
-            onSliderPosChanged = "((findDisplay 152001) displayCtrl 10) ctrlSetText format['%1 Hour(s)',round (_this#1)]; OT_sleepTime = (round (_this#1));";
+            onLoad = "(_this # 0) sliderSetRange [1, 48]; OT_sleepTime = 1;";
+            onSliderPosChanged = "((findDisplay 152001) displayCtrl 10) ctrlSetText format ['%1 Hour(s)', round (_this # 1)]; OT_sleepTime = (round (_this # 1));";
         };
         class SleepButton: RscButton {
             idc = -1;
@@ -64,11 +64,11 @@ class OT_sleep_dialog {
             y = "0.533 * safezoneH + safezoneY";
             w = "0.134062 * safezoneW";
             h = "0.033 * safezoneH";
-            onButtonClick = "[] remoteExec [""OT_fnc_startSleeping"",[0,-2] select isDedicated,false]; [] spawn {uiSleep 8; OT_sleepTime remoteExec [""skipTime"",2]; }";
+            onButtonClick = "[] remoteExec ['OT_fnc_startSleeping', [0, -2] select isDedicated, false]; [] spawn { uiSleep 8; OT_sleepTime remoteExec ['skipTime', 2]; };";
             colorBackground[] = {
-                "(profilenamespace getvariable ['GUI_BCG_RGB_R',0.3843])",
-                "(profilenamespace getvariable ['GUI_BCG_RGB_G',0.7019])",
-                "(profilenamespace getvariable ['GUI_BCG_RGB_B',0.8862])",
+                "(profileNamespace getVariable ['GUI_BCG_RGB_R', 0.3843])",
+                "(profileNamespace getVariable ['GUI_BCG_RGB_G', 0.7019])",
+                "(profileNamespace getVariable ['GUI_BCG_RGB_B', 0.8862])",
                 1
             };
         };
@@ -82,7 +82,7 @@ class OT_sleep_dialog {
             w = "0.0928125 * safezoneW";
             h = "0.033 * safezoneH";
             font = "PuristaMedium";
-            onLoad = "(_this#0) ctrlSetText '1 Hour(s)'";
+            onLoad = "(_this # 0) ctrlSetText '1 Hour(s)'";
         };
     };
 };

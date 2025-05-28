@@ -14,7 +14,7 @@ class OT_dialog_buildbase {
 
         class RscButton_1600: RscOverthrowButton {
             idc = 1600;
-            action = "closeDialog 0;[] call cancelBuild;";
+            action = "closeDialog 0; [] call cancelBuild;";
 
             text = "Close"; //--- ToDo: Localize;
             x = "0.0204687 * safezoneW + safezoneX";
@@ -122,7 +122,7 @@ class OT_dialog_buildobjective {
 
         class RscButton_1600: RscOverthrowButton {
             idc = 1600;
-            action = "closeDialog 0;[] call cancelBuild;";
+            action = "closeDialog 0; [] call cancelBuild;";
 
             text = "Close"; //--- ToDo: Localize;
             x = "0.0204687 * safezoneW + safezoneX";
@@ -251,7 +251,7 @@ class OT_dialog_buildtown {
 
         class RscButton_1600: RscOverthrowButton {
             idc = 1600;
-            action = "closeDialog 0;[] call cancelBuild;";
+            action = "closeDialog 0; [] call cancelBuild;";
 
             text = "Close"; //--- ToDo: Localize;
             x = "0.0204687 * safezoneW + safezoneX";
@@ -317,7 +317,7 @@ class OT_dialog_police {
         class RscStructuredText_1100: RscOverthrowStructuredText {
             idc = 1100;
 
-            text = "<t size=""2"" align=""center"">Blah Police Station</t>"; //--- ToDo: Localize;
+            text = "<t size='2' align='center'>Blah Police Station</t>"; //--- ToDo: Localize;
             x = "0.288594 * safezoneW + safezoneX";
             y = "0.214 * safezoneH + safezoneY";
             w = "0.422812 * safezoneW";
@@ -334,7 +334,7 @@ class OT_dialog_police {
         class RscStructuredText_1101: RscOverthrowStructuredText {
             idc = 1101;
 
-            text = "<t size=""1.5"" align=""center"">Police: 2</t>"; //--- ToDo: Localize;
+            text = "<t size='1.5' align='center'>Police: 2</t>"; //--- ToDo: Localize;
             x = "0.29375 * safezoneW + safezoneX";
             y = "0.28 * safezoneH + safezoneY";
             w = "0.4125 * safezoneW";
@@ -355,7 +355,7 @@ class OT_dialog_police {
         class RscStructuredText_1102: RscOverthrowStructuredText {
             idc = 1102;
 
-            text = "<t align=""center"">Transfer to another station</t>"; //--- ToDo: Localize;
+            text = "<t align='center'>Transfer to another station</t>"; //--- ToDo: Localize;
             x = "0.288594 * safezoneW + safezoneX";
             y = "0.335 * safezoneH + safezoneY";
             w = "0.422812 * safezoneW";
@@ -366,7 +366,7 @@ class OT_dialog_police {
         class RscStructuredText_1103: RscOverthrowStructuredText {
             idc = 1103;
 
-            text = "<t align=""center"">Hire police</t>"; //--- ToDo: Localize;
+            text = "<t align='center'>Hire police</t>"; //--- ToDo: Localize;
             x = "0.288594 * safezoneW + safezoneX";
             y = "0.467 * safezoneH + safezoneY";
             w = "0.422812 * safezoneW";
@@ -377,7 +377,7 @@ class OT_dialog_police {
         class RscStructuredText_1104: RscOverthrowStructuredText {
             idc = 1104;
 
-            text = "<t size=""1.2"" align=""center"">Effects</t><br/><br/><t size=""0.8"" align=""center"">+1 Stability/10 mins</t>"; //--- ToDo: Localize;
+            text = "<t size='1.2' align='center'>Effects</t><br/><br/><t size='0.8' align='center'>+1 Stability/10 mins</t>"; //--- ToDo: Localize;
             x = "0.4175 * safezoneW + safezoneX";
             y = "0.632 * safezoneH + safezoneY";
             w = "0.170156 * safezoneW";

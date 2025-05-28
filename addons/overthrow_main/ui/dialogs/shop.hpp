@@ -276,7 +276,7 @@ class OT_dialog_workshop {
         };
         class RscStructuredText_1101: RscOverthrowStructuredText {
             idc = 1101;
-            text = "<t size=""2"" align=""center"">Workshop</t>"; //--- ToDo: Localize;
+            text = "<t size='2' align='center'>Workshop</t>"; //--- ToDo: Localize;
             x = "0.2525 * safezoneW + safezoneX";
             y = "0.159 * safezoneH + safezoneY";
             w = "0.391875 * safezoneW";
@@ -295,7 +295,7 @@ class OT_dialog_workshop {
         };
         class RscStructuredText_1102: RscOverthrowStructuredText {
             idc = 1102;
-            text = "<t size=""2"" align=""center"">&gt;&gt;</t>"; //--- ToDo: Localize;
+            text = "<t size='2' align='center'>&gt;&gt;</t>"; //--- ToDo: Localize;
             x = "0.752656 * safezoneW + safezoneX";
             y = "0.28 * safezoneH + safezoneY";
             w = "0.0309375 * safezoneW";
@@ -408,14 +408,14 @@ class OT_dialog_warehouse {
         class RscButton_1604: RscOverthrowButton {
             idc = 1604;
             text = "Search";
-            x = "0.65  * safezoneW + safezoneX";
+            x = "0.65 * safezoneW + safezoneX";
             y = "0.155 * safezoneH + safezoneY";
             w = "0.0567187 * safezoneW";
             h = "0.05 * safezoneH";
         };
         class RscEdit_1700: RscEditOverthrow {
             idc = 1700;
-            x = "0.247344  * safezoneW + safezoneX";
+            x = "0.247344 * safezoneW + safezoneX";
             y = "0.155 * safezoneH + safezoneY";
             w = "0.402187 * safezoneW";
             h = "0.05 * safezoneH";
@@ -512,14 +512,14 @@ class OT_dialog_import {
         class RscButton_1603: RscOverthrowButton {
             idc = 1603;
             text = "Search";
-            x = "0.65  * safezoneW + safezoneX";
+            x = "0.65 * safezoneW + safezoneX";
             y = "0.155 * safezoneH + safezoneY";
             w = "0.0567187 * safezoneW";
             h = "0.05 * safezoneH";
         };
         class RscEdit_1700: RscEditOverthrow {
             idc = 1700;
-            x = "0.247344  * safezoneW + safezoneX";
+            x = "0.247344 * safezoneW + safezoneX";
             y = "0.155 * safezoneH + safezoneY";
             w = "0.402187 * safezoneW";
             h = "0.05 * safezoneH";
@@ -539,7 +539,7 @@ class OT_dialog_loadout {
 
         class RscButton_1600: RscOverthrowButton {
             idc = 1600;
-            action = "[player,OT_context,lbData [1500,lbCurSel 1500]] call OT_fnc_restoreLoadout";
+            action = "[player, OT_context, lbData [1500, lbCurSel 1500]] call OT_fnc_restoreLoadout";
 
             text = "Restore"; //--- ToDo: Localize;
             x = "0.12875 * safezoneW + safezoneX";
@@ -550,7 +550,7 @@ class OT_dialog_loadout {
         };
         class RscButton_1601: RscOverthrowButton {
             idc = 1601;
-            action = "[lbData [1500,lbCurSel 1500]] call OT_fnc_removeLoadout";
+            action = "[lbData [1500, lbCurSel 1500]] call OT_fnc_removeLoadout";
 
             text = "Delete"; //--- ToDo: Localize;
             x = "0.12875 * safezoneW + safezoneX";

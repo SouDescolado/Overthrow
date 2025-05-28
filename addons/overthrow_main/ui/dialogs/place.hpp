@@ -76,7 +76,7 @@ class OT_dialog_input {
         class RscEdit_1400: RscOverthrowEdit {
             idc = 1400;
 
-            onKeyDown = "_key = _this select 1;_name = ctrltext 1400;if(_key == 28 && _name != """") then {[] call OT_inputHandler;closeDialog 0;}";
+            onKeyDown = "_key = _this select 1; _name = ctrltext 1400; if (_key == 28 && _name != '') then { [] call OT_inputHandler; closeDialog 0; };";
             text = ""; //--- ToDo: Localize;
             x = "0.37625 * safezoneW + safezoneX";
             y = "0.412 * safezoneH + safezoneY";
@@ -95,7 +95,7 @@ class OT_dialog_input {
         };
         class RscButton_1600: RscOverthrowButton {
             idc = 1600;
-            onButtonClick = "_this call OT_inputHandler;closeDialog 0;";
+            onButtonClick = "_this call OT_inputHandler; closeDialog 0;";
             text = "OK"; //--- ToDo: Localize;
             x = "0.577344 * safezoneW + safezoneX";
             y = "0.478 * safezoneH + safezoneY";
@@ -131,7 +131,7 @@ class OT_dialog_place {
 
         class RscButton_1600: RscOverthrowButton {
             idc = 1600;
-            action = "closeDialog 0;'Sandbags' spawn OT_fnc_place";
+            action = "closeDialog 0; 'Sandbags' spawn OT_fnc_place";
 
             text = "Sandbags"; //--- ToDo: Localize;
             x = "0.551562 * safezoneW + safezoneX";
@@ -142,7 +142,7 @@ class OT_dialog_place {
         };
         class RscButton_1601: RscOverthrowButton {
             idc = 1601;
-            action = "closeDialog 0;'Camo Nets' spawn OT_fnc_place";
+            action = "closeDialog 0; 'Camo Nets' spawn OT_fnc_place";
 
             text = "Camo Nets"; //--- ToDo: Localize;
             x = "0.7475 * safezoneW + safezoneX";
@@ -153,7 +153,7 @@ class OT_dialog_place {
         };
         class RscButton_1602: RscOverthrowButton {
             idc = 1602;
-            action = "closeDialog 0;'Barriers' spawn OT_fnc_place";
+            action = "closeDialog 0; 'Barriers' spawn OT_fnc_place";
 
             text = "Barriers"; //--- ToDo: Localize;
             x = "0.649531 * safezoneW + safezoneX";
@@ -164,7 +164,7 @@ class OT_dialog_place {
         };
         class RscButton_1603: RscOverthrowButton {
             idc = 1603;
-            action = "closeDialog 0;'Camp' spawn OT_fnc_place";
+            action = "closeDialog 0; 'Camp' spawn OT_fnc_place";
 
             text = "Camp"; //--- ToDo: Localize;
             x = "0.0617187 * safezoneW + safezoneX";
@@ -175,7 +175,7 @@ class OT_dialog_place {
         };
         class RscButton_1604: RscOverthrowButton {
             idc = 1604;
-            action = "closeDialog 0;'Ammobox' spawn OT_fnc_place";
+            action = "closeDialog 0; 'Ammobox' spawn OT_fnc_place";
 
             text = "Ammobox"; //--- ToDo: Localize;
             x = "0.355625 * safezoneW + safezoneX";
@@ -186,7 +186,7 @@ class OT_dialog_place {
         };
         class RscButton_1605: RscOverthrowButton {
             idc = 1605;
-            action = "closeDialog 0;'Misc' spawn OT_fnc_place";
+            action = "closeDialog 0; 'Misc' spawn OT_fnc_place";
 
             text = "Misc"; //--- ToDo: Localize;
             x = "0.845469 * safezoneW + safezoneX";
@@ -197,7 +197,7 @@ class OT_dialog_place {
         };
         class RscButton_1606: RscOverthrowButton {
             idc = 1606;
-            action = "closeDialog 0;'Base' spawn OT_fnc_place";
+            action = "closeDialog 0; 'Base' spawn OT_fnc_place";
 
             text = "FOB"; //--- ToDo: Localize;
             x = "0.159687 * safezoneW + safezoneX";
@@ -208,7 +208,7 @@ class OT_dialog_place {
         };
         class RscButton_1607: RscOverthrowButton {
             idc = 1607;
-            action = "closeDialog 0;'Map' spawn OT_fnc_place";
+            action = "closeDialog 0; 'Map' spawn OT_fnc_place";
 
             text = "Map"; //--- ToDo: Localize;
             x = "0.257656 * safezoneW + safezoneX";
@@ -219,7 +219,7 @@ class OT_dialog_place {
         };
         class RscButton_1608: RscOverthrowButton {
             idc = 1608;
-            action = "closeDialog 0;'Safe' spawn OT_fnc_place";
+            action = "closeDialog 0; 'Safe' spawn OT_fnc_place";
 
             text = "Safe"; //--- ToDo: Localize;
             x = "0.453594 * safezoneW + safezoneX";

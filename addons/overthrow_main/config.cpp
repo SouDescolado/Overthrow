@@ -65,7 +65,7 @@ class CfgMainMenuSpotlight {
         picture = "\overthrow_main\campaign\overthrow_spotlight.jpg"; // Square picture, ideally 512x512
         video = "\a3\Ui_f\Video\spotlight_1_Apex.ogv"; // Video played on mouse hover
         // First activate "multiplayer" control in main display, then activate "host server" control in "multiplayer" display
-        action = "ctrlactivate ((ctrlparent (_this select 0)) displayctrl 105); ctrlactivate (findDisplay 8 displayctrl 167);";
+        action = "ctrlActivate ((ctrlParent (_this select 0)) displayCtrl 105); ctrlActivate (findDisplay 8 displayCtrl 167);";
         actionText = "$STR_A3_RscDisplayMain_Spotlight_Play"; // Text displayed in top left corner of on-hover white frame
         condition = "true"; // Condition for showing the spotlight
     };

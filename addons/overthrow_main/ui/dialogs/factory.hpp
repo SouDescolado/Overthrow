@@ -98,7 +98,7 @@ class OT_dialog_factoryold {
             y = "0.72 * safezoneH + safezoneY";
             w = "0.103125 * safezoneW";
             h = "0.055 * safezoneH";
-            action = "closeDialog 0;[] call OT_fnc_reverseEngineerDialog;";
+            action = "closeDialog 0; [] call OT_fnc_reverseEngineerDialog;";
         };
         class RscButton_1603: RscOverthrowButton {
             idc = 1603;
@@ -143,7 +143,7 @@ class OT_dialog_factory {
 
         class RscStructuredText_1104: RscOverthrowStructuredText {
             idc = 1104;
-            text = "<t align=""center"" size=""1.8"">Factory</t>"; //--- ToDo: Localize;
+            text = "<t align='center' size='1.8'>Factory</t>"; //--- ToDo: Localize;
             x = "0.381406 * safezoneW + safezoneX";
             y = "0.104 * safezoneH + safezoneY";
             w = "0.232031 * safezoneW";
@@ -157,7 +157,7 @@ class OT_dialog_factory {
             y = "0.797 * safezoneH + safezoneY";
             w = "0.128906 * safezoneW";
             h = "0.066 * safezoneH";
-            action = "closeDialog 0;[] call OT_fnc_reverseEngineerDialog;";
+            action = "closeDialog 0; [] call OT_fnc_reverseEngineerDialog;";
         };
         class RscListbox_1500: RscOverthrowListBox {
             idc = 1500;
@@ -211,7 +211,7 @@ class OT_dialog_factory {
         };
         class RscStructuredText_1101: RscOverthrowStructuredText {
             idc = 1101;
-            text = "<t size=""0.9"">Build Queue</t>"; //--- ToDo: Localize;
+            text = "<t size='0.9'>Build Queue</t>"; //--- ToDo: Localize;
             x = "0.438125 * safezoneW + safezoneX";
             y = "0.291 * safezoneH + safezoneY";
             w = "0.113437 * safezoneW";
@@ -220,7 +220,7 @@ class OT_dialog_factory {
         };
         class RscStructuredText_1102: RscOverthrowStructuredText {
             idc = 1102;
-            text = "<t size=""0.9"">Blueprints</t>"; //--- ToDo: Localize;
+            text = "<t size='0.9'>Blueprints</t>"; //--- ToDo: Localize;
             x = "0.216406 * safezoneW + safezoneX";
             y = "0.148 * safezoneH + safezoneY";
             w = "0.113437 * safezoneW";

@@ -21,7 +21,7 @@ class RscDisplayMainMap {
 */
 
 class RscMapControl {
-    onDraw = "_this call (missionNameSpace getVariable ['OT_fnc_mapHandler',{}]);";
+    onDraw = "_this call (missionNamespace getVariable ['OT_fnc_mapHandler', {}])";
 };
 
 class RscStructuredText;

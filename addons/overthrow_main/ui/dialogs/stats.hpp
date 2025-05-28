@@ -15,7 +15,7 @@ class RscTitles {
         fadein = 0;
         fadeout = 0;
         name = "OT_stashHUD";
-        onLoad = "with uiNameSpace do { OT_stashHUD = _this select 0 }";
+        onLoad = "with uiNamespace do { OT_stashHUD = _this select 0 }";
 
         class controls {
             ////////////////////////////////////////////////////////
@@ -74,7 +74,7 @@ class RscTitles {
         fadein = 0;
         fadeout = 0;
         name = "OT_statsHUD";
-        onLoad = "with uiNameSpace do { OT_statsHUD = _this select 0 }";
+        onLoad = "with uiNamespace do { OT_statsHUD = _this select 0 }";
         class controls {
             class RscStructuredText_1106: RscOverthrowStructuredText {
                 idc = 1001;

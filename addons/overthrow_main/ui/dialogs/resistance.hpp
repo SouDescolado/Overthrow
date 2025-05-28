@@ -190,7 +190,7 @@ class OT_dialog_garrison {
             y = "0.291 * safezoneH + safezoneY";
             w = "0.0567187 * safezoneW";
             h = "0.077 * safezoneH";
-            action = "[getpos player,0] spawn OT_fnc_addGarrison";
+            action = "[getPos player, 0] spawn OT_fnc_addGarrison";
         };
         class RscButton_1601: RscOverthrowButton {
             idc = 1601;
@@ -199,7 +199,7 @@ class OT_dialog_garrison {
             y = "0.291 * safezoneH + safezoneY";
             w = "0.0567187 * safezoneW";
             h = "0.077 * safezoneH";
-            action = "[getpos player,1] spawn OT_fnc_addGarrison";
+            action = "[getPos player, 1] spawn OT_fnc_addGarrison";
         };
         class RscButton_1602: RscOverthrowButton {
             idc = 1602;
@@ -208,7 +208,7 @@ class OT_dialog_garrison {
             y = "0.291 * safezoneH + safezoneY";
             w = "0.0567187 * safezoneW";
             h = "0.077 * safezoneH";
-            action = "[getpos player,12] spawn OT_fnc_addGarrison";
+            action = "[getPos player, 12] spawn OT_fnc_addGarrison";
         };
         class RscButton_1603: RscOverthrowButton {
             idc = 1603;
@@ -217,7 +217,7 @@ class OT_dialog_garrison {
             y = "0.291 * safezoneH + safezoneY";
             w = "0.0567187 * safezoneW";
             h = "0.077 * safezoneH";
-            action = "[getpos player,7] spawn OT_fnc_addGarrison";
+            action = "[getPos player, 7] spawn OT_fnc_addGarrison";
         };
         class RscButton_1604: RscOverthrowButton {
             idc = 1604;
@@ -226,7 +226,7 @@ class OT_dialog_garrison {
             y = "0.379 * safezoneH + safezoneY";
             w = "0.0567187 * safezoneW";
             h = "0.077 * safezoneH";
-            action = "[getpos player,8] spawn OT_fnc_addGarrison";
+            action = "[getPos player, 8] spawn OT_fnc_addGarrison";
         };
         class RscButton_1605: RscOverthrowButton {
             idc = 1605;
@@ -235,7 +235,7 @@ class OT_dialog_garrison {
             y = "0.379 * safezoneH + safezoneY";
             w = "0.0567187 * safezoneW";
             h = "0.077 * safezoneH";
-            action = "[getpos player,9] spawn OT_fnc_addGarrison";
+            action = "[getPos player, 9] spawn OT_fnc_addGarrison";
         };
         class RscButton_1606: RscOverthrowButton {
             idc = 1606;
@@ -244,7 +244,7 @@ class OT_dialog_garrison {
             y = "0.379 * safezoneH + safezoneY";
             w = "0.0567187 * safezoneW";
             h = "0.077 * safezoneH";
-            action = "[getpos player,'HMG'] spawn OT_fnc_addGarrison";
+            action = "[getPos player, 'HMG'] spawn OT_fnc_addGarrison";
         };
         class RscButton_1607: RscOverthrowButton {
             idc = 1607;
@@ -253,7 +253,7 @@ class OT_dialog_garrison {
             y = "0.379 * safezoneH + safezoneY";
             w = "0.0567187 * safezoneW";
             h = "0.077 * safezoneH";
-            action = "[getpos player,'GMG'] spawn OT_fnc_addGarrison";
+            action = "[getPos player, 'GMG'] spawn OT_fnc_addGarrison";
         };
         class RscStructuredText_1101: RscOverthrowStructuredText {
             idc = 1101;

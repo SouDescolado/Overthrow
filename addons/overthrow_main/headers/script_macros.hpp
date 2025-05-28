@@ -11,7 +11,7 @@
 #endif
 
 #ifndef OT_VALID_LOOT_CONTAINERS
-    #define OT_VALID_LOOT_CONTAINERS ["Car","ReammoBox_F","Air","Ship"]
+    #define OT_VALID_LOOT_CONTAINERS ["Car", "ReammoBox_F", "Air", "Ship"]
 #endif
 
 #ifndef OT_MAX_WAIT_TIME

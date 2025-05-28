@@ -221,7 +221,7 @@ class Intro {
                     flags = 7;
                     class Attributes {
                         skill = 0.2;
-                        init = "this switchMove ""Acts_ExecutionVictim_Loop""; this disableAI ""ALL"";";
+                        init = "this switchMove 'Acts_ExecutionVictim_Loop'; this disableAI 'ALL';";
                         name = "criminal_01";
                     };
                     id = 9;
@@ -230,7 +230,7 @@ class Intro {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     class type {
@@ -242,7 +242,7 @@ class Intro {
                         };
                         class Attribute1 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     class type {
@@ -273,7 +273,7 @@ class Intro {
             class CustomAttributes {
                 class Attribute0 {
                     property = "EnableHUD";
-                    expression = "_this setVariable ['EnableHUD',_value];";
+                    expression = "_this setVariable ['EnableHUD', _value];";
                     class Value {
                         class data {
                             class type {
@@ -285,7 +285,7 @@ class Intro {
                 };
                 class Attribute1 {
                     property = "ShowCinemaBorders";
-                    expression = "_this setVariable ['ShowCinemaBorders',_value];";
+                    expression = "_this setVariable ['ShowCinemaBorders', _value];";
                     class Value {
                         class data {
                             class type {
@@ -297,7 +297,7 @@ class Intro {
                 };
                 class Attribute2 {
                     property = "FOV";
-                    expression = "_this setVariable ['FOV',_value];";
+                    expression = "_this setVariable ['FOV', _value];";
                     class Value {
                         class data {
                             class type {
@@ -309,7 +309,7 @@ class Intro {
                 };
                 class Attribute3 {
                     property = "SwitchToAtStart";
-                    expression = "_this setVariable ['SwitchToAtStart',_value];";
+                    expression = "_this setVariable ['SwitchToAtStart', _value];";
                     class Value {
                         class data {
                             class type {
@@ -321,19 +321,19 @@ class Intro {
                 };
                 class Attribute4 {
                     property = "Focus";
-                    expression = "_this setVariable ['Focus',_value];";
+                    expression = "_this setVariable ['Focus', _value];";
                     class Value {
                         class data {
                             class type {
                                 type[] = {"STRING"};
                             };
-                            value = "[-1,-1]";
+                            value = "[-1, -1]";
                         };
                     };
                 };
                 class Attribute5 {
                     property = "VisionMode";
-                    expression = "_this setVariable ['VisionMode',_value];";
+                    expression = "_this setVariable ['VisionMode', _value];";
                     class Value {
                         class data {
                             class type {
@@ -370,7 +370,7 @@ class Intro {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "allowDamage";
-                            expression = "_this allowdamage _value;";
+                            expression = "_this allowDamage _value;";
                             class Value {
                                 class data {
                                     class type {
@@ -382,7 +382,7 @@ class Intro {
                         };
                         class Attribute1 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     class type {
@@ -394,7 +394,7 @@ class Intro {
                         };
                         class Attribute2 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     class type {
@@ -406,7 +406,7 @@ class Intro {
                         };
                         class Attribute3 {
                             property = "hideObject";
-                            expression = "if !(is3DEN) then {_this hideobjectglobal _value;};";
+                            expression = "if !(is3DEN) then { _this hideObjectGlobal _value };";
                             class Value {
                                 class data {
                                     class type {
@@ -418,7 +418,7 @@ class Intro {
                         };
                         class Attribute4 {
                             property = "enableStamina";
-                            expression = "_this enablestamina _value;";
+                            expression = "_this enableStamina _value;";
                             class Value {
                                 class data {
                                     class type {
@@ -543,7 +543,7 @@ class Intro {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     class type {
@@ -555,7 +555,7 @@ class Intro {
                         };
                         class Attribute1 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     class type {
@@ -567,7 +567,7 @@ class Intro {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     class type {
@@ -602,7 +602,7 @@ class Intro {
             class CustomAttributes {
                 class Attribute0 {
                     property = "allowDamage";
-                    expression = "_this allowdamage _value;";
+                    expression = "_this allowDamage _value;";
                     class Value {
                         class data {
                             class type {
@@ -631,7 +631,7 @@ class Intro {
             class CustomAttributes {
                 class Attribute0 {
                     property = "allowDamage";
-                    expression = "_this allowdamage _value;";
+                    expression = "_this allowDamage _value;";
                     class Value {
                         class data {
                             class type {
@@ -666,7 +666,7 @@ class Intro {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     class type {
@@ -678,7 +678,7 @@ class Intro {
                         };
                         class Attribute1 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     class type {
@@ -793,7 +793,7 @@ class Intro {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     class type {
@@ -805,7 +805,7 @@ class Intro {
                         };
                         class Attribute1 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     class type {
@@ -921,7 +921,7 @@ class Intro {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     class type {
@@ -933,7 +933,7 @@ class Intro {
                         };
                         class Attribute1 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     class type {
@@ -1047,7 +1047,7 @@ class Intro {
             class CustomAttributes {
                 class Attribute0 {
                     property = "allowDamage";
-                    expression = "_this allowdamage _value;";
+                    expression = "_this allowDamage _value;";
                     class Value {
                         class data {
                             class type {
@@ -1076,7 +1076,7 @@ class Intro {
             class CustomAttributes {
                 class Attribute0 {
                     property = "allowDamage";
-                    expression = "_this allowdamage _value;";
+                    expression = "_this allowDamage _value;";
                     class Value {
                         class data {
                             class type {

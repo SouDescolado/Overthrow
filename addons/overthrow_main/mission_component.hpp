@@ -161,7 +161,7 @@ class zen_context_menu_actions {
         displayName = "Overthrow: Set Money";
         icon = "\overthrow_main\ui\markers\shop-General.paa";
         statement = "[_hoveredEntity] call OT_fnc_zenSetMoney";
-        condition = "_hoveredEntity isKindOf 'CAManBase' && {isPlayer _hoveredEntity}";
+        condition = "_hoveredEntity isKindOf 'CAManBase' && { isPlayer _hoveredEntity }";
         priority = 50;
     };
 };

@@ -319,7 +319,7 @@ class CustomAttributes {
         };
         class Attribute4 {
             property = "SharedObjectives";
-            expression = "if (isMultiplayer) then {[_value] spawn bis_fnc_sharedObjectives;};";
+            expression = "if (isMultiplayer) then { [_value] spawn bis_fnc_sharedObjectives }";
             class Value {
                 class data {
                     singleType = "SCALAR";
@@ -427,7 +427,7 @@ class Mission {
             name = "Intel";
             class Attribute0 {
                 property = "Enh_rainbowStrength";
-                expression = "0 setRainBow _value";
+                expression = "0 setRainbow _value";
                 class Value {
                     class data {
                         singleType = "SCALAR";
@@ -437,7 +437,7 @@ class Mission {
             };
             class Attribute1 {
                 property = "Enh_disableGrass";
-                expression = "if(_value) then {50 remoteExec ['setTerrainGrid',[0,-2] select (isDedicated),true]}";
+                expression = "if (_value) then { 50 remoteExec ['setTerrainGrid', [0, -2] select (isDedicated), true] }";
                 class Value {
                     class data {
                         singleType = "BOOL";
@@ -447,7 +447,7 @@ class Mission {
             };
             class Attribute2 {
                 property = "Enh_viewDistance";
-                expression = "if (!is3DEN && (_value > 0)) then {_value remoteExec ['setViewDistance',[0,-2] select (isDedicated),true]}";
+                expression = "if (!is3DEN && (_value > 0)) then { _value remoteExec ['setViewDistance', [0, -2] select (isDedicated), true] }";
                 class Value {
                     class data {
                         singleType = "SCALAR";
@@ -457,7 +457,7 @@ class Mission {
             };
             class Attribute3 {
                 property = "Enh_fogDecay";
-                expression = "missionNamespace setVariable ['Enh_fogDecay',_value]";
+                expression = "missionNamespace setVariable ['Enh_fogDecay', _value]";
                 class Value {
                     class data {
                         singleType = "SCALAR";
@@ -467,7 +467,7 @@ class Mission {
             };
             class Attribute4 {
                 property = "Enh_fogValue";
-                expression = "				if (_value > 0) then				{					_value spawn					{						waitUntil {time > 0.2};						0 setFog [_this,missionNamespace getVariable 'Enh_fogDecay',missionNamespace getVariable 'Enh_fogBase'];					};				};			";
+                expression = "if (_value > 0) then { _value spawn { waitUntil { time > 0.2 }; 0 setFog [_this, missionNamespace getVariable 'Enh_fogDecay', missionNamespace getVariable 'Enh_fogBase']; }; };";
                 class Value {
                     class data {
                         singleType = "SCALAR";
@@ -477,7 +477,7 @@ class Mission {
             };
             class Attribute5 {
                 property = "Enh_fogBase";
-                expression = "missionNamespace setVariable ['Enh_fogBase',_value]";
+                expression = "missionNamespace setVariable ['Enh_fogBase', _value]";
                 class Value {
                     class data {
                         singleType = "STRING";
@@ -487,7 +487,7 @@ class Mission {
             };
             class Attribute6 {
                 property = "Enh_timeMultiplier";
-                expression = "if (!is3DEN) then {setTimeMultiplier _value}";
+                expression = "if (!is3DEN) then { setTimeMultiplier _value }";
                 class Value {
                     class data {
                         singleType = "SCALAR";
@@ -497,7 +497,7 @@ class Mission {
             };
             class Attribute7 {
                 property = "Enh_enableEnvironment";
-                expression = "if (!is3DEN) then {enableEnvironment _value};";
+                expression = "if (!is3DEN) then { enableEnvironment _value }";
                 class Value {
                     class data {
                         singleType = "BOOL";
@@ -640,7 +640,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -650,7 +650,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -660,7 +660,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -670,7 +670,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -680,7 +680,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -690,7 +690,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -700,7 +700,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -726,7 +726,7 @@ class Mission {
             class CustomAttributes {
                 class Attribute0 {
                     property = "ACE_moduleCargoSettings_enable";
-                    expression = "_this setVariable ['enable',_value,true];";
+                    expression = "_this setVariable ['enable', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -736,7 +736,7 @@ class Mission {
                 };
                 class Attribute1 {
                     property = "ACE_moduleCargoSettings_paradropTimeCoefficent";
-                    expression = "_this setVariable ['paradropTimeCoefficent',_value,true];";
+                    expression = "_this setVariable ['paradropTimeCoefficent', _value, true];";
                     class Value {
                         class data {
                             singleType = "STRING";
@@ -758,7 +758,7 @@ class Mission {
             class CustomAttributes {
                 class Attribute0 {
                     property = "ace_captives_moduleSettings_requireSurrender";
-                    expression = "_this setVariable ['requireSurrender',_value,true];";
+                    expression = "_this setVariable ['requireSurrender', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -768,7 +768,7 @@ class Mission {
                 };
                 class Attribute1 {
                     property = "ace_captives_moduleSettings_allowHandcuffOwnSide";
-                    expression = "_this setVariable ['allowHandcuffOwnSide',_value,true];";
+                    expression = "_this setVariable ['allowHandcuffOwnSide', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -778,7 +778,7 @@ class Mission {
                 };
                 class Attribute2 {
                     property = "ace_captives_moduleSettings_allowSurrender";
-                    expression = "_this setVariable ['allowSurrender',_value,true];";
+                    expression = "_this setVariable ['allowSurrender', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -788,7 +788,7 @@ class Mission {
                 };
                 class Attribute3 {
                     property = "ace_captives_moduleSettings_requireSurrenderAi";
-                    expression = "_this setVariable ['requireSurrenderAi',_value,true];";
+                    expression = "_this setVariable ['requireSurrenderAi', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -810,7 +810,7 @@ class Mission {
             class CustomAttributes {
                 class Attribute0 {
                     property = "ACE_ModuleSwitchUnits_SafeZoneRadius";
-                    expression = "_this setVariable ['SafeZoneRadius',_value,true];";
+                    expression = "_this setVariable ['SafeZoneRadius', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -820,7 +820,7 @@ class Mission {
                 };
                 class Attribute1 {
                     property = "ACE_ModuleSwitchUnits_SwitchToCivilian";
-                    expression = "_this setVariable ['SwitchToCivilian',_value,true];";
+                    expression = "_this setVariable ['SwitchToCivilian', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -830,7 +830,7 @@ class Mission {
                 };
                 class Attribute2 {
                     property = "ACE_ModuleSwitchUnits_SwitchToEast";
-                    expression = "_this setVariable ['SwitchToEast',_value,true];";
+                    expression = "_this setVariable ['SwitchToEast', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -840,7 +840,7 @@ class Mission {
                 };
                 class Attribute3 {
                     property = "ACE_ModuleSwitchUnits_SwitchToWest";
-                    expression = "_this setVariable ['SwitchToWest',_value,true];";
+                    expression = "_this setVariable ['SwitchToWest', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -850,7 +850,7 @@ class Mission {
                 };
                 class Attribute4 {
                     property = "ACE_ModuleSwitchUnits_SwitchToIndependent";
-                    expression = "_this setVariable ['SwitchToIndependent',_value,true];";
+                    expression = "_this setVariable ['SwitchToIndependent', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -860,7 +860,7 @@ class Mission {
                 };
                 class Attribute5 {
                     property = "ACE_ModuleSwitchUnits_EnableSafeZone";
-                    expression = "_this setVariable ['EnableSafeZone',_value,true];";
+                    expression = "_this setVariable ['EnableSafeZone', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -882,7 +882,7 @@ class Mission {
             class CustomAttributes {
                 class Attribute0 {
                     property = "ace_weather_ModuleSettings_enabled";
-                    expression = "_this setVariable ['enabled',_value,true];";
+                    expression = "_this setVariable ['enabled', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -892,7 +892,7 @@ class Mission {
                 };
                 class Attribute1 {
                     property = "ace_weather_ModuleSettings_windSimulation";
-                    expression = "_this setVariable ['windSimulation',_value,true];";
+                    expression = "_this setVariable ['windSimulation', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -902,7 +902,7 @@ class Mission {
                 };
                 class Attribute2 {
                     property = "ace_weather_ModuleSettings_updateInterval";
-                    expression = "_this setVariable ['updateInterval',_value,true];";
+                    expression = "_this setVariable ['updateInterval', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -924,7 +924,7 @@ class Mission {
             class CustomAttributes {
                 class Attribute0 {
                     property = "ACE_VehicleLock_ModuleSetup_DefaultLockpickStrength";
-                    expression = "_this setVariable ['DefaultLockpickStrength',_value,true];";
+                    expression = "_this setVariable ['DefaultLockpickStrength', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -934,7 +934,7 @@ class Mission {
                 };
                 class Attribute1 {
                     property = "ACE_VehicleLock_ModuleSetup_VehicleStartingLockState";
-                    expression = "_this setVariable ['VehicleStartingLockState',_value,true];";
+                    expression = "_this setVariable ['VehicleStartingLockState', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -944,7 +944,7 @@ class Mission {
                 };
                 class Attribute2 {
                     property = "ACE_VehicleLock_ModuleSetup_LockVehicleInventory";
-                    expression = "_this setVariable ['LockVehicleInventory',_value,true];";
+                    expression = "_this setVariable ['LockVehicleInventory', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -966,7 +966,7 @@ class Mission {
             class CustomAttributes {
                 class Attribute0 {
                     property = "ace_advanced_fatigue_moduleSettings_TerrainGradientFactor";
-                    expression = "_this setVariable ['TerrainGradientFactor',_value,true];";
+                    expression = "_this setVariable ['TerrainGradientFactor', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -976,7 +976,7 @@ class Mission {
                 };
                 class Attribute1 {
                     property = "ace_advanced_fatigue_moduleSettings_Enabled";
-                    expression = "_this setVariable ['Enabled',_value,true];";
+                    expression = "_this setVariable ['Enabled', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -986,7 +986,7 @@ class Mission {
                 };
                 class Attribute2 {
                     property = "ace_advanced_fatigue_moduleSettings_RecoveryFactor";
-                    expression = "_this setVariable ['RecoveryFactor',_value,true];";
+                    expression = "_this setVariable ['RecoveryFactor', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -996,7 +996,7 @@ class Mission {
                 };
                 class Attribute3 {
                     property = "ace_advanced_fatigue_moduleSettings_LoadFactor";
-                    expression = "_this setVariable ['LoadFactor',_value,true];";
+                    expression = "_this setVariable ['LoadFactor', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -1006,7 +1006,7 @@ class Mission {
                 };
                 class Attribute4 {
                     property = "ace_advanced_fatigue_moduleSettings_PerformanceFactor";
-                    expression = "_this setVariable ['PerformanceFactor',_value,true];";
+                    expression = "_this setVariable ['PerformanceFactor', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -1028,7 +1028,7 @@ class Mission {
             class CustomAttributes {
                 class Attribute0 {
                     property = "ACE_ModuleMap_MapShake";
-                    expression = "_this setVariable ['MapShake',_value,true];";
+                    expression = "_this setVariable ['MapShake', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -1038,7 +1038,7 @@ class Mission {
                 };
                 class Attribute1 {
                     property = "ACE_ModuleMap_MapShowCursorCoordinates";
-                    expression = "_this setVariable ['MapShowCursorCoordinates',_value,true];";
+                    expression = "_this setVariable ['MapShowCursorCoordinates', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -1048,7 +1048,7 @@ class Mission {
                 };
                 class Attribute2 {
                     property = "ACE_ModuleMap_DefaultChannel";
-                    expression = "_this setVariable ['DefaultChannel',_value,true];";
+                    expression = "_this setVariable ['DefaultChannel', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -1058,7 +1058,7 @@ class Mission {
                 };
                 class Attribute3 {
                     property = "ACE_ModuleMap_MapIllumination";
-                    expression = "_this setVariable ['MapIllumination',_value,true];";
+                    expression = "_this setVariable ['MapIllumination', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -1068,7 +1068,7 @@ class Mission {
                 };
                 class Attribute4 {
                     property = "ACE_ModuleMap_MapGlow";
-                    expression = "_this setVariable ['MapGlow',_value,true];";
+                    expression = "_this setVariable ['MapGlow', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -1078,7 +1078,7 @@ class Mission {
                 };
                 class Attribute5 {
                     property = "ACE_ModuleMap_MapLimitZoom";
-                    expression = "_this setVariable ['MapLimitZoom',_value,true];";
+                    expression = "_this setVariable ['MapLimitZoom', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -1135,7 +1135,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -1145,7 +1145,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -1155,7 +1155,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -1165,7 +1165,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -1175,7 +1175,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -1185,7 +1185,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -1195,7 +1195,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -1246,7 +1246,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -1256,7 +1256,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -1266,7 +1266,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -1276,7 +1276,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -1286,7 +1286,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -1296,7 +1296,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -1306,7 +1306,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -1357,7 +1357,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -1367,7 +1367,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -1377,7 +1377,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -1387,7 +1387,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -1397,7 +1397,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -1407,7 +1407,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -1417,7 +1417,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -1468,7 +1468,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -1478,7 +1478,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -1488,7 +1488,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -1498,7 +1498,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -1508,7 +1508,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -1518,7 +1518,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -1528,7 +1528,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -1579,7 +1579,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -1589,7 +1589,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -1599,7 +1599,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -1609,7 +1609,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -1619,7 +1619,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -1629,7 +1629,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -1639,7 +1639,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -1665,7 +1665,7 @@ class Mission {
             class CustomAttributes {
                 class Attribute0 {
                     property = "ACE_moduleRearmSettings_level";
-                    expression = "_this setVariable ['level',_value,true];";
+                    expression = "_this setVariable ['level', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -1675,7 +1675,7 @@ class Mission {
                 };
                 class Attribute1 {
                     property = "ACE_moduleRearmSettings_supply";
-                    expression = "_this setVariable ['supply',_value,true];";
+                    expression = "_this setVariable ['supply', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -1697,7 +1697,7 @@ class Mission {
             class CustomAttributes {
                 class Attribute0 {
                     property = "ACE_moduleRefuelSettings_progressDuration";
-                    expression = "_this setVariable ['progressDuration',_value,true];";
+                    expression = "_this setVariable ['progressDuration', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -1707,7 +1707,7 @@ class Mission {
                 };
                 class Attribute1 {
                     property = "ACE_moduleRefuelSettings_rate";
-                    expression = "_this setVariable ['rate',_value,true];";
+                    expression = "_this setVariable ['rate', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -1717,7 +1717,7 @@ class Mission {
                 };
                 class Attribute2 {
                     property = "ACE_moduleRefuelSettings_hoseLength";
-                    expression = "_this setVariable ['hoseLength',_value,true];";
+                    expression = "_this setVariable ['hoseLength', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -1739,7 +1739,7 @@ class Mission {
             class CustomAttributes {
                 class Attribute0 {
                     property = "ACE_moduleRepairSettings_fullRepairLocation";
-                    expression = "_this setVariable ['fullRepairLocation',_value,true];";
+                    expression = "_this setVariable ['fullRepairLocation', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -1749,7 +1749,7 @@ class Mission {
                 };
                 class Attribute1 {
                     property = "ACE_moduleRepairSettings_engineerSetting_fullRepair";
-                    expression = "_this setVariable ['engineerSetting_fullRepair',_value,true];";
+                    expression = "_this setVariable ['engineerSetting_fullRepair', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -1759,7 +1759,7 @@ class Mission {
                 };
                 class Attribute2 {
                     property = "ACE_moduleRepairSettings_engineerSetting_Repair";
-                    expression = "_this setVariable ['engineerSetting_Repair',_value,true];";
+                    expression = "_this setVariable ['engineerSetting_Repair', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -1769,7 +1769,7 @@ class Mission {
                 };
                 class Attribute3 {
                     property = "ACE_moduleRepairSettings_consumeItem_ToolKit";
-                    expression = "_this setVariable ['consumeItem_ToolKit',_value,true];";
+                    expression = "_this setVariable ['consumeItem_ToolKit', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -1779,7 +1779,7 @@ class Mission {
                 };
                 class Attribute4 {
                     property = "ACE_moduleRepairSettings_repairDamageThreshold";
-                    expression = "_this setVariable ['repairDamageThreshold',_value,true];";
+                    expression = "_this setVariable ['repairDamageThreshold', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -1789,7 +1789,7 @@ class Mission {
                 };
                 class Attribute5 {
                     property = "ACE_moduleRepairSettings_wheelRepairRequiredItems";
-                    expression = "_this setVariable ['wheelRepairRequiredItems',_value,true];";
+                    expression = "_this setVariable ['wheelRepairRequiredItems', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -1799,7 +1799,7 @@ class Mission {
                 };
                 class Attribute6 {
                     property = "ACE_moduleRepairSettings_repairDamageThreshold_Engineer";
-                    expression = "_this setVariable ['repairDamageThreshold_Engineer',_value,true];";
+                    expression = "_this setVariable ['repairDamageThreshold_Engineer', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -1809,7 +1809,7 @@ class Mission {
                 };
                 class Attribute7 {
                     property = "ACE_moduleRepairSettings_engineerSetting_Wheel";
-                    expression = "_this setVariable ['engineerSetting_Wheel',_value,true];";
+                    expression = "_this setVariable ['engineerSetting_Wheel', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -1819,7 +1819,7 @@ class Mission {
                 };
                 class Attribute8 {
                     property = "ACE_moduleRepairSettings_addSpareParts";
-                    expression = "_this setVariable ['addSpareParts',_value,true];";
+                    expression = "_this setVariable ['addSpareParts', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -1850,7 +1850,7 @@ class Mission {
             class CustomAttributes {
                 class Attribute0 {
                     property = "ACE_ModuleExplosive_RequireSpecialist";
-                    expression = "_this setVariable ['RequireSpecialist',_value,true];";
+                    expression = "_this setVariable ['RequireSpecialist', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -1860,7 +1860,7 @@ class Mission {
                 };
                 class Attribute1 {
                     property = "ACE_ModuleExplosive_PunishNonSpecialists";
-                    expression = "_this setVariable ['PunishNonSpecialists',_value,true];";
+                    expression = "_this setVariable ['PunishNonSpecialists', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -1870,7 +1870,7 @@ class Mission {
                 };
                 class Attribute2 {
                     property = "ACE_ModuleExplosive_ExplodeOnDefuse";
-                    expression = "_this setVariable ['ExplodeOnDefuse',_value,true];";
+                    expression = "_this setVariable ['ExplodeOnDefuse', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -1914,7 +1914,7 @@ class Mission {
             class CustomAttributes {
                 class Attribute0 {
                     property = "ace_ui_Module_throwableCount";
-                    expression = "_this setVariable ['throwableCount',_value,true];";
+                    expression = "_this setVariable ['throwableCount', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -1924,7 +1924,7 @@ class Mission {
                 };
                 class Attribute1 {
                     property = "ace_ui_Module_staminaBar";
-                    expression = "_this setVariable ['staminaBar',_value,true];";
+                    expression = "_this setVariable ['staminaBar', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -1934,7 +1934,7 @@ class Mission {
                 };
                 class Attribute2 {
                     property = "ace_ui_Module_gunnerZeroing";
-                    expression = "_this setVariable ['gunnerZeroing',_value,true];";
+                    expression = "_this setVariable ['gunnerZeroing', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -1944,7 +1944,7 @@ class Mission {
                 };
                 class Attribute3 {
                     property = "ace_ui_Module_ammoType";
-                    expression = "_this setVariable ['ammoType',_value,true];";
+                    expression = "_this setVariable ['ammoType', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -1954,7 +1954,7 @@ class Mission {
                 };
                 class Attribute4 {
                     property = "ace_ui_Module_throwableName";
-                    expression = "_this setVariable ['throwableName',_value,true];";
+                    expression = "_this setVariable ['throwableName', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -1964,7 +1964,7 @@ class Mission {
                 };
                 class Attribute5 {
                     property = "ace_ui_Module_vehicleAltitude";
-                    expression = "_this setVariable ['vehicleAltitude',_value,true];";
+                    expression = "_this setVariable ['vehicleAltitude', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -1974,7 +1974,7 @@ class Mission {
                 };
                 class Attribute6 {
                     property = "ace_ui_Module_gunnerMagCount";
-                    expression = "_this setVariable ['gunnerMagCount',_value,true];";
+                    expression = "_this setVariable ['gunnerMagCount', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -1984,7 +1984,7 @@ class Mission {
                 };
                 class Attribute7 {
                     property = "ace_ui_Module_gunnerWeaponName";
-                    expression = "_this setVariable ['gunnerWeaponName',_value,true];";
+                    expression = "_this setVariable ['gunnerWeaponName', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -1994,7 +1994,7 @@ class Mission {
                 };
                 class Attribute8 {
                     property = "ace_ui_Module_groupBar";
-                    expression = "_this setVariable ['groupBar',_value,true];";
+                    expression = "_this setVariable ['groupBar', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2004,7 +2004,7 @@ class Mission {
                 };
                 class Attribute9 {
                     property = "ace_ui_Module_stance";
-                    expression = "_this setVariable ['stance',_value,true];";
+                    expression = "_this setVariable ['stance', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2014,7 +2014,7 @@ class Mission {
                 };
                 class Attribute10 {
                     property = "ace_ui_Module_vehicleInfoBackground";
-                    expression = "_this setVariable ['vehicleInfoBackground',_value,true];";
+                    expression = "_this setVariable ['vehicleInfoBackground', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2024,7 +2024,7 @@ class Mission {
                 };
                 class Attribute11 {
                     property = "ace_ui_Module_soldierVehicleWeaponInfo";
-                    expression = "_this setVariable ['soldierVehicleWeaponInfo',_value,true];";
+                    expression = "_this setVariable ['soldierVehicleWeaponInfo', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2034,7 +2034,7 @@ class Mission {
                 };
                 class Attribute12 {
                     property = "ace_ui_Module_gunnerFiringMode";
-                    expression = "_this setVariable ['gunnerFiringMode',_value,true];";
+                    expression = "_this setVariable ['gunnerFiringMode', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2044,7 +2044,7 @@ class Mission {
                 };
                 class Attribute13 {
                     property = "ace_ui_Module_gunnerWeaponNameBackground";
-                    expression = "_this setVariable ['gunnerWeaponNameBackground',_value,true];";
+                    expression = "_this setVariable ['gunnerWeaponNameBackground', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2054,7 +2054,7 @@ class Mission {
                 };
                 class Attribute14 {
                     property = "ace_ui_Module_zeroing";
-                    expression = "_this setVariable ['zeroing',_value,true];";
+                    expression = "_this setVariable ['zeroing', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2064,7 +2064,7 @@ class Mission {
                 };
                 class Attribute15 {
                     property = "ace_ui_Module_vehicleSpeed";
-                    expression = "_this setVariable ['vehicleSpeed',_value,true];";
+                    expression = "_this setVariable ['vehicleSpeed', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2074,7 +2074,7 @@ class Mission {
                 };
                 class Attribute16 {
                     property = "ace_ui_Module_vehicleRadar";
-                    expression = "_this setVariable ['vehicleRadar',_value,true];";
+                    expression = "_this setVariable ['vehicleRadar', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2084,7 +2084,7 @@ class Mission {
                 };
                 class Attribute17 {
                     property = "ace_ui_Module_vehicleName";
-                    expression = "_this setVariable ['vehicleName',_value,true];";
+                    expression = "_this setVariable ['vehicleName', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2094,7 +2094,7 @@ class Mission {
                 };
                 class Attribute18 {
                     property = "ace_ui_Module_allowSelectiveUI";
-                    expression = "_this setVariable ['allowSelectiveUI',_value,true];";
+                    expression = "_this setVariable ['allowSelectiveUI', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2104,7 +2104,7 @@ class Mission {
                 };
                 class Attribute19 {
                     property = "ace_ui_Module_weaponLowerInfoBackground";
-                    expression = "_this setVariable ['weaponLowerInfoBackground',_value,true];";
+                    expression = "_this setVariable ['weaponLowerInfoBackground', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2114,7 +2114,7 @@ class Mission {
                 };
                 class Attribute20 {
                     property = "ace_ui_Module_vehicleFuelBar";
-                    expression = "_this setVariable ['vehicleFuelBar',_value,true];";
+                    expression = "_this setVariable ['vehicleFuelBar', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2124,7 +2124,7 @@ class Mission {
                 };
                 class Attribute21 {
                     property = "ace_ui_Module_gunnerLaunchableName";
-                    expression = "_this setVariable ['gunnerLaunchableName',_value,true];";
+                    expression = "_this setVariable ['gunnerLaunchableName', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2134,7 +2134,7 @@ class Mission {
                 };
                 class Attribute22 {
                     property = "ace_ui_Module_gunnerAmmoType";
-                    expression = "_this setVariable ['gunnerAmmoType',_value,true];";
+                    expression = "_this setVariable ['gunnerAmmoType', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2144,7 +2144,7 @@ class Mission {
                 };
                 class Attribute23 {
                     property = "ace_ui_Module_gunnerWeaponLowerInfoBackground";
-                    expression = "_this setVariable ['gunnerWeaponLowerInfoBackground',_value,true];";
+                    expression = "_this setVariable ['gunnerWeaponLowerInfoBackground', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2154,7 +2154,7 @@ class Mission {
                 };
                 class Attribute24 {
                     property = "ace_ui_Module_magCount";
-                    expression = "_this setVariable ['magCount',_value,true];";
+                    expression = "_this setVariable ['magCount', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2164,7 +2164,7 @@ class Mission {
                 };
                 class Attribute25 {
                     property = "ace_ui_Module_gunnerAmmoCount";
-                    expression = "_this setVariable ['gunnerAmmoCount',_value,true];";
+                    expression = "_this setVariable ['gunnerAmmoCount', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2174,7 +2174,7 @@ class Mission {
                 };
                 class Attribute26 {
                     property = "ace_ui_Module_vehicleCompass";
-                    expression = "_this setVariable ['vehicleCompass',_value,true];";
+                    expression = "_this setVariable ['vehicleCompass', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2184,7 +2184,7 @@ class Mission {
                 };
                 class Attribute27 {
                     property = "ace_ui_Module_vehicleDamage";
-                    expression = "_this setVariable ['vehicleDamage',_value,true];";
+                    expression = "_this setVariable ['vehicleDamage', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2194,7 +2194,7 @@ class Mission {
                 };
                 class Attribute28 {
                     property = "ace_ui_Module_ammoCount";
-                    expression = "_this setVariable ['ammoCount',_value,true];";
+                    expression = "_this setVariable ['ammoCount', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2204,7 +2204,7 @@ class Mission {
                 };
                 class Attribute29 {
                     property = "ace_ui_Module_weaponName";
-                    expression = "_this setVariable ['weaponName',_value,true];";
+                    expression = "_this setVariable ['weaponName', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2214,7 +2214,7 @@ class Mission {
                 };
                 class Attribute30 {
                     property = "ace_ui_Module_gunnerLaunchableCount";
-                    expression = "_this setVariable ['gunnerLaunchableCount',_value,true];";
+                    expression = "_this setVariable ['gunnerLaunchableCount', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2224,7 +2224,7 @@ class Mission {
                 };
                 class Attribute31 {
                     property = "ace_ui_Module_firingMode";
-                    expression = "_this setVariable ['firingMode',_value,true];";
+                    expression = "_this setVariable ['firingMode', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2234,7 +2234,7 @@ class Mission {
                 };
                 class Attribute32 {
                     property = "ace_ui_Module_weaponNameBackground";
-                    expression = "_this setVariable ['weaponNameBackground',_value,true];";
+                    expression = "_this setVariable ['weaponNameBackground', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2244,7 +2244,7 @@ class Mission {
                 };
                 class Attribute33 {
                     property = "ace_ui_Module_vehicleNameBackground";
-                    expression = "_this setVariable ['vehicleNameBackground',_value,true];";
+                    expression = "_this setVariable ['vehicleNameBackground', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2254,7 +2254,7 @@ class Mission {
                 };
                 class Attribute34 {
                     property = "ace_ui_Module_commandMenu";
-                    expression = "_this setVariable ['commandMenu',_value,true];";
+                    expression = "_this setVariable ['commandMenu', _value, true];";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2301,7 +2301,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -2311,7 +2311,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -2321,7 +2321,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -2331,7 +2331,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -2341,7 +2341,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -2351,7 +2351,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -2361,7 +2361,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -2411,7 +2411,7 @@ class Mission {
             class CustomAttributes {
                 class Attribute0 {
                     property = "ModuleCurator_F_Owner";
-                    expression = "_this setVariable ['Owner',_value,true];";
+                    expression = "_this setVariable ['Owner', _value, true];";
                     class Value {
                         class data {
                             singleType = "STRING";
@@ -2421,7 +2421,7 @@ class Mission {
                 };
                 class Attribute1 {
                     property = "ModuleCurator_F_Forced";
-                    expression = "_this setVariable ['Forced',_value,true];";
+                    expression = "_this setVariable ['Forced', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -2431,7 +2431,7 @@ class Mission {
                 };
                 class Attribute2 {
                     property = "ModuleCurator_F_Name";
-                    expression = "_this setVariable ['Name',_value,true];";
+                    expression = "_this setVariable ['Name', _value, true];";
                     class Value {
                         class data {
                             singleType = "STRING";
@@ -2451,7 +2451,7 @@ class Mission {
                 };
                 class Attribute4 {
                     property = "ModuleCurator_F_Addons";
-                    expression = "_this setVariable ['Addons',_value,true];";
+                    expression = "_this setVariable ['Addons', _value, true];";
                     class Value {
                         class data {
                             singleType = "SCALAR";
@@ -2791,7 +2791,7 @@ class Mission {
             class CustomAttributes {
                 class Attribute0 {
                     property = "allowDamage";
-                    expression = "_this allowdamage _value;";
+                    expression = "_this allowDamage _value;";
                     class Value {
                         class data {
                             singleType = "BOOL";
@@ -2927,7 +2927,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -2937,7 +2937,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -2947,7 +2947,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -2957,7 +2957,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -2967,7 +2967,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -2977,7 +2977,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -2987,7 +2987,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3039,7 +3039,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3049,7 +3049,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3059,7 +3059,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3069,7 +3069,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3079,7 +3079,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3089,7 +3089,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3099,7 +3099,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3152,7 +3152,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3162,7 +3162,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3172,7 +3172,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3182,7 +3182,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3192,7 +3192,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3202,7 +3202,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3212,7 +3212,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3265,7 +3265,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3275,7 +3275,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3285,7 +3285,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3295,7 +3295,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3305,7 +3305,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3315,7 +3315,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3325,7 +3325,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3378,7 +3378,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3388,7 +3388,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3398,7 +3398,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3408,7 +3408,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3418,7 +3418,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3428,7 +3428,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3438,7 +3438,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3491,7 +3491,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3501,7 +3501,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3511,7 +3511,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3521,7 +3521,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3531,7 +3531,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3541,7 +3541,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3551,7 +3551,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3603,7 +3603,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3613,7 +3613,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3623,7 +3623,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3633,7 +3633,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3643,7 +3643,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3653,7 +3653,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3663,7 +3663,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3714,7 +3714,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3724,7 +3724,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3734,7 +3734,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3744,7 +3744,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3754,7 +3754,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3764,7 +3764,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3774,7 +3774,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3826,7 +3826,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3836,7 +3836,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3846,7 +3846,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3856,7 +3856,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3866,7 +3866,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3876,7 +3876,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3886,7 +3886,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3939,7 +3939,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3949,7 +3949,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3959,7 +3959,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3969,7 +3969,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -3979,7 +3979,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -3989,7 +3989,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -3999,7 +3999,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4052,7 +4052,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4062,7 +4062,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4072,7 +4072,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -4082,7 +4082,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4092,7 +4092,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4102,7 +4102,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -4112,7 +4112,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4165,7 +4165,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4175,7 +4175,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4185,7 +4185,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -4195,7 +4195,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4205,7 +4205,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4215,7 +4215,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -4225,7 +4225,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4278,7 +4278,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4288,7 +4288,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4298,7 +4298,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -4308,7 +4308,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4318,7 +4318,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4328,7 +4328,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -4338,7 +4338,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4391,7 +4391,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4401,7 +4401,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4411,7 +4411,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -4421,7 +4421,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4431,7 +4431,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4441,7 +4441,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -4451,7 +4451,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4504,7 +4504,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4514,7 +4514,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4524,7 +4524,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -4534,7 +4534,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4544,7 +4544,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4554,7 +4554,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -4564,7 +4564,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4617,7 +4617,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4627,7 +4627,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4637,7 +4637,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -4647,7 +4647,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4657,7 +4657,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4667,7 +4667,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -4677,7 +4677,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4730,7 +4730,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4740,7 +4740,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4750,7 +4750,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -4760,7 +4760,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4770,7 +4770,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4780,7 +4780,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -4790,7 +4790,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4843,7 +4843,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4853,7 +4853,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4863,7 +4863,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -4873,7 +4873,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4883,7 +4883,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4893,7 +4893,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -4903,7 +4903,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4956,7 +4956,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4966,7 +4966,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -4976,7 +4976,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -4986,7 +4986,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -4996,7 +4996,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5006,7 +5006,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -5016,7 +5016,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5069,7 +5069,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -5079,7 +5079,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5089,7 +5089,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -5099,7 +5099,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -5109,7 +5109,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5119,7 +5119,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -5129,7 +5129,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5182,7 +5182,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -5192,7 +5192,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5202,7 +5202,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -5212,7 +5212,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -5222,7 +5222,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5232,7 +5232,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -5242,7 +5242,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5294,7 +5294,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -5304,7 +5304,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5314,7 +5314,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -5324,7 +5324,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -5334,7 +5334,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5344,7 +5344,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -5354,7 +5354,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5405,7 +5405,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -5415,7 +5415,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5425,7 +5425,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -5435,7 +5435,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -5445,7 +5445,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5455,7 +5455,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -5465,7 +5465,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5516,7 +5516,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -5526,7 +5526,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5536,7 +5536,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -5546,7 +5546,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -5556,7 +5556,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5566,7 +5566,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -5576,7 +5576,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5628,7 +5628,7 @@ class Mission {
                     class CustomAttributes {
                         class Attribute0 {
                             property = "ace_isSurrendered";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleSurrender }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -5638,7 +5638,7 @@ class Mission {
                         };
                         class Attribute1 {
                             property = "ace_isEngineer";
-                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+                            expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || { _value == -1 }) then { _this setVariable ['ace_isEngineer', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5648,7 +5648,7 @@ class Mission {
                         };
                         class Attribute2 {
                             property = "face";
-                            expression = "_this setface _value;";
+                            expression = "_this setFace _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -5658,7 +5658,7 @@ class Mission {
                         };
                         class Attribute3 {
                             property = "ace_isHandcuffed";
-                            expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+                            expression = "if (_value) then { [objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed }";
                             class Value {
                                 class data {
                                     singleType = "BOOL";
@@ -5668,7 +5668,7 @@ class Mission {
                         };
                         class Attribute4 {
                             property = "pitch";
-                            expression = "_this setpitch _value;";
+                            expression = "_this setPitch _value;";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
@@ -5678,7 +5678,7 @@ class Mission {
                         };
                         class Attribute5 {
                             property = "speaker";
-                            expression = "_this setspeaker _value;";
+                            expression = "_this setSpeaker _value;";
                             class Value {
                                 class data {
                                     singleType = "STRING";
@@ -5688,7 +5688,7 @@ class Mission {
                         };
                         class Attribute6 {
                             property = "ace_isMedic";
-                            expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+                            expression = "if (_value != -1 && { _value != (parseNumber (_this getUnitTrait 'medic')) }) then { _this setVariable ['ace_medical_medicClass', _value, true] }";
                             class Value {
                                 class data {
                                     singleType = "SCALAR";
