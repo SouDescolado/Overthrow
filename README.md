@@ -36,4 +36,4 @@ The goal of the project is to update the Overthrow codebase to allow for easier 
 * You will **not** get the source files properly by unpacking the PBO! Follow the instructions.
 
 # 💬 Join the Official Overthrow Discord Server!
-## https://discord.com/invite/R3ghxge
+## https://discord.gg/overthrow
