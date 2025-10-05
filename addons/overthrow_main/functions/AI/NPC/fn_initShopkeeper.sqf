@@ -15,7 +15,7 @@ removeBackpack _unit;
 removeHeadgear _unit;
 removeVest _unit;
 
-[_unit,"self"] call OT_fnc_setOwner;
+[_unit, "self"] call OT_fnc_setOwner;
 
 _unit disableAI "MOVE";
 _unit disableAI "AUTOCOMBAT";

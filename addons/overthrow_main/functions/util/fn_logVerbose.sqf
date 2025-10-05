@@ -1,3 +1,3 @@
-if(OT_adminMode) then {
+if (OT_adminMode) then {
     diag_log _this;
 };

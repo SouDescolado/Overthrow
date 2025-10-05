@@ -3,10 +3,16 @@ Function: incomeSystem
 ---------------------------------------------------------------------------- */
 //Manages passive income for all players (Lease + taxes)
 
-waitUntil {sleep 1;server getVariable ["StartupType",""] != ""};
+waitUntil {
+    sleep 1;
+    server getVariable ["StartupType", ""] != "";
+};
 income_system_lasthour = date select 3;
 
-["income_system_loop","_counter%3 isEqualTo 0 && {!(income_system_lasthour isEqualTo (date select 3))}","
+[
+    "income_system_loop",
+    "_counter%3 isEqualTo 0 && {!(income_system_lasthour isEqualTo (date select 3))}",
+    "
 income_system_lasthour = date select 3;
 
 if(OT_fastTime) then {
@@ -73,4 +79,5 @@ if(income_system_lasthour in [0,6,12,18]) then {
 		};
 	};
 };
-"] call OT_fnc_addActionLoop;
+"
+] call OT_fnc_addActionLoop;

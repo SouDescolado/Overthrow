@@ -17,17 +17,19 @@ private _stability = server getVariable [format ["stability%1", _nearestTown], 1
 
 [
     format ["Set Town Stability: %1", _nearestTown],
-    [[
-        "SLIDER:PERCENT",
-        "Set this towns stability to:",
-        0,
-        1,
-        (_stability / 100)
-    ]],
+    [
+        [
+            "SLIDER:PERCENT",
+            "Set this towns stability to:",
+            0,
+            1,
+            (_stability / 100)
+        ]
+    ],
     {
         params ["_result", "_args"];
         _args params ["_town"];
-        server setVariable [format ["stability%1", _town], round ((_result # 0) * 100)]
+        server setVariable [format ["stability%1", _town], round ((_result # 0) * 100)];
     },
     {},
     [_nearestTown, _stability]

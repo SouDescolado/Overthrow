@@ -15,40 +15,40 @@
 */
 
 params [
-	["_unit", objNull, [objNull]]
+    ["_unit", objNull, [objNull]]
 ];
 
-if (isNull _unit) exitWith {diag_log "Overthrow: Tried to delete a null unit"};
+if (isNull _unit) exitWith { diag_log "Overthrow: Tried to delete a null unit" };
 
 // objectParent is more reliable than vehicle, see biki.
 private _unitObjectParent = objectParent _unit;
 
 // Unit is not in a vehicle and can be deleted.
 if (isNull _unitObjectParent) exitWith {
-	private _group = group _unit;
+    private _group = group _unit;
 
-	deleteVehicle _unit;
+    deleteVehicle _unit;
 
-	// If unit's group becomes empty, delete the group too.
-	if ((units _group) isEqualTo []) then {
-		[_group] call OT_fnc_cleanupEmptyGroup;
-	};
-	true;
+    // If unit's group becomes empty, delete the group too.
+    if ((units _group) isEqualTo []) then {
+        [_group] call OT_fnc_cleanupEmptyGroup;
+    };
+    true;
 };
 
 // Unit is in a local vehicle and can be deleted.
 if (local _unitObjectParent) exitWith {
-	private _group = group _unit;
+    private _group = group _unit;
 
-	_unitObjectParent deleteVehicleCrew _unit;
+    _unitObjectParent deleteVehicleCrew _unit;
 
-	// If unit's group becomes empty, delete the group too.
-	if ((units _group) isEqualTo []) then {
-		[_group] call OT_fnc_cleanupEmptyGroup;
-	};
-	true;
+    // If unit's group becomes empty, delete the group too.
+    if ((units _group) isEqualTo []) then {
+        [_group] call OT_fnc_cleanupEmptyGroup;
+    };
+    true;
 };
 
 // Vehicle isn't local, execute where it is.
 [_unit] remoteExecCall ["OT_fnc_cleanupUnit", _unitObjectParent, false];
-false
+false;

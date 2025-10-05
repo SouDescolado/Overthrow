@@ -10,17 +10,17 @@ if (stance _unit isEqualTo "STAND" && isClass (configFile >> "CfgPatches" >> "ew
     [_unit, "EWK_CIGS_SMOKING_ERC_CTS"] remoteExec ["switchMove"];
 
     private _time = time;
-    while {time < _time + 3} do {
+    while { time < _time + 3 } do {
         if (!alive _unit) exitWith {
             [_unit, ""] remoteExec ["switchMove"];
         };
-        sleep (1/60);
+        sleep (1 / 60);
     };
 } else {
     private _time = time;
-    while {time < _time + 3} do {
+    while { time < _time + 3 } do {
         _unit playActionNow "Gear";
-        sleep (1/60);
+        sleep (1 / 60);
     };
 };
 

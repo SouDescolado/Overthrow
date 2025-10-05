@@ -15,19 +15,22 @@
 */
 
 params [
-	["_vehicle", objNull, [objNull]]
+    ["_vehicle", objNull, [objNull]]
 ];
 
 // Run game with -debug on to see callstack of assert
-if (!assert !(isNull _vehicle)) exitWith {diag_log "Overthrow: Tried to delete a null vehicle!"; false};
+if (!assert !(isNull _vehicle)) exitWith {
+    diag_log "Overthrow: Tried to delete a null vehicle!";
+    false;
+};
 
 // Vehicle is local and can be deleted
 if (local _vehicle) exitWith {
-	deleteVehicleCrew _vehicle;
-	deleteVehicle _vehicle;
-	true;
+    deleteVehicleCrew _vehicle;
+    deleteVehicle _vehicle;
+    true;
 };
 
 // Vehicle isn't local, execute where it is
 [_vehicle] remoteExecCall ["OT_fnc_cleanupVehicle", _vehicle, false];
-false
+false;

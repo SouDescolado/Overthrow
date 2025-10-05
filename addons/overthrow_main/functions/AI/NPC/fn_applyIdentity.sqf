@@ -1,16 +1,16 @@
-params ["_unit","_identity"];
+params ["_unit", "_identity"];
 
-_identity params ["_face","_clothes","_name","_glasses"];
+_identity params ["_face", "_clothes", "_name", "_glasses"];
 
 //Face
 [_unit, _face] remoteExecCall ["setFace", 0, _unit];
 
 //Clothes
 // Possibly some old legacy compatibility where _clothes could be nil.
-if(isNil "_clothes") then {
+if (isNil "_clothes") then {
     _clothes = selectRandom OT_clothes_locals;
 };
-if(_clothes != "") then {
+if (_clothes != "") then {
     _unit forceAddUniform _clothes;
 };
 
@@ -22,17 +22,17 @@ if (isNil "_firstname" || isNil "_lastname") then {
     _firstname = selectRandom OT_firstNames_local;
     _lastname = selectRandom OT_lastNames_local;
 };
-private _fullname = [format["%1 %2",_firstname,_lastname],_firstname,_lastname];
-[_unit,_fullname] remoteExecCall ["setName",0,_unit];
+private _fullname = [format ["%1 %2", _firstname, _lastname], _firstname, _lastname];
+[_unit, _fullname] remoteExecCall ["setName", 0, _unit];
 
 //Glasses
-if(_glasses != "") then {
+if (_glasses != "") then {
     _unit addGoggles _glasses;
 };
 
 //Voice (optional)
-if(count _identity > 4) then {
+if (count _identity > 4) then {
     [_unit, _identity select 4] remoteExecCall ["setSpeaker", 0, _unit];
-}else{
+} else {
     [_unit, "NoVoice"] remoteExecCall ["setSpeaker", 0, _unit];
 };

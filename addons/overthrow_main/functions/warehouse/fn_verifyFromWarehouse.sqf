@@ -1,34 +1,33 @@
-
 // This file is responsible for handling item verification -
 // for players, NPC item verification method is handled by-
 // fn_verifyLoadoutFromWarehouse
 
-params ["_unit","_newItems",["_correct",true]];
+params ["_unit", "_newItems", ["_correct", true]];
 
 private _warehouse = [_unit] call OT_fnc_nearestWarehouse;
-if (_warehouse == objNull) exitWith {hint "No warehouse near by!"};
+if (_warehouse == objNull) exitWith { hint "No warehouse near by!" };
 
 private _ignore = ["ItemMap"];
 {
-    _x params [["_cls",""], ["_count",0]];
+    _x params [["_cls", ""], ["_count", 0]];
 
-    if (_count < 0) then {["Item %1 was passed with negative count (%2)!", _cls, _count] call BIS_fnc_error};
+    if (_count < 0) then { ["Item %1 was passed with negative count (%2)!", _cls, _count] call BIS_fnc_error };
 
     if !(_cls in _ignore) then {
-        
-        private _boxAmount = (_warehouse getVariable [format["item_%1",_cls],[_cls,0]]) select 1;
 
-        if(_boxAmount < _count) then {
+        private _boxAmount = (_warehouse getVariable [format ["item_%1", _cls], [_cls, 0]]) select 1;
+
+        if (_boxAmount < _count) then {
             //take off the difference
             call {
                 if (binocular _unit isEqualTo _cls) exitWith {
-                    if (_correct) then {_unit removeWeapon _cls};
+                    if (_correct) then { _unit removeWeapon _cls };
                     _count = 0;
                     _missing pushBack _cls;
                 };
 
                 if (_cls in primaryWeaponItems _unit) exitWith {
-                     if (_correct) then {_unit removePrimaryWeaponItem _cls};
+                    if (_correct) then { _unit removePrimaryWeaponItem _cls };
                     _count = 0;
                     _missing pushBack _cls;
                 };
@@ -43,7 +42,7 @@ private _ignore = ["ItemMap"];
                 };
 
                 if (_cls in secondaryWeaponItems _unit) exitWith {
-                    if (_correct) then {_unit removeSecondaryWeaponItem _cls};
+                    if (_correct) then { _unit removeSecondaryWeaponItem _cls };
                     _count = 0;
                     _missing pushBack _cls;
                 };
@@ -58,13 +57,13 @@ private _ignore = ["ItemMap"];
                 };
 
                 if (_cls in handgunItems _unit) exitWith {
-                    if (_correct) then {_unit removeHandgunItem _cls};
+                    if (_correct) then { _unit removeHandgunItem _cls };
                     _count = 0;
                     _missing pushBack _cls;
                 };
 
                 if (handgunWeapon _unit isEqualTo _cls) exitWith {
-                    if (_correct) then {_unit removeWeapon _cls};
+                    if (_correct) then { _unit removeWeapon _cls };
                     _count = 0;
                     _missing pushBack _cls;
                 };
@@ -92,34 +91,34 @@ private _ignore = ["ItemMap"];
                 };
 
                 if (headgear _unit == _cls) exitWith {
-                    if(_correct) then {removeHeadgear _unit};
+                    if (_correct) then { removeHeadgear _unit };
                     _count = 0;
                     _missing pushBack _cls;
                 };
 
                 if (goggles _unit == _cls) exitWith {
-                    if(_correct) then {removeGoggles _unit};
+                    if (_correct) then { removeGoggles _unit };
                     _count = 0;
                     _missing pushBack _cls;
                 };
 
                 if (_cls in assignedItems _unit) exitWith {
-                    if(_correct) then {_unit unlinkItem _cls};
+                    if (_correct) then { _unit unlinkItem _cls };
                     _count = 0;
                     _missing pushBack _cls;
                 };
 
                 _totake = _count - _boxAmount;
-                if (_cls isKindOf ["Default",configFile >> "CfgMagazines"]) exitWith {
-                    while {_count > _boxAmount} do {
+                if (_cls isKindOf ["Default", configFile >> "CfgMagazines"]) exitWith {
+                    while { _count > _boxAmount } do {
                         _count = _count - 1;
-                        if (_correct) then {_unit removeMagazine _cls};
+                        if (_correct) then { _unit removeMagazine _cls };
                         _missing pushBack _cls;
                     };
                 };
-                while {_count > _boxAmount} do {
+                while { _count > _boxAmount } do {
                     _count = _count - 1;
-                    if (_correct) then {_unit removeItem _cls};
+                    if (_correct) then { _unit removeItem _cls };
                     _missing pushBack _cls;
                 };
             };
@@ -190,4 +189,4 @@ if (_unitGoggles isNotEqualTo "" && _unitGoggles in _newItems) then {
 };
 */
 
-_missing
+_missing;

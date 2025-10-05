@@ -19,15 +19,15 @@ Examples:
     _fruitMap get "apple" -> 3
 */
 
-if !(assert (_this isEqualType [])) exitWith {createHashMap};
+if !(assert (_this isEqualType [])) exitWith { createHashMap };
 
 private _resultMap = createHashMap;
 
 {
-	_resultMap set [
-		_x, 
-		(_resultMap getOrDefault [_x, 0]) + 1
-	];
+    _resultMap set [
+        _x,
+        (_resultMap getOrDefault [_x, 0]) + 1
+    ];
 } forEach _this;
 
-_resultMap
+_resultMap;

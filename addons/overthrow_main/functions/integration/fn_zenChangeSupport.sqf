@@ -17,11 +17,13 @@ private _support = [_nearestTown] call OT_fnc_support;
 
 [
     format ["Change Town Support: %1", _nearestTown],
-    [[
-        "EDIT",
-        "Change this towns support by",
-        "0"
-    ]],
+    [
+        [
+            "EDIT",
+            "Change this towns support by",
+            "0"
+        ]
+    ],
     {
         params ["_result", "_args"];
         _args params ["_town"];

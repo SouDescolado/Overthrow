@@ -1,10 +1,10 @@
-params ["_i","_s","_e","_c","_p"];
-private _groups = spawner getVariable [_i,[]];
-spawner setVariable [_i,[],false];
+params ["_i", "_s", "_e", "_c", "_p"];
+private _groups = spawner getVariable [_i, []];
+spawner setVariable [_i, [], false];
 {
     // Cleanup a group
     if (_x isEqualType grpNull) then {
-		private _units = units _x;
+        private _units = units _x;
         if (_units isEqualTo []) then {
             [_x] call OT_fnc_cleanupEmptyGroup;
         };
@@ -13,7 +13,7 @@ spawner setVariable [_i,[],false];
                 [_x] call OT_fnc_cleanupUnit;
                 sleep 0.1;
             };
-        }forEach(_units);
+        } forEach (_units);
         continue;
     };
 

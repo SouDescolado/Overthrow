@@ -17,7 +17,7 @@
 params ["_unit", "_target"];
 
 // If target is truck or ammobox, it can always be overloaded
-if (_target isKindOf "Truck_F" || _target isKindOf "ReammoBox_F") exitWith {true};
+if (_target isKindOf "Truck_F" || _target isKindOf "ReammoBox_F") exitWith { true };
 
 // Load of the target container
 private _targetLoad = loadAbs _target;
@@ -34,4 +34,4 @@ private _targetLoad = loadAbs _target;
 private _unitDumpableLoad = loadAbs _unit - getNumber (configFile >> "CfgWeapons" >> (uniform _unit) >> "ItemInfo" >> "mass");
 
 // Return if unit's loadout would fit in the target container
-_targetLoad + _unitDumpableLoad <= maxLoad _target
+_targetLoad + _unitDumpableLoad <= maxLoad _target;

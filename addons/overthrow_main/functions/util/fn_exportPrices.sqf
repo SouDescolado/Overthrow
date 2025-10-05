@@ -1,15 +1,14 @@
 if (dialog) then {
-  closeDialog 0;
+    closeDialog 0;
 };
 
-
-private ["_str","_classes","_editBox","_legalText"];
+private ["_str", "_classes", "_editBox", "_legalText"];
 _classes = _this;
 
 _str = "";
 {
     if (!(_x in OT_loadedPrices)) then {
-        _str = _str + format["['%1',%2],",_x,str (cost getVariable _x)];
+        _str = _str + format ["['%1',%2],", _x, str (cost getVariable _x)];
     };
 } forEach _classes;
 
@@ -20,5 +19,5 @@ _legalText = ((findDisplay 49558) displayCtrl 5);
 
 _editBox ctrlSetText _str;
 
-_legalText ctrlSetStructuredText parseText format["<t font='PuristaMedium'>For use in /overthrow_main/data/prices.sqf. Will only show items that are not already in the file, so you can append mod items etc.</t>"];
+_legalText ctrlSetStructuredText parseText format ["<t font='PuristaMedium'>For use in /overthrow_main/data/prices.sqf. Will only show items that are not already in the file, so you can append mod items etc.</t>"];
 [_legalText] call BIS_fnc_ctrlFitToTextHeight;

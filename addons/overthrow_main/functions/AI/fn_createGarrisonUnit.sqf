@@ -20,7 +20,7 @@ if (_doinit) then {
 if (_charge) then {
     private _cls = _soldier # 1;
     private _loadout = getUnitLoadout _unit;
-    private _garrison = server getVariable [format ["resgarrison%1", _baseCode],[]];
+    private _garrison = server getVariable [format ["resgarrison%1", _baseCode], []];
     _garrison pushBack [_cls, _loadout];
     server setVariable [format ["resgarrison%1", _baseCode], _garrison, true];
 };

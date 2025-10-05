@@ -11,7 +11,7 @@
 */
 
 params [
-	["_group", grpNull, [grpNull]]
+    ["_group", grpNull, [grpNull]]
 ];
 
 // Incorrect arguments or group got auto-deleted

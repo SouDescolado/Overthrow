@@ -1,113 +1,116 @@
 ot_weather_getWeather = {
-	private _forecast = _this;
-	private _wavetarget = 0;
-	private _fogtarget = 0;
-	private _overtarget = 0;
-	private _raintarget = 0;
-	private _lightning = 0;
-	private _temp = 30;
-	private _hour = date select 3;
-	_this call {
-		if(_this == "Storm") exitWith {
-			_overtarget = 1;
-			_fogtarget = 0.01;
-			_wavetarget = 1;
-			_raintarget = 0.8 + (random 0.2);
-			_lightning = random 1;
-		};
-		if(_this == "Rain") exitWith {
-			_overtarget = 0.7 + (random 0.1);
-			_fogtarget = 0.002;
-			_wavetarget = 0.3 + (random 0.4);
-			_raintarget = 0.6 + (random 0.2);
-			_lightning = 0;
-		};
-		if(_this == "Cloudy") exitWith {
-			_overtarget = 0.3 + (random 0.7);
-			_fogtarget = 0.001;
-			_wavetarget = 0 + (random 0.2);
-			_raintarget = 0;
-			_lightning = 0;
-		};
-		if(_this == "Clear") exitWith {
-			_overtarget = random 0.2;
-			_fogtarget = 0;
-			_wavetarget = random 0.2;
-			_raintarget = 0;
-			_lightning = 0;
-		};
-	};
-	if(_hour isEqualTo 6) then {
-		//morning fog
-		_fogtarget = _fogtarget + 0.002;
-	};
-	_temp = ambientTemperature # 0;
-	[_overtarget,_fogtarget,_wavetarget,_raintarget,_lightning,_temp]
+    private _forecast = _this;
+    private _wavetarget = 0;
+    private _fogtarget = 0;
+    private _overtarget = 0;
+    private _raintarget = 0;
+    private _lightning = 0;
+    private _temp = 30;
+    private _hour = date select 3;
+    _this call {
+        if (_this == "Storm") exitWith {
+            _overtarget = 1;
+            _fogtarget = 0.01;
+            _wavetarget = 1;
+            _raintarget = 0.8 + (random 0.2);
+            _lightning = random 1;
+        };
+        if (_this == "Rain") exitWith {
+            _overtarget = 0.7 + (random 0.1);
+            _fogtarget = 0.002;
+            _wavetarget = 0.3 + (random 0.4);
+            _raintarget = 0.6 + (random 0.2);
+            _lightning = 0;
+        };
+        if (_this == "Cloudy") exitWith {
+            _overtarget = 0.3 + (random 0.7);
+            _fogtarget = 0.001;
+            _wavetarget = 0 + (random 0.2);
+            _raintarget = 0;
+            _lightning = 0;
+        };
+        if (_this == "Clear") exitWith {
+            _overtarget = random 0.2;
+            _fogtarget = 0;
+            _wavetarget = random 0.2;
+            _raintarget = 0;
+            _lightning = 0;
+        };
+    };
+    if (_hour isEqualTo 6) then {
+        //morning fog
+        _fogtarget = _fogtarget + 0.002;
+    };
+    _temp = ambientTemperature # 0;
+    [_overtarget, _fogtarget, _wavetarget, _raintarget, _lightning, _temp];
 };
 
 ot_weather_change_forecast = "Clear";
 
-if((server getVariable "StartupType") == "NEW" || (server getVariable ["weatherversion",0]) < 1) then {
-	server setVariable ["weatherversion",1,false];
+if ((server getVariable "StartupType") == "NEW" || (server getVariable ["weatherversion", 0]) < 1) then {
+    server setVariable ["weatherversion", 1, false];
 
-	_mode = selectRandom ["Clear","Cloudy"];
-	_weather = _mode call ot_weather_getWeather;
-	_newOvercast = _weather select 0;
+    _mode = selectRandom ["Clear", "Cloudy"];
+    _weather = _mode call ot_weather_getWeather;
+    _newOvercast = _weather select 0;
 
-	skipTime -24;
-	86400 setOvercast _newOvercast;
-	86400 setFog 0;
-	86400 setWaves (_weather select 2);
-	86400 setLightnings (_weather select 4);
-	86400 setWindForce (_newOvercast * 0.3);
-	86400 setGusts _newOvercast;
-	86400 setRain (_weather select 3);
-	86400 setWindDir (85 + random 10); //https://en.wikipedia.org/wiki/Trade_winds
-	skipTime 24;
+    skipTime -24;
+    86400 setOvercast _newOvercast;
+    86400 setFog 0;
+    86400 setWaves (_weather select 2);
+    86400 setLightnings (_weather select 4);
+    86400 setWindForce (_newOvercast * 0.3);
+    86400 setGusts _newOvercast;
+    86400 setRain (_weather select 3);
+    86400 setWindDir (85 + random 10); //https://en.wikipedia.org/wiki/Trade_winds
+    skipTime 24;
 
-	simulWeatherSync;
-	(_weather select 3) spawn {
-		sleep 2;
-		10 setRain _this;
-	};
+    simulWeatherSync;
+    (_weather select 3) spawn {
+        sleep 2;
+        10 setRain _this;
+    };
 
-	server setVariable ["temperature",(_weather select 5),true];
-	server setVariable ["forecast",_mode,true];
-	ot_weather_change_forecast = _mode;
-	_count = 0;
-}else{
-	ot_weather_change_forecast = server getVariable ["forecast","Clear"];
-	_weather = ot_weather_change_forecast call ot_weather_getWeather;
-	_newOvercast = _weather select 0;
-	skipTime -24;
-	86400 setOvercast _newOvercast;
-	86400 setFog 0;
-	86400 setWaves (_weather select 2);
-	86400 setLightnings (_weather select 4);
-	86400 setRain (_weather select 3);
-	86400 setWindForce (_newOvercast * 0.3);
-	86400 setGusts _newOvercast;
-	86400 setWindDir (85 + random 10); //https://en.wikipedia.org/wiki/Trade_winds
-	skipTime 24;
+    server setVariable ["temperature", (_weather select 5), true];
+    server setVariable ["forecast", _mode, true];
+    ot_weather_change_forecast = _mode;
+    _count = 0;
+} else {
+    ot_weather_change_forecast = server getVariable ["forecast", "Clear"];
+    _weather = ot_weather_change_forecast call ot_weather_getWeather;
+    _newOvercast = _weather select 0;
+    skipTime -24;
+    86400 setOvercast _newOvercast;
+    86400 setFog 0;
+    86400 setWaves (_weather select 2);
+    86400 setLightnings (_weather select 4);
+    86400 setRain (_weather select 3);
+    86400 setWindForce (_newOvercast * 0.3);
+    86400 setGusts _newOvercast;
+    86400 setWindDir (85 + random 10); //https://en.wikipedia.org/wiki/Trade_winds
+    skipTime 24;
 
-	(_weather select 3) spawn {
-		sleep 2;
-		10 setRain _this;
-	};
+    (_weather select 3) spawn {
+        sleep 2;
+        10 setRain _this;
+    };
 
-	_date = server getVariable ["timedate",OT_startDate];
-	setDate _date;
-	120 setFog 0; //Tanoa fog wtf
-	forceWeatherChange;
-	simulWeatherSync;
+    _date = server getVariable ["timedate", OT_startDate];
+    setDate _date;
+    120 setFog 0; //Tanoa fog wtf
+    forceWeatherChange;
+    simulWeatherSync;
 };
 
 ot_weather_change_time = 350 + (random 600);
 
 //Fog killer
-[{100 setFog 0;}, [], 100] call CBA_fnc_waitAndExecute;
+[{ 100 setFog 0 }, [], 100] call CBA_fnc_waitAndExecute;
 
-["unique_ID","(ot_weather_change_time - time) <= 0","
+[
+    "unique_ID",
+    "(ot_weather_change_time - time) <= 0",
+    "
 private _month = date select 1;
 
 private _stormchance = 1;
@@ -154,4 +157,5 @@ _newOvercast = (_weather select 0);
 
 server setVariable [""temperature"",(_weather select 5),true];
 ot_weather_change_time = time + (350 + (random 600));
-"] call OT_fnc_addActionLoop;
+"
+] call OT_fnc_addActionLoop;

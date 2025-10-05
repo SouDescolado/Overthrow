@@ -17,7 +17,7 @@
 params ["_origin", "_target"];
 
 // If target is truck or ammobox, it can always be overloaded
-if (_target isKindOf "Truck_F" || _target isKindOf "ReammoBox_F") exitWith {true};
+if (_target isKindOf "Truck_F" || _target isKindOf "ReammoBox_F") exitWith { true };
 
 // Load of the target container
 private _targetLoad = loadAbs _target;
@@ -38,4 +38,4 @@ private _originLoad = loadAbs _origin;
 } forEach (everyContainer _origin);
 
 // Return if the content of the origin container would fit in the target container
-_targetLoad + _originLoad <= maxLoad _target
+_targetLoad + _originLoad <= maxLoad _target;

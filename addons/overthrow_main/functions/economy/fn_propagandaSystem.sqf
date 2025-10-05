@@ -1,10 +1,16 @@
 if !(isServer) exitWith {};
 propaganda_system_lasthour = 0;
-waitUntil {sleep 1;server getVariable ["StartupType",""] != ""};
+waitUntil {
+    sleep 1;
+    server getVariable ["StartupType", ""] != "";
+};
 
 sleep 20;
 
-["propaganda_system","_counter%10 isEqualTo 0 && {!((date#3) isEqualTo propaganda_system_lasthour)}","
+[
+    "propaganda_system",
+    "_counter%10 isEqualTo 0 && {!((date#3) isEqualTo propaganda_system_lasthour)}",
+    "
 	private _numplayers = count(allPlayers - (entities 'HeadlessClient_F'));
 	propaganda_system_lasthour = date select 3;
 	if(_numplayers > 0) then {
@@ -50,4 +56,5 @@ sleep 20;
 		server setVariable [format[""stability%1"",OT_nation],_totalStability / (count OT_allTowns),true];
 		server setVariable [format[""population%1"",OT_nation],_totalPop,true];
 	};
-"] call OT_fnc_addActionLoop;
+"
+] call OT_fnc_addActionLoop;

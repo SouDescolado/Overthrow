@@ -11,18 +11,18 @@ params ["_class", ["_largePic", false]];
 
 private _config = configFile >> "CfgWeapons" >> _class;
 if (isClass _config) exitWith {
-	private _pic = getText (_config >> "picture");
-	private _name = getText (_config >> "displayName");
+    private _pic = getText (_config >> "picture");
+    private _name = getText (_config >> "displayName");
     private _desc = getText (_config >> "descriptionShort");
-    [_pic, _name, _desc]
+    [_pic, _name, _desc];
 };
 
 _config = configFile >> "CfgMagazines" >> _class;
 if (isClass _config) exitWith {
     private _pic = getText (_config >> "picture");
-	private _name = getText (_config >> "displayName");
+    private _name = getText (_config >> "displayName");
     private _desc = getText (_config >> "descriptionShort");
-    [_pic, _name, _desc]
+    [_pic, _name, _desc];
 };
 
 _config = configFile >> "CfgVehicles" >> _class;
@@ -30,24 +30,24 @@ if (isClass _config) exitWith {
     if (getNumber (_config >> "isbackpack") isEqualTo 1) then {
         // backpacks
         private _pic = getText (_config >> "picture");
-	    private _name = getText (_config >> "displayName");
+        private _name = getText (_config >> "displayName");
         private _desc = "";
-        [_pic, _name, _desc]
+        [_pic, _name, _desc];
     } else {
         // non-backpack vehicles
         private _pic = getText (_config >> ["picture", "editorPreview"] select (_largePic));
-	    private _name = getText (_config >> "displayName");
+        private _name = getText (_config >> "displayName");
         private _desc = getText (_config >> "Library" >> "libTextDesc");
-        [_pic, _name, _desc]
+        [_pic, _name, _desc];
     };
 };
 
 _config = configFile >> "CfgGlasses" >> _class;
 if (isClass _config) exitWith {
     private _pic = getText (_config >> "picture");
-	private _name = getText (_config >> "displayName");
+    private _name = getText (_config >> "displayName");
     private _desc = "";
-    [_pic, _name, _desc]
+    [_pic, _name, _desc];
 };
 
-["", "", ""]
+["", "", ""];

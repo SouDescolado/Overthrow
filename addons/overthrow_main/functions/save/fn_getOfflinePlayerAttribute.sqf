@@ -1,6 +1,6 @@
-params ["_uid","_attr",["_val",""]];
+params ["_uid", "_attr", ["_val", ""]];
 {
-    _x params ["_k","_v"];
-    if(_k isEqualTo _attr) exitWith {_val=_v};
-}forEach(players_NS getVariable [_uid,[]]);
+    _x params ["_k", "_v"];
+    if (_k isEqualTo _attr) exitWith { _val = _v };
+} forEach (players_NS getVariable [_uid, []]);
 _val;

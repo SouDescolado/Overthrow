@@ -3,8 +3,8 @@ _idx = -1;
 {
     _idx = _idx + 1;
     _id = _x select 0;
-    if(_id isEqualTo _this) exitWith{_found = true};
-}forEach(OT_allspawners);
-if(_found) then {
+    if (_id isEqualTo _this) exitWith { _found = true };
+} forEach (OT_allspawners);
+if (_found) then {
     OT_allspawners deleteAt _idx;
 };

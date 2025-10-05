@@ -22,14 +22,14 @@ params ["_weaponItems", "_amount", "_target"];
 // anyway.
 _target addWeaponWithAttachmentsCargoGlobal [[(_weaponItems # 0 call BIS_fnc_baseWeapon), "", "", "", [], [], ""], _amount];
 // suppressor
-if (_weaponItems # 1 isNotEqualTo "") then {_target addItemCargoGlobal [(_weaponItems # 1), _amount]};
+if (_weaponItems # 1 isNotEqualTo "") then { _target addItemCargoGlobal [(_weaponItems # 1), _amount] };
 // pointer
-if (_weaponItems # 2 isNotEqualTo "") then {_target addItemCargoGlobal [(_weaponItems # 2), _amount]};
+if (_weaponItems # 2 isNotEqualTo "") then { _target addItemCargoGlobal [(_weaponItems # 2), _amount] };
 // optics
-if (_weaponItems # 3 isNotEqualTo "") then {_target addItemCargoGlobal [(_weaponItems # 3), _amount]};
+if (_weaponItems # 3 isNotEqualTo "") then { _target addItemCargoGlobal [(_weaponItems # 3), _amount] };
 // primary mag
-if (_weaponItems # 4 isNotEqualTo []) then {_target addMagazineAmmoCargo [(_weaponItems # 4 # 0), _amount, (_weaponItems # 4 # 1)]};
+if (_weaponItems # 4 isNotEqualTo []) then { _target addMagazineAmmoCargo [(_weaponItems # 4 # 0), _amount, (_weaponItems # 4 # 1)] };
 // secondary mag
-if (_weaponItems # 5 isNotEqualTo []) then {_target addMagazineAmmoCargo [(_weaponItems # 5 # 0), _amount, (_weaponItems # 5 # 1)]};
+if (_weaponItems # 5 isNotEqualTo []) then { _target addMagazineAmmoCargo [(_weaponItems # 5 # 0), _amount, (_weaponItems # 5 # 1)] };
 // bipod
-if (_weaponItems # 6 isNotEqualTo "") then {_target addItemCargoGlobal [(_weaponItems # 6), _amount]};
+if (_weaponItems # 6 isNotEqualTo "") then { _target addItemCargoGlobal [(_weaponItems # 6), _amount] };

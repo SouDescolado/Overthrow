@@ -4,12 +4,12 @@ private _selectedUnits = groupSelectedUnits player;
 } forEach (_selectedUnits);
 
 // If at least one selected unit is a driver of a recovery truck, do truck recovery instead
-private _unitInRecoveryTruck = _selectedUnits findIf {objectParent _x isKindOf "OT_I_Truck_recovery" && driver objectParent _x isEqualTo _x};
+private _unitInRecoveryTruck = _selectedUnits findIf { objectParent _x isKindOf "OT_I_Truck_recovery" && driver objectParent _x isEqualTo _x };
 if (_unitInRecoveryTruck > -1) exitWith {
-	[_selectedUnits # _unitInRecoveryTruck] spawn OT_fnc_recover;
+    [_selectedUnits # _unitInRecoveryTruck] spawn OT_fnc_recover;
 };
 
-private _sortedTargets = nearestObjects [_selectedUnits # 0, ["Car", "ReammoBox_F", "Air", "Ship"], 20] select {alive _x};
+private _sortedTargets = nearestObjects [_selectedUnits # 0, ["Car", "ReammoBox_F", "Air", "Ship"], 20] select { alive _x };
 if (count _sortedTargets isEqualTo 0) exitWith {
     "Cannot find any containers or vehicles within 20m of first selected unit" call OT_fnc_notifyMinor;
 };
@@ -17,25 +17,31 @@ private _target = _sortedTargets # 0;
 
 {
     [_x, _target] spawn {
-		params ["_looter", "_target"];
+        params ["_looter", "_target"];
 
         private _range = 100;
 
-        _looter globalChat format["Looting bodies and item piles within %1m into the %2", _range, (typeOf _target) call OT_fnc_vehicleGetName];
+        _looter globalChat format ["Looting bodies and item piles within %1m into the %2", _range, (typeOf _target) call OT_fnc_vehicleGetName];
 
         _looter setBehaviour "SAFE";
         if (!isNull objectParent _looter) then {
             doGetOut _looter;
-            waitUntil {sleep 1; (isNull objectParent _looter) || (!alive _looter)};
+            waitUntil {
+                sleep 1;
+                (isNull objectParent _looter) || (!alive _looter);
+            };
         };
 
         _looter doMove ASLToAGL (getPosASL _target);
 
         // Wait until looter reaches the target container
         private _timeout = time + 30;
-        waitUntil {sleep 1; (_looter distance _target < 12) || (!alive _looter) || (!alive _target) || (_timeout < time)};
+        waitUntil {
+            sleep 1;
+            (_looter distance _target < 12) || (!alive _looter) || (!alive _target) || (_timeout < time);
+        };
         if ((!alive _looter) || (!alive _target) || (_timeout < time)) exitWith {
-            if (alive _looter) then {_looter globalChat format ["Can't get to the %1, cancelling loot order", (typeOf _target) call OT_fnc_vehicleGetName]};
+            if (alive _looter) then { _looter globalChat format ["Can't get to the %1, cancelling loot order", (typeOf _target) call OT_fnc_vehicleGetName] };
         };
 
         // Looter has reached the target container. Dump his loadout to it.
@@ -48,7 +54,7 @@ private _target = _sortedTargets # 0;
         [_looter, _target] call OT_fnc_dumpUnitLoadout;
         _looter setUnitLoadout [[], [], [], [_looterOwnUniform, []], [], [], "", "", [], ["", "", "", "", "", ""]];
 
-        while {true} do {
+        while { true } do {
             private _sortedBodies = [];
             {
                 // Some bodies are inside vehicles, so we search through the crew of every vehicle
@@ -75,9 +81,12 @@ private _target = _sortedTargets # 0;
 
                 // Wait until looter reaches the body
                 _timeout = time + 30;
-                waitUntil {sleep 1; (_looter distance2D _body < 12) || (isNull _body) || (!alive _looter) || (!alive _target) || (_timeout < time)};
+                waitUntil {
+                    sleep 1;
+                    (_looter distance2D _body < 12) || (isNull _body) || (!alive _looter) || (!alive _target) || (_timeout < time);
+                };
                 if ((!alive _looter) || (!alive _target) || (_timeout < time)) then {
-                    if (alive _looter) then {_looter globalChat "Can't get to a body, cancelling loot order"};
+                    if (alive _looter) then { _looter globalChat "Can't get to a body, cancelling loot order" };
                     _body setVariable ["OT_looterReserved", false, false];
                     break;
                 };
@@ -122,9 +131,12 @@ private _target = _sortedTargets # 0;
 
                 // Wait until looter reaches the target container
                 _timeout = time + 30;
-                waitUntil {sleep 1; (_looter distance _target < 12) || (!alive _looter) || (!alive _target) || (_timeout < time)};
+                waitUntil {
+                    sleep 1;
+                    (_looter distance _target < 12) || (!alive _looter) || (!alive _target) || (_timeout < time);
+                };
                 if ((!alive _looter) || (!alive _target) || (_timeout < time)) then {
-                    if (alive _looter) then {_looter globalChat format ["Can't get back to the %1, cancelling loot order", (typeOf _target) call OT_fnc_vehicleGetName]};
+                    if (alive _looter) then { _looter globalChat format ["Can't get back to the %1, cancelling loot order", (typeOf _target) call OT_fnc_vehicleGetName] };
                     break;
                 };
 
@@ -139,7 +151,7 @@ private _target = _sortedTargets # 0;
             } else {
                 // There are no longer any bodies to loot. Loot the nearest item pile.
 
-                private _sortedWeaponHolders = nearestObjects [_target, ["WeaponHolder", "WeaponHolderSimulated"], _range] select {!(_x getVariable ["OT_looterReserved", false])};
+                private _sortedWeaponHolders = nearestObjects [_target, ["WeaponHolder", "WeaponHolderSimulated"], _range] select { !(_x getVariable ["OT_looterReserved", false]) };
 
                 if (_sortedWeaponHolders isEqualTo []) then {
                     _looter globalChat "All done!";
@@ -155,9 +167,12 @@ private _target = _sortedTargets # 0;
 
                 // Wait until looter reaches the item pile
                 _timeout = time + 30;
-                waitUntil {sleep 1; (_looter distance2D _weaponHolder < 12) || (isNull _weaponHolder) || (!alive _looter) || (!alive _target) || (_timeout < time)};
+                waitUntil {
+                    sleep 1;
+                    (_looter distance2D _weaponHolder < 12) || (isNull _weaponHolder) || (!alive _looter) || (!alive _target) || (_timeout < time);
+                };
                 if ((!alive _looter) || (!alive _target) || (_timeout < time)) then {
-                    if (alive _looter) then {_looter globalChat "Can't get to an item pile, cancelling loot order"};
+                    if (alive _looter) then { _looter globalChat "Can't get to an item pile, cancelling loot order" };
                     _weaponHolder setVariable ["OT_looterReserved", false, false];
                     break;
                 };
@@ -171,9 +186,12 @@ private _target = _sortedTargets # 0;
 
                 // Wait until looter reaches the target container
                 _timeout = time + 30;
-                waitUntil {sleep 1; (_looter distance _target < 12) || (isNull _weaponHolder) || (!alive _looter) || (!alive _target) || (_timeout < time)};
+                waitUntil {
+                    sleep 1;
+                    (_looter distance _target < 12) || (isNull _weaponHolder) || (!alive _looter) || (!alive _target) || (_timeout < time);
+                };
                 if ((!alive _looter) || (!alive _target) || (_timeout < time)) then {
-                    if (alive _looter) then {_looter globalChat format ["Can't get back to the %1, cancelling loot order", (typeOf _target) call OT_fnc_vehicleGetName]};
+                    if (alive _looter) then { _looter globalChat format ["Can't get back to the %1, cancelling loot order", (typeOf _target) call OT_fnc_vehicleGetName] };
                     _weaponHolder setVariable ["OT_looterReserved", false, false];
                     break;
                 };
