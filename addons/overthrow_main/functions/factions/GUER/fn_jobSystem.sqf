@@ -12,5 +12,5 @@ OT_allJobs = [];
 } forEach ("true" configClasses (configFile >> "CfgOverthrowMissions"));
 if (isServer) then {
     job_system_counter = 12;
-    ["job_system", "_counter%10 isEqualTo 0", "call OT_fnc_jobLoop"] call OT_fnc_addActionLoop;
+    ["job_system", "_counter % 10 isEqualTo 0", "call OT_fnc_jobLoop"] call OT_fnc_addActionLoop;
 };

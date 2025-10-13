@@ -73,39 +73,39 @@ diag_log format ["Overthrow: %1 towns virtualized", count OT_allTowns];
     "OT_virtualization_loop",
     "true",
     "
-	{
-		_x params ['_id','_start','_end','_nil','_nil','_time'];
-		private _spawnidx = OT_allSpawned find _id;
-		private _val = (_spawnidx > -1);
-		if((_start select 0) isEqualTo (_end select 0)) then {
-			if(_val) then {
-				if((time - _time) > 30) then {
-					if !([_start] call OT_fnc_inSpawnDistance) then {					
-						OT_allSpawned deleteAt _spawnidx;
-						_x spawn OT_fnc_despawn;
-					};
-				};
-			}else{
-				if ([_start] call OT_fnc_inSpawnDistance) then {
-						OT_allSpawned pushback _id;
-						_x spawn OT_fnc_spawn;
-					};
-			};
-		}else{
-			if(_val) then {
-				if((time - _time) > 30) then {
-					if !(([_start] call OT_fnc_inSpawnDistance) || {[_end] call OT_fnc_inSpawnDistance}) then {
-						OT_allSpawned deleteAt _spawnidx;
-						_x spawn OT_fnc_despawn;
-					};
-				};
-			}else{
-				if (([_start] call OT_fnc_inSpawnDistance) || {([_end] call OT_fnc_inSpawnDistance)}) then {
-					OT_allSpawned pushback _id;
-					_x spawn OT_fnc_spawn;
-				};
-			};
-		};
-	}foreach(OT_allspawners);
-"
+        {
+            _x params ['_id', '_start', '_end', '_nil', '_nil', '_time'];
+            private _spawnidx = OT_allSpawned find _id;
+            private _val = (_spawnidx > -1);
+            if ((_start select 0) isEqualTo (_end select 0)) then {
+                if (_val) then {
+                    if ((time - _time) > 30) then {
+                        if !([_start] call OT_fnc_inSpawnDistance) then {
+                            OT_allSpawned deleteAt _spawnidx;
+                            _x spawn OT_fnc_despawn;
+                        };
+                    };
+                } else {
+                    if ([_start] call OT_fnc_inSpawnDistance) then {
+                        OT_allSpawned pushback _id;
+                        _x spawn OT_fnc_spawn;
+                    };
+                };
+            } else {
+                if (_val) then {
+                    if ((time - _time) > 30) then {
+                        if !(([_start] call OT_fnc_inSpawnDistance) || { [_end] call OT_fnc_inSpawnDistance }) then {
+                            OT_allSpawned deleteAt _spawnidx;
+                            _x spawn OT_fnc_despawn;
+                        };
+                    };
+                } else {
+                    if (([_start] call OT_fnc_inSpawnDistance) || { ([_end] call OT_fnc_inSpawnDistance) }) then {
+                        OT_allSpawned pushback _id;
+                        _x spawn OT_fnc_spawn;
+                    };
+                };
+            };
+        } foreach (OT_allspawners);
+    "
 ] call OT_fnc_addActionLoop;

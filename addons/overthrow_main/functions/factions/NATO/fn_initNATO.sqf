@@ -98,7 +98,7 @@ OT_NATO_Units_CTRGSupport = [];
             spawner setVariable [format ["loadouts_%1", _name], _loadouts, false];
         };
     };
-} forEach (format ["(getNumber(_x >> 'scope') == 2) && (getText(_x >> 'faction') == '%1') && (configName _x) isKindOf 'SoldierWB'", OT_faction_NATO] configClasses (configFile >> "CfgVehicles"));
+} forEach (format ["(getNumber (_x >> 'scope') == 2) && (getText (_x >> 'faction') == '%1') && (configName _x) isKindOf 'SoldierWB'", OT_faction_NATO] configClasses (configFile >> "CfgVehicles"));
 
 //Generate and cache gendarm loadouts
 private _loadout = getUnitLoadout OT_NATO_Unit_Police;

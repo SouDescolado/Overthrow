@@ -88,7 +88,7 @@ OT_faces_eastern = [];
     if (OT_identity_local in _types) then { OT_faces_local pushBack configName _x };
     if (OT_identity_western in _types) then { OT_faces_western pushBack configName _x };
     if (OT_identity_eastern in _types) then { OT_faces_eastern pushBack configName _x };
-} forEach ("getNumber(_x >> 'disabled') isEqualTo 0" configClasses (configFile >> "CfgFaces" >> "Man_A3"));
+} forEach ("getNumber (_x >> 'disabled') isEqualTo 0" configClasses (configFile >> "CfgFaces" >> "Man_A3"));
 
 OT_voices_local = [];
 OT_voices_western = [];
@@ -98,7 +98,7 @@ OT_voices_eastern = [];
     if (OT_language_local in _types) then { OT_voices_local pushBack configName _x };
     if (OT_language_western in _types) then { OT_voices_western pushBack configName _x };
     if (OT_language_eastern in _types) then { OT_voices_eastern pushBack configName _x };
-} forEach ("getNumber(_x >> 'scope') isEqualTo 2" configClasses (configFile >> "CfgVoice"));
+} forEach ("getNumber (_x >> 'scope') isEqualTo 2" configClasses (configFile >> "CfgVoice"));
 
 //Find houses
 OT_hugePopHouses = ["Land_MultistoryBuilding_01_F", "Land_MultistoryBuilding_03_F", "Land_MultistoryBuilding_04_F", "Land_House_2W04_F", "Land_House_2W03_F"]; //buildings with potentially lots of people living in them
@@ -115,7 +115,7 @@ OT_highPopHouses = [];
         if (_cost > 25000) exitWith { OT_medPopHouses pushBack _name };
         OT_lowPopHouses pushBack _name;
     };
-} forEach ("(getNumber (_x >> 'scope') isEqualTo 2) && {(configName _x isKindOf 'House') && {'_house' in (toLowerANSI (configName _x))}}" configClasses (_cfgVehicles));
+} forEach ("(getNumber (_x >> 'scope') isEqualTo 2) && { (configName _x isKindOf 'House') && { '_house' in (toLowerANSI (configName _x)) } }" configClasses (_cfgVehicles));
 
 OT_allBuyableBuildings = OT_lowPopHouses + OT_medPopHouses + OT_highPopHouses + OT_hugePopHouses + OT_mansions + [OT_item_Tent, OT_flag_IND];
 
@@ -283,7 +283,7 @@ OT_spawnHouses = [];
     OT_spawnHouses pushBack _cls;
     OT_allBuyableBuildings pushBackUnique _cls;
     OT_allRealEstate pushBackUnique _cls;
-} forEach ("getNumber ( _x >> ""ot_isPlayerHouse"" ) isEqualTo 1" configClasses (_cfgVehicles));
+} forEach ("getNumber (_x >> 'ot_isPlayerHouse') isEqualTo 1" configClasses (_cfgVehicles));
 
 //Mission house overrides
 {
@@ -296,7 +296,7 @@ OT_spawnHouses = [];
 
 OT_gunDealerHouses = OT_spawnHouses;
 
-private _allShops = "getNumber ( _x >> ""ot_isShop"" ) isEqualTo 1" configClasses (_cfgVehicles);
+private _allShops = "getNumber (_x >> 'ot_isShop') isEqualTo 1" configClasses (_cfgVehicles);
 OT_shops = _allShops apply { configName _x };
 
 //Mission shop overrides
@@ -306,7 +306,7 @@ OT_shops = _allShops apply { configName _x };
     templates setVariable [_cls, _template, true];
 } forEach (OT_shopBuildings);
 
-private _allCarShops = "getNumber ( _x >> ""ot_isCarDealer"" ) isEqualTo 1" configClasses (_cfgVehicles);
+private _allCarShops = "getNumber (_x >> 'ot_isCarDealer') isEqualTo 1" configClasses (_cfgVehicles);
 OT_carShops = _allCarShops apply { configName _x };
 
 //Mission car shop overrides
@@ -331,13 +331,11 @@ if (isServer) then {
 };
 
 private _allVehs = "
-	( getNumber ( _x >> 'scope' ) isEqualTo 2
-	&&
-	{ (getArray ( _x >> 'threat' ) # 0) < 0.5 }
-	&&
-	{ toLowerANSI getText ( _x >> 'vehicleClass' ) in ['car', 'support'] }
-	&&
-	{ toLowerANSI getText ( _x >> 'faction' ) in ['civ_f', 'ind_f'] })
+    (getNumber (_x >> 'scope') isEqualTo 2
+        && { (getArray (_x >> 'threat') # 0) < 0.5 }
+        && { toLowerANSI getText (_x >> 'vehicleClass') in ['car', 'support'] }
+        && { toLowerANSI getText (_x >> 'faction') in ['civ_f', 'ind_f'] }
+    );
 " configClasses (_cfgVehicles);
 
 private _mostExpensive = 0;
@@ -366,12 +364,10 @@ private _mostExpensive = 0;
 
 //Determine vehicle threats
 _allVehs = "
-	( getNumber ( _x >> 'scope' ) isEqualTo 2
-	&&
-	{ (getArray ( _x >> 'threat' ) # 0) > 0}
-	&&
-	{ toLowerANSI getText ( _x >> 'vehicleClass' ) in ['car', 'armored']})
-
+    (getNumber (_x >> 'scope') isEqualTo 2
+        && { (getArray (_x >> 'threat') # 0) > 0 }
+        && { toLowerANSI getText (_x >> 'vehicleClass') in ['car', 'armored'] }
+    );
 " configClasses (_cfgVehicles);
 
 {
@@ -379,13 +375,11 @@ _allVehs = "
 } forEach (_allVehs);
 
 private _allHelis = "
-    ( getNumber ( _x >> 'scope' ) isEqualTo 2
-    &&
-	{ (getArray ( _x >> 'threat' ) select 0) < 0.5}
-	&&
-    { toLowerANSI getText ( _x >> 'vehicleClass' ) isEqualTo 'air'}
-	&&
-    { toLowerANSI getText ( _x >> 'faction' ) in ['civ_f', 'ind_f'] })
+    (getNumber (_x >> 'scope') isEqualTo 2
+        && { (getArray (_x >> 'threat') select 0) < 0.5 }
+        && { toLowerANSI getText (_x >> 'vehicleClass') isEqualTo 'air' }
+        && { toLowerANSI getText (_x >> 'faction') in ['civ_f', 'ind_f'] }
+    );
 " configClasses (_cfgVehicles);
 
 {
@@ -414,11 +408,10 @@ private _allHelis = "
 
 //Determine aircraft threats
 _allHelis = "
-    ( getNumber ( _x >> 'scope' ) isEqualTo 2
-    &&
-	{ (getArray ( _x >> 'threat' ) select 0) >= 0.5}
-	&&
-    { toLowerANSI getText ( _x >> 'vehicleClass' ) isEqualTo 'air'})
+    (getNumber (_x >> 'scope') isEqualTo 2
+        && { (getArray (_x >> 'threat') select 0) >= 0.5 }
+        && { toLowerANSI getText (_x >> 'vehicleClass') isEqualTo 'air' }
+    );
 " configClasses (_cfgVehicles);
 
 {
@@ -453,7 +446,7 @@ if (isServer) then {
 
 // Filter the scope only once
 private _filteredWeaponConfigs = "
-	(getNumber (_x >> 'scope') == 2)
+    (getNumber (_x >> 'scope') == 2);
 " configClasses (_cfgWeapons);
 
 private _allWeapons = [];
@@ -496,19 +489,19 @@ private _allHelmets = [];
 _filteredWeaponConfigs = nil;
 
 private _allAmmo = "
-    ( getNumber ( _x >> 'scope' ) isEqualTo 2 )
+    (getNumber (_x >> 'scope') isEqualTo 2);
 " configClasses (configFile >> "cfgMagazines");
 
 private _allVehicles = "
-    ( getNumber ( _x >> 'scope' ) > 0 )
+    (getNumber (_x >> 'scope') > 0);
 " configClasses (_cfgVehicles);
 
 private _allFactions = "
-    ( getNumber ( _x >> 'side' ) < 3 )
+    (getNumber (_x >> 'side') < 3);
 " configClasses (configFile >> "cfgFactionClasses");
 
 private _allGlasses = "
-    ( getNumber ( _x >> 'scope' ) isEqualTo 2 )
+    (getNumber (_x >> 'scope') isEqualTo 2);
 " configClasses (configFile >> "CfgGlasses");
 
 OT_allFactions = [];
@@ -604,7 +597,7 @@ OT_allBLURifleMagazines = [];
     // These weapons and magazines will NEVER be given to units.
     private _blacklist = ["Throw", "Put", "NLAW_F", "rhs_weap_m79", "rhs_mag_30Rnd_556x45_M200_Stanag"];
 
-    private _all = format ["(getNumber( _x >> ""scope"" ) isEqualTo 2 ) && {(getText( _x >> ""faction"" ) isEqualTo '%1')}", _name] configClasses (_cfgVehicles);
+    private _all = format ["(getNumber (_x >> 'scope') isEqualTo 2) && { (getText (_x >> 'faction') isEqualTo '%1') }", _name] configClasses (_cfgVehicles);
     {
         private _cls = configName _x;
         if (_cls isKindOf "CAManBase") then {
@@ -917,7 +910,7 @@ if (isServer) then {
             private _clsCfg = _cfgVeh >> _name;
             private _cost = getNumber (_clsCfg >> "armor") * _multiply;
             private _steel = round (getNumber (_clsCfg >> "armor") * 0.5);
-            private _numturrets = count ("!((configName _x) select [0,5] == ""Cargo"") && !((count getArray (_x >> ""magazines"")) isEqualTo 0)" configClasses (_clsCfg >> "Turrets"));
+            private _numturrets = count ("!((configName _x) select [0, 5] == 'Cargo') && !((count getArray (_x >> 'magazines')) isEqualTo 0)" configClasses (_clsCfg >> "Turrets"));
             private _plastic = 2;
             if (_numturrets > 0) then {
                 _cost = _cost + (_numturrets * _cost * 10);

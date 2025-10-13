@@ -12,4 +12,4 @@ private _trackcounter = 0;
 
 GUER_faction_loop_data = [_lastmin, _lasthr, _currentProduction, _stabcounter, _trackcounter];
 
-["GUER_faction_loop", "_counter%5 isEqualTo 0", "call OT_fnc_GUERLoop"] call OT_fnc_addActionLoop;
+["GUER_faction_loop", "_counter % 5 isEqualTo 0", "call OT_fnc_GUERLoop"] call OT_fnc_addActionLoop;

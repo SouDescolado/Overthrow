@@ -94,24 +94,24 @@ if (_byair && _tgroup isEqualType grpNull) then {
     _wp setWaypointBehaviour "COMBAT";
     _wp setWaypointSpeed "FULL";
     _wp setWaypointCompletionRadius 150;
-    _wp setWaypointStatements ["true", format ["(vehicle this) flyInHeight %1;", 75 + random 50]];
+    _wp setWaypointStatements ["true", format ["(vehicle this) flyInHeight %1", 75 + random 50]];
 
     _wp = _tgroup addWaypoint [_ao, 0];
     _wp setWaypointType "MOVE";
     _wp setWaypointBehaviour "COMBAT";
-    _wp setWaypointStatements ["true", "(vehicle this) AnimateDoor ['Door_rear_source', 1, false];"];
+    _wp setWaypointStatements ["true", "(vehicle this) AnimateDoor ['Door_rear_source', 1, false]"];
     _wp setWaypointCompletionRadius 50;
     _wp setWaypointSpeed "FULL";
 
     _wp = _tgroup addWaypoint [_ao, 0];
     _wp setWaypointType "SCRIPTED";
-    _wp setWaypointStatements ["true", "[vehicle this,75] spawn OT_fnc_parachuteAll"];
+    _wp setWaypointStatements ["true", "[vehicle this, 75] spawn OT_fnc_parachuteAll"];
     _wp setWaypointTimeout [5, 5, 5];
 
     _wp = _tgroup addWaypoint [_ao, 0];
     _wp setWaypointType "SCRIPTED";
     _wp setWaypointBehaviour "CARELESS";
-    _wp setWaypointStatements ["true", "(vehicle this) AnimateDoor ['Door_rear_source', 0, false];"];
+    _wp setWaypointStatements ["true", "(vehicle this) AnimateDoor ['Door_rear_source', 0, false]"];
     _wp setWaypointTimeout [20, 20, 20];
 } else {
     if (_tgroup isEqualType grpNull) then {

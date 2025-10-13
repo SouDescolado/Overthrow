@@ -110,7 +110,7 @@ private _lastCounter = server getVariable ["NATOlastcounter", ""];
                     _wp setWaypointBehaviour "COMBAT";
                     _wp setWaypointSpeed "FULL";
                     _wp setWaypointTimeout [5, 20, 60];
-                    _wp setWaypointStatements ["true", format ["(vehicle this) flyInHeight %1;", 25 + random 50]];
+                    _wp setWaypointStatements ["true", format ["(vehicle this) flyInHeight %1", 25 + random 50]];
                 } forEach (_targets);
 
                 _wp = _group addWaypoint [_pos, 300];
@@ -118,7 +118,7 @@ private _lastCounter = server getVariable ["NATOlastcounter", ""];
                 _wp setWaypointBehaviour "COMBAT";
                 _wp setWaypointSpeed "FULL";
                 _wp setWaypointTimeout [5, 20, 60];
-                _wp setWaypointStatements ["true", format ["(vehicle this) flyInHeight %1;", 25 + random 50]];
+                _wp setWaypointStatements ["true", format ["(vehicle this) flyInHeight %1", 25 + random 50]];
 
                 _wp = _group addWaypoint [_pos, 0];
                 _wp setWaypointType "CYCLE";

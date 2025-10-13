@@ -784,7 +784,7 @@ class OT_dialog_options {
 class OT_dialog_upload {
     idd = 49558;
     movingenable = 0;
-    onLoad = "params ['_display']; _display displayAddEventHandler ['KeyDown', 'if ((_this select 1) == 1) then { true }'];";
+    onLoad = "params ['_display']; _display displayAddEventHandler ['KeyDown', { if ((_this select 1) == 1) then { true } }];";
 
     class controlsBackground {
         class background1: RscOverthrowText {

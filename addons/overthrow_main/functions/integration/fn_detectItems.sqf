@@ -121,8 +121,8 @@ private _getprice = {
         OT_allItems pushBack _cls;
     };
 } forEach ("
-    (getNumber (_x >> 'scope') isEqualTo 2) &&
-    {(configName _x call BIS_fnc_itemType) # 0 isEqualTo 'Item'}
+    (getNumber (_x >> 'scope') isEqualTo 2)
+        && { (configName _x call BIS_fnc_itemType) # 0 isEqualTo 'Item' };
 " configClasses (configFile >> "CfgWeapons"));
 
 //add Bags
@@ -134,16 +134,16 @@ private _getprice = {
         cost setVariable [_cls, [_mass, 0, 0, 1], true]; // the price of a bag is its mass, unless otherwise stated in prices.sqf.
     };
 } forEach ("
-    (getNumber (_x >> 'scope') isEqualTo 2) &&
-    {
-        _parents = ([_x,true] call BIS_fnc_returnParents);
-        'Bag_Base' in _parents &&
-        {getText (_x >> 'Faction') isEqualTo 'Default'} &&
-        {!('Weapon_Bag_Base' in _parents)} &&
-        {count (_x >> 'TransportItems') isEqualTo 0} &&
-        {count (_x >> 'TransportMagazines') isEqualTo 0} &&
-        {count (_x >> 'TransportWeapons') isEqualTo 0}
-    }
+    (getNumber (_x >> 'scope') isEqualTo 2)
+        && {
+            _parents = ([_x, true] call BIS_fnc_returnParents);
+            'Bag_Base' in _parents
+                && { getText (_x >> 'Faction') isEqualTo 'Default' }
+                && { !('Weapon_Bag_Base' in _parents) }
+                && { count (_x >> 'TransportItems') isEqualTo 0 }
+                && { count (_x >> 'TransportMagazines') isEqualTo 0 }
+                && { count (_x >> 'TransportWeapons') isEqualTo 0 };
+        };
 " configClasses (configFile >> "CfgVehicles")); // Bags that do not have a faction (weapon and tripod bags do), and carry no content.
 //add craftable magazines
 {
@@ -151,11 +151,11 @@ private _getprice = {
     private _recipe = call compileFinal getText (_x >> "ot_craftRecipe");
     private _qty = getNumber (_x >> "ot_craftQuantity");
     OT_craftableItems pushBack [_cls, _recipe, _qty];
-} forEach ("getNumber (_x >> ""ot_craftable"") isEqualTo 1" configClasses (configFile >> "CfgMagazines"));
+} forEach ("getNumber (_x >> 'ot_craftable') isEqualTo 1" configClasses (configFile >> "CfgMagazines"));
 //add craftable weapons
 {
     private _cls = configName _x;
     private _recipe = call compileFinal getText (_x >> "ot_craftRecipe");
     private _qty = getNumber (_x >> "ot_craftQuantity");
     OT_craftableItems pushBack [_cls, _recipe, _qty];
-} forEach ("getNumber (_x >> ""ot_craftable"") isEqualTo 1" configClasses (configFile >> "CfgWeapons"));
+} forEach ("getNumber (_x >> 'ot_craftable') isEqualTo 1" configClasses (configFile >> "CfgWeapons"));

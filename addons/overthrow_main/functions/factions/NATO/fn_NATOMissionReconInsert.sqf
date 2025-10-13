@@ -37,7 +37,7 @@ _group = [_start, west, OT_NATO_Group_Recon] call BIS_fnc_spawnGroup;
 
 // These are special forces, they are much better than regular guys
 // Randomskill macro to add some variance to units
-#define RANDOMSKILL (random [0.75,0.8,0.85])
+#define RANDOMSKILL (random [0.75, 0.8, 0.85])
 {
     _x setSkill ["courage", RANDOMSKILL];
     _x setSkill ["spotDistance", RANDOMSKILL];
@@ -97,23 +97,23 @@ if (_isAir) then {
     _wp setWaypointBehaviour "COMBAT";
     _wp setWaypointSpeed "FULL";
     _wp setWaypointCompletionRadius 150;
-    _wp setWaypointStatements ["true", "(vehicle this) flyInHeight 200;"];
+    _wp setWaypointStatements ["true", "(vehicle this) flyInHeight 200"];
 
     _wp = _tgroup addWaypoint [_ao, 0];
     _wp setWaypointType "MOVE";
     _wp setWaypointBehaviour "COMBAT";
-    _wp setWaypointStatements ["true", "(vehicle this) AnimateDoor ['Door_rear_source', 1, false];"];
+    _wp setWaypointStatements ["true", "(vehicle this) AnimateDoor ['Door_rear_source', 1, false]"];
     _wp setWaypointCompletionRadius 50;
     _wp setWaypointSpeed "FULL";
 
     _wp = _tgroup addWaypoint [_ao, 0];
     _wp setWaypointType "SCRIPTED";
-    _wp setWaypointStatements ["true", "[vehicle this,75] spawn OT_fnc_parachuteAll"];
+    _wp setWaypointStatements ["true", "[vehicle this, 75] spawn OT_fnc_parachuteAll"];
     _wp setWaypointTimeout [10, 10, 10];
 
     _wp = _tgroup addWaypoint [_ao, 0];
     _wp setWaypointType "SCRIPTED";
-    _wp setWaypointStatements ["true", "(vehicle this) AnimateDoor ['Door_rear_source', 0, false];"];
+    _wp setWaypointStatements ["true", "(vehicle this) AnimateDoor ['Door_rear_source', 0, false]"];
     _wp setWaypointTimeout [15, 15, 15];
 
     _moveto = _close getPos [200, _dir];
