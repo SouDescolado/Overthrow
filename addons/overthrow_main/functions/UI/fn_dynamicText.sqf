@@ -1,6 +1,6 @@
 disableSerialization;
 
-params ["_text", ["_x", -1], ["_y", -1], ["_delay", 4], ["_fade", 1], ["_moveY", 0], ["_layer", [] call bis_fnc_rscLayer]];
+params ["_text", ["_x", -1], ["_y", -1], ["_delay", 4], ["_fade", 1], ["_moveY", 0], ["_layer", [] call BIS_fnc_rscLayer]];
 _delay = 0 max _delay;
 _fade = 0 max _fade;
 

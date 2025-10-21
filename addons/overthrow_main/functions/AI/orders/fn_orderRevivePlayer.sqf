@@ -31,7 +31,7 @@ _medic doMove getPosATL _unit;
                 } else {
                     _medic removeItem "ACE_epinephrine";
                 };
-                [_unit, false] call ACE_medical_fnc_setUnconscious;
+                [_unit, false] call ace_medical_fnc_setUnconscious;
             },
             _this,
             5

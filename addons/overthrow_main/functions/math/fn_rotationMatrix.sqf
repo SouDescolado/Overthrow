@@ -15,6 +15,6 @@ private _SInv = [
     [0, 1, 0]
 ];
 
-private _DCM = [_V, _sInv] call OT_fnc_matrixMultiply;
+private _DCM = [_V, _SInv] call OT_fnc_matrixMultiply;
 
 _DCM;

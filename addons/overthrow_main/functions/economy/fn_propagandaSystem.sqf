@@ -52,7 +52,7 @@ sleep 20;
                         };
                     };
                 };
-            } foreach (OT_allTowns);
+            } forEach (OT_allTowns);
             server setVariable [format ['stability%1', OT_nation], _totalStability / (count OT_allTowns), true];
             server setVariable [format ['population%1', OT_nation], _totalPop, true];
         };

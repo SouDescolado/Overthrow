@@ -6,10 +6,10 @@ class OT_dialog_name {
     class controlsBackground {
         class RscStructuredText_1199: RscOverthrowStructuredText {
             idc = 1199;
-            x = "0.371094 * safezoneW + safezoneX";
-            y = "0.368 * safezoneH + safezoneY";
-            w = "0.252656 * safezoneW";
-            h = "0.176 * safezoneH";
+            x = "0.371094 * safeZoneW + safeZoneX";
+            y = "0.368 * safeZoneH + safeZoneY";
+            w = "0.252656 * safeZoneW";
+            h = "0.176 * safeZoneH";
             colorBackground[] = {0.1, 0.1, 0.1, 1};
             colorActive[] = {0.1, 0.1, 0.1, 1};
         };
@@ -22,28 +22,28 @@ class OT_dialog_name {
 
         class RscEdit_1400: RscOverthrowEdit {
             idc = 1400;
-            x = "0.37625 * safezoneW + safezoneX";
-            y = "0.412 * safezoneH + safezoneY";
-            w = "0.242344 * safezoneW";
-            h = "0.055 * safezoneH";
+            x = "0.37625 * safeZoneW + safeZoneX";
+            y = "0.412 * safeZoneH + safeZoneY";
+            w = "0.242344 * safeZoneW";
+            h = "0.055 * safeZoneH";
             text = "Base";
         };
         class RscStructuredText_1100: RscOverthrowStructuredText {
             idc = 1100;
             text = "Enter a name for your new base"; //--- ToDo: Localize;
-            x = "0.37625 * safezoneW + safezoneX";
-            y = "0.379 * safezoneH + safezoneY";
-            w = "0.195937 * safezoneW";
-            h = "0.022 * safezoneH";
+            x = "0.37625 * safeZoneW + safeZoneX";
+            y = "0.379 * safeZoneH + safeZoneY";
+            w = "0.195937 * safeZoneW";
+            h = "0.022 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0};
         };
         class RscButton_1600: RscOverthrowButton {
             idc = 1600;
             text = "Done"; //--- ToDo: Localize;
-            x = "0.577344 * safezoneW + safezoneX";
-            y = "0.478 * safezoneH + safezoneY";
-            w = "0.04125 * safezoneW";
-            h = "0.055 * safezoneH";
+            x = "0.577344 * safeZoneW + safeZoneX";
+            y = "0.478 * safeZoneH + safeZoneY";
+            w = "0.04125 * safeZoneW";
+            h = "0.055 * safeZoneH";
             action = "_this call OT_fnc_onNameDone";
         };
         ////////////////////////////////////////////////////////
@@ -59,10 +59,10 @@ class OT_dialog_input {
     class controlsBackground {
         class RscStructuredText_1199: RscOverthrowStructuredText {
             idc = 1199;
-            x = "0.371094 * safezoneW + safezoneX";
-            y = "0.368 * safezoneH + safezoneY";
-            w = "0.252656 * safezoneW";
-            h = "0.176 * safezoneH";
+            x = "0.371094 * safeZoneW + safeZoneX";
+            y = "0.368 * safeZoneH + safeZoneY";
+            w = "0.252656 * safeZoneW";
+            h = "0.176 * safeZoneH";
             colorBackground[] = {0.1, 0.1, 0.1, 1};
             colorActive[] = {0.1, 0.1, 0.1, 1};
         };
@@ -76,31 +76,31 @@ class OT_dialog_input {
         class RscEdit_1400: RscOverthrowEdit {
             idc = 1400;
 
-            onKeyDown = "_key = _this select 1; _name = ctrltext 1400; if (_key == 28 && _name != '') then { [] call OT_inputHandler; closeDialog 0; };";
+            onKeyDown = "_key = _this select 1; _name = ctrlText 1400; if (_key == 28 && _name != '') then { [] call OT_inputHandler; closeDialog 0; };";
             text = ""; //--- ToDo: Localize;
-            x = "0.37625 * safezoneW + safezoneX";
-            y = "0.412 * safezoneH + safezoneY";
-            w = "0.242344 * safezoneW";
-            h = "0.055 * safezoneH";
+            x = "0.37625 * safeZoneW + safeZoneX";
+            y = "0.412 * safeZoneH + safeZoneY";
+            w = "0.242344 * safeZoneW";
+            h = "0.055 * safeZoneH";
         };
         class RscStructuredText_1100: RscOverthrowStructuredText {
             idc = 1100;
 
             text = ""; //--- ToDo: Localize;
-            x = "0.37625 * safezoneW + safezoneX";
-            y = "0.379 * safezoneH + safezoneY";
-            w = "0.195937 * safezoneW";
-            h = "0.022 * safezoneH";
+            x = "0.37625 * safeZoneW + safeZoneX";
+            y = "0.379 * safeZoneH + safeZoneY";
+            w = "0.195937 * safeZoneW";
+            h = "0.022 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0};
         };
         class RscButton_1600: RscOverthrowButton {
             idc = 1600;
             onButtonClick = "_this call OT_inputHandler; closeDialog 0;";
             text = "OK"; //--- ToDo: Localize;
-            x = "0.577344 * safezoneW + safezoneX";
-            y = "0.478 * safezoneH + safezoneY";
-            w = "0.04125 * safezoneW";
-            h = "0.055 * safezoneH";
+            x = "0.577344 * safeZoneW + safeZoneX";
+            y = "0.478 * safeZoneH + safeZoneY";
+            w = "0.04125 * safeZoneW";
+            h = "0.055 * safeZoneH";
         };
         ////////////////////////////////////////////////////////
         // GUI EDITOR OUTPUT END
@@ -115,10 +115,10 @@ class OT_dialog_place {
     class controlsBackground {
         class RscStructuredText_1199: RscOverthrowStructuredText {
             idc = 1199;
-            x = "-0.000156274 * safezoneW + safezoneX";
-            y = "0.786 * safezoneH + safezoneY";
-            w = "1.00031 * safezoneW";
-            h = "0.11 * safezoneH";
+            x = "-0.000156274 * safeZoneW + safeZoneX";
+            y = "0.786 * safeZoneH + safeZoneY";
+            w = "1.00031 * safeZoneW";
+            h = "0.11 * safeZoneH";
             colorBackground[] = {0.1, 0.1, 0.1, 1};
             colorActive[] = {0.1, 0.1, 0.1, 1};
         };
@@ -134,10 +134,10 @@ class OT_dialog_place {
             action = "closeDialog 0; 'Sandbags' spawn OT_fnc_place";
 
             text = "Sandbags"; //--- ToDo: Localize;
-            x = "0.551562 * safezoneW + safezoneX";
-            y = "0.797 * safezoneH + safezoneY";
-            w = "0.0928125 * safezoneW";
-            h = "0.088 * safezoneH";
+            x = "0.551562 * safeZoneW + safeZoneX";
+            y = "0.797 * safeZoneH + safeZoneY";
+            w = "0.0928125 * safeZoneW";
+            h = "0.088 * safeZoneH";
             tooltip = "Light defense"; //--- ToDo: Localize;
         };
         class RscButton_1601: RscOverthrowButton {
@@ -145,10 +145,10 @@ class OT_dialog_place {
             action = "closeDialog 0; 'Camo Nets' spawn OT_fnc_place";
 
             text = "Camo Nets"; //--- ToDo: Localize;
-            x = "0.7475 * safezoneW + safezoneX";
-            y = "0.797 * safezoneH + safezoneY";
-            w = "0.0928125 * safezoneW";
-            h = "0.088 * safezoneH";
+            x = "0.7475 * safeZoneW + safeZoneX";
+            y = "0.797 * safeZoneH + safeZoneY";
+            w = "0.0928125 * safeZoneW";
+            h = "0.088 * safeZoneH";
             tooltip = "Hide from the helicopters"; //--- ToDo: Localize;
         };
         class RscButton_1602: RscOverthrowButton {
@@ -156,10 +156,10 @@ class OT_dialog_place {
             action = "closeDialog 0; 'Barriers' spawn OT_fnc_place";
 
             text = "Barriers"; //--- ToDo: Localize;
-            x = "0.649531 * safezoneW + safezoneX";
-            y = "0.797 * safezoneH + safezoneY";
-            w = "0.0928125 * safezoneW";
-            h = "0.088 * safezoneH";
+            x = "0.649531 * safeZoneW + safeZoneX";
+            y = "0.797 * safeZoneH + safeZoneY";
+            w = "0.0928125 * safeZoneW";
+            h = "0.088 * safeZoneH";
             tooltip = "Medium defense"; //--- ToDo: Localize;
         };
         class RscButton_1603: RscOverthrowButton {
@@ -167,10 +167,10 @@ class OT_dialog_place {
             action = "closeDialog 0; 'Camp' spawn OT_fnc_place";
 
             text = "Camp"; //--- ToDo: Localize;
-            x = "0.0617187 * safezoneW + safezoneX";
-            y = "0.797 * safezoneH + safezoneY";
-            w = "0.0928125 * safezoneW";
-            h = "0.088 * safezoneH";
+            x = "0.0617187 * safeZoneW + safeZoneX";
+            y = "0.797 * safeZoneH + safeZoneY";
+            w = "0.0928125 * safeZoneW";
+            h = "0.088 * safeZoneH";
             tooltip = "Creates a fast travel destination"; //--- ToDo: Localize;
         };
         class RscButton_1604: RscOverthrowButton {
@@ -178,10 +178,10 @@ class OT_dialog_place {
             action = "closeDialog 0; 'Ammobox' spawn OT_fnc_place";
 
             text = "Ammobox"; //--- ToDo: Localize;
-            x = "0.355625 * safezoneW + safezoneX";
-            y = "0.797 * safezoneH + safezoneY";
-            w = "0.0928125 * safezoneW";
-            h = "0.088 * safezoneH";
+            x = "0.355625 * safeZoneW + safeZoneX";
+            y = "0.797 * safeZoneH + safeZoneY";
+            w = "0.0928125 * safeZoneW";
+            h = "0.088 * safeZoneH";
             tooltip = "An empty ammobox"; //--- ToDo: Localize;
         };
         class RscButton_1605: RscOverthrowButton {
@@ -189,10 +189,10 @@ class OT_dialog_place {
             action = "closeDialog 0; 'Misc' spawn OT_fnc_place";
 
             text = "Misc"; //--- ToDo: Localize;
-            x = "0.845469 * safezoneW + safezoneX";
-            y = "0.797 * safezoneH + safezoneY";
-            w = "0.0928125 * safezoneW";
-            h = "0.088 * safezoneH";
+            x = "0.845469 * safeZoneW + safeZoneX";
+            y = "0.797 * safeZoneH + safeZoneY";
+            w = "0.0928125 * safeZoneW";
+            h = "0.088 * safeZoneH";
             tooltip = "Miscellaneous (but useful) items"; //--- ToDo: Localize;
         };
         class RscButton_1606: RscOverthrowButton {
@@ -200,10 +200,10 @@ class OT_dialog_place {
             action = "closeDialog 0; 'Base' spawn OT_fnc_place";
 
             text = "FOB"; //--- ToDo: Localize;
-            x = "0.159687 * safezoneW + safezoneX";
-            y = "0.797 * safezoneH + safezoneY";
-            w = "0.0928125 * safezoneW";
-            h = "0.088 * safezoneH";
+            x = "0.159687 * safeZoneW + safeZoneX";
+            y = "0.797 * safeZoneH + safeZoneY";
+            w = "0.0928125 * safeZoneW";
+            h = "0.088 * safeZoneH";
             tooltip = "Creates a fast travel destination, allows building of light military structures"; //--- ToDo: Localize;
         };
         class RscButton_1607: RscOverthrowButton {
@@ -211,10 +211,10 @@ class OT_dialog_place {
             action = "closeDialog 0; 'Map' spawn OT_fnc_place";
 
             text = "Map"; //--- ToDo: Localize;
-            x = "0.257656 * safezoneW + safezoneX";
-            y = "0.797 * safezoneH + safezoneY";
-            w = "0.0928125 * safezoneW";
-            h = "0.088 * safezoneH";
+            x = "0.257656 * safeZoneW + safeZoneX";
+            y = "0.797 * safeZoneH + safeZoneY";
+            w = "0.0928125 * safeZoneW";
+            h = "0.088 * safeZoneH";
             tooltip = "A map"; //--- ToDo: Localize;
         };
         class RscButton_1608: RscOverthrowButton {
@@ -222,10 +222,10 @@ class OT_dialog_place {
             action = "closeDialog 0; 'Safe' spawn OT_fnc_place";
 
             text = "Safe"; //--- ToDo: Localize;
-            x = "0.453594 * safezoneW + safezoneX";
-            y = "0.797 * safezoneH + safezoneY";
-            w = "0.0928125 * safezoneW";
-            h = "0.088 * safezoneH";
+            x = "0.453594 * safeZoneW + safeZoneX";
+            y = "0.797 * safeZoneH + safeZoneY";
+            w = "0.0928125 * safeZoneW";
+            h = "0.088 * safeZoneH";
             tooltip = "Store and retrieve money"; //--- ToDo: Localize;
         };
         ////////////////////////////////////////////////////////

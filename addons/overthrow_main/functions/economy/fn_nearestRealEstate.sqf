@@ -4,7 +4,7 @@ private _buildings = _this nearObjects ["Building", 30];
 private _gotbuilding = false;
 private _building = objNull;
 
-private _sorted = [_buildings, [_this], { _x distance _input0 }, "ASCEND"] call BIS_fnc_SortBy;
+private _sorted = [_buildings, [_this], { _x distance _input0 }, "ASCEND"] call BIS_fnc_sortBy;
 
 if (!isNil "modeTarget") then {
     _sorted = _sorted - [modeTarget];

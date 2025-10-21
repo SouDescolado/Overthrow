@@ -44,7 +44,7 @@ private _itemname = _itemcls call OT_fnc_weaponGetName;
             _destination = _posTown findEmptyPosition [5, 100, OT_civType_local];
         };
     };
-} forEach ([OT_allTowns, [], { random 100 }, "ASCEND"] call BIS_fnc_SortBy);
+} forEach ([OT_allTowns, [], { random 100 }, "ASCEND"] call BIS_fnc_sortBy);
 
 _reward = floor ((_startpos distance2D _destination) * 0.005 * _numitems);
 

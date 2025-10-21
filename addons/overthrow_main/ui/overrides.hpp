@@ -34,7 +34,7 @@ class OTRscDynamicText: RscStructuredText {
     h = 10000;
     colorText[] = {1, 1, 1, 1};
     colorBackground[] = {0, 0, 0, 0};
-    size = "(0.05 / 1.17647) * safezoneH";
+    size = "(0.05 / 1.17647) * safeZoneH";
     sizeEx = 0.4;
     class Attributes {
         color = "#ffffff";

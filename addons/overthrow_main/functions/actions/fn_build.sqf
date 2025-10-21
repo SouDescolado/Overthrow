@@ -1,7 +1,7 @@
 if !(captive player) exitWith { "You cannot build while wanted" call OT_fnc_notifyMinor };
 _base = player call OT_fnc_nearestBase;
 _closest = "";
-_isbase = false;
+_isBase = false;
 _isobj = false;
 _center = getPos player;
 modeMax = 350;
@@ -10,7 +10,7 @@ if !(isNil "_base") then {
     if ((_base select 0) distance player < 120) then {
         _closest = _base select 1;
         _center = _base select 0;
-        _isbase = true;
+        _isBase = true;
         modeMax = 100;
     };
 };
@@ -38,7 +38,7 @@ if (!_isBase) then {
     };
 };
 
-if ((!_isbase) && !(_closest in (server getVariable ["NATOabandoned", []]))) exitWith {
+if ((!_isBase) && !(_closest in (server getVariable ["NATOabandoned", []]))) exitWith {
     if (_isobj) then {
         format ["NATO does not allow construction this close to %1.", _closest] call OT_fnc_notifyMinor;
     } else {
@@ -53,27 +53,27 @@ _playerpos = (getPos player);
 
 _campos = [(_playerpos select 0) + 35, (_playerpos select 1) + 35, (_playerpos select 2) + 70];
 _start = [_playerpos select 0, _playerpos select 1, 2];
-buildcam = "camera" camCreate _start;
+buildCam = "camera" camCreate _start;
 
 buildFocus = createVehicle ["Sign_Sphere10cm_F", _start getPos [1000, getDir player], [], 0, "NONE"];
 buildFocus setObjectTexture [0, "\overthrow_main\ui\clear.paa"];
 
-buildcam camSetTarget buildFocus;
-buildcam cameraEffect ["internal", "BACK"];
-buildcam camCommit 0;
+buildCam camSetTarget buildFocus;
+buildCam cameraEffect ["internal", "BACK"];
+buildCam camCommit 0;
 
 showCinemaBorder false;
-waitUntil { camCommitted buildcam };
+waitUntil { camCommitted buildCam };
 
 if (currentVisionMode player > 0) then {
     camUseNVG true;
 };
 
 buildFocus setPos _playerpos;
-buildcam camSetTarget buildFocus;
-buildcam camSetPos _campos;
-buildcam camCommit 2;
-waitUntil { camCommitted buildcam };
+buildCam camSetTarget buildFocus;
+buildCam camSetPos _campos;
+buildCam camCommit 2;
+waitUntil { camCommitted buildCam };
 
 modeFinished = false;
 modeCancelled = false;
@@ -234,17 +234,17 @@ buildOnKeyDown = {
         if (_key isEqualTo 16) exitWith {
             //Q
             _handled = true;
-            _newdir = _dir - _amt;
-            if (_newdir < 0) then { _newdir = 359 };
-            modeTarget setDir (_newdir);
+            _newDir = _dir - _amt;
+            if (_newDir < 0) then { _newDir = 359 };
+            modeTarget setDir (_newDir);
             buildRotation = _newDir;
         };
         if (_key isEqualTo 18) exitWith {
             //E
             _handled = true;
-            _newdir = _dir + _amt;
-            if (_newdir > 359) then { _newdir = 0 };
-            modeTarget setDir (_newdir);
+            _newDir = _dir + _amt;
+            if (_newDir > 359) then { _newDir = 0 };
+            modeTarget setDir (_newDir);
             buildRotation = _newDir;
         };
     };
@@ -327,15 +327,15 @@ buildOnMouseUp = {
 
 buildOnMouseWheel = {
     _z = _this select 1;
-    _pos = position buildcam;
+    _pos = position buildCam;
     private _distMul = 0.25 + (buildCam distance buildFocus) / 100;
 
     if (_z < 0) then {
-        buildcam camSetPos [(_pos select 0), (_pos select 1), (_pos select 2) + 10 * _distMul];
+        buildCam camSetPos [(_pos select 0), (_pos select 1), (_pos select 2) + 10 * _distMul];
     } else {
-        buildcam camSetPos [(_pos select 0), (_pos select 1), (_pos select 2) - 10 * _distMul];
+        buildCam camSetPos [(_pos select 0), (_pos select 1), (_pos select 2) - 10 * _distMul];
     };
-    buildcam camSetTarget buildFocus;
+    buildCam camSetTarget buildFocus;
     buildCam camCommit 0.1;
 };
 
@@ -421,8 +421,8 @@ if (!isNull modeTarget) then {
 deleteVehicle buildFocus;
 
 closeDialog 0;
-buildcam cameraEffect ["Terminate", "BACK"];
-buildcam = nil;
+buildCam cameraEffect ["Terminate", "BACK"];
+buildCam = nil;
 
 modeTarget = nil;
 modeCancelled = nil;

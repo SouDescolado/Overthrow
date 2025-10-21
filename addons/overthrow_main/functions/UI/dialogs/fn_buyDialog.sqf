@@ -1,6 +1,6 @@
 params ["_town", "_standing", "_s", ["_multiplier", 1]];
 
-private _sorted = [_s, [], { _x select 0 }, "ASCEND"] call BIS_fnc_SortBy;
+private _sorted = [_s, [], { _x select 0 }, "ASCEND"] call BIS_fnc_sortBy;
 
 lbClear 1500;
 {

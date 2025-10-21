@@ -118,7 +118,7 @@ if (_currentObjectType == OT_item_Storage) then {
 if (_currentObjectType == OT_item_Safe) then {
     _this addAction ["Put Money", OT_fnc_safePutMoney, nil, 0, false, true, "", ""];
     _this addAction ["Take Money", OT_fnc_safeTakeMoney, nil, 0, false, true, "", ""];
-    _this addAction ["Set Password", OT_fnc_safeSetPassword, nil, 0, false, true, "", "(_target getVariable ['owner', '']) isEqualTo getplayeruid _this"];
+    _this addAction ["Set Password", OT_fnc_safeSetPassword, nil, 0, false, true, "", "(_target getVariable ['owner', '']) isEqualTo getPlayerUID _this"];
     _this enableDynamicSimulation true;
 };
 

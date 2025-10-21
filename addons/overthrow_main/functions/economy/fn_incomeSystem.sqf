@@ -39,13 +39,13 @@ income_system_lasthour = date select 3;
             };
 
             {
-                private _owned = _x getvariable ['leasedata', []];
+                private _owned = _x getVariable ['leasedata', []];
                 _lease = 0;
                 {
                     _x params ['_id', '_cls', '_pos', '_town'];
                     private _data = [_cls, _town] call OT_fnc_getRealEstateData;
                     _lease = _lease + (_data select 2);
-                } foreach (_owned);
+                } forEach (_owned);
                 if (_lease > 0) then {
                     _tt = 0;
                     if (_tax > 0) then {
@@ -54,7 +54,7 @@ income_system_lasthour = date select 3;
                     _totax = _totax + _tt;
                     [_lease - _tt, 'Lease Income'] remoteExec ['OT_fnc_money', _x, false];
                 };
-            } foreach (allPlayers - (entities 'HeadlessClient_F'));
+            } forEach (allPlayers - (entities 'HeadlessClient_F'));
 
             [_totax] call OT_fnc_resistanceFunds;
             _total = _total - _totax;
@@ -72,7 +72,7 @@ income_system_lasthour = date select 3;
                     {
                         _money = _x getVariable ['money', 0];
                         _x setVariable ['money', _money + _perPlayer, true];
-                    } foreach (allPlayers - (entities 'HeadlessClient_F'));
+                    } forEach (allPlayers - (entities 'HeadlessClient_F'));
                     format ['Tax income: $%1 (+%2 Influence)', [_perPlayer, 1, 0, true] call CBA_fnc_formatNumber, _inf] remoteExec ['OT_fnc_notifyMinor', 0, false];
                 } else {
                     _inf remoteExec ['OT_fnc_influence', 0, false];

@@ -1,4 +1,4 @@
-params ["_mortar", "_mortargroup"];
+params ["_mortar", "_mortarGroup"];
 
 // Lambs is enabled - register the arty
 if (isClass (configFile >> "CfgPatches" >> "lambs_wp")) then {
@@ -7,7 +7,7 @@ if (isClass (configFile >> "CfgPatches" >> "lambs_wp")) then {
 
 while {
     sleep (5 + (random 5));
-    ("8Rnd_82mm_Mo_shells" in getArtilleryAmmo [_mortar]) && (alive _mortar) && ((units _mortargroup) findIf { alive _x } != -1);
+    ("8Rnd_82mm_Mo_shells" in getArtilleryAmmo [_mortar]) && (alive _mortar) && ((units _mortarGroup) findIf { alive _x } != -1);
 } do {
     private _attacking = server getVariable ["NATOattacking", ""];
     private _mortarpos = position _mortar;
@@ -19,13 +19,13 @@ while {
         _timesince = time - (server getVariable ["NATOattackstart", time]);
         if (_timesince < 300) then {
             if (_distance < 4000 && _distance > 500) then {
-                _mortargroup setCombatMode "RED";
+                _mortarGroup setCombatMode "RED";
                 _p = _pos getPos [150, random 360];
                 _mortar commandArtilleryFire [_p, "8Rnd_82mm_Mo_shells", 1];
                 sleep (3 + (random 3));
                 _mortar commandArtilleryFire [_p, "8Rnd_82mm_Mo_shells", 1];
                 sleep 3;
-                _mortargroup setCombatMode "BLUE";
+                _mortarGroup setCombatMode "BLUE";
                 //Did anyone hear that?
                 if ((_mortarpos nearEntities ["CAManBase", 3000]) findIf { side _x isEqualTo resistance || captive _x } != -1) then {
                     private _icons = spawner getVariable ["NATOmortars", []];
@@ -45,7 +45,7 @@ while {
             };
         };
     } else {
-        private _targets = [spawner getVariable ["NATOknownTargets", []], [], { _x select 2 }, "DESCEND"] call BIS_fnc_SortBy;
+        private _targets = [spawner getVariable ["NATOknownTargets", []], [], { _x select 2 }, "DESCEND"] call BIS_fnc_sortBy;
         {
             _x params ["_ty", "_pos", "_pri", "_obj", "_done"];
             _distance = (_pos distance2D _mortar);
@@ -64,7 +64,7 @@ while {
                 && !_done
             ) exitWith {
                 _x set [4, true];
-                _mortargroup setCombatMode "RED";
+                _mortarGroup setCombatMode "RED";
 
                 // The first shot must miss the target!!! Otherwise players just... die
                 _mortar commandArtilleryFire [_pos getPos [30, random 360], "8Rnd_82mm_Mo_shells", 1];
@@ -73,7 +73,7 @@ while {
                 sleep (3 + (random 3));
                 _mortar commandArtilleryFire [_pos, "8Rnd_82mm_Mo_shells", 1];
                 sleep 3;
-                _mortargroup setCombatMode "BLUE";
+                _mortarGroup setCombatMode "BLUE";
                 //Did anyone hear that?
                 if ((_mortarpos nearEntities ["CAManBase", 3000]) findIf { side _x isEqualTo resistance || captive _x } != -1) then {
                     private _icons = spawner getVariable ["NATOmortars", []];
@@ -92,6 +92,6 @@ while {
                 };
             };
         } forEach (_targets);
-        spawner setVariable ["NATOknowntargets", _targets, true];
+        spawner setVariable ["NATOknownTargets", _targets, true];
     };
 };

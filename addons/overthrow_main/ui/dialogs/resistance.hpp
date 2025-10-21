@@ -5,10 +5,10 @@ class OT_dialog_resistance {
     class controlsBackground {
         class RscStructuredText_1100: RscOverthrowStructuredText {
             idc = 1100;
-            x = "0.237031 * safezoneW + safezoneX";
-            y = "0.17 * safezoneH + safezoneY";
-            w = "0.525937 * safezoneW";
-            h = "0.7 * safezoneH";
+            x = "0.237031 * safeZoneW + safeZoneX";
+            y = "0.17 * safeZoneH + safeZoneY";
+            w = "0.525937 * safeZoneW";
+            h = "0.7 * safeZoneH";
             colorBackground[] = {0.1, 0.1, 0.1, 1};
             colorActive[] = {0.1, 0.1, 0.1, 1};
         };
@@ -22,129 +22,129 @@ class OT_dialog_resistance {
         class RscStructuredText_1101: RscOverthrowStructuredText {
             idc = 1101;
             text = "<t align='center' size='2'>Resistance</t>"; //--- ToDo: Localize;
-            x = "0.242187 * safezoneW + safezoneX";
-            y = "0.181 * safezoneH + safezoneY";
-            w = "0.515625 * safezoneW";
-            h = "0.044 * safezoneH";
+            x = "0.242187 * safeZoneW + safeZoneX";
+            y = "0.181 * safeZoneH + safeZoneY";
+            w = "0.515625 * safeZoneW";
+            h = "0.044 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0};
             colorActive[] = {0, 0, 0, 0};
         };
         class RscListbox_1500: RscOverthrowListBox {
             idc = 1500;
-            x = "0.298906 * safezoneW + safezoneX";
-            y = "0.236 * safezoneH + safezoneY";
-            w = "0.242344 * safezoneW";
-            h = "0.165 * safezoneH";
+            x = "0.298906 * safeZoneW + safeZoneX";
+            y = "0.236 * safeZoneH + safeZoneY";
+            w = "0.242344 * safeZoneW";
+            h = "0.165 * safeZoneH";
             onLBSelChanged = "_this call OT_fnc_showMemberInfo";
         };
         class RscStructuredText_1102: RscOverthrowStructuredText {
             idc = 1102;
-            x = "0.546406 * safezoneW + safezoneX";
-            y = "0.236 * safezoneH + safezoneY";
-            w = "0.154687 * safezoneW";
-            h = "0.11 * safezoneH";
+            x = "0.546406 * safeZoneW + safeZoneX";
+            y = "0.236 * safeZoneH + safeZoneY";
+            w = "0.154687 * safeZoneW";
+            h = "0.11 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0.2};
             colorActive[] = {0, 0, 0, 0};
         };
         class RscButton_1600: RscOverthrowButton {
             idc = 1600;
             text = "Make General"; //--- ToDo: Localize;
-            x = "0.628906 * safezoneW + safezoneX";
-            y = "0.357 * safezoneH + safezoneY";
-            w = "0.0721875 * safezoneW";
-            h = "0.044 * safezoneH";
+            x = "0.628906 * safeZoneW + safeZoneX";
+            y = "0.357 * safeZoneH + safeZoneY";
+            w = "0.0721875 * safeZoneW";
+            h = "0.044 * safeZoneH";
             action = "[] call OT_fnc_makeGeneral;";
         };
         class RscButton_1601: RscOverthrowButton {
             idc = 1601;
             text = "Transfer funds"; //--- ToDo: Localize;
-            x = "0.546406 * safezoneW + safezoneX";
-            y = "0.357 * safezoneH + safezoneY";
-            w = "0.0721875 * safezoneW";
-            h = "0.044 * safezoneH";
+            x = "0.546406 * safeZoneW + safeZoneX";
+            y = "0.357 * safeZoneH + safeZoneY";
+            w = "0.0721875 * safeZoneW";
+            h = "0.044 * safeZoneH";
             action = "[] call OT_fnc_transferFunds;";
         };
         class RscStructuredText_1103: RscOverthrowStructuredText {
             idc = 1103;
             text = "<t align='center' size='1.2'>Businesses</t>"; //--- ToDo: Localize;
-            x = "0.242187 * safezoneW + safezoneX";
-            y = "0.412 * safezoneH + safezoneY";
-            w = "0.515625 * safezoneW";
-            h = "0.033 * safezoneH";
+            x = "0.242187 * safeZoneW + safeZoneX";
+            y = "0.412 * safeZoneH + safeZoneY";
+            w = "0.515625 * safeZoneW";
+            h = "0.033 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0};
             colorActive[] = {0, 0, 0, 0};
         };
         class RscListbox_1501: RscOverthrowListBox {
             idc = 1501;
-            x = "0.298906 * safezoneW + safezoneX";
-            y = "0.445 * safezoneH + safezoneY";
-            w = "0.242344 * safezoneW";
-            h = "0.165 * safezoneH";
+            x = "0.298906 * safeZoneW + safeZoneX";
+            y = "0.445 * safeZoneH + safeZoneY";
+            w = "0.242344 * safeZoneW";
+            h = "0.165 * safeZoneH";
             onLBSelChanged = "_this call OT_fnc_showBusinessInfo";
         };
         class RscStructuredText_1104: RscOverthrowStructuredText {
             idc = 1104;
-            x = "0.546406 * safezoneW + safezoneX";
-            y = "0.445 * safezoneH + safezoneY";
-            w = "0.154687 * safezoneW";
-            h = "0.11 * safezoneH";
+            x = "0.546406 * safeZoneW + safeZoneX";
+            y = "0.445 * safeZoneH + safeZoneY";
+            w = "0.154687 * safeZoneW";
+            h = "0.11 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0.2};
             colorActive[] = {0, 0, 0, 0};
         };
         class RscButton_1602: RscOverthrowButton {
             idc = 1602;
             text = "Fire"; //--- ToDo: Localize;
-            x = "0.546406 * safezoneW + safezoneX";
-            y = "0.566 * safezoneH + safezoneY";
-            w = "0.0721875 * safezoneW";
-            h = "0.044 * safezoneH";
+            x = "0.546406 * safeZoneW + safeZoneX";
+            y = "0.566 * safeZoneH + safeZoneY";
+            w = "0.0721875 * safeZoneW";
+            h = "0.044 * safeZoneH";
             action = "[] call OT_fnc_fireEmployee;";
         };
         class RscButton_1603: RscOverthrowButton {
             idc = 1603;
             text = "Hire"; //--- ToDo: Localize;
-            x = "0.628906 * safezoneW + safezoneX";
-            y = "0.566 * safezoneH + safezoneY";
-            w = "0.0721875 * safezoneW";
-            h = "0.044 * safezoneH";
+            x = "0.628906 * safeZoneW + safeZoneX";
+            y = "0.566 * safeZoneH + safeZoneY";
+            w = "0.0721875 * safeZoneW";
+            h = "0.044 * safeZoneH";
             action = "[] call OT_fnc_hireEmployee;";
         };
         class RscStructuredText_1106: RscOverthrowStructuredText {
             idc = 1106;
 
-            x = "0.298906 * safezoneW + safezoneX";
-            y = "0.698 * safezoneH + safezoneY";
-            w = "0.402187 * safezoneW";
-            h = "0.151 * safezoneH";
+            x = "0.298906 * safeZoneW + safeZoneX";
+            y = "0.698 * safeZoneH + safeZoneY";
+            w = "0.402187 * safeZoneW";
+            h = "0.151 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0.2};
             colorActive[] = {0, 0, 0, 0};
         };
         class RscButton_1604: RscOverthrowButton {
             idc = 1604;
             text = "Give funds"; //--- ToDo: Localize;
-            x = "0.402031 * safezoneW + safezoneX";
-            y = "0.643 * safezoneH + safezoneY";
-            w = "0.0979687 * safezoneW";
-            h = "0.044 * safezoneH";
+            x = "0.402031 * safeZoneW + safeZoneX";
+            y = "0.643 * safeZoneH + safeZoneY";
+            w = "0.0979687 * safeZoneW";
+            h = "0.044 * safeZoneH";
             action = "[] call OT_fnc_giveFunds;";
         };
         class RscButton_1605: RscOverthrowButton {
             idc = 1605;
             text = "Take funds"; //--- ToDo: Localize;
-            x = "0.510313 * safezoneW + safezoneX";
-            y = "0.643 * safezoneH + safezoneY";
-            w = "0.0979687 * safezoneW";
-            h = "0.044 * safezoneH";
+            x = "0.510313 * safeZoneW + safeZoneX";
+            y = "0.643 * safeZoneH + safeZoneY";
+            w = "0.0979687 * safeZoneW";
+            h = "0.044 * safeZoneH";
             action = "[] call OT_fnc_takeFunds;";
         };
         class RscButton_1699: RscOverthrowButton {
             idc = 1699;
             text = "X"; //--- ToDo: Localize;
             action = "closeDialog 0";
-            x = "0.732031 * safezoneW + safezoneX";
-            y = "0.181 * safezoneH + safezoneY";
-            w = "0.0257812 * safezoneW";
-            h = "0.044 * safezoneH";
+            x = "0.732031 * safeZoneW + safeZoneX";
+            y = "0.181 * safeZoneH + safeZoneY";
+            w = "0.0257812 * safeZoneW";
+            h = "0.044 * safeZoneH";
         };
         ////////////////////////////////////////////////////////
         // GUI EDITOR OUTPUT END
@@ -161,10 +161,10 @@ class OT_dialog_garrison {
             idc = 1199;
 
             text = ""; //--- ToDo: Localize;
-            x = "0.288594 * safezoneW + safezoneX";
-            y = "0.214 * safezoneH + safezoneY";
-            w = "0.422812 * safezoneW";
-            h = "0.572 * safezoneH";
+            x = "0.288594 * safeZoneW + safeZoneX";
+            y = "0.214 * safeZoneH + safeZoneY";
+            w = "0.422812 * safeZoneW";
+            h = "0.572 * safeZoneH";
             colorBackground[] = {0.1, 0.1, 0.1, 1};
             colorActive[] = {0.1, 0.1, 0.1, 1};
         };
@@ -177,90 +177,90 @@ class OT_dialog_garrison {
         class RscStructuredText_1100: RscOverthrowStructuredText {
             idc = 1100;
             text = "<t size='1.5' align='center'>Base</t>"; //--- ToDo: Localize;
-            x = "0.298906 * safezoneW + safezoneX";
-            y = "0.236 * safezoneH + safezoneY";
-            w = "0.402187 * safezoneW";
-            h = "0.033 * safezoneH";
+            x = "0.298906 * safeZoneW + safeZoneX";
+            y = "0.236 * safeZoneH + safeZoneY";
+            w = "0.402187 * safeZoneW";
+            h = "0.033 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0};
         };
         class RscButton_1600: RscOverthrowButton {
             idc = 1600;
             text = "+1 Rifleman"; //--- ToDo: Localize;
-            x = "0.37625 * safezoneW + safezoneX";
-            y = "0.291 * safezoneH + safezoneY";
-            w = "0.0567187 * safezoneW";
-            h = "0.077 * safezoneH";
+            x = "0.37625 * safeZoneW + safeZoneX";
+            y = "0.291 * safeZoneH + safeZoneY";
+            w = "0.0567187 * safeZoneW";
+            h = "0.077 * safeZoneH";
             action = "[getPos player, 0] spawn OT_fnc_addGarrison";
         };
         class RscButton_1601: RscOverthrowButton {
             idc = 1601;
             text = "+1 Autorifleman"; //--- ToDo: Localize;
-            x = "0.438125 * safezoneW + safezoneX";
-            y = "0.291 * safezoneH + safezoneY";
-            w = "0.0567187 * safezoneW";
-            h = "0.077 * safezoneH";
+            x = "0.438125 * safeZoneW + safeZoneX";
+            y = "0.291 * safeZoneH + safeZoneY";
+            w = "0.0567187 * safeZoneW";
+            h = "0.077 * safeZoneH";
             action = "[getPos player, 1] spawn OT_fnc_addGarrison";
         };
         class RscButton_1602: RscOverthrowButton {
             idc = 1602;
             text = "+1 Grenadier"; //--- ToDo: Localize;
-            x = "0.5 * safezoneW + safezoneX";
-            y = "0.291 * safezoneH + safezoneY";
-            w = "0.0567187 * safezoneW";
-            h = "0.077 * safezoneH";
+            x = "0.5 * safeZoneW + safeZoneX";
+            y = "0.291 * safeZoneH + safeZoneY";
+            w = "0.0567187 * safeZoneW";
+            h = "0.077 * safeZoneH";
             action = "[getPos player, 12] spawn OT_fnc_addGarrison";
         };
         class RscButton_1603: RscOverthrowButton {
             idc = 1603;
             text = "+1 Medic"; //--- ToDo: Localize;
-            x = "0.561875 * safezoneW + safezoneX";
-            y = "0.291 * safezoneH + safezoneY";
-            w = "0.0567187 * safezoneW";
-            h = "0.077 * safezoneH";
+            x = "0.561875 * safeZoneW + safeZoneX";
+            y = "0.291 * safeZoneH + safeZoneY";
+            w = "0.0567187 * safeZoneW";
+            h = "0.077 * safeZoneH";
             action = "[getPos player, 7] spawn OT_fnc_addGarrison";
         };
         class RscButton_1604: RscOverthrowButton {
             idc = 1604;
             text = "+1 Anti-Tank"; //--- ToDo: Localize;
-            x = "0.37625 * safezoneW + safezoneX";
-            y = "0.379 * safezoneH + safezoneY";
-            w = "0.0567187 * safezoneW";
-            h = "0.077 * safezoneH";
+            x = "0.37625 * safeZoneW + safeZoneX";
+            y = "0.379 * safeZoneH + safeZoneY";
+            w = "0.0567187 * safeZoneW";
+            h = "0.077 * safeZoneH";
             action = "[getPos player, 8] spawn OT_fnc_addGarrison";
         };
         class RscButton_1605: RscOverthrowButton {
             idc = 1605;
             text = "+1 Anti-Air"; //--- ToDo: Localize;
-            x = "0.438125 * safezoneW + safezoneX";
-            y = "0.379 * safezoneH + safezoneY";
-            w = "0.0567187 * safezoneW";
-            h = "0.077 * safezoneH";
+            x = "0.438125 * safeZoneW + safeZoneX";
+            y = "0.379 * safeZoneH + safeZoneY";
+            w = "0.0567187 * safeZoneW";
+            h = "0.077 * safeZoneH";
             action = "[getPos player, 9] spawn OT_fnc_addGarrison";
         };
         class RscButton_1606: RscOverthrowButton {
             idc = 1606;
             text = "+1 HMG"; //--- ToDo: Localize;
-            x = "0.5 * safezoneW + safezoneX";
-            y = "0.379 * safezoneH + safezoneY";
-            w = "0.0567187 * safezoneW";
-            h = "0.077 * safezoneH";
+            x = "0.5 * safeZoneW + safeZoneX";
+            y = "0.379 * safeZoneH + safeZoneY";
+            w = "0.0567187 * safeZoneW";
+            h = "0.077 * safeZoneH";
             action = "[getPos player, 'HMG'] spawn OT_fnc_addGarrison";
         };
         class RscButton_1607: RscOverthrowButton {
             idc = 1607;
             text = "+1 GMG"; //--- ToDo: Localize;
-            x = "0.561875 * safezoneW + safezoneX";
-            y = "0.379 * safezoneH + safezoneY";
-            w = "0.0567187 * safezoneW";
-            h = "0.077 * safezoneH";
+            x = "0.561875 * safeZoneW + safeZoneX";
+            y = "0.379 * safeZoneH + safeZoneY";
+            w = "0.0567187 * safeZoneW";
+            h = "0.077 * safeZoneH";
             action = "[getPos player, 'GMG'] spawn OT_fnc_addGarrison";
         };
         class RscStructuredText_1101: RscOverthrowStructuredText {
             idc = 1101;
-            x = "0.314375 * safezoneW + safezoneX";
-            y = "0.489 * safezoneH + safezoneY";
-            w = "0.37125 * safezoneW";
-            h = "0.264 * safezoneH";
+            x = "0.314375 * safeZoneW + safeZoneX";
+            y = "0.489 * safeZoneH + safeZoneY";
+            w = "0.37125 * safeZoneW";
+            h = "0.264 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0.3};
         };
         ////////////////////////////////////////////////////////
@@ -276,10 +276,10 @@ class OT_dialog_jobs {
     class controlsBackground {
         class RscStructuredText_1199: RscOverthrowStructuredText {
             idc = 1199;
-            x = "0.242187 * safezoneW + safezoneX";
-            y = "0.214 * safezoneH + safezoneY";
-            w = "0.654844 * safezoneW";
-            h = "0.572 * safezoneH";
+            x = "0.242187 * safeZoneW + safeZoneX";
+            y = "0.214 * safeZoneH + safeZoneY";
+            w = "0.654844 * safeZoneW";
+            h = "0.572 * safeZoneH";
             colorBackground[] = {0.1, 0.1, 0.1, 1};
             colorActive[] = {0.1, 0.1, 0.1, 1};
         };
@@ -292,58 +292,58 @@ class OT_dialog_jobs {
 
         class RscListbox_1500: RscOverthrowListBox {
             idc = 1500;
-            x = "0.247344 * safezoneW + safezoneX";
-            y = "0.225 * safezoneH + safezoneY";
-            w = "0.402187 * safezoneW";
-            h = "0.55 * safezoneH";
+            x = "0.247344 * safeZoneW + safeZoneX";
+            y = "0.225 * safeZoneH + safeZoneY";
+            w = "0.402187 * safeZoneW";
+            h = "0.55 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0.9};
             onLBSelChanged = "_this call OT_fnc_displayJobDetails";
         };
         class RscPicture_1200: RscOverthrowPicture {
             idc = 1200;
             text = "";
-            x = "0.654688 * safezoneW + safezoneX";
-            y = "0.225 * safezoneH + safezoneY";
-            w = "0.237187 * safezoneW";
-            h = "0.165 * safezoneH";
+            x = "0.654688 * safeZoneW + safeZoneX";
+            y = "0.225 * safeZoneH + safeZoneY";
+            w = "0.237187 * safeZoneW";
+            h = "0.165 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0};
         };
         class RscButton_1600: RscOverthrowButton {
             idc = 1600;
             text = "Set Waypoint"; //--- ToDo: Localize;
-            x = "0.840312 * safezoneW + safezoneX";
-            y = "0.676 * safezoneH + safezoneY";
-            w = "0.0515625 * safezoneW";
-            h = "0.099 * safezoneH";
+            x = "0.840312 * safeZoneW + safeZoneX";
+            y = "0.676 * safeZoneH + safeZoneY";
+            w = "0.0515625 * safeZoneW";
+            h = "0.099 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0.8};
             action = "[] call OT_fnc_setJobWaypoint;";
         };
         class RscButton_1601: RscOverthrowButton {
             idc = 1601;
             text = "Clear Waypoint"; //--- ToDo: Localize;
-            x = "0.778437 * safezoneW + safezoneX";
-            y = "0.676 * safezoneH + safezoneY";
-            w = "0.0567187 * safezoneW";
-            h = "0.099 * safezoneH";
+            x = "0.778437 * safeZoneW + safeZoneX";
+            y = "0.676 * safeZoneH + safeZoneY";
+            w = "0.0567187 * safeZoneW";
+            h = "0.099 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0.8};
             action = "[] call OT_fnc_clearPlayerWaypoint;";
         };
         class RscStructuredText_1100: RscOverthrowStructuredText {
             idc = 1100;
-            x = "0.654688 * safezoneW + safezoneX";
-            y = "0.4 * safezoneH + safezoneY";
-            w = "0.237187 * safezoneW";
-            h = "0.265 * safezoneH";
+            x = "0.654688 * safeZoneW + safeZoneX";
+            y = "0.4 * safeZoneH + safeZoneY";
+            w = "0.237187 * safeZoneW";
+            h = "0.265 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0.3};
         };
         class RscButton_1699: RscOverthrowButton {
             idc = 1699;
             text = "X"; //--- ToDo: Localize;
             action = "closeDialog 0";
-            x = "0.732031 * safezoneW + safezoneX";
-            y = "0.181 * safezoneH + safezoneY";
-            w = "0.0257812 * safezoneW";
-            h = "0.044 * safezoneH";
+            x = "0.732031 * safeZoneW + safeZoneX";
+            y = "0.181 * safeZoneH + safeZoneY";
+            w = "0.0257812 * safeZoneW";
+            h = "0.044 * safeZoneH";
         };
         ////////////////////////////////////////////////////////
         // GUI EDITOR OUTPUT END
@@ -361,10 +361,10 @@ class OT_dialog_logistics {
     class controlsBackground {
         class RscStructuredText_1199: RscOverthrowStructuredText {
             idc = 1199;
-            x = "0.242187 * safezoneW + safezoneX";
-            y = "0.214 * safezoneH + safezoneY";
-            w = "0.654844 * safezoneW";
-            h = "0.572 * safezoneH";
+            x = "0.242187 * safeZoneW + safeZoneX";
+            y = "0.214 * safeZoneH + safeZoneY";
+            w = "0.654844 * safeZoneW";
+            h = "0.572 * safeZoneH";
             colorBackground[] = {0.1, 0.1, 0.1, 1};
             colorActive[] = {0.1, 0.1, 0.1, 1};
         };
@@ -377,58 +377,58 @@ class OT_dialog_logistics {
 
         class RscListbox_1500: RscOverthrowListBox {
             idc = 1500;
-            x = "0.247344 * safezoneW + safezoneX";
-            y = "0.225 * safezoneH + safezoneY";
-            w = "0.402187 * safezoneW";
-            h = "0.55 * safezoneH";
+            x = "0.247344 * safeZoneW + safeZoneX";
+            y = "0.225 * safeZoneH + safeZoneY";
+            w = "0.402187 * safeZoneW";
+            h = "0.55 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0.9};
             onLBSelChanged = "_this call OT_fnc_displayLogisticDetails";
         };
         class RscPicture_1200: RscOverthrowPicture {
             idc = 1200;
             text = "";
-            x = "0.654688 * safezoneW + safezoneX";
-            y = "0.225 * safezoneH + safezoneY";
-            w = "0.237187 * safezoneW";
-            h = "0.165 * safezoneH";
+            x = "0.654688 * safeZoneW + safeZoneX";
+            y = "0.225 * safeZoneH + safeZoneY";
+            w = "0.237187 * safeZoneW";
+            h = "0.165 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0};
         };
         class RscButton_1600: RscOverthrowButton {
             idc = 1600;
             text = "Set Waypoint"; //--- ToDo: Localize;
-            x = "0.840312 * safezoneW + safezoneX";
-            y = "0.676 * safezoneH + safezoneY";
-            w = "0.0515625 * safezoneW";
-            h = "0.099 * safezoneH";
+            x = "0.840312 * safeZoneW + safeZoneX";
+            y = "0.676 * safeZoneH + safeZoneY";
+            w = "0.0515625 * safeZoneW";
+            h = "0.099 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0.8};
             action = "[] call OT_fnc_setVehicleWaypoint;";
         };
         class RscButton_1601: RscOverthrowButton {
             idc = 1601;
             text = "Clear Waypoint"; //--- ToDo: Localize;
-            x = "0.778437 * safezoneW + safezoneX";
-            y = "0.676 * safezoneH + safezoneY";
-            w = "0.0567187 * safezoneW";
-            h = "0.099 * safezoneH";
+            x = "0.778437 * safeZoneW + safeZoneX";
+            y = "0.676 * safeZoneH + safeZoneY";
+            w = "0.0567187 * safeZoneW";
+            h = "0.099 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0.8};
             action = "[] call OT_fnc_clearPlayerWaypoint;";
         };
         class RscStructuredText_1100: RscOverthrowStructuredText {
             idc = 1100;
-            x = "0.654688 * safezoneW + safezoneX";
-            y = "0.4 * safezoneH + safezoneY";
-            w = "0.237187 * safezoneW";
-            h = "0.265 * safezoneH";
+            x = "0.654688 * safeZoneW + safeZoneX";
+            y = "0.4 * safeZoneH + safeZoneY";
+            w = "0.237187 * safeZoneW";
+            h = "0.265 * safeZoneH";
             colorBackground[] = {0, 0, 0, 0.3};
         };
         class RscButton_1699: RscOverthrowButton {
             idc = 1699;
             text = "X"; //--- ToDo: Localize;
             action = "closeDialog 0";
-            x = "0.732031 * safezoneW + safezoneX";
-            y = "0.181 * safezoneH + safezoneY";
-            w = "0.0257812 * safezoneW";
-            h = "0.044 * safezoneH";
+            x = "0.732031 * safeZoneW + safeZoneX";
+            y = "0.181 * safeZoneH + safeZoneY";
+            w = "0.0257812 * safeZoneW";
+            h = "0.044 * safeZoneH";
         };
         ////////////////////////////////////////////////////////
         // GUI EDITOR OUTPUT END
@@ -446,10 +446,10 @@ class OT_dialog_joboffer {
     class controlsBackground {
         class RscStructuredText_1199: RscOverthrowStructuredText {
             idc = 1199;
-            x = "0.329844 * safezoneW + safezoneX";
-            y = "0.28 * safezoneH + safezoneY";
-            w = "0.345469 * safezoneW";
-            h = "0.319 * safezoneH";
+            x = "0.329844 * safeZoneW + safeZoneX";
+            y = "0.28 * safeZoneH + safeZoneY";
+            w = "0.345469 * safeZoneW";
+            h = "0.319 * safeZoneH";
             colorBackground[] = {0.1, 0.1, 0.1, 1};
             colorActive[] = {0.1, 0.1, 0.1, 1};
         };
@@ -462,30 +462,30 @@ class OT_dialog_joboffer {
         class RscButton_1600: RscOverthrowGreenButton {
             idc = 1600;
             text = "Accept"; //--- ToDo: Localize;
-            x = "0.592812 * safezoneW + safezoneX";
-            y = "0.522 * safezoneH + safezoneY";
-            w = "0.0773437 * safezoneW";
-            h = "0.066 * safezoneH";
+            x = "0.592812 * safeZoneW + safeZoneX";
+            y = "0.522 * safeZoneH + safeZoneY";
+            w = "0.0773437 * safeZoneW";
+            h = "0.066 * safeZoneH";
             action = "[] call OT_fnc_acceptJob;";
             tooltip = "Accept this job (will appear in Jobs screen for all players)";
         };
         class RscButton_1601: RscOverthrowButton {
             idc = 1601;
             text = "Deny"; //--- ToDo: Localize;
-            x = "0.510312 * safezoneW + safezoneX";
-            y = "0.522 * safezoneH + safezoneY";
-            w = "0.0773437 * safezoneW";
-            h = "0.066 * safezoneH";
+            x = "0.510312 * safeZoneW + safeZoneX";
+            y = "0.522 * safeZoneH + safeZoneY";
+            w = "0.0773437 * safeZoneW";
+            h = "0.066 * safeZoneH";
             action = "[] call OT_fnc_denyJob;";
             tooltip = "Deny this job (will be offered another job if available)";
         };
         class RscButton_1602: RscOverthrowButton {
             idc = 1602;
             text = "Cancel"; //--- ToDo: Localize;
-            x = "0.335 * safezoneW + safezoneX";
-            y = "0.522 * safezoneH + safezoneY";
-            w = "0.0773437 * safezoneW";
-            h = "0.066 * safezoneH";
+            x = "0.335 * safeZoneW + safeZoneX";
+            y = "0.522 * safeZoneH + safeZoneY";
+            w = "0.0773437 * safeZoneW";
+            h = "0.066 * safeZoneH";
             action = "closeDialog 0";
         };
         ////////////////////////////////////////////////////////

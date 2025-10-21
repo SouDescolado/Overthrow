@@ -42,4 +42,4 @@ lbClear 1500;
 
         lbSetColor [1500, _idx, _color];
     };
-} forEach ([vehicles, [], { _x distance player }, "ASCEND"] call BIS_fnc_SortBy);
+} forEach ([vehicles, [], { _x distance player }, "ASCEND"] call BIS_fnc_sortBy);

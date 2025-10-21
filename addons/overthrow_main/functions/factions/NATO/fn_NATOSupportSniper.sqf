@@ -68,7 +68,7 @@ if (_isHQ) then {
     _wp = _tgroup addWaypoint [_ao, 0];
     _wp setWaypointType "MOVE";
     _wp setWaypointBehaviour "COMBAT";
-    _wp setWaypointStatements ["true", "(vehicle this) AnimateDoor ['Door_rear_source', 1, false]"];
+    _wp setWaypointStatements ["true", "(vehicle this) animateDoor ['Door_rear_source', 1, false]"];
     _wp setWaypointCompletionRadius 50;
     _wp setWaypointSpeed "FULL";
 
@@ -79,7 +79,7 @@ if (_isHQ) then {
 
     _wp = _tgroup addWaypoint [_ao, 0];
     _wp setWaypointType "SCRIPTED";
-    _wp setWaypointStatements ["true", "(vehicle this) AnimateDoor ['Door_rear_source', 0, false]"];
+    _wp setWaypointStatements ["true", "(vehicle this) animateDoor ['Door_rear_source', 0, false]"];
     _wp setWaypointTimeout [15, 15, 15];
 
     _moveto = OT_NATO_HQPos getPos [200, _dir];

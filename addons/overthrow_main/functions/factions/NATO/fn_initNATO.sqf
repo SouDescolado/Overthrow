@@ -8,16 +8,16 @@ OT_NATO_GroundForces = [];
     private _config = _x;
     {
         private _name = toLower (configName _x);
-        private _numtroops = count ("true" configClasses _x);
+        private _numTroops = count ("true" configClasses _x);
 
         // Recon troops are checked here as well, in case specops config doesn't exist
         // no uav or ugv groups
         // also try to get the largest possible recon group
         if ("recon" in _name && { !("uav" in _name) && !("ugv" in _name) && _numTroops > (OT_NATO_Group_Recon # 1) }) then {
-            OT_NATO_Group_Recon = [_x, _numtroops];
+            OT_NATO_Group_Recon = [_x, _numTroops];
             continue; // We don't want recon guys ending up as regular infantry
         };
-        if (_numtroops > 5) then {
+        if (_numTroops > 5) then {
             OT_NATO_GroundForces pushBack _x;
         };
     } forEach ("true" configClasses _config);

@@ -319,7 +319,7 @@ class CustomAttributes {
         };
         class Attribute4 {
             property = "SharedObjectives";
-            expression = "if (isMultiplayer) then { [_value] spawn bis_fnc_sharedObjectives }";
+            expression = "if (isMultiplayer) then { [_value] spawn BIS_fnc_sharedObjectives }";
             class Value {
                 class data {
                     singleType = "SCALAR";

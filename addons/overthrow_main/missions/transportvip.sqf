@@ -24,7 +24,7 @@ private _abandoned = server getVariable ["NATOabandoned", []];
             _pickup = _posTown findEmptyPosition [5, 100, OT_civType_local];
         };
     };
-} forEach ([OT_allTowns, [], { random 100 }, "ASCEND"] call BIS_fnc_SortBy);
+} forEach ([OT_allTowns, [], { random 100 }, "ASCEND"] call BIS_fnc_sortBy);
 
 //Find a destination town
 {
@@ -38,7 +38,7 @@ private _abandoned = server getVariable ["NATOabandoned", []];
             _destination = _posTown findEmptyPosition [5, 100, OT_civType_local];
         };
     };
-} forEach ([OT_allTowns, [], { random 100 }, "ASCEND"] call BIS_fnc_SortBy);
+} forEach ([OT_allTowns, [], { random 100 }, "ASCEND"] call BIS_fnc_sortBy);
 
 //Give our VIP an identity
 private _identity = call OT_fnc_randomLocalIdentity;

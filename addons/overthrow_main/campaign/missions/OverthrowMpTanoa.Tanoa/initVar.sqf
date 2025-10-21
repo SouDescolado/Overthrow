@@ -97,8 +97,8 @@ OT_NATO_Vehicles_AirGarrison = [
 ];
 
 OT_NATO_Vehicles_StaticAAGarrison = [
-    "B_T_static_AA_F",
-    "B_T_static_AA_F"
+    "B_T_Static_AA_F",
+    "B_T_Static_AA_F"
 ]; //Added to every airfield
 
 OT_NATO_Vehicles_JetGarrison = [

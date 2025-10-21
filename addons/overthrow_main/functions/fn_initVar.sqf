@@ -490,7 +490,7 @@ _filteredWeaponConfigs = nil;
 
 private _allAmmo = "
     (getNumber (_x >> 'scope') isEqualTo 2);
-" configClasses (configFile >> "cfgMagazines");
+" configClasses (configFile >> "CfgMagazines");
 
 private _allVehicles = "
     (getNumber (_x >> 'scope') > 0);
@@ -498,7 +498,7 @@ private _allVehicles = "
 
 private _allFactions = "
     (getNumber (_x >> 'side') < 3);
-" configClasses (configFile >> "cfgFactionClasses");
+" configClasses (configFile >> "CfgFactionClasses");
 
 private _allGlasses = "
     (getNumber (_x >> 'scope') isEqualTo 2);
@@ -543,7 +543,7 @@ OT_allBLURifleMagazines = [];
 
 {
     private _name = configName _x;
-    private _title = getText (_x >> "displayname");
+    private _title = getText (_x >> "displayName");
     private _m = getNumber (_x >> "mass");
     private _ignore = getNumber (_x >> "ot_shopignore");
     if (_ignore != 1) then {

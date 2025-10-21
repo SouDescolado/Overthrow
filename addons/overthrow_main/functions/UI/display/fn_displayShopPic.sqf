@@ -12,7 +12,7 @@ if (_price > -1) then {
 
     // Special cases
     if (_cls == "Set_HMG") exitWith {
-        _pic = getText (configFile >> "cfgVehicles" >> "C_Quadbike_01_F" >> "editorPreview");
+        _pic = getText (configFile >> "CfgVehicles" >> "C_Quadbike_01_F" >> "editorPreview");
         _txt = "Quad Bike w/ HMG Backpacks";
         _desc = "A Quad-bike containing the backpacks required to set up a Static HMG";
     };

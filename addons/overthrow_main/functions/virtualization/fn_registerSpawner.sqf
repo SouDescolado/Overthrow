@@ -24,6 +24,6 @@ if (OT_deepDebug) then {
     diag_log format ["Overthrow: Registered %1 @ %2 %3", _id, _start, _params];
 };
 
-OT_allspawners pushBack [_id, _start, _end, _code, _params, 0];
+OT_allSpawners pushBack [_id, _start, _end, _code, _params, 0];
 
 OT_spawnUniqueCounter;

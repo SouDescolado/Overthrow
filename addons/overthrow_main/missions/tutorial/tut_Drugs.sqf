@@ -17,7 +17,7 @@ private _thistown = (getPosATL player) call OT_fnc_nearestTown;
 
 //No? well where is the closest town?
 if (count _targets isEqualTo 0) exitWith {
-    private _towns = [OT_townData, [], { (_x select 0) distance player }, "ASCEND"] call BIS_fnc_SortBy;
+    private _towns = [OT_townData, [], { (_x select 0) distance player }, "ASCEND"] call BIS_fnc_sortBy;
     private _town = _towns select 1;
     private _destination = _town select 0;
     _town = _town select 1;
@@ -51,7 +51,7 @@ if (count _targets isEqualTo 0) exitWith {
 "There is a civilian nearby, their position has been marked on your map." call OT_fnc_notifyMinor;
 //pick the closest group and reveal
 
-private _sorted = [_targets, [], { _x distance player }, "ASCEND"] call BIS_fnc_SortBy;
+private _sorted = [_targets, [], { _x distance player }, "ASCEND"] call BIS_fnc_sortBy;
 private _group = group (_sorted select 0);
 player reveal [leader _group, 4];
 

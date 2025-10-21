@@ -41,10 +41,10 @@ _veh animate ["hideSeatsRear", 1];
     }
 ] remoteExec ["addEventHandler", 0, true];
 
-_Dname = getText (configFile >> "cfgVehicles" >> (typeOf _wpn) >> "displayName");
+_Dname = getText (configFile >> "CfgVehicles" >> (typeOf _wpn) >> "displayName");
 [_veh, format ["Get in %1 as Gunner", _Dname], "<img size='2' image='\a3\ui_f\data\IGUI\Cfg\Actions\getingunner_ca.paa'/>"] remoteExec ["OT_UpdateGetInState", 0, true];
 _ls = [(_this select 0), "", "", "", "speed _target <= 1 && speed _target >= -1 && _target distance _this < 5 && isNull objectParent _this && (!((_target getVariable 'OT_Attached') isEqualType false) || !((_target getVariable 'OT_Local') isEqualType false))", "true", {}, {}, {}, {}, [], 13, nil, false, false] call BIS_fnc_holdActionAdd;
-_vls = (_this select 0) addAction ["", { [(_this select 0), (_this select 1)] spawn OT_fnc_mountAttached }, [], 5.5, true, true, "", "typeNAME (_target getVariable 'OT_Attached') != 'BOOL' && _target distance _this < 5"];
+_vls = (_this select 0) addAction ["", { [(_this select 0), (_this select 1)] spawn OT_fnc_mountAttached }, [], 5.5, true, true, "", "typeName (_target getVariable 'OT_Attached') != 'BOOL' && _target distance _this < 5"];
 (_this select 0) setVariable ["OT_Act", _ls, false];
 (_this select 0) setVariable ["OT_Act_GetIn", _vls, false];
 (_this select 0) setVariable ["OT_Attached", false, true];

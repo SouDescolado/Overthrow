@@ -240,7 +240,7 @@ if (count _terminal > 0) then {
         _pos = OT_NATO_HQ_garrisonPos;
         _dir = OT_NATO_HQ_garrisonDir;
     } else {
-        _pos = [_posTown, 10, 100, 10, 0, 0.3, 0] call BIS_Fnc_findSafePos;
+        _pos = [_posTown, 10, 100, 10, 0, 0.3, 0] call BIS_fnc_findSafePos;
         _dir = random 360;
     };
 };

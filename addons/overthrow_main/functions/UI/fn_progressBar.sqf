@@ -5,7 +5,7 @@ private _del = _this select 1;
 if !(_del) then {
     with uiNamespace do {
         ctrlDelete (uiNamespace getVariable "pBar");
-        ctrlDelete (uiNamespace getVariable "pBartext");
+        ctrlDelete (uiNamespace getVariable "pBarText");
         pBar = findDisplay 46 ctrlCreate ["RscProgress", -1];
         pBar ctrlSetPosition [0.345, -0.15];
         pBar progressSetPosition 0;
@@ -36,6 +36,6 @@ if !(_del) then {
 } else {
     with uiNamespace do {
         ctrlDelete (uiNamespace getVariable "pBar");
-        ctrlDelete (uiNamespace getVariable "pBartext");
+        ctrlDelete (uiNamespace getVariable "pBarText");
     };
 };

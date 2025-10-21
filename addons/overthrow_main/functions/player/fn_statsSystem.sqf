@@ -1,6 +1,6 @@
 disableSerialization;
 
-private _layer = ["stats"] call bis_fnc_rscLayer;
+private _layer = ["stats"] call BIS_fnc_rscLayer;
 _layer cutRsc ["OT_statsHUD", "PLAIN", 0, false];
 
 [

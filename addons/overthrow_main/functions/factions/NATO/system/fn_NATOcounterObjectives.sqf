@@ -13,7 +13,7 @@
 */
 
 if (isNil "OT_townsSortedByPopulation") then {
-    OT_townsSortedByPopulation = [OT_allTowns, [], { server getVariable format ["population%1", _x] }, "DESCEND"] call BIS_fnc_SortBy;
+    OT_townsSortedByPopulation = [OT_allTowns, [], { server getVariable format ["population%1", _x] }, "DESCEND"] call BIS_fnc_sortBy;
 };
 
 private _countered = false;
@@ -34,7 +34,7 @@ private _lastCounter = server getVariable ["NATOlastcounter", ""];
     if (_pri > 800) then { _chance = _chance - 1 };
     if (_popControl > 1000) then { _chance = _chance - 1 };
     if (_popControl > 2000) then { _chance = _chance - 1 };
-    if ((time - _lastAttack) > 1200 && { (_name != _lastcounter) } && { (_name in _abandoned) } && { (_resources > _pri) } && { (random 100) > _chance }) exitWith {
+    if ((time - _lastAttack) > 1200 && { (_name != _lastCounter) } && { (_name in _abandoned) } && { (_resources > _pri) } && { (random 100) > _chance }) exitWith {
         //Counter an objective
         private _multiplier = _diff + 1;
         if (_popControl > 1000) then { _multiplier = 2 };

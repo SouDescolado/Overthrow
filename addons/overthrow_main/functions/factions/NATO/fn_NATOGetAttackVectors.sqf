@@ -14,7 +14,7 @@ private _ground = [];
             _air pushBack _x;
         };
     };
-} forEach ([OT_objectiveData + OT_airportData, [], { _pos distance (_x select 0) }, "ASCEND"] call BIS_fnc_SortBy);
+} forEach ([OT_objectiveData + OT_airportData, [], { _pos distance (_x select 0) }, "ASCEND"] call BIS_fnc_sortBy);
 
 //add helipads to possibles
 {
@@ -25,6 +25,6 @@ private _ground = [];
 } forEach (OT_NATOHelipads);
 
 //sort airfields + helipads by distance
-_air = [_air, [], { _pos distance (_x select 0) }, "ASCEND"] call BIS_fnc_SortBy;
+_air = [_air, [], { _pos distance (_x select 0) }, "ASCEND"] call BIS_fnc_sortBy;
 
 [_ground, _air];

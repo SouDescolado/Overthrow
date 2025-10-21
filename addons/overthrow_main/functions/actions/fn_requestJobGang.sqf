@@ -24,7 +24,7 @@ private _expiry = 0;
         };
     };
     if (_gotjob) exitWith {};
-} forEach ([OT_allJobs, [], { random 100 }, "ASCEND", { _x select 7 }] call BIS_fnc_SortBy);
+} forEach ([OT_allJobs, [], { random 100 }, "ASCEND", { _x select 7 }] call BIS_fnc_sortBy);
 
 if !(_gotjob) exitWith {
     [OT_interactingWith, player, ["We don't have any more jobs at the moment."]] spawn OT_fnc_doConversation;

@@ -56,13 +56,13 @@ private _charges = [];
 } forEach _targets;
 
 // Run away! (not into water preferably)
-private _runto = [0, 0, 0];
+private _runTo = [0, 0, 0];
 for "_i" from 0 to 30 do {
-    if (_i >= 30) exitWith { _runto = _targetPos getPos [(1000 + random 1000), random 360] };
+    if (_i >= 30) exitWith { _runTo = _targetPos getPos [(1000 + random 1000), random 360] };
     _testPos = _targetPos getPos [(1000 + random 1000), random 360];
     if !(surfaceIsWater _testPos) exitWith { _runTo = _testPos };
 };
-_wp = _group addWaypoint [_runto, 0];
+_wp = _group addWaypoint [_runTo, 0];
 _wp setWaypointType "MOVE";
 _wp setWaypointBehaviour "COMBAT";
 _wp setWaypointSpeed "FULL";

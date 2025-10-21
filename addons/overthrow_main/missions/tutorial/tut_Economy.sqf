@@ -18,7 +18,7 @@ private _actualMission = {
 
     //No? well where is the closest town?
     if (count _targets isEqualTo 0) exitWith {
-        private _towns = [OT_townData, [], { (_x select 0) distance player }, "ASCEND"] call BIS_fnc_SortBy;
+        private _towns = [OT_townData, [], { (_x select 0) distance player }, "ASCEND"] call BIS_fnc_sortBy;
         private _town = _towns select 1;
         private _destination = _town select 0;
         _town = _town select 1;
@@ -53,7 +53,7 @@ private _actualMission = {
 
     "There is a wreck nearby. Use the toolkit to salvage it" call OT_fnc_notifyMinor;
 
-    private _sorted = [_targets, [], { _x distance player }, "ASCEND"] call BIS_fnc_SortBy;
+    private _sorted = [_targets, [], { _x distance player }, "ASCEND"] call BIS_fnc_sortBy;
     private _veh = _sorted select 0;
     player reveal [_veh, 4];
 

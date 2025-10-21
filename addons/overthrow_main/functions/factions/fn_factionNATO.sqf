@@ -3,7 +3,7 @@ if (!isServer) exitWith {};
 private _abandoned = [];
 private _resources = 0;
 
-private _nextturn = 30; //wait 30 seconds from game start until spending resources
+private _nextTurn = 30; //wait 30 seconds from game start until spending resources
 
 server setVariable ["NATOattacking", "", true];
 server setVariable ["NATOattackstart", 0, true];
@@ -12,7 +12,7 @@ server setVariable ["QRFpos", nil, true];
 server setVariable ["QRFprogress", nil, true];
 server setVariable ["QRFstart", nil, true];
 
-OT_nextNATOTurn = time + _nextturn;
+OT_nextNATOTurn = time + _nextTurn;
 publicVariable "OT_nextNATOTurn";
 
 [
@@ -93,7 +93,7 @@ publicVariable "OT_nextNATOTurn";
                 _lastAttack = time - (server getVariable ["NATOlastattack", 0]);
                 _resourceGain = server getVariable ["NATOresourceGain", 0];
                 //NATO turn
-                _nextturn = OT_NATOwait + random OT_NATOwait;
+                _nextTurn = OT_NATOwait + random OT_NATOwait;
                 OT_nextNATOTurn = time + _nextTurn;
                 publicVariable "OT_nextNATOTurn";
 

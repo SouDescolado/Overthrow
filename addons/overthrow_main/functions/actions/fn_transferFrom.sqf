@@ -10,7 +10,7 @@ private _objects = [];
 if (_objects isEqualTo []) exitWith {
     "Cannot find any containers or other vehicles within 20m of this vehicle" call OT_fnc_notifyMinor;
 };
-private _sorted = [_objects, [], { _x distance player }, "ASCEND"] call BIS_fnc_SortBy;
+private _sorted = [_objects, [], { _x distance player }, "ASCEND"] call BIS_fnc_sortBy;
 private _target = _sorted select 0;
 
 if (_veh call OT_fnc_unitSeen) then {

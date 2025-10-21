@@ -87,7 +87,7 @@ diag_log format ["Overthrow: %1 towns virtualized", count OT_allTowns];
                     };
                 } else {
                     if ([_start] call OT_fnc_inSpawnDistance) then {
-                        OT_allSpawned pushback _id;
+                        OT_allSpawned pushBack _id;
                         _x spawn OT_fnc_spawn;
                     };
                 };
@@ -101,11 +101,11 @@ diag_log format ["Overthrow: %1 towns virtualized", count OT_allTowns];
                     };
                 } else {
                     if (([_start] call OT_fnc_inSpawnDistance) || { ([_end] call OT_fnc_inSpawnDistance) }) then {
-                        OT_allSpawned pushback _id;
+                        OT_allSpawned pushBack _id;
                         _x spawn OT_fnc_spawn;
                     };
                 };
             };
-        } foreach (OT_allspawners);
+        } forEach (OT_allSpawners);
     "
 ] call OT_fnc_addActionLoop;

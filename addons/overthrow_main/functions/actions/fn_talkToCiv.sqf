@@ -405,7 +405,7 @@ if (_canTute) then {
                     };
                 };
                 if (_found) exitWith {};
-            } forEach ([OT_townData, [], { (_x select 0) distance2D player }, "ASCEND", { ((_x select 0) distance2D player) < 3000 }] call BIS_fnc_SortBy);
+            } forEach ([OT_townData, [], { (_x select 0) distance2D player }, "ASCEND", { ((_x select 0) distance2D player) < 3000 }] call BIS_fnc_sortBy);
 
             private _code = {};
 

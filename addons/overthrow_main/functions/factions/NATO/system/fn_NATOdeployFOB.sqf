@@ -54,7 +54,7 @@ if (_lowest isNotEqualTo "") then {
         _spend = _spend - 500;
         _resources = _resources - 500;
         spawner setVariable ["NATOdeploying", true, false];
-        [_gotpos] spawn OT_fnc_NATOMissionDeployFOB;
+        [_gotPos] spawn OT_fnc_NATOMissionDeployFOB;
         _fobEstablished = true;
     };
 };

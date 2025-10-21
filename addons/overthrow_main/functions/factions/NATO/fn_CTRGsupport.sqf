@@ -14,22 +14,22 @@ _dir = _pos getDir _posTown;
 _attackpos = _posTown getPos [random 150, random 360];
 
 //Determine direction to attack from (preferrably away from water)
-_attackdir = random 360;
+_attackDir = random 360;
 if (surfaceIsWater (_posTown getPos [150, _attackDir])) then {
-    _attackdir = _attackdir + 180;
-    if (_attackdir > 359) then { _attackdir = _attackdir - 359 };
+    _attackDir = _attackDir + 180;
+    if (_attackDir > 359) then { _attackDir = _attackDir - 359 };
     if (surfaceIsWater (_posTown getPos [150, _attackDir])) then {
-        _attackdir = _attackdir + 90;
-        if (_attackdir > 359) then { _attackdir = _attackdir - 359 };
+        _attackDir = _attackDir + 90;
+        if (_attackDir > 359) then { _attackDir = _attackDir - 359 };
         if (surfaceIsWater (_posTown getPos [150, _attackDir])) then {
-            _attackdir = _attackdir + 180;
-            if (_attackdir > 359) then { _attackdir = _attackdir - 359 };
+            _attackDir = _attackDir + 180;
+            if (_attackDir > 359) then { _attackDir = _attackDir - 359 };
         };
     };
 };
-_attackdir = _attackdir - 45;
+_attackDir = _attackDir - 45;
 
-_ao = _posTown getPos [(350 + random 150), (_attackdir + random 90)];
+_ao = _posTown getPos [(350 + random 150), (_attackDir + random 90)];
 _group = createGroup blufor;
 
 {
@@ -77,7 +77,7 @@ _wp setWaypointStatements ["true", "(vehicle this) flyInHeight 100"];
 _wp = _tgroup addWaypoint [_ao, 0];
 _wp setWaypointType "MOVE";
 _wp setWaypointBehaviour "COMBAT";
-_wp setWaypointStatements ["true", "(vehicle this) AnimateDoor ['Door_rear_source', 1, false]"];
+_wp setWaypointStatements ["true", "(vehicle this) animateDoor ['Door_rear_source', 1, false]"];
 _wp setWaypointCompletionRadius 50;
 _wp setWaypointSpeed "FULL";
 
@@ -88,7 +88,7 @@ _wp setWaypointTimeout [10, 10, 10];
 
 _wp = _tgroup addWaypoint [_ao, 0];
 _wp setWaypointType "SCRIPTED";
-_wp setWaypointStatements ["true", "(vehicle this) AnimateDoor ['Door_rear_source', 0, false]"];
+_wp setWaypointStatements ["true", "(vehicle this) animateDoor ['Door_rear_source', 0, false]"];
 _wp setWaypointTimeout [15, 15, 15];
 
 _moveto = OT_NATO_HQPos getPos [200, _dir];

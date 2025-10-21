@@ -123,7 +123,7 @@ class CfgVehicles {
         class ACE_Actions {
             class ACE_MainActions {
                 class OT_InteractionActions {
-                    condition = "(alive _target) && (!isplayer _target) && !(side _target isEqualTo west)";
+                    condition = "(alive _target) && (!isPlayer _target) && !(side _target isEqualTo west)";
                     selection = "pelvis";
                     distance = 4;
                     displayName = "Talk";
@@ -136,7 +136,7 @@ class CfgVehicles {
                 class OT_StartSpliff {
                     displayName = "Smoke a spliff";
                     condition = "('OT_Ganja' in (items player)) && { !(_player getVariable ['ot_isSmoking', false]) }";
-                    statement = "[_player] spawn ot_fnc_startSpliff";
+                    statement = "[_player] spawn OT_fnc_startSpliff";
                     showDisabled = 0;
                     exceptions[] = {"isNotInside", "isNotSitting"};
                     icon = "\overthrow_main\ui\icons\light_cig.paa";
@@ -144,7 +144,7 @@ class CfgVehicles {
                 class OT_StopSpliff {
                     displayName = "Ditch your spliff!";
                     condition = "(goggles _player) in OT_cigsArray && { _player getVariable ['ot_isSmoking', false] }";
-                    statement = "[_player] spawn ot_fnc_stopSpliff";
+                    statement = "[_player] spawn OT_fnc_stopSpliff";
                     showDisabled = 0;
                     exceptions[] = {"isNotInside", "isNotSitting"};
                     icon = "\overthrow_main\ui\icons\light_cig.paa";

@@ -21,7 +21,7 @@ if (_b isEqualType []) then {
 if (_objects isEqualTo []) exitWith {
     "Cannot find any containers or other vehicles within 20m of this vehicle" call OT_fnc_notifyMinor;
 };
-_sorted = [_objects, [], { _x distance player }, "ASCEND"] call BIS_fnc_SortBy;
+_sorted = [_objects, [], { _x distance player }, "ASCEND"] call BIS_fnc_sortBy;
 _target = _sorted select 0;
 
 _doTransfer = {

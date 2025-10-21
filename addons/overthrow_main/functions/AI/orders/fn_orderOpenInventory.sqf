@@ -15,7 +15,7 @@ if (!isNull objectParent _unit) then {
     if (count _objects isEqualTo 0) exitWith {
         _unit action ["Gear", objNull];
     };
-    _sorted = [_objects, [], { _x distance _unit }, "ASCEND"] call BIS_fnc_SortBy;
+    _sorted = [_objects, [], { _x distance _unit }, "ASCEND"] call BIS_fnc_sortBy;
 };
 
 if ((count _sorted) isEqualTo 0) exitWith {

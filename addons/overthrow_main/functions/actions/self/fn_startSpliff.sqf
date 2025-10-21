@@ -15,7 +15,7 @@ player removeItem "OT_Ganja";
 // player addItem "murshun_cigs_cigpack";
 // player addItem "murshun_cigs_lighter";
 
-[_unit, "murshun_cigs_lighter_01"] call ot_fnc_playSound;
+[_unit, "murshun_cigs_lighter_01"] call OT_fnc_playSound;
 // _unit addItem "murshun_cigs_cig0";
 _unit addGoggles "murshun_cigs_cig0";
 if (!(local _unit)) exitWith {};
@@ -38,7 +38,7 @@ if (_unit getVariable ["ot_isSmoking", false]) exitWith {};
 _unit setVariable ["ot_isSmoking", true, true];
 _unit setVariable ["ot_lastSmoke", time, false];
 
-[_unit] spawn ot_fnc_smokeAnimation;
+[_unit] spawn OT_fnc_smokeAnimation;
 
 sleep (3.5 + random 2);
 [_unit] remoteExec ["ot_fnc_smokePuffs"];

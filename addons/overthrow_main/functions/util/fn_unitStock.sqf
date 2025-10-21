@@ -75,8 +75,8 @@ private _allCargo = {
     _myitems;
 };
 
-private _theseitems = _target call _allCargo;
-if !(isNil "_theseitems") then {
+private _theseItems = _target call _allCargo;
+if !(isNil "_theseItems") then {
     {
         private _cls = _x;
         if (_category isEqualTo "" || _cls in _categoryItems) then {
@@ -96,13 +96,13 @@ if !(isNil "_theseitems") then {
                 };
             };
 
-            _theseitems set [_forEachIndex, _cls];
+            _theseItems set [_forEachIndex, _cls];
         } else {
             _theseItems set [_forEachIndex, objNull];
         };
-    } forEach (_theseitems);
+    } forEach (_theseItems);
 
-    _theseitems = _theseitems - [objNull];
-    _items = _theseitems call BIS_fnc_consolidateArray;
+    _theseItems = _theseItems - [objNull];
+    _items = _theseItems call BIS_fnc_consolidateArray;
 };
 _items;

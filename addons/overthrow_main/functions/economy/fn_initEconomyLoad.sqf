@@ -109,7 +109,7 @@ if (_version < OT_economyVersion) then {
     _pos = _posTown getPos [40, -90];
     _mSize = 250;
 
-    if (_x in OT_Capitals) then {
+    if (_x in OT_capitals) then {
         _mSize = 400;
     };
 

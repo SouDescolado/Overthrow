@@ -71,7 +71,7 @@ while { _count < _numCiv } do {
     _groups pushBack _group;
 
     private _home = _town call OT_fnc_getRandomRoadPosition;
-    while { (_groupcount < _pergroup) && (_count < _numCiv) } do {
+    while { (_groupCount < _pergroup) && (_count < _numCiv) } do {
         _pos = _home getPos [10, random 360];
         _civ = _group createUnit [OT_civType_local, _pos, [], 0, "NONE"];
         _civ setBehaviour "SAFE";
@@ -81,7 +81,7 @@ while { _count < _numCiv } do {
         private _identity = call OT_fnc_randomLocalIdentity;
         [_civ, _identity] call OT_fnc_applyIdentity;
         _count = _count + 1;
-        _groupcount = _groupcount + 1;
+        _groupCount = _groupCount + 1;
         sleep 0.5;
     };
     _group call OT_fnc_initCivilianGroup;

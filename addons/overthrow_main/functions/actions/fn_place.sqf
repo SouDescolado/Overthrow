@@ -110,9 +110,9 @@ if (_cost > 0) then {
             //Q
             private _amt = 1;
             if (_shift) then { _amt = 45 };
-            private _newdir = _dir - _amt;
-            if (_newdir < 0) then { _newdir = _newdir + 360 };
-            modeTarget setDir (_newdir);
+            private _newDir = _dir - _amt;
+            if (_newDir < 0) then { _newDir = _newDir + 360 };
+            modeTarget setDir (_newDir);
             modeRotation = _newDir;
             true;
         };
@@ -120,9 +120,9 @@ if (_cost > 0) then {
             //E
             private _amt = 1;
             if (_shift) then { _amt = 45 };
-            private _newdir = _dir + _amt;
-            if (_newdir > 359) then { _newdir = _newdir - 360 };
-            modeTarget setDir (_newdir);
+            private _newDir = _dir + _amt;
+            if (_newDir > 359) then { _newDir = _newDir - 360 };
+            modeTarget setDir (_newDir);
             modeRotation = _newDir;
             true;
         };

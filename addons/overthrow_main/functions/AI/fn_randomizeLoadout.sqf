@@ -148,7 +148,7 @@ if (_hasLauncher) then {
             //add 2 other random ones
             private _c = 0;
             {
-                if (_foreachIndex > 0) then {
+                if (_forEachIndex > 0) then {
                     private _count = getNumber (_cfgMagazines >> _x >> "count");
                     ((_newloadout select 5) select 1) pushBack [_x, 1, _count];
                     _c = _c + 1;

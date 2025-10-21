@@ -11,7 +11,7 @@ private _possible = [];
 } forEach ((allVariables warehouse) select { ((toLowerANSI _x select [0, 5]) isEqualTo "item_") });
 
 if (count _possible > 0) then {
-    private _sorted = [_possible, [], { (cost getVariable [_x, [200]]) select 0 }, "DESCEND"] call BIS_fnc_SortBy;
+    private _sorted = [_possible, [], { (cost getVariable [_x, [200]]) select 0 }, "DESCEND"] call BIS_fnc_sortBy;
     _found = _sorted select 0;
 };
 
