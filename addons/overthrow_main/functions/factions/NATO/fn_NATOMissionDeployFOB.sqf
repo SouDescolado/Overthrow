@@ -54,7 +54,7 @@ if (_isAir) then {
     _tgroup = createGroup blufor;
 
     _spawnpos = _close findEmptyPosition [15, 100, OT_NATO_Vehicle_AirTransport_Small];
-    if (count _spawnpos == 0) then { _spawnpos = _close findEmptyPosition [8, 100, OT_NATO_Vehicle_AirTransport_Small] };
+    if (_spawnpos isEqualTo []) then { _spawnpos = _close findEmptyPosition [8, 100, OT_NATO_Vehicle_AirTransport_Small] };
     _veh = OT_NATO_Vehicle_AirTransport_Small createVehicle _spawnpos;
     _veh setDir _dir;
     _tgroup addVehicle _veh;
@@ -120,7 +120,7 @@ if (_isAir) then {
         _convoypos = (getPos _road);
     };
     _spawnpos = _convoypos findEmptyPosition [10, 100, OT_NATO_Vehicle_Transport_Light];
-    if (count _spawnpos == 0) then { _spawnpos = _convoypos findEmptyPosition [0, 100, OT_NATO_Vehicle_Transport_Light] };
+    if (_spawnpos isEqualTo []) then { _spawnpos = _convoypos findEmptyPosition [0, 100, OT_NATO_Vehicle_Transport_Light] };
     _veh = OT_NATO_Vehicle_Transport_Light createVehicle _spawnpos;
     _group addVehicle _veh;
 

@@ -91,7 +91,7 @@ private _title = format ["Operative transport for %1", _factionName];
         //Success Check
         params ["", "", "_destination", "", "_civ"];
         //near the destination and not in a vehicle
-        ((_civ distance _destination) < 50) && (vehicle _civ) == _civ;
+        ((_civ distance _destination) < 50) && isNull objectParent _civ;
     },
     {
         //Cleanup

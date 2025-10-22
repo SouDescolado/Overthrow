@@ -25,7 +25,7 @@ private _fobs = server getVariable ["NATOfobs", []];
         _clearedFOBs pushBack _x;
         "Cleared NATO FOB" remoteExec ["OT_fnc_notifyMinor", 0, false];
         private _flag = _pos nearObjects [OT_flag_NATO, 50];
-        if (count _flag > 0) then {
+        if (_flag isNotEqualTo []) then {
             deleteVehicle (_flag select 0);
         };
         deleteMarker format ["natofob%1", str _pos];

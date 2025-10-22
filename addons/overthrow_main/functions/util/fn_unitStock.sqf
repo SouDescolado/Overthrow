@@ -30,7 +30,7 @@ private _allCargo = {
         {
             {
                 if (_x isEqualType "") then {
-                    if (!(_x isEqualTo "") && !(_x isEqualTo (binocular _target))) then {
+                    if ((_x isNotEqualTo "") && (_x isNotEqualTo (binocular _target))) then {
                         if (_forEachIndex isEqualTo 0) then {
                             _myitems pushBack (_x call BIS_fnc_baseWeapon);
                         } else {
@@ -39,7 +39,7 @@ private _allCargo = {
                     };
                 };
                 if (_x isEqualType []) then {
-                    if (!(_x # 0 isEqualTo "") && !(_x # 0 isEqualTo (binocular _target))) then {
+                    if ((_x # 0 isNotEqualTo "") && (_x # 0 isNotEqualTo (binocular _target))) then {
                         _myitems pushBack (_x select 0);
                     };
                 };
@@ -50,7 +50,7 @@ private _allCargo = {
         {
             {
                 if (_x isEqualType "") then {
-                    if !(_x isEqualTo "") then {
+                    if (_x isNotEqualTo "") then {
                         if (_forEachIndex isEqualTo 0) then {
                             _myitems pushBack (_x call BIS_fnc_baseWeapon);
                         } else {
@@ -59,7 +59,7 @@ private _allCargo = {
                     };
                 };
                 if (_x isEqualType []) then {
-                    if !((_x select 0) isEqualTo "") then {
+                    if ((_x select 0) isNotEqualTo "") then {
                         _myitems pushBack (_x select 0);
                     };
                 };

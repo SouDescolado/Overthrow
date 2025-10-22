@@ -27,7 +27,7 @@ private _allitems = [];
     if (_x isEqualType "") then { _allitems pushBack _x } else { _allitems pushBack _x # 0 };
 } forEach (_handgun);
 private _clothes = "";
-if (count _uniform > 0) then {
+if (_uniform isNotEqualTo []) then {
     _uniform params ["_item", "_items"];
     _clothes = _item;
     {
@@ -39,7 +39,7 @@ if (count _uniform > 0) then {
         };
     } forEach (_items);
 };
-if (count _vest > 0) then {
+if (_vest isNotEqualTo []) then {
     _vest params ["_item", "_items"];
     _allitems pushBack _item;
     {
@@ -51,7 +51,7 @@ if (count _vest > 0) then {
         };
     } forEach (_items);
 };
-if (count _backpack > 0) then {
+if (_backpack isNotEqualTo []) then {
     _backpack params ["_item", "_items"];
     _allitems pushBack _item;
     {
@@ -72,7 +72,7 @@ private _itemqty = _allitems call BIS_fnc_consolidateArray;
 private _bought = [];
 {
     _x params ["_cls", "_num"];
-    if !(_cls isEqualTo "ItemMap") then {
+    if (_cls isNotEqualTo "ItemMap") then {
         _whqty = _cls call OT_fnc_qtyInWarehouse;
         if (_whqty < _num) then { _num = _num - _whqty } else { _num = 0 };
         if (_num > 0) then {

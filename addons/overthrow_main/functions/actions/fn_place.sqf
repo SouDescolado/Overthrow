@@ -192,8 +192,8 @@ if (_cost > 0) then {
         sleep 0.5;
         modeFinished
             || modeCancelled
-            || (count attachedObjects player == 0)
-            || (vehicle player != player)
+            || (attachedObjects player isEqualTo [])
+            || (!isNull objectParent player)
             || (!alive player)
             || (!isPlayer player);
     };
@@ -203,7 +203,7 @@ if (_cost > 0) then {
     { detach _x } forEach attachedObjects player;
 
     if (modeCancelled
-        || (vehicle player != player)
+        || (!isNull objectParent player)
         || (!alive player)
         || (!isPlayer player)
     ) then {
@@ -229,7 +229,7 @@ if (_cost > 0) then {
                 createMarkerLocal [_mrkid, getPos modeTarget];
                 _mrkid setMarkerPosLocal (getPos modeTarget);
                 private _camp = player getVariable ["camp", []];
-                if (count _camp > 0) then {
+                if (_camp isNotEqualTo []) then {
                     {
                         private _t = typeOf _x;
                         if ((_x call OT_fnc_getOwner) == getPlayerUID player) then {

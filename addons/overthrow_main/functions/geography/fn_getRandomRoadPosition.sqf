@@ -33,7 +33,7 @@ if (_pos isEqualTo []) then {
 };
 
 private _roads = _pos nearRoads 100;
-if (count _roads > 0) exitWith {
+if (_roads isNotEqualTo []) exitWith {
     getPosATL (_roads select 0);
 };
 _pos;

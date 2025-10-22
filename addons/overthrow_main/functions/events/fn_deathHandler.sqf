@@ -96,7 +96,7 @@ call {
 
             if (_gangid > -1) then {
                 _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
-                if (count _gang > 0) then {
+                if (_gang isNotEqualTo []) then {
                     _members = _gang select 0;
                     _members deleteAt (_members find _civid);
                     _gang set [0, _members];
@@ -122,7 +122,7 @@ call {
 
         if (_gangid > -1) then {
             _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
-            if (count _gang > 0) then {
+            if (_gang isNotEqualTo []) then {
                 private _name = _gang select 8;
                 OT_civilians setVariable [format ["gang%1", _gangid], nil, true];
                 _gangs = OT_civilians getVariable [format ["gangs%1", _hometown], []];

@@ -20,7 +20,7 @@ if !(isNil "_from") then {
     private _frompos = _from select 0;
 
     private _pos = _frompos findEmptyPosition [15, 100, _vehtype];
-    if (count _pos == 0) then { _pos = _frompos findEmptyPosition [8, 100, _vehtype] };
+    if (_pos isEqualTo []) then { _pos = _frompos findEmptyPosition [8, 100, _vehtype] };
 
     private _group = createGroup blufor;
     private _veh = _vehtype createVehicle _pos;
@@ -60,7 +60,7 @@ if !(isNil "_from") then {
         alive _veh && time > _timeout;
     };
 
-    while { (count (waypoints _group)) > 0 } do {
+    while { (waypoints _group) isNotEqualTo [] } do {
         deleteWaypoint ((waypoints _group) select 0);
     };
 
@@ -77,7 +77,7 @@ if !(isNil "_from") then {
     };
 
     if (alive _veh) then {
-        while { (count (waypoints _group)) > 0 } do {
+        while { (waypoints _group) isNotEqualTo [] } do {
             deleteWaypoint ((waypoints _group) select 0);
         };
         _veh land "LAND";

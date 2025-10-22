@@ -8,7 +8,7 @@ if (count _this > 3) then {
     _radius = _this select 3;
 };
 
-while { (count (waypoints group _target)) > 0 } do {
+while { (waypoints group _target) isNotEqualTo [] } do {
     deleteWaypoint ((waypoints group _target) select 0);
 };
 private _wp = (group _target) addWaypoint [ASLToAGL (getPosASL player), 0];
@@ -20,7 +20,7 @@ OT_missionMarkerText = _txt;
     params ["_target", "_radius", "_wp"];
     while { !isNil "_wp" && (player distance waypointPosition _wp) > _radius } do {};
     if (!isNil "_wp") then {
-        while { (count (waypoints group _target)) > 0 } do {
+        while { (waypoints group _target) isNotEqualTo [] } do {
             deleteWaypoint ((waypoints group _target) select 0);
         };
         OT_missionMarker = nil;

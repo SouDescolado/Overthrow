@@ -1,7 +1,7 @@
 params ["_leader", "_gangid", "_player"];
 
 private _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
-if (count _gang isEqualTo 0) exitWith { diag_log "Overthrow Error: gang not found (OT_fnc_gangJoinResistance)" };
+if (_gang isEqualTo []) exitWith { diag_log "Overthrow Error: gang not found (OT_fnc_gangJoinResistance)" };
 
 private _group = createGroup resistance;
 private _name = _gang select 8;

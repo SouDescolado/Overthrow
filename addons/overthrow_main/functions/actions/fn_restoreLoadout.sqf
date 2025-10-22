@@ -6,7 +6,7 @@ _loadout params ["_primary", "_secondary", "_tertiary", "_uniform", "_vest", "_b
 
 [_unit, _ammobox] call OT_fnc_dumpStuff;
 
-if (count _primary > 0) then {
+if (_primary isNotEqualTo []) then {
     private _pWpn = _primary select 0;
     private _pItems = [_primary select 1, _primary select 2, _primary select 3];
     private _pAmmo = (_primary select 4) select 0;
@@ -26,7 +26,7 @@ if (count _primary > 0) then {
     };
 };
 
-if (count _secondary > 0) then {
+if (_secondary isNotEqualTo []) then {
     private _sWpn = _secondary select 0;
     private _sItems = [_secondary select 1, _secondary select 2, _secondary select 3];
     private _sAmmo = (_secondary select 4) select 0;
@@ -46,7 +46,7 @@ if (count _secondary > 0) then {
     };
 };
 
-if (count _tertiary > 0) then {
+if (_tertiary isNotEqualTo []) then {
     private _tWpn = _tertiary select 0;
     private _tItems = [_tertiary select 1, _tertiary select 2, _tertiary select 3];
     private _tAmmo = (_tertiary select 4) select 0;
@@ -61,12 +61,12 @@ if (count _tertiary > 0) then {
     };
 };
 
-if (count _uniform > 0) then {
+if (_uniform isNotEqualTo []) then {
     private _uniformCls = _uniform select 0;
     private _uniformItems = _uniform select 1;
 };
 
-if (count _vest > 0) then {
+if (_vest isNotEqualTo []) then {
     private _vestCls = _vest select 0;
     private _vestItems = _vest select 1;
 
@@ -97,7 +97,7 @@ if (count _vest > 0) then {
     };
 };
 
-if (count _backpack > 0) then {
+if (_backpack isNotEqualTo []) then {
     private _bpCls = _backpack select 0;
     private _bpItems = _backpack select 1;
 
@@ -128,7 +128,7 @@ if (count _backpack > 0) then {
     };
 };
 
-if (count _optic > 0) then {
+if (_optic isNotEqualTo []) then {
     private _opticCls = _optic select 0;
     if ([_ammobox, _opticCls, 1] call CBA_fnc_removeWeaponCargo) then {
         _unit addWeaponGlobal _opticCls;
@@ -136,7 +136,7 @@ if (count _optic > 0) then {
     };
 };
 
-if (count _uniform > 0) then {
+if (_uniform isNotEqualTo []) then {
     _unit forceAddUniform _uniformCls;
 };
 

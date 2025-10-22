@@ -23,10 +23,10 @@ private _control = _display displayCtrl 9999;
 _control ctrlSetFade 1;
 _control ctrlCommit 0;
 private _pos = ctrlPosition _control;
-if !(_x isEqualTo -1) then { _pos set [0, _x] };
-if !(_y isEqualTo -1) then { _pos set [1, _y] };
-if !(_w isEqualTo -1) then { _pos set [2, _w] };
-if !(_h isEqualTo -1) then { _pos set [3, _h] };
+if (_x isNotEqualTo -1) then { _pos set [0, _x] };
+if (_y isNotEqualTo -1) then { _pos set [1, _y] };
+if (_w isNotEqualTo -1) then { _pos set [2, _w] };
+if (_h isNotEqualTo -1) then { _pos set [3, _h] };
 
 if (isNil "OT_dynamicTextIdCounter") then {
     OT_dynamicTextIdCounter = 10000;
@@ -63,7 +63,7 @@ _control ctrlCommit _fade;
         if (isNil "_control" || { isNull _control }) exitWith {};
 
         private _pos = ctrlPosition _control;
-        if !(_moveY isEqualTo 0) then {
+        if (_moveY isNotEqualTo 0) then {
             _pos set [1, (_pos select 1) + _moveY];
             _control ctrlSetPosition _pos;
             _control ctrlCommit _delay;
@@ -76,7 +76,7 @@ _control ctrlCommit _fade;
                 disableSerialization;
                 params ["_control", "", "", "", "", ["_delayDone", -1]];
                 if (isNil "_control" || { isNull _control }) exitWith { true };
-                if !(_delayDone isEqualTo -1) then {
+                if (_delayDone isNotEqualTo -1) then {
                     time >= _delayDone;
                 } else {
                     ctrlCommitted _control;

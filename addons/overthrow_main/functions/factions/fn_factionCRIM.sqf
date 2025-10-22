@@ -1,7 +1,7 @@
 //cache loadouts
 {
     private _gangs = OT_civilians getVariable [format ["gangs%1", _x], []];
-    if (count _gangs > 0) then {
+    if (_gangs isNotEqualTo []) then {
         private _gangid = _gangs select 0;
         private _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
         if (_gang isEqualType []) then {

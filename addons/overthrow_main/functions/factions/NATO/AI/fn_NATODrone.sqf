@@ -53,7 +53,7 @@ while {
                     };
                 };
 
-                if ((count crew _x) > 0 && { ((_x isKindOf "Car") || (_x isKindOf "Air") || (_x isKindOf "Ship")) && !(_type in (OT_allVehicles + OT_allBoats + OT_helis)) }) exitWith {
+                if ((crew _x) isNotEqualTo [] && { ((_x isKindOf "Car") || (_x isKindOf "Air") || (_x isKindOf "Ship")) && !(_type in (OT_allVehicles + OT_allBoats + OT_helis)) }) exitWith {
                     if (side _x != west) then {
                         if (([_drone, "VIEW"] checkVisibility [getPosASL _drone, _position]) > 0.01) then {
 

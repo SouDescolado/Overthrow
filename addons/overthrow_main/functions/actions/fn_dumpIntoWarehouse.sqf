@@ -99,7 +99,7 @@ if (handgunWeapon _unit != "") then {
 
 if (_linkedItems) then {
     {
-        if !(_x isEqualTo "ItemMap") then {
+        if (_x isNotEqualTo "ItemMap") then {
             if (([(configFile >> "CfgWeapons" >> _x), "useAsBinocular", 0] call BIS_fnc_returnConfigEntry) > 0) then {
                 _unit unassignItem _x;
                 _unit removeWeapon _x;

@@ -13,7 +13,7 @@ private _iswarehouse = false;
 
 if (!_notvehicle) then {
     {
-        if !(_x isEqualTo _target) then { _objects pushBack _x };
+        if (_x isNotEqualTo _target) then { _objects pushBack _x };
     } forEach (player nearEntities [["Car", "ReammoBox_F", "Air", "Ship"], 20]);
 };
 

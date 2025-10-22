@@ -7,14 +7,14 @@ private _spawnHouses = OT_spawnHouses;
 while { !_found && _range < 1200 } do {
     private _houses = nearestObjects [_pos, ["house"], _range, false];
     private _possible = [];
-    if (count _houses > 0) then {
+    if (_houses isNotEqualTo []) then {
         {
             if ((typeOf _x) in _spawnHouses && { !(_x call OT_fnc_hasOwner) }) then {
                 _possible pushBack _x;
             };
         } forEach (_houses);
 
-        if (count _possible > 0) then {
+        if (_possible isNotEqualTo []) then {
             _house = selectRandom _possible;
             _found = true;
         };

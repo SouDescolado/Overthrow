@@ -15,7 +15,7 @@ _count = 0;
 {
     _x params ["_cls", "_name", "_side"];
     _pos = server getVariable [format ["factionrep%1", _cls], []];
-    if (count _pos > 0) then {
+    if (_pos isNotEqualTo []) then {
         _count = _count + 1;
         [_pos, OT_fnc_spawnFactionRep, [_cls, _name]] call OT_fnc_registerSpawner;
     };

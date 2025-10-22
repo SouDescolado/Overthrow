@@ -19,7 +19,7 @@ if (isNil "_road") exitWith {
 
 _start = getPos _road;
 
-if ((count _start) isEqualTo 0 || _start # 1 isEqualTo 0) exitWith {
+if (_start isEqualTo [] || _start # 1 isEqualTo 0) exitWith {
     diag_log format ["Overthrow: WARNING: Couldnt find road for %1 %2", _name, _start];
     [];
 };

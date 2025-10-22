@@ -59,7 +59,7 @@ if (_dead > 150) then {
 } forEach (spawner getVariable ["_noid_", []]);
 
 {
-    if ((_x isKindOf "Air") && { (alive _x) } && ((side _x) isEqualTo west) && (_x call OT_fnc_isRadarInRange) && { (count crew _x > 0) }) then {
+    if ((_x isKindOf "Air") && { (alive _x) } && ((side _x) isEqualTo west) && (_x call OT_fnc_isRadarInRange) && { crew _x isNotEqualTo [] }) then {
         [_x, 2500] call OT_fnc_revealToResistance;
     };
 } forEach (entities "Air");
@@ -254,7 +254,7 @@ if ((date select 4) != _lastmin) then {
         if (_currentCls != "") then {
             _queue = server getVariable ["factoryQueue", []];
             _changed = false;
-            if (count _queue > 0) then {
+            if (_queue isNotEqualTo []) then {
                 _item = _queue select 0;
                 if ((_item select 0) != _currentCls) then {
                     server setVariable ["GEURproducetime", 0, true];
@@ -264,14 +264,14 @@ if ((date select 4) != _lastmin) then {
             };
             if (_changed) exitWith {
                 _queue = server getVariable ["factoryQueue", []];
-                if (count _queue > 0) then {
+                if (_queue isNotEqualTo []) then {
                     _item = _queue select 0;
                     server setVariable ["GEURproducing", _item select 0, true];
                 };
             };
 
             _cost = cost getVariable [_currentCls, []];
-            if (count _cost > 0) then {
+            if (_cost isNotEqualTo []) then {
                 _cost params ["_base", "_wood", "_steel", "_plastic"];
                 if (isNil "_plastic") then {
                     _plastic = 0;
@@ -310,7 +310,7 @@ if ((date select 4) != _lastmin) then {
                     private _veh = OT_factoryPos nearestObject OT_item_CargoContainer;
                     if (_veh isEqualTo objNull) then {
                         _p = OT_factoryPos findEmptyPosition [5, 100, OT_item_CargoContainer];
-                        if (count _p > 0) then {
+                        if (_p isNotEqualTo []) then {
                             _veh = OT_item_CargoContainer createVehicle _p;
                             [_veh, (server getVariable ["generals", []]) select 0] call OT_fnc_setOwner;
                             clearWeaponCargoGlobal _veh;
@@ -348,7 +348,7 @@ if ((date select 4) != _lastmin) then {
                     _timespent = 0;
 
                     _queue = server getVariable ["factoryQueue", []];
-                    if (count _queue > 0) then {
+                    if (_queue isNotEqualTo []) then {
                         _item = _queue select 0;
                         if (_item select 1 > 1) then {
                             _item set [1, (_item select 1) - 1];
@@ -362,7 +362,7 @@ if ((date select 4) != _lastmin) then {
 
                     if (!(_currentCls isKindOf "Bag_Base") && _currentCls isKindOf "AllVehicles") then {
                         _p = OT_factoryVehicleSpawn findEmptyPosition [5, 100, _currentCls];
-                        if (count _p > 0) then {
+                        if (_p isNotEqualTo []) then {
                             _veh = _currentCls createVehicle _p;
                             //[_veh,(server getVariable ["generals",[]]) select 0] call OT_fnc_setOwner;
                             _veh setVariable ["OT_forceSaveUnowned", true, true]; // Save this vehicle even if it is unowned (we know somebody must have requested it at the factory, so they'll come back and claim it... eventually)
@@ -413,7 +413,7 @@ if ((date select 4) != _lastmin) then {
             };
         } else {
             _queue = server getVariable ["factoryQueue", []];
-            if (count _queue > 0) then {
+            if (_queue isNotEqualTo []) then {
                 _item = _queue select 0;
                 server setVariable ["GEURproducing", _item select 0, true];
             };

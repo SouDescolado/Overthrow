@@ -27,7 +27,7 @@ diag_log format ["Overthrow: Economy version is %1", _version];
     {
         _pos = _x select 0;
         _pos set [2, 0];
-        if !(_pos isFlatEmpty [-1, -1, 0.5, 10] isEqualTo []) then {
+        if (_pos isFlatEmpty [-1, -1, 0.5, 10] isNotEqualTo []) then {
             _ob = _pos call OT_fnc_nearestObjective;
             _obpos = _ob select 0;
             _obdist = _obpos distance _pos;

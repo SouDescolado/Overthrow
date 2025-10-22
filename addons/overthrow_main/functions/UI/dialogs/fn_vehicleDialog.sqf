@@ -15,6 +15,6 @@ if !(_veh call OT_fnc_playerIsOwner) then {
     };
 };
 
-if !(typeOf _veh == "OT_I_Truck_recovery") then {
+if (typeOf _veh != "OT_I_Truck_recovery") then {
     ctrlShow [1614, false];
 };

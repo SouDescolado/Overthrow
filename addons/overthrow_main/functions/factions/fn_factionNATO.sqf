@@ -26,7 +26,7 @@ publicVariable "OT_nextNATOTurn";
             private _diff = server getVariable ["OT_difficulty", 1];
 
             //scheduler
-            if (count _schedule > 0) then {
+            if (_schedule isNotEqualTo []) then {
                 private _item = [];
                 private _idx = -1;
                 private _remove = [];

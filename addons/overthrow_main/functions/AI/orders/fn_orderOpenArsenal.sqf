@@ -7,9 +7,9 @@ private _unit = (groupSelectedUnits player) select 0;
 
 private _objects = [];
 {
-    if !(_x isEqualTo _unit) then { _objects pushBack _x };
+    if (_x isNotEqualTo _unit) then { _objects pushBack _x };
 } forEach (_unit nearEntities [["ReammoBox_F"], 20]);
-if (count _objects isEqualTo 0) exitWith {
+if (_objects isEqualTo []) exitWith {
     "Cannot find any ammoboxes within 20m of first selected unit" call OT_fnc_notifyMinor;
 };
 _sorted = [_objects, [], { _x distance _unit }, "ASCEND"] call BIS_fnc_sortBy;

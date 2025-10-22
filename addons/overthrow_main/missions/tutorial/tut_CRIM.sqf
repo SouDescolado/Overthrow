@@ -18,18 +18,18 @@ private _thistown = (getPosATL player) call OT_fnc_nearestTown;
 } forEach (player nearEntities ["CAManBase", OT_spawnDistance]);
 
 //No? well where is a town with an active gang
-if (count _targets isEqualTo 0) exitWith {
+if (_targets isEqualTo []) exitWith {
     private _towns = [OT_townData, [], { (_x select 0) distance player }, "ASCEND"] call BIS_fnc_sortBy;
     private _town = "";
     private _done = false;
     {
         _x params ["_pos", "_t"];
         _gangshere = OT_civilians getVariable [format ["gangs%1", _t], []];
-        if !(_t isEqualTo _thistown) then {
-            if (count _gangshere > 0) then {
+        if (_t isNotEqualTo _thistown) then {
+            if (_gangshere isNotEqualTo []) then {
                 _gang = OT_civilians getVariable [format ["gang%1", _gangshere select 0], []];
-                if (count _gang > 0) then {
-                    if (count (_gang select 0) > 0) then {
+                if (_gang isNotEqualTo []) then {
+                    if ((_gang select 0) isNotEqualTo []) then {
                         _destination = _pos;
                         _town = _t;
                         _done = true;
@@ -40,7 +40,7 @@ if (count _targets isEqualTo 0) exitWith {
         if (_done) exitWith {};
     } forEach (_towns);
 
-    if (count _destination > 0) then {
+    if (_destination isNotEqualTo []) then {
         //give waypoint
         [player, _destination, _town] call OT_fnc_givePlayerWaypoint;
 

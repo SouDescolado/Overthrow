@@ -262,7 +262,7 @@ private _hasList_buildableHouses = false;
                         if (count (_x select 7) > 5) then {
                             //Attached
                             _a = (_x select 7) select 5;
-                            if (count _a > 0) then {
+                            if (_a isNotEqualTo []) then {
                                 _a params ["_attached", "_am"];
                                 _veh setVariable ["OT_attachedClass", _attached, true];
                                 [_veh, _am] call OT_fnc_initAttached;
@@ -281,7 +281,7 @@ private _hasList_buildableHouses = false;
 
                 // If the object is a player-built house, fetch its variables
                 private _houseParams = _x param [8, []];
-                if (!(_houseParams isEqualTo []) or { _type in _buildableHouses }) then {
+                if ((_houseParams isNotEqualTo []) or { _type in _buildableHouses }) then {
                     _veh setVariable ["OT_house_isPlayerBuilt", true, true];
 
                     private _isLeased = _houseParams param [0, false];
@@ -467,7 +467,7 @@ sleep 0.3;
     _pos = _x select 0;
     _code = format ["fob%1", _pos];
     _garrison = server getVariable [format ["resgarrison%1", _code], []];
-    if (count _garrison > 0) then {
+    if (_garrison isNotEqualTo []) then {
         _group = createGroup resistance;
         spawner setVariable [format ["resgarrison%1", _code], _group, true];
         {
@@ -502,7 +502,7 @@ sleep 0.3;
     _pos = _x select 0;
     _code = _x select 1;
     _garrison = server getVariable [format ["resgarrison%1", _code], []];
-    if (count _garrison > 0) then {
+    if (_garrison isNotEqualTo []) then {
         _group = createGroup resistance;
         spawner setVariable [format ["resgarrison%1", _code], _group, true];
         {
@@ -528,7 +528,7 @@ private _revealed = server getVariable ["revealedGangs", []];
     if (isNil "_x") then { continue };
     private _gang = OT_civilians getVariable [format ["gang%1", _x], []];
 
-    if ((count _gang) > 0) then {
+    if (_gang isNotEqualTo []) then {
         _mrkid = format ["gang%1", _gang select 2];
         _mrk = createMarkerLocal [_mrkid, _gang select 4];
         _mrkid setMarkerTypeLocal "ot_Camp";
@@ -551,7 +551,7 @@ private _built = (allMissionObjects "Static");
                 if (false /*typename _x isEqualTo "ARRAY"*/ ) then {
                     //old save with positions
                     _buildings = (_x nearObjects ["Building", 8]);
-                    if (count _buildings > 0) then {
+                    if (_buildings isNotEqualTo []) then {
                         _bdg = _buildings select 0;
                         [_bdg, _uid] call OT_fnc_setOwner;
                     };
@@ -560,7 +560,7 @@ private _built = (allMissionObjects "Static");
 
                     _pos = buildingpositions getVariable [_x, []];
                     _bdg = objNull;
-                    if (count _pos isEqualTo 0) then {
+                    if (_pos isEqualTo []) then {
                         _bdg = OT_centerPos nearestObject parseNumber _x;
                         buildingpositions setVariable [_x, position _bdg, true];
                     } else {

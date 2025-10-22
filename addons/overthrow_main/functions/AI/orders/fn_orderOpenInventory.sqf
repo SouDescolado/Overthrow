@@ -10,15 +10,15 @@ if (!isNull objectParent _unit) then {
 } else {
     private _objects = [];
     {
-        if !(_x isEqualTo _unit) then { _objects pushBack _x };
+        if (_x isNotEqualTo _unit) then { _objects pushBack _x };
     } forEach (_unit nearEntities [["Car", "ReammoBox_F", "Air", "Ship"], 5]);
-    if (count _objects isEqualTo 0) exitWith {
+    if (_objects isEqualTo []) exitWith {
         _unit action ["Gear", objNull];
     };
     _sorted = [_objects, [], { _x distance _unit }, "ASCEND"] call BIS_fnc_sortBy;
 };
 
-if ((count _sorted) isEqualTo 0) exitWith {
+if (_sorted isEqualTo []) exitWith {
     _unit action ["Gear", objNull];
 };
 

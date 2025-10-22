@@ -170,7 +170,7 @@ if (_target isEqualType "") then {
             } forEach (_unit call OT_fnc_unitStock);
 
             {
-                if !(_x isEqualTo "ItemMap") then {
+                if (_x isNotEqualTo "ItemMap") then {
                     if !([_ammobox, _x, 1] call CBA_fnc_removeItemCargo) then {
                         _unit unlinkItem _x;
                         _missing pushBack _x;
@@ -179,7 +179,7 @@ if (_target isEqualType "") then {
             } forEach (assignedItems _unit);
 
             private _backpack = backpack _unit;
-            if !(_backpack isEqualTo "") then {
+            if (_backpack isNotEqualTo "") then {
                 if !(_backpack in backpackCargo _ammobox) then {
                     _missing pushBack _backpack;
                     //Put the items from the backpack back in the ammobox
@@ -210,7 +210,7 @@ if (_target isEqualType "") then {
             };
 
             private _vest = vest _unit;
-            if !(_vest isEqualTo "") then {
+            if (_vest isNotEqualTo "") then {
                 if !(_vest in itemCargo _ammobox) then {
                     _missing pushBack _vest;
                     //Put the items from the vest back in the ammobox
@@ -241,7 +241,7 @@ if (_target isEqualType "") then {
             };
 
             private _helmet = headgear _unit;
-            if !(_helmet isEqualTo "") then {
+            if (_helmet isNotEqualTo "") then {
                 if !(_helmet in itemCargo _ammobox) then {
                     _missing pushBack _helmet;
                     removeHeadgear _unit;
@@ -251,7 +251,7 @@ if (_target isEqualType "") then {
             };
 
             private _goggles = goggles _unit;
-            if !(_goggles isEqualTo "") then {
+            if (_goggles isNotEqualTo "") then {
                 if !(_goggles in itemCargo _ammobox) then {
                     _missing pushBack _goggles;
                     removeGoggles _unit;

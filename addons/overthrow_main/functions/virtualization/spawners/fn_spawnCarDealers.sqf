@@ -20,7 +20,7 @@ private _groups = [];
     _groups pushBack _group;
 
     //set start location based on building config
-    private _start = _building buildingPos getNumber (configFile >> "CfgVehicles" >> typeOf (_building) >> "ot_shopPos");
+    private _start = _building buildingPos getNumber (configOf _building >> "ot_shopPos");
     if (isNil "_start" || { _start isEqualTo "" } || { _start isEqualTo "''" }) then { _start = _building buildingPos 0 };
     private _facing = 0;
 

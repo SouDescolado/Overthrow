@@ -26,7 +26,7 @@ if ([_topos, _fromregion] call OT_fnc_regionIsConnected) then {
     };
     {
         _pos = _convoypos findEmptyPosition [10, 100, _x];
-        if (count _pos == 0) then { _pos = _convoypos findEmptyPosition [0, 100, _x] };
+        if (_pos isEqualTo []) then { _pos = _convoypos findEmptyPosition [0, 100, _x] };
         _veh = createVehicle [_x, _pos, [], 0, ""];
         _veh setVariable ["garrison", "HQ", false];
 
@@ -50,7 +50,7 @@ if ([_topos, _fromregion] call OT_fnc_regionIsConnected) then {
 
     {
         _pos = _convoypos findEmptyPosition [10, 100, OT_NATO_Vehicle_HVT];
-        if (count _pos == 0) then { _pos = _convoypos findEmptyPosition [0, 100, OT_NATO_Vehicle_HVT] };
+        if (_pos isEqualTo []) then { _pos = _convoypos findEmptyPosition [0, 100, OT_NATO_Vehicle_HVT] };
         _veh = createVehicle [OT_NATO_Vehicle_HVT, _pos, [], 0, ""];
         _veh setVariable ["garrison", "HQ", false];
 
@@ -79,12 +79,12 @@ if ([_topos, _fromregion] call OT_fnc_regionIsConnected) then {
 
     private _numsupport = 2;
 
-    if (count _hvts > 0) then {
+    if (_hvts isNotEqualTo []) then {
         private _count = 0;
         while { _count < _numsupport } do {
             _vehtype = selectRandom OT_NATO_Vehicles_GroundSupport;
             _pos = _convoypos findEmptyPosition [10, 100, _vehtype];
-            if (count _pos == 0) then { _pos = _convoypos findEmptyPosition [0, 100, _vehtype] };
+            if (_pos isEqualTo []) then { _pos = _convoypos findEmptyPosition [0, 100, _vehtype] };
             _veh = createVehicle [_vehtype, _pos, [], 0, ""];
             _veh setVariable ["garrison", "HQ", false];
             _veh setDir (_dir);

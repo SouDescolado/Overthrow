@@ -16,7 +16,7 @@ private _thistown = (getPosATL player) call OT_fnc_nearestTown;
 } forEach (player nearEntities ["CAManBase", OT_spawnDistance]);
 
 //No? well where is a town that they control
-if (count _targets isEqualTo 0) exitWith {
+if (_targets isEqualTo []) exitWith {
     private _towns = [OT_townData, [], { (_x select 0) distance player }, "ASCEND"] call BIS_fnc_sortBy;
     private _town = "";
     private _done = false;
@@ -30,7 +30,7 @@ if (count _targets isEqualTo 0) exitWith {
         if (_done) exitWith {};
     } forEach (_towns);
 
-    if (count _destination > 0) then {
+    if (_destination isNotEqualTo []) then {
         //give waypoint
         [player, _destination, _town] call OT_fnc_givePlayerWaypoint;
 

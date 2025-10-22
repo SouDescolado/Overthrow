@@ -73,14 +73,14 @@ if !(_jobparams call _setup) exitWith {
                         if (_wassuccess) then {
                             format ["Job completed: %1", (_job select 0) select 0] remoteExec ["OT_fnc_notifyGood", 0, false];
                         } else {
-                            if !(_remains <= 0) then {
+                            if (_remains > 0) then {
                                 format ["Job failed: %1", (_job select 0) select 0] remoteExec ["OT_fnc_notifyBad", 0, false];
                             } else {
                                 format ["Job expired: %1", (_job select 0) select 0] remoteExec ["OT_fnc_notifyBad", 0, false];
                             };
                         };
 
-                        if !(_remains <= 0) then {
+                        if (_remains > 0) then {
                             if (_repeat < 1) then {
                                 _completed = server getVariable ["OT_completedJobIds", []];
                                 _completed pushBack _id;

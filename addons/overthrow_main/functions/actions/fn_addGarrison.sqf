@@ -88,7 +88,7 @@ if (_create isEqualType 1) then {
 
                 [];
             });
-            if !(_res isEqualTo []) exitWith {
+            if (_res isNotEqualTo []) exitWith {
                 _done = true;
                 _dir = _res select 0;
                 _p = _res select 1;
@@ -109,7 +109,7 @@ if (_create isEqualType 1) then {
 
         if !(_done) then {
             _p = _pos findEmptyPosition [20, 120, _class_obj];
-            if (count _p == 0) exitWith {
+            if (_p isEqualTo []) exitWith {
                 _doit = false;
                 _charge = false;
                 diag_log format ["Overthrow: Unable to find a position for %1 near %2", _create, _pos];

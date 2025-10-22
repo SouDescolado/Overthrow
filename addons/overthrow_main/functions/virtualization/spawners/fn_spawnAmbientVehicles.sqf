@@ -29,7 +29,7 @@ private _loops = 0;
 while { (_count < _numVeh) && (_loops < 50) } do {
     private _start = [[[_posTown, _mSize]]] call BIS_fnc_randomPos;
     _roads = _start nearRoads 75;
-    if (count _roads > 0) then {
+    if (_roads isNotEqualTo []) then {
         _road = _roads select 0;
         _pos = getPosATL _road;
         _vehtype = "";
@@ -47,12 +47,12 @@ while { (_count < _numVeh) && (_loops < 50) } do {
                 _posVeh = _pos getPos [6, _dirveh + 90];
                 _posEmpty = _posVeh findEmptyPosition [4, 15, _vehtype];
                 //dont bother if the position isnt empty for 4m
-                if (count _posEmpty isEqualTo 0) then {
+                if (_posEmpty isEqualTo []) then {
                     _posVeh = [];
                 } else {
                     if ((_posVeh distance _posEmpty) > 4) then { _posVeh = [] };
                 };
-                if (count _posVeh > 0) then {
+                if (_posVeh isNotEqualTo []) then {
                     _veh = _vehtype createVehicle _posEmpty;
                     _veh setVariable ["ambient", true, true];
                     clearItemCargoGlobal _veh;

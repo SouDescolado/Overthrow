@@ -113,8 +113,8 @@ if (_gunOut) then {
 };
 
 private _totalAmmo = 0;
-private _turrets = "!((configName _x) select [0, 5] == 'Cargo') && !((count getArray (_x >> 'magazines')) isEqualTo 0)" configClasses (configFile >> "CfgVehicles" >> _cls >> "Turrets");
-private _hasAmmo = (count _turrets) > 0;
+private _turrets = "((configName _x) select [0, 5] != 'Cargo') && (getArray (_x >> 'magazines') isNotEqualTo [])" configClasses (configFile >> "CfgVehicles" >> _cls >> "Turrets");
+private _hasAmmo = _turrets isNotEqualTo [];
 private _ammotxt = "";
 {
     _x params ["_ammocls", "_num"];

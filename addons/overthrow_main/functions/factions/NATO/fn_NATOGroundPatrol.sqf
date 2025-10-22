@@ -11,7 +11,7 @@ if !(_frombase in _abandoned) then {
 
     private _frompos = server getVariable _frombase;
     private _pos = _frompos findEmptyPosition [10, 100, _vehtype];
-    if (count _pos == 0) then { _pos = _frompos findEmptyPosition [0, 100, _vehtype] };
+    if (_pos isEqualTo []) then { _pos = _frompos findEmptyPosition [0, 100, _vehtype] };
 
     private _group = createGroup blufor;
     private _veh = _vehtype createVehicle _pos;
@@ -49,7 +49,7 @@ if !(_frombase in _abandoned) then {
         alive _veh && time > _timeout;
     };
 
-    while { (count (waypoints _group)) > 0 } do {
+    while { (waypoints _group) isNotEqualTo [] } do {
         deleteWaypoint ((waypoints _group) select 0);
     };
 
@@ -66,7 +66,7 @@ if !(_frombase in _abandoned) then {
     };
 
     if (alive _veh) then {
-        while { (count (waypoints _group)) > 0 } do {
+        while { (waypoints _group) isNotEqualTo [] } do {
             deleteWaypoint ((waypoints _group) select 0);
         };
         waitUntil {

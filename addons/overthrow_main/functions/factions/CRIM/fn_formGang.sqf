@@ -5,7 +5,7 @@ private _townpos = server getVariable _town;
 private _possible = spawner getVariable [format ["gangpositions%1", _town], []];
 private _gangs = OT_civilians getVariable [format ["gangs%1", _town], []];
 private _gangid = -1;
-if ((count _possible) > 0) then {
+if (_possible isNotEqualTo []) then {
     _home = selectRandom _possible;
     _home set [2, 0];
 

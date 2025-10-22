@@ -64,7 +64,7 @@ if !(captive _unit) then {
         //get closest gang member
         private _ents = _unit nearEntities ["CAManBase", 1200];
         private _i = _ents findIf { side _x isEqualTo east };
-        if !(_i isEqualTo -1) then {
+        if (_i isNotEqualTo -1) then {
             private _member = _ents select _i;
             private _gangid = _member getVariable ["OT_gangid", -1];
             private _player = _unit;
@@ -72,7 +72,7 @@ if !(captive _unit) then {
             if (_gangid > -1) then {
                 private _name = "The gang";
                 _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
-                if (count _gang > 0) then {
+                if (_gang isNotEqualTo []) then {
                     _name = _gang select 8;
                 };
                 if (!isPlayer _unit) then { _player = _unit call OT_fnc_getOwnerUnit };
@@ -155,7 +155,7 @@ if !(captive _unit) then {
                 _unit setCaptive false;
                 [_unit] call OT_fnc_revealToNATO;
             };
-            if !(hmd _unit isEqualTo "") exitWith {
+            if (hmd _unit isNotEqualTo "") exitWith {
                 if (isPlayer _unit) then {
                     "NATO has spotted your NV Goggles" call OT_fnc_notifyMinor;
                 };
@@ -185,7 +185,7 @@ if !(captive _unit) then {
 
 // NATO attacks
 private _attack = server getVariable ["NATOattacking", ""];
-if !(_attack isEqualTo "") then {
+if (_attack isNotEqualTo "") then {
     private _pos = server getVariable [_attack, [-5000, -5000, 0]];
     private _playerpos = getPosATL _unit;
     if (_pos distance2D _playerpos < 1000) then {

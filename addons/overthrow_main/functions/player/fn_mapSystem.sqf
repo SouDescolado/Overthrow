@@ -128,12 +128,11 @@ OT_mapcache_bodies = [];
         } forEach (player getVariable ["owned", []]);
 
         //Vehicle cache
-        private _cfgVeh = configFile >> "CfgVehicles";
         {
             //Owned vehicles
-            if (((typeOf _x == OT_item_CargoContainer) || (_x isKindOf "Ship") || (_x isKindOf "Air") || (_x isKindOf "Car")) && { (count crew _x == 0) } && { (_x call OT_fnc_hasOwner) }) then {
+            if (((typeOf _x == OT_item_CargoContainer) || (_x isKindOf "Ship") || (_x isKindOf "Air") || (_x isKindOf "Car")) && { crew _x isEqualTo [] } && { (_x call OT_fnc_hasOwner) }) then {
                 _vehs pushBack [
-                    getText (_cfgVeh >> (typeOf _x) >> "icon"),
+                    getText (configOf _x >> "icon"),
                     [1, 1, 1, 1],
                     getPosASL _x,
                     0.4,
@@ -160,7 +159,7 @@ OT_mapcache_bodies = [];
                 };
             };
             //Radar hits
-            if ((_x isKindOf "Air") && { (alive _x) } && ((side _x) isEqualTo west) && (_x call OT_fnc_isRadarInRange) && { (count crew _x > 0) }) then {
+            if ((_x isKindOf "Air") && { (alive _x) } && ((side _x) isEqualTo west) && (_x call OT_fnc_isRadarInRange) && { crew _x isNotEqualTo [] }) then {
                 _radar pushBack _x;
             };
         } forEach entities [["Car", "Air", "Ship", "StaticWeapon", OT_item_CargoContainer], ["Parachute"], false, false];
@@ -211,7 +210,7 @@ OT_mapcache_bodies = [];
     OT_mapcache_factions = [];
     {
         _x params ["_cls", "_name", "_side", "_flag"];
-        if !(_side isEqualTo 1) then {
+        if (_side isNotEqualTo 1) then {
             private _factionPos = server getVariable format ["factionrep%1", _cls];
             if !(isNil "_factionPos") then {
                 OT_mapcache_factions pushBack [

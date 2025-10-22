@@ -85,13 +85,13 @@ private _lastCounter = server getVariable ["NATOlastcounter", ""];
                 };
             } forEach (_knownTargets);
 
-            if (count _targets > 0) then {
+            if (_targets isNotEqualTo []) then {
                 _targets = _targets call BIS_fnc_arrayShuffle;
                 private _group = createGroup blufor;
                 _group deleteGroupWhenEmpty true;
                 _group setVariable ["lambs_danger_disableGroupAI", true];
                 private _p = _pos findEmptyPosition [5, 100, OT_NATO_Vehicles_ReconDrone];
-                if (count _p == 0) then { _p = _pos findEmptyPosition [2, 100, OT_NATO_Vehicles_ReconDrone] };
+                if (_p isEqualTo []) then { _p = _pos findEmptyPosition [2, 100, OT_NATO_Vehicles_ReconDrone] };
                 _drone = createVehicle [OT_NATO_Vehicles_ReconDrone, _p, [], 0, ""];
                 _drone enableDynamicSimulation false;
 

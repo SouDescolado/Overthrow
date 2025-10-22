@@ -52,7 +52,7 @@ private _popControl = call OT_fnc_getControlledPopulation;
             // Send patrol to towns low in stability (new in v0.7.8.5)
             if (_resources > 250 && _stability < 30 && !(server getVariable [format ["NATOpatrolsent%1", _town], false])) then {
                 ([_pos] call OT_fnc_NATOGetAttackVectors) params ["_ground", "_air"];
-                if (count _ground > 0) then {
+                if (_ground isNotEqualTo []) then {
                     server setVariable [format ["NATOpatrolsent%1", _town], true];
                     (_ground select 0) params ["_obpos", "_obname"];
                     private _dir = _pos getDir _obpos;
@@ -77,7 +77,7 @@ private _popControl = call OT_fnc_getControlledPopulation;
                     diag_log format ["Overthrow: NATO Sent ground forces to %1 from %2", _town, _obname];
                     [_obpos, _ao, _pos, false, 5] spawn OT_fnc_NATOGroundReinforcements;
                 } else {
-                    if (count _air > 0 && _population > 500) then {
+                    if (_air isNotEqualTo [] && _population > 500) then {
                         server setVariable [format ["NATOpatrolsent%1", _town], true];
                         (_air select 0) params ["_obpos", "_obname"];
 

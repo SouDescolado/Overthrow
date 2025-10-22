@@ -29,7 +29,7 @@ if (_byair) then {
     {
         //check if theres anything on it
         private _on = ASLToAGL getPosASL _x nearEntities ["Air", 15];
-        if ((count _on) isEqualTo 0) exitWith {
+        if (_on isEqualTo []) exitWith {
             _pos = getPosASL _x;
             _dir = getDir _x;
         };
@@ -37,12 +37,12 @@ if (_byair) then {
 
     if !(_pos isEqualType []) then {
         _pos = _frompos findEmptyPosition [15, 100, _vehtype];
-        if (count _pos == 0) then { _pos = _frompos findEmptyPosition [8, 100, _vehtype] };
+        if (_pos isEqualTo []) then { _pos = _frompos findEmptyPosition [8, 100, _vehtype] };
         _dir = (_frompos getDir _ao);
     };
 } else {
     _pos = _frompos findEmptyPosition [10, 100, _vehtype];
-    if (count _pos == 0) then { _pos = _frompos findEmptyPosition [0, 100, _vehtype] };
+    if (_pos isEqualTo []) then { _pos = _frompos findEmptyPosition [0, 100, _vehtype] };
     _dir = (_frompos getDir _ao);
 };
 _pos set [2, 0];
@@ -180,7 +180,7 @@ if (_tgroup isEqualType grpNull) then {
                 _stillfor = 0;
             };
             if (_eject) exitWith {
-                while { (count (waypoints _tgroup)) > 0 } do {
+                while { (waypoints _tgroup) isNotEqualTo [] } do {
                     deleteWaypoint ((waypoints _tgroup) select 0);
                 };
                 commandStop (driver _veh);
@@ -191,7 +191,7 @@ if (_tgroup isEqualType grpNull) then {
                 _done = true;
                 waitUntil {
                     sleep 2;
-                    (count crew _veh) isEqualTo 0;
+                    (crew _veh) isEqualTo [];
                 };
                 [_veh] call OT_fnc_cleanup;
             };

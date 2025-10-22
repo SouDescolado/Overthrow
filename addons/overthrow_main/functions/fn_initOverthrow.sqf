@@ -98,7 +98,7 @@ OT_tpl_checkpoint = [] call compileScript ["data\templates\NATOcheckpoint.sqf", 
         diag_log "== OVERTHROW == Waiting for a player to connect!";
         waitUntil {
             sleep 1;
-            count ([] call CBA_fnc_players) > 0;
+            ([] call CBA_fnc_players) isNotEqualTo [];
         };
         [] spawn OT_fnc_loadGame;
     };

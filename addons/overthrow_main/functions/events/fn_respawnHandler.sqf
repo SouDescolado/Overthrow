@@ -6,7 +6,7 @@ if (isNull (_old)) exitWith {};
 
 //remove last body from spawn distance check
 {
-    if (!(_x isEqualTo _old) && (getPlayerUID player) isEqualTo (_x getVariable ["player_uid", false])) then {
+    if ((_x isNotEqualTo _old) && (getPlayerUID player) isEqualTo (_x getVariable ["player_uid", false])) then {
         _x setVariable ["player_uid", false, true];
     };
 } forEach (allDeadMen);

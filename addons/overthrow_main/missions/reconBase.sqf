@@ -36,7 +36,7 @@ private _title = format ["Recon of %1", _base];
         _players = _players apply { [_x distance _loc, _x] };
         _players sort true;
 
-        if (count _players == 0) exitWith { false };
+        if (_players isEqualTo []) exitWith { false };
 
         _closestPlayer = (_players select 0) select 1;
 
@@ -44,14 +44,14 @@ private _title = format ["Recon of %1", _base];
         if (_spawnid isEqualTo "") exitWith { false }; //Base has not been spawned yet
         //Get groups in spawn
         _groups = spawner getVariable [_spawnid, []];
-        if (count _groups == 0) exitWith { false }; //Base is empty/not spawned atm
+        if (_groups isEqualTo []) exitWith { false }; //Base is empty/not spawned atm
 
         _count = 0;
         _missedOne = false;
         {
             private _group = _x;
             if ((typeName _group isEqualTo "GROUP") && !isNull (leader _group)) then {
-                if ((vehicle leader _group) == leader _group) then {
+                if (isNull objectParent leader _group) then {
                     if ((resistance knowsAbout (leader _x)) <= 1.2) then { _missedOne = true } else { _count = _count + (count units _group) }; //does the resistance know about the leader of this group?
                 }; //Removed check for vehicles as static guns are sometimes unspottable
             };
@@ -79,7 +79,7 @@ private _title = format ["Recon of %1", _base];
             _players = _players apply { [_x distance _loc, _x] };
             _players sort true;
 
-            if ((count _players) > 0) then {
+            if (_players isNotEqualTo []) then {
                 [500] remoteExec ["OT_fnc_money", (_players select 0) select 1, false];
             };
 

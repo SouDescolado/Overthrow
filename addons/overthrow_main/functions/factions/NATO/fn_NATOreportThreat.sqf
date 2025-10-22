@@ -29,7 +29,7 @@ call {
     if (_ty in OT_allVehicleThreats) exitWith {
         _threat = 150;
     };
-    if !(_veh getVariable ["OT_attachedClass", ""] isEqualTo "") exitWith {
+    if (_veh getVariable ["OT_attachedClass", ""] isNotEqualTo "") exitWith {
         _threat = 100;
     };
     if (_ty in OT_allPlaneThreats) exitWith {

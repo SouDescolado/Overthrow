@@ -490,7 +490,7 @@ _filteredWeaponConfigs = nil;
 
 private _allAmmo = "
     (getNumber (_x >> 'scope') isEqualTo 2);
-" configClasses (configFile >> "CfgMagazines");
+" configClasses (_cfgMagazines);
 
 private _allVehicles = "
     (getNumber (_x >> 'scope') > 0);
@@ -607,7 +607,7 @@ OT_allBLURifleMagazines = [];
                 if !(_base in _blacklist) then {
                     private _muzzleEffect = getText (_cfgWeapons >> _base >> "muzzleEffect");
                     if (!(_x in _weapons) && (getNumber (_cfgWeapons >> _base >> "scope") isEqualTo 2)) then { _weapons pushBack _base };
-                    if (_side isEqualTo 1 && !(_muzzleEffect isEqualTo "BIS_fnc_effectFiredFlares")) then {
+                    if (_side isEqualTo 1 && _muzzleEffect isNotEqualTo "BIS_fnc_effectFiredFlares") then {
                         if (_base isKindOf ["Rifle", _cfgWeapons]) then {
                             private _mass = getNumber (_cfgWeapons >> _base >> "WeaponSlotsInfo" >> "mass");
                             _base call {
@@ -815,11 +815,11 @@ OT_allLegalClothing = [];
     private _cost = round (_mass * 4);
 
     private _c = _name splitString "_";
-    if (_c select (count _c - 1) != "VR") then {
+    if (_c select -1 != "VR") then {
         OT_allClothing pushBack _name;
 
         private _side = _c select 1;
-        if ((_name == "V_RebreatherIA" || (!isNil "_side" && { _side == "C" || _side == "I" })) && (_c select (count _c - 1) != "VR")) then {
+        if ((_name == "V_RebreatherIA" || (!isNil "_side" && { _side == "C" || _side == "I" })) && (_c select -1 != "VR")) then {
             OT_allLegalClothing pushBack _name;
         };
         if (isServer && isNil { cost getVariable _name }) then {
@@ -910,7 +910,7 @@ if (isServer) then {
             private _clsCfg = _cfgVeh >> _name;
             private _cost = getNumber (_clsCfg >> "armor") * _multiply;
             private _steel = round (getNumber (_clsCfg >> "armor") * 0.5);
-            private _numturrets = count ("!((configName _x) select [0, 5] == 'Cargo') && !((count getArray (_x >> 'magazines')) isEqualTo 0)" configClasses (_clsCfg >> "Turrets"));
+            private _numturrets = count ("((configName _x) select [0, 5] != 'Cargo') && (getArray (_x >> 'magazines') isNotEqualTo [])" configClasses (_clsCfg >> "Turrets"));
             private _plastic = 2;
             if (_numturrets > 0) then {
                 _cost = _cost + (_numturrets * _cost * 10);

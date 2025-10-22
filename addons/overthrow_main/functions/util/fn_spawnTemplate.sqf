@@ -75,7 +75,7 @@ _objects = [];
         clearBackpackCargoGlobal _o;
         clearItemCargoGlobal _o;
 
-        if !(_type isEqualTo "B_CargoNet_01_ammo_F") then {
+        if (_type isNotEqualTo "B_CargoNet_01_ammo_F") then {
             _o enableSimulationGlobal false;
             _o setVariable ["simulation", false, true];
         };

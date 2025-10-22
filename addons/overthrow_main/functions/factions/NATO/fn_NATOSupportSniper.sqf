@@ -38,7 +38,7 @@ if (_isHQ) then {
     _tgroup = createGroup blufor;
 
     _spawnpos = OT_NATO_HQPos findEmptyPosition [15, 100, OT_NATO_Vehicle_AirTransport_Small];
-    if (count _spawnpos == 0) then { _spawnpos = OT_NATO_HQPos findEmptyPosition [8, 100, OT_NATO_Vehicle_AirTransport_Small] };
+    if (_spawnpos isEqualTo []) then { _spawnpos = OT_NATO_HQPos findEmptyPosition [8, 100, OT_NATO_Vehicle_AirTransport_Small] };
     _veh = OT_NATO_Vehicle_AirTransport_Small createVehicle _spawnpos;
     _veh setDir _dir;
     _tgroup addVehicle _veh;

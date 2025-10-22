@@ -1,10 +1,10 @@
 private _handled = false;
 
 if (!dialog) then {
-    if (count (player nearObjects [OT_workshopBuilding, 10]) > 0) then {
+    if ((player nearObjects [OT_workshopBuilding, 10]) isNotEqualTo []) then {
         [] call OT_fnc_workshopDialog;
     } else {
-        if ((vehicle player) != player && count (nearestObjects [player, OT_portBuilding, 30]) > 0) then {
+        if (!isNull objectParent player && (nearestObjects [player, OT_portBuilding, 30]) isNotEqualTo []) then {
             createDialog "OT_dialog_vehicleport";
             private _ft = server getVariable ["OT_fastTravelType", 1];
             if (!OT_adminMode && _ft > 1) then {
@@ -18,7 +18,7 @@ if (!dialog) then {
 
                     private _acekey = "Left Windows (default)";
                     private _acebind = ["ACE3 Common", "ace_interact_menu_InteractKey"] call CBA_fnc_getKeybind;
-                    if (count _acebind > 0) then {
+                    if (_acebind isNotEqualTo []) then {
                         _acekey = (cba_keybinding_keynames) getVariable [str ((_acebind select 5) select 0), _acekey];
                     };
 
@@ -256,7 +256,7 @@ if (!dialog) then {
                     [_gundealer, player, _lines, _done] call OT_fnc_doConversation;
                 };
             };
-            if (hcShownBar && count (hcSelected player) > 0) exitWith {
+            if (hcShownBar && (hcSelected player) isNotEqualTo []) exitWith {
                 createDialog "OT_dialog_squad";
             };
             if (!hcShownBar && ((groupSelectedUnits player) findIf { !isPlayer _x } != -1)) exitWith {
@@ -267,7 +267,7 @@ if (!dialog) then {
                 } forEach (groupSelectedUnits player);
                 createDialog "OT_dialog_command";
             };
-            if (vehicle player != player) exitWith {
+            if (!isNull objectParent player) exitWith {
                 private _ferry = player getVariable ["OT_ferryDestination", []];
                 if (count _ferry isEqualTo 3) exitWith {
                     _veh = vehicle player;
@@ -324,7 +324,7 @@ if (!dialog) then {
             };
 
             private _cTarget = cursorTarget;
-            if ((_cTarget isKindOf "CAManBase") && (alive _cTarget) && (!isPlayer _cTarget) && !(side _cTarget isEqualTo west) && (_cTarget distance player) < 10) exitWith {
+            if ((_cTarget isKindOf "CAManBase") && (alive _cTarget) && (!isPlayer _cTarget) && (side _cTarget isNotEqualTo west) && (_cTarget distance player) < 10) exitWith {
                 _cTarget call OT_fnc_talkToCiv;
             };
             [] spawn OT_fnc_mainMenu;

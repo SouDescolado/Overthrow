@@ -65,7 +65,7 @@ private _ignore = [];
 } forEach (_unit call OT_fnc_unitStock);
 
 {
-    if !(_x isEqualTo "ItemMap") then {
+    if (_x isNotEqualTo "ItemMap") then {
         if !([_x, 1] call OT_fnc_removeFromWarehouse) then {
             if (_correct) then { _unit unlinkItem _x };
             _missing pushBack _x;
@@ -74,7 +74,7 @@ private _ignore = [];
 } forEach (assignedItems _unit);
 
 private _backpack = backpack _unit;
-if !(_backpack isEqualTo "") then {
+if (_backpack isNotEqualTo "") then {
     if !([_backpack, 1] call OT_fnc_removeFromWarehouse) then {
         _missing pushBack _backpack;
         if (_correct) then {
@@ -88,7 +88,7 @@ if !(_backpack isEqualTo "") then {
 };
 
 private _vest = vest _unit;
-if !(_vest isEqualTo "") then {
+if (_vest isNotEqualTo "") then {
     if !([_vest, 1] call OT_fnc_removeFromWarehouse) then {
         _missing pushBack _vest;
         if (_correct) then {
@@ -102,7 +102,7 @@ if !(_vest isEqualTo "") then {
 };
 
 private _helmet = headgear _unit;
-if !(_helmet isEqualTo "") then {
+if (_helmet isNotEqualTo "") then {
     if !([_helmet, 1] call OT_fnc_removeFromWarehouse) then {
         _missing pushBack _helmet;
         if (_correct) then { removeHeadgear _unit };
@@ -110,7 +110,7 @@ if !(_helmet isEqualTo "") then {
 };
 
 private _goggles = goggles _unit;
-if !(_goggles isEqualTo "") then {
+if (_goggles isNotEqualTo "") then {
     if !([_goggles, 1] call OT_fnc_removeFromWarehouse) then {
         _missing pushBack _goggles;
         if (_correct) then { removeGoggles _unit };

@@ -9,7 +9,7 @@ private _pos = false;
 {
     //check if theres anything on it
     private _on = ASLToAGL getPosASL _x nearEntities ["Air", 15];
-    if ((count _on) isEqualTo 0) exitWith {
+    if (_on isEqualTo []) exitWith {
         _pos = getPosASL _x;
         _dir = getDir _x;
     };
@@ -17,7 +17,7 @@ private _pos = false;
 
 if !(_pos isEqualType []) then {
     _pos = _frompos findEmptyPosition [15, 100, _vehtype];
-    if (count _pos == 0) then { _pos = _frompos findEmptyPosition [8, 100, _vehtype] };
+    if (_pos isEqualTo []) then { _pos = _frompos findEmptyPosition [8, 100, _vehtype] };
 };
 
 private _group = createGroup blufor;
@@ -96,7 +96,7 @@ waitUntil {
     alive _veh && time > _timeout;
 };
 
-while { (count (waypoints _group)) > 0 } do {
+while { (waypoints _group) isNotEqualTo [] } do {
     deleteWaypoint ((waypoints _group) select 0);
 };
 

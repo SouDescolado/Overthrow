@@ -5,7 +5,7 @@ sleep random 2;
 
 private _pos = server getVariable [format ["factionrep%1", _faction], []];
 
-if (count _pos isEqualTo 0) exitWith { [] };
+if (_pos isEqualTo []) exitWith { [] };
 
 private _groups = [];
 

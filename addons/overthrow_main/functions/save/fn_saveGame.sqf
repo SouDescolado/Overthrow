@@ -168,7 +168,7 @@ private _vehicles = (_tocheck) apply {
         private _att = [];
 
         //get attached ammo (if applicable)
-        if (!(_attachedClass isEqualTo "") && { alive _attached }) then {
+        if ((_attachedClass isNotEqualTo "") && { alive _attached }) then {
             _att = [_attachedClass, (_attached weaponsTurret [0]) apply { [_x, _attached ammo _x] }];
         };
         /* 7 */
@@ -238,7 +238,7 @@ if !(_quiet) then {
 private _squads = ((server getVariable ["squads", []]) select {
     _x params ["_owner", "_cls", "_group"];
     _group isEqualType grpNull
-        && { count units _group > 0 }
+        && { units _group isNotEqualTo [] }
         && { (units _group) findIf { alive _x } != -1 };
 }) apply {
     _x params ["_owner", "_cls", "_group"];
@@ -275,7 +275,7 @@ private _getGroupSoldiers = {
     private _group = spawner getVariable [format ["resgarrison%1", _code], grpNull];
     if !(isNull _group) then {
         private _soldiers = _group call _getGroupSoldiers;
-        if (count _soldiers > 0) then {
+        if (_soldiers isNotEqualTo []) then {
             _server pushBack [format ["resgarrison%1", _code], _soldiers];
         };
     };
@@ -291,7 +291,7 @@ if !(_quiet) then {
     private _group = spawner getVariable [format ["resgarrison%1", _code], grpNull];
     if !(isNull _group) then {
         private _soldiers = _group call _getGroupSoldiers;
-        if (count _soldiers > 0) then {
+        if (_soldiers isNotEqualTo []) then {
             _server pushBack [format ["resgarrison%1", _code], _soldiers];
         };
     };
@@ -320,7 +320,7 @@ if !(_quiet) then {
     "Persistent Save Completed" remoteExecCall ["OT_fnc_notifyAndLog", 0, false];
 };
 
-if (!_autoSave && !(_user isEqualTo objNull)) then {
+if (!_autoSave && (_user isNotEqualTo objNull)) then {
     [_data] remoteExec ["OT_fnc_uploadData", _user, false];
 };
 

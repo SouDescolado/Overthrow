@@ -18,7 +18,7 @@ if (_money < _price) exitWith { "You cannot afford that!" call OT_fnc_notifyMino
 private _civ = OT_interactingWith;
 if (!isNil "_civ" && _civ getVariable ["factionrep", false] && !((_cls isKindOf "Land") || (_cls isKindOf "Air") || (_cls isKindOf "Ship"))) then {
     _faction = _civ getVariable ["faction", ""];
-    if !(_faction isEqualTo "") then {
+    if (_faction isNotEqualTo "") then {
         _increase = floor (_price / 1000);
         if (_increase > 0) then {
             private _factionName = server getVariable format ["factionname%1", _faction];
@@ -30,7 +30,7 @@ if (!isNil "_civ" && _civ getVariable ["factionrep", false] && !((_cls isKindOf 
 
 if (_cls == "Set_HMG") exitWith {
     private _pos = (getPosATL player) findEmptyPosition [5, 100, "C_Quadbike_01_F"];
-    if (count _pos == 0) exitWith { "Not enough space, please clear an area nearby" call OT_fnc_notifyMinor };
+    if (_pos isEqualTo []) exitWith { "Not enough space, please clear an area nearby" call OT_fnc_notifyMinor };
 
     [-_price] call OT_fnc_money;
     private _veh = "C_Quadbike_01_F" createVehicle _pos;
@@ -65,7 +65,7 @@ if (_cls in OT_allSquads) exitWith {
 };
 if (_cls == OT_item_UAV) exitWith {
     private _pos = (getPosATL player) findEmptyPosition [5, 100, _cls];
-    if (count _pos == 0) exitWith { "Not enough space, please clear an area nearby" call OT_fnc_notifyMinor };
+    if (_pos isEqualTo []) exitWith { "Not enough space, please clear an area nearby" call OT_fnc_notifyMinor };
 
     [-_price] call OT_fnc_money;
 
@@ -95,7 +95,7 @@ if (_cls == OT_item_UAV) exitWith {
 };
 if (_cls in OT_allVehicles) exitWith {
     private _pos = (getPosATL player) findEmptyPosition [5, 100, _cls];
-    if (count _pos == 0) exitWith { "Not enough space, please clear an area nearby" call OT_fnc_notifyMinor };
+    if (_pos isEqualTo []) exitWith { "Not enough space, please clear an area nearby" call OT_fnc_notifyMinor };
 
     [-_price] call OT_fnc_money;
     private _veh = _cls createVehicle _pos;
@@ -116,7 +116,7 @@ if (_cls in OT_allVehicles) exitWith {
 };
 if (_cls isKindOf "Ship") exitWith {
     private _pos = (getPosATL player) findEmptyPosition [5, 100, _cls];
-    if (count _pos == 0) exitWith { "Not enough space, please clear an area nearby" call OT_fnc_notifyMinor };
+    if (_pos isEqualTo []) exitWith { "Not enough space, please clear an area nearby" call OT_fnc_notifyMinor };
 
     [-_price] call OT_fnc_money;
     private _veh = _cls createVehicle _pos;

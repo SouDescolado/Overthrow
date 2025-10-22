@@ -9,7 +9,7 @@ if !("ItemMap" in assignedItems player) exitWith { hint "You need a map to fast 
 if (_ftrules > 0 && !((primaryWeapon player) isEqualTo "" && (secondaryWeapon player) isEqualTo "" && (handgunWeapon player) isEqualTo "")) exitWith { hint "You cannot fast travel holding a weapon" };
 
 _foundweapon = false;
-if ((vehicle player) != player && _ftrules > 0) then {
+if (!isNull objectParent player && _ftrules > 0) then {
     {
         if (!((primaryWeapon _x) isEqualTo "" && (secondaryWeapon _x) isEqualTo "" && (handgunWeapon _x) isEqualTo "")) exitWith { _foundweapon = true };
     } forEach (crew vehicle player);
@@ -24,7 +24,7 @@ private _hasdrugs = false;
 if (_hasdrugs && _ftrules > 0) exitWith { "You cannot fast travel while carrying drugs" call OT_fnc_notifyMinor };
 
 private _exit = false;
-if ((vehicle player) != player) then {
+if (!isNull objectParent player) then {
     {
         if (_x in OT_allDrugs) exitWith { _hasdrugs = true };
     } forEach (itemCargo vehicle player);
@@ -48,7 +48,7 @@ if ((vehicle player) != player) then {
 };
 if (_exit) exitWith {};
 
-if (((vehicle player) != player) && (vehicle player) isKindOf "Ship") exitWith { hint "You cannot fast travel in a boat" };
+if (!isNull objectParent player && (vehicle player) isKindOf "Ship") exitWith { hint "You cannot fast travel in a boat" };
 
 if !((vehicle player) call OT_fnc_vehicleCanMove) exitWith { hint "This vehicle is unable to move" };
 
@@ -62,9 +62,9 @@ OT_FastTravel_MapSingleClickEHId = addMissionEventHandler [
         private _handled = false;
 
         private _buildings = _pos nearObjects [OT_item_Tent, 30];
-        if !(_buildings isEqualTo []) then {
+        if (_buildings isNotEqualTo []) then {
             _bdg = (_buildings select 0);
-            if !(_bdg getVariable ["owner", ""] isEqualTo "") then {
+            if (_bdg getVariable ["owner", ""] isNotEqualTo "") then {
                 _handled = true;
             };
         };
@@ -105,7 +105,7 @@ OT_FastTravel_MapSingleClickEHId = addMissionEventHandler [
             private _cost = 0;
             private _ft = server getVariable ["OT_fastTravelType", 1];
             if (_handled && _ft isEqualTo 1 && !OT_adminMode) then {
-                if ((vehicle player) isEqualTo player) then {
+                if (isNull objectParent player) then {
                     _cost = ceil ((player distance _pos) / 50);
                 } else {
                     _cost = ceil ((player distance _pos) / 20);
@@ -133,15 +133,15 @@ OT_FastTravel_MapSingleClickEHId = addMissionEventHandler [
                             private _roads = [];
                             while { true } do {
                                 _roads = _pos nearRoads _tam;
-                                if (count _roads < 1) then { _tam = _tam + 10 };
-                                if (count _roads > 0) exitWith {};
+                                if (_roads isEqualTo []) then { _tam = _tam + 10 };
+                                if (_roads isNotEqualTo []) exitWith {};
                             };
                             { _x allowDamage false } forEach (crew _vehicle);
                             private _road = _roads select 0;
                             _pos = getPosATL _road findEmptyPosition [10, 120, typeOf _vehicle];
-                            if (count _pos == 0) then { _pos = getPosATL _road findEmptyPosition [0, 120, typeOf _vehicle] };
+                            if (_pos isEqualTo []) then { _pos = getPosATL _road findEmptyPosition [0, 120, typeOf _vehicle] };
 
-                            if (count _pos > 0) then {
+                            if (_pos isNotEqualTo []) then {
                                 _vehicle setPos _pos;
                                 if (_cost > 0) then { [-_cost] call OT_fnc_money };
                             } else {
@@ -151,7 +151,7 @@ OT_FastTravel_MapSingleClickEHId = addMissionEventHandler [
                     } else {
                         _pos = _pos findEmptyPosition [1, 100];
 
-                        if (count _pos > 0) then {
+                        if (_pos isNotEqualTo []) then {
                             player setPos _pos;
                             if (_cost > 0) then { [-_cost] call OT_fnc_money };
                         } else {

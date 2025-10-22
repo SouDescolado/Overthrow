@@ -86,7 +86,7 @@ if (_strength >= 150) then {
 };
 sleep 2;
 
-if (_strength > 500 && (count _air) > 0) then {
+if (_strength > 500 && _air isNotEqualTo []) then {
     //Send CAS
     _obpos = (_air select 0) select 0;
     _name = (_air select 0) select 1;
@@ -96,7 +96,7 @@ if (_strength > 500 && (count _air) > 0) then {
 };
 sleep 2;
 
-if (_popControl > 1000 && _strength > 1000 && (count _air) > 0) then {
+if (_popControl > 1000 && _strength > 1000 && _air isNotEqualTo []) then {
     //Send more CAS
     private _from = selectRandom _air;
     _obpos = _from select 0;
@@ -113,7 +113,7 @@ if (_popControl > 2000 && _strength > 1500) then {
 };
 
 //Send ground support
-if ((count _ground > 0) && (_strength > 250)) then {
+if ((_ground isNotEqualTo []) && (_strength > 250)) then {
     _obpos = (_ground select 0) select 0;
     _name = (_ground select 0) select 1;
     _send = 100;
@@ -130,7 +130,7 @@ if ((count _ground > 0) && (_strength > 250)) then {
 sleep 2;
 
 //Send tanks
-if ((count _ground > 0) && (_strength > 1500) && (_popControl > 500)) then {
+if ((_ground isNotEqualTo []) && (_strength > 1500) && (_popControl > 500)) then {
     _obpos = (_ground select 0) select 0;
     _name = (_ground select 0) select 1;
     [_obpos, _pos, 100, 0] spawn OT_fnc_NATOTankSupport;
@@ -252,7 +252,7 @@ if (_progress > 0) then {
     server setVariable ["NATOresources", round (_strength * 0.5), true];
     {
         if (side _x isEqualTo west) then {
-            if (count (units _x) > 0) then {
+            if ((units _x) isNotEqualTo []) then {
                 _lead = (units _x) select 0;
                 private _g = (_lead getVariable ["garrison", ""]);
                 if !(_g isEqualType "") then { _g = "HQ" };

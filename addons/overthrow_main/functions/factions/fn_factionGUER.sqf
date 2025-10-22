@@ -1,5 +1,5 @@
 private _blueprints = server getVariable ["GEURblueprints", []];
-if (count _blueprints isEqualTo 0) then {
+if (_blueprints isEqualTo []) then {
     _blueprints = OT_item_DefaultBlueprints;
     server setVariable ["GEURblueprints", _blueprints, true];
 };

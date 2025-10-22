@@ -18,7 +18,7 @@ private _tgroup = createGroup blufor;
 
 private _dir = _frompos getDir _ao;
 private _pos = _frompos findEmptyPosition [10, 100, _vehtype];
-if (count _pos == 0) then { _pos = _frompos findEmptyPosition [0, 100, _vehtype] };
+if (_pos isEqualTo []) then { _pos = _frompos findEmptyPosition [0, 100, _vehtype] };
 
 _veh = _vehtype createVehicle _pos;
 _veh setVariable ["garrison", "HQ", false];
@@ -63,8 +63,8 @@ if (_tgroup isEqualType grpNull) then {
     _dir = _attackpos getDir _frompos;
     _roads = _ao nearRoads 150;
     private _dropos = _ao;
-    if (count _roads > 0) then {
-        _dropos = ASLToAGL (getPosASL (_roads select (count _roads - 1)));
+    if (_roads isNotEqualTo []) then {
+        _dropos = ASLToAGL (getPosASL (_roads select -1));
     };
     _move = _tgroup addWaypoint [_dropos, 0];
     _move setWaypointBehaviour "SAFE";
@@ -121,7 +121,7 @@ if (_tgroup isEqualType grpNull) then {
                 _stillfor = 0;
             };
             if (_eject) then {
-                while { (count (waypoints _tgroup)) > 0 } do {
+                while { (waypoints _tgroup) isNotEqualTo [] } do {
                     deleteWaypoint ((waypoints _tgroup) select 0);
                 };
                 commandStop (driver _veh);

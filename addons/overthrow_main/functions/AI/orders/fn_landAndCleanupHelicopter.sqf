@@ -2,7 +2,7 @@ params ["_veh", "_pos"];
 
 private _group = group (driver _veh);
 if (_group isEqualType grpNull) then {
-    while { (count (waypoints _group)) > 0 } do {
+    while { (waypoints _group) isNotEqualTo [] } do {
         deleteWaypoint ((waypoints _group) select 0);
     };
 };

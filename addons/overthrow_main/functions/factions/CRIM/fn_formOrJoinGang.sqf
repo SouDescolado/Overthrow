@@ -3,7 +3,7 @@ params ["_town"];
 _gangs = OT_civilians getVariable [format ["gangs%1", _town], []];
 _townpos = server getVariable _town;
 
-if (count _gangs > 0) then {
+if (_gangs isNotEqualTo []) then {
     //make a gang larger (maybe)
     _gangid = _gangs select 0;
     _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];

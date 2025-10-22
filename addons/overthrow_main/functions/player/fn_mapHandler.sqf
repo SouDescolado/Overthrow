@@ -4,7 +4,6 @@ disableSerialization;
 params ["_mapCtrl"];
 
 private _vehs = [];
-private _cfgVeh = configFile >> "CfgVehicles";
 
 //Draw markers for all players on foot, else save as vehicle to draw - Mission Parameter
 if (OT_showPlayerMarkers) then {
@@ -101,14 +100,14 @@ if (visibleMap) then {
             private _passengers = "";
             private _color = [0, 0.5, 0, 1];
             {
-                if (isPlayer _x && !(_x isEqualTo player)) then {
+                if (isPlayer _x && (_x isNotEqualTo player)) then {
                     _passengers = format ["%1 %2", _passengers, name _x];
                 };
                 if !(captive _x) then { _color = [0, 0.2, 0, 1] };
             } forEach (crew _x);
 
             _mapCtrl drawIcon [
-                getText (_cfgVeh >> (typeOf _x) >> "icon"),
+                getText (configOf _x >> "icon"),
                 _color,
                 _pos,
                 24,

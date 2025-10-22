@@ -1,5 +1,5 @@
 crim_counter = crim_counter + 1;
-if !(crim_counter < 12) then {
+if (crim_counter >= 12) then {
     crim_counter = 0;
     private _revealed = server getVariable ["revealedGangs", []];
     {
@@ -11,7 +11,7 @@ if !(crim_counter < 12) then {
         _pos = server getVariable _x;
 
         private _gangs = OT_civilians getVariable [format ["gangs%1", _x], []];
-        if (count _gangs > 0) then {
+        if (_gangs isNotEqualTo []) then {
             private _gangid = _gangs select 0;
             private _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
             if (count _gang == 9) then {

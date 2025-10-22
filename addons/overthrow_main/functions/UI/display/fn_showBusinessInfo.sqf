@@ -1,7 +1,7 @@
 disableSerialization;
 private _name = "";
 private _data = [];
-if (count _this isEqualTo 0) then {
+if (_this isEqualTo []) then {
     private _idx = lbCurSel 1501;
     _name = lbData [1501, _idx];
 } else {

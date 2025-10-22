@@ -41,12 +41,12 @@ _unit addEventHandler [
             //See if anyone heard the shots
             private _range = 800;
             (_me weaponAccessories (currentMuzzle _me)) params [["_silencer", ""]];
-            if !(_silencer isEqualTo "") then {
+            if (_silencer isNotEqualTo "") then {
                 //Shot was suppressed
                 _range = 50;
             };
 
-            if !((allGroups findIf { side _x in [west, east] && { (leader _x distance _me) < _range } }) isEqualTo -1) exitWith {
+            if ((allGroups findIf { side _x in [west, east] && { (leader _x distance _me) < _range } }) isNotEqualTo -1) exitWith {
                 _me setCaptive false;
                 [_me, _range] call OT_fnc_revealToNATO;
             };
@@ -80,9 +80,9 @@ if ((isPlayer _unit) && isNil "OT_ACEunconsciousChangedEHId") then {
             private _nearbyUnits = player nearEntities ["CAManBase", 50];
             {
                 if (!isPlayer _x
-                    && { (isNull objectParent _x) }
-                    && { ((side _x isEqualTo resistance) || captive _x) }
-                    && { !(_unit isEqualTo _x) }
+                    && { isNull objectParent _x }
+                    && { (side _x isEqualTo resistance) || captive _x }
+                    && { _unit isNotEqualTo _x }
                     && { _havepi || { ("ACE_epinephrine" in (items _x)) } }
                 ) exitWith {
                     systemChat format ["%1: On my way to help you", name _x];

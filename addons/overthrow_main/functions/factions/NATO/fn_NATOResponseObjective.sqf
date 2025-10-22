@@ -20,7 +20,7 @@ _fail = {
     100 remoteExec ["OT_fnc_influenceSilent", 0, false];
     private _posTown = getMarkerPos _objective;
     _flag = _posTown nearObjects [OT_flag_NATO, 500];
-    if (count _flag > 0) then {
+    if (_flag isNotEqualTo []) then {
         deleteVehicle (_flag select 0);
     };
     _abandoned = server getVariable "NATOabandoned";

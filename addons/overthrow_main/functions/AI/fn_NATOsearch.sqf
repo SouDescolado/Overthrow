@@ -32,7 +32,7 @@ private _group = group _cop;
 private _hdl = objNull;
 
 //delete all group waypoints
-while { (count (waypoints _group)) > 0 } do {
+while { (waypoints _group) isNotEqualTo [] } do {
     deleteWaypoint ((waypoints _group) select 0);
 };
 sleep 0.5;
@@ -89,7 +89,7 @@ if ((_target distance _posnow) > 2) then {
         [_cop, "I said stop! move again and we WILL open fire"] remoteExec ["globalChat", _target, false];
         "sectorLost" remoteExec ["playSound", _target, false];
 
-        while { !((waypoints _group) isEqualTo []) } do {
+        while { (waypoints _group) isNotEqualTo [] } do {
             deleteWaypoint ((waypoints _group) select 0);
         };
         sleep 3;

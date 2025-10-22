@@ -4,7 +4,7 @@ _jobparams params ["_faction"];
 private _reppos = server getVariable [format ["factionrep%1", _faction], getPos player];
 private _roads = _reppos nearRoads 75;
 private _destination = [];
-if (count _roads > 0) then {
+if (_roads isNotEqualTo []) then {
     _destination = getPos (_roads select 0);
 } else {
     _destination = _reppos;

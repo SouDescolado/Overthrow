@@ -139,7 +139,7 @@ for "_i" from 0 to (_numslots - 1) do {
         } else {
             _items = getArray (_com);
         };
-        if (count _items > 0) then {
+        if (_items isNotEqualTo []) then {
             _cls = selectRandom _items;
             _unit addPrimaryWeaponItem _cls;
         };

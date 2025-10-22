@@ -15,7 +15,7 @@ private _bargates = _start nearObjects ["Land_BarGate_F", 50];
 
 [_group, _start, 50, 4] call CBA_fnc_taskPatrol;
 
-while { !(isNil "_group") && count (units _group) > 0 } do {
+while { !(isNil "_group") && (units _group) isNotEqualTo [] } do {
     _group setVariable ["VCM_NORESCUE", true];
     _group setVariable ["VCM_TOUGHSQUAD", true];
 
@@ -26,7 +26,7 @@ while { !(isNil "_group") && count (units _group) > 0 } do {
     {
         _unit = _x;
         _iscar = false;
-        if (_unit isKindOf "LandVehicle" && !(side _x isEqualTo west)) then {
+        if (_unit isKindOf "LandVehicle" && (side _x isNotEqualTo west)) then {
             _unit = driver _unit;
             _iscar = true;
             _f = false;
@@ -54,7 +54,7 @@ while { !(isNil "_group") && count (units _group) > 0 } do {
         };
     } forEach (_start nearEntities [["CaManBase", "LandVehicle"], _outerRange]);
 
-    if ((count _vehs) > 0 || (count _friendly) > 0) then {
+    if (_vehs isNotEqualTo [] || _friendly isNotEqualTo []) then {
         {
             _x animate ["Door_1_rot", 1];
         } forEach (_bargates);

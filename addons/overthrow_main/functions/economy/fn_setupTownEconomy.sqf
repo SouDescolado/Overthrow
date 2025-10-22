@@ -12,7 +12,7 @@ private _piers = [];
 private _activeHardware = [];
 
 private _churches = nearestObjects [_posTown, OT_churches, _dist, false];
-if (count _churches > 0) then {
+if (_churches isNotEqualTo []) then {
     server setVariable [format ["churchin%1", _town], getPos (_churches select 0), true];
 };
 
@@ -79,7 +79,7 @@ diag_log format ["Overthrow: Set up economy in %1 (pop. %2, %3 of %4 shops)", _t
 } forEach (nearestObjects [_posTown, OT_carShops, _dist, false]);
 server setVariable [format ["activecarshopsin%1", _town], _activecar, true];
 
-if ((count OT_piers) > 0) then {
+if (OT_piers isNotEqualTo []) then {
     {
         private _po = getPos _x;
         if !(_po in _piers) then {

@@ -3,8 +3,8 @@ private _numtokill = round (random 3) + 2;
 private _title = "Kill NATO";
 private _found = false;
 
-private _groups = [allGroups, [], { (leader _x) distance2D player }, "ASCEND", { (side leader _x) isEqualTo west && (count units _x) > 0 && ((leader _x) distance2D player) < 300 }] call BIS_fnc_sortBy;
-if (count _groups isEqualTo 0) exitWith { [] };
+private _groups = [allGroups, [], { (leader _x) distance2D player }, "ASCEND", { (side leader _x) isEqualTo west && (units _x) isNotEqualTo [] && ((leader _x) distance2D player) < 300 }] call BIS_fnc_sortBy;
+if (_groups isEqualTo []) exitWith { [] };
 
 private _group = _groups select 0;
 private _numtokill = count units _group;

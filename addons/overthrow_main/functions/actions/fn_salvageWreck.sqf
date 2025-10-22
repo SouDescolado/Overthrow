@@ -82,7 +82,7 @@ private _doSalvage = {
 private _objects = player nearEntities [["Car", "ReammoBox_F", "Air", "Ship"], 20];
 _filtered = [];
 {
-    if !(_x isEqualTo OT_salvageVehicle) then { _filtered pushBack _x };
+    if (_x isNotEqualTo OT_salvageVehicle) then { _filtered pushBack _x };
 } forEach (_objects);
 
 if ((count _filtered) isEqualTo 1) then {

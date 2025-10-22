@@ -1,7 +1,7 @@
 private _town = player call OT_fnc_nearestTown;
 private _standing = [_town] call OT_fnc_support;
 
-if (_standing < 10 && count (player nearObjects [OT_refugeeCamp, 50]) isEqualTo 0) exitWith {
+if (_standing < 10 && (player nearObjects [OT_refugeeCamp, 50]) isEqualTo []) exitWith {
     "+10 Resistance Support required to recruit, or you must be within 50m of a refugee camp" call OT_fnc_notifyMinor;
 };
 

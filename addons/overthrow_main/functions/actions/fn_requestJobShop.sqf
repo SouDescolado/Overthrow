@@ -38,7 +38,7 @@ OT_jobShowing = _job;
 OT_jobShowingID = _id;
 OT_jobShowingExpiry = _expiry;
 OT_jobsOffered pushBack _id;
-if (count _job isEqualTo 0) exitWith { call OT_fnc_requestJobShop };
+if (_job isEqualTo []) exitWith { call OT_fnc_requestJobShop };
 _job params ["_info", "_markerPos", "_setup", "_fail", "_success", "_end", "_jobparams"];
 
 OT_jobShowingType = "shop";

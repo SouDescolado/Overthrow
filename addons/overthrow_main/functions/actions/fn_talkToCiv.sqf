@@ -33,7 +33,7 @@ private _canGangJob = false;
 private _isShop = false;
 private _isMayor = false;
 
-if !((_civ getVariable ["shop", []]) isEqualTo []) then {
+if ((_civ getVariable ["shop", []]) isNotEqualTo []) then {
     _canSellDrugs = true;
     _canRecruit = false;
     _canBuy = true;
@@ -106,19 +106,19 @@ if (_civ call OT_fnc_hasOwner) then {
     _canSellDrugs = false;
 };
 
-if !((_civ getVariable ["garrison", ""]) isEqualTo "") then {
+if ((_civ getVariable ["garrison", ""]) isNotEqualTo "") then {
     _canRecruit = false;
     _canIntel = false;
     _canSellDrugs = false;
 };
-if !((_civ getVariable ["polgarrison", ""]) isEqualTo "") then {
+if ((_civ getVariable ["polgarrison", ""]) isNotEqualTo "") then {
     _canRecruit = false;
     _canIntel = false;
     _canSellDrugs = false;
 };
 
 private _delivery = _civ getVariable ["OT_delivery", []];
-if ((count _delivery) > 0) then {
+if (_delivery isNotEqualTo []) then {
     _delivery params ["_itemcls", "_numitems"];
     _canRecruit = false;
     _canIntel = false;
@@ -197,7 +197,7 @@ if (_canGangJob) then {
     private _gangid = _civ getVariable ["OT_gangid", -1];
     if (_gangid > -1) then {
         _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
-        if (count _gang > 0) then {
+        if (_gang isNotEqualTo []) then {
             private _name = _gang select 8;
             private _rep = player getVariable [format ["gangrep%1", _gangid], 0];
             _options pushBack format ["<t align='center' size='2'>%1</t><br/><br/><t align='center' size='0.8'>Your Rep: %2", _name, _rep];
@@ -398,7 +398,7 @@ if (_canTute) then {
                 _x params ["_pos", "_name"];
                 private _gangs = OT_civilians getVariable [format ["gangs%1", _name], []];
                 private _found = false;
-                if (count _gangs > 0) then {
+                if (_gangs isNotEqualTo []) then {
                     if !((_gangs select 0) in _revealed) then {
                         _gangid = _gangs select 0;
                         _found = true;
@@ -581,7 +581,7 @@ if (_canBuyBoats) then {
                         player setVariable ["OT_ferryDestination", _destpos, false];
                         private _desttown = _destpos call OT_fnc_nearestTown;
                         private _pos = (getPosATL player) findEmptyPosition [10, 100, OT_vehType_ferry];
-                        if (count _pos isEqualTo 0) exitWith {
+                        if (_pos isEqualTo []) exitWith {
                             "Not enough space, please clear an area nearby" call OT_fnc_notifyMinor;
                         };
                         private _cost = floor ((player distance _destpos) * 0.005);
@@ -635,7 +635,7 @@ if (_canBuyBoats) then {
                                 !alive player
                                     || !alive _veh
                                     || !alive _driver
-                                    || (vehicle player isEqualTo player)
+                                    || (isNull objectParent player)
                                     || (player distance _destpos < 80);
                             };
 

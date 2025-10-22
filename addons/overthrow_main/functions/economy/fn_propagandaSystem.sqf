@@ -9,7 +9,7 @@ sleep 20;
 
 [
     "propaganda_system",
-    "_counter % 10 isEqualTo 0 && { !((date # 3) isEqualTo propaganda_system_lasthour) }",
+    "_counter % 10 isEqualTo 0 && { (date # 3) isNotEqualTo propaganda_system_lasthour }",
     "
         private _numplayers = count (allPlayers - (entities 'HeadlessClient_F'));
         propaganda_system_lasthour = date select 3;

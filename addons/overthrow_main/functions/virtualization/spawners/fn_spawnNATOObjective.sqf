@@ -85,7 +85,7 @@ if (_name in OT_allComms) then {
 
     if (_count < _numNATO) then {
         _start = _posTown findEmptyPosition [2, 50];
-        if ((count _start) isEqualTo 0) then {
+        if (_start isEqualTo []) then {
             _start = _posTown findEmptyPosition [2, 150];
         };
         _civ = _group createUnit [OT_NATO_Unit_AA_ass, _start, [], 0, "NONE"];
@@ -225,7 +225,7 @@ while { _count < _numNATO } do {
 private _pos = [];
 private _dir = 0;
 private _terminal = nearestObjects [_posTown, OT_airportTerminals, 350];
-if (count _terminal > 0) then {
+if (_terminal isNotEqualTo []) then {
     private _tp = getPos (_terminal select 0);
     _dir = getDir (_terminal select 0);
     private _dist = 35;
@@ -266,7 +266,7 @@ private _road = objNull;
     private _vehtype = _x;
     private _got = false;
     private _pos = _posTown findEmptyPosition [10, 250, _vehtype];
-    if (count _pos == 0) then { _pos = _posTown findEmptyPosition [0, 250, _vehtype] };
+    if (_pos isEqualTo []) then { _pos = _posTown findEmptyPosition [0, 250, _vehtype] };
     private _dir = random 360;
 
     // if position is on road, randomize a little and try again, until it is not on road
@@ -274,11 +274,11 @@ private _road = objNull;
     while { (isOnRoad _pos) && (_loops < 50) } do {
         private _newRandomPos = _posTown getPos [random 100, random 360];
         _pos = _newRandomPos findEmptyPosition [10, 250, _vehtype];
-        if (count _pos == 0) then { _pos = _newRandomPos findEmptyPosition [0, 250, _vehtype] };
+        if (_pos isEqualTo []) then { _pos = _newRandomPos findEmptyPosition [0, 250, _vehtype] };
         _loops = _loops + 1;
     };
 
-    if (count _pos > 0) then {
+    if (_pos isNotEqualTo []) then {
         if (_vehtype in OT_staticWeapons) then {
             //put sandbags
             private _p = _pos getPos [1.5, _dir];
@@ -323,7 +323,7 @@ private _road = objNull;
         _groups pushBack _group;
         _group setVariable ["Vcm_Disable", true, true]; //stop him from running off
         private _vpos = _posTown findEmptyPosition [10, 100, OT_NATO_Vehicle_HVT];
-        if (count _vpos == 0) then { _vpos = _posTown findEmptyPosition [0, 100, OT_NATO_Vehicle_HVT] };
+        if (_vpos isEqualTo []) then { _vpos = _posTown findEmptyPosition [0, 100, OT_NATO_Vehicle_HVT] };
         //His empty APC
         private _veh = OT_NATO_Vehicle_HVT createVehicle _vpos;
         _veh setPos _vpos;

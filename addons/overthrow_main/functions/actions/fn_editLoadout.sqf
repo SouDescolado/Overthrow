@@ -19,7 +19,7 @@ if (_warehouse == objNull) exitWith { hint "No warehouse near by!" };
     };
 } forEach (allVariables _warehouse);
 
-if ((count _items) isEqualTo 0) exitWith { hint "Cannot edit loadout, no items in warehouse" };
+if (_items isEqualTo []) exitWith { hint "Cannot edit loadout, no items in warehouse" };
 
 //spawn a virtual dude
 private _start = (getPosATL player) findEmptyPosition [5, 100, _cls];

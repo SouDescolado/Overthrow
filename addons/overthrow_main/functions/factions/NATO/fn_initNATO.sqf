@@ -60,7 +60,7 @@ OT_NATO_Units_CTRGSupport = [];
 {
     private _name = configName _x;
     private _unitCfg = _x;
-    if (!(_name isEqualTo OT_NATO_Unit_Police) && !(_name isEqualTo OT_NATO_Unit_PoliceCommander)) then {
+    if ((_name isNotEqualTo OT_NATO_Unit_Police) && (_name isNotEqualTo OT_NATO_Unit_PoliceCommander)) then {
         [_name] call {
             params ["_name"];
             _name = toLower _name;
@@ -159,7 +159,7 @@ if ((server getVariable "StartupType") == "NEW" || (server getVariable ["NATOver
 
     //Find military objectives
     private _groundvehs = OT_allBLUOffensiveVehicles select { getText (configFile >> "CfgVehicles" >> _x >> "faction") == OT_faction_NATO && { !((_x isKindOf "Air") || (_x isKindOf "Tank") || (_x isKindOf "Ship")) } };
-    if (count _groundvehs == 0) then {
+    if (_groundvehs isEqualTo []) then {
         _groundvehs = OT_allBLUOffensiveVehicles select { getText (configFile >> "CfgVehicles" >> _x >> "faction") == OT_fallback_faction_NATO && { !((_x isKindOf "Air") || (_x isKindOf "Tank") || (_x isKindOf "Ship")) } };
     };
     {
@@ -200,7 +200,7 @@ if ((server getVariable "StartupType") == "NEW" || (server getVariable ["NATOver
                 } forEach (OT_NATO_Vehicles_JetGarrison);
                 server setVariable [format ["airgarrison%1", _name], _garr, true];
                 OT_NATO_HQPos = _pos;
-                if ((count OT_NATO_HQ_garrisonPos) isEqualTo 0) then {
+                if (OT_NATO_HQ_garrisonPos isEqualTo []) then {
                     OT_NATO_HQ_garrisonPos = _pos;
                 };
             } else {
@@ -214,7 +214,7 @@ if ((server getVariable "StartupType") == "NEW" || (server getVariable ["NATOver
         //Check for helipads
         if !(_name in OT_allAirports) then {
             private _helipads = (_pos nearObjects ["Land_HelipadCircle_F", 400]) + (_pos nearObjects ["Land_HelipadSquare_F", 400]);
-            if ((count _helipads) > 0) then {
+            if (_helipads isNotEqualTo []) then {
                 OT_NATOHelipads pushBackUnique _x;
             };
         };
@@ -262,7 +262,7 @@ if ((server getVariable "StartupType") == "NEW" || (server getVariable ["NATOver
         };
     } forEach (OT_airportData);
 
-    if ((count _prilist) > 0) then {
+    if (_prilist isNotEqualTo []) then {
         {
             _x params ["_type", "_num"];
             private _count = 0;
@@ -277,7 +277,7 @@ if ((server getVariable "StartupType") == "NEW" || (server getVariable ["NATOver
 
         //Distribute some random Air vehicles
         private _airvehs = OT_allBLUOffensiveVehicles select { getText (configFile >> "CfgVehicles" >> _x >> "faction") == OT_faction_NATO && { _x isKindOf "Air" } };
-        if (count _airvehs == 0) then {
+        if (_airvehs isEqualTo []) then {
             _airvehs = OT_allBLUOffensiveVehicles select { getText (configFile >> "CfgVehicles" >> _x >> "faction") == OT_fallback_faction_NATO && { _x isKindOf "Air" } };
         };
         {
@@ -371,7 +371,7 @@ diag_log "Overthrow: NATO Init Done";
     if !((server getVariable "StartupType") == "NEW" || (server getVariable ["NATOversion", 0]) < OT_NATOversion) then {
         if !(_name in OT_allAirports) then {
             private _helipads = (_pos nearObjects ["Land_HelipadCircle_F", 400]) + (_pos nearObjects ["Land_HelipadSquare_F", 400]);
-            if ((count _helipads) > 0) then {
+            if (_helipads isNotEqualTo []) then {
                 OT_NATOHelipads pushBackUnique _x;
             };
         };
@@ -381,7 +381,7 @@ diag_log "Overthrow: NATO Init Done";
     //first try to find a warehouse to put it at
     private _warehouses = (_pos nearObjects [OT_warehouse, 400]);
     private _supplypos = _pos;
-    if ((count _warehouses) isEqualTo 0) then {
+    if (_warehouses isEqualTo []) then {
         //just pick a random position
         _supplypos = _pos findEmptyPosition [4, 100, OT_item_Storage];
     } else {

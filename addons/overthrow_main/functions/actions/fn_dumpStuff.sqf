@@ -155,7 +155,7 @@ if (_full) exitWith { false };
 
 if ((!isPlayer _unit) || _linkedItems) then {
     {
-        if !(_x isEqualTo "ItemMap") then {
+        if (_x isNotEqualTo "ItemMap") then {
             if (!(_t canAdd _x) && !_isTruck) exitWith {
                 _full = true;
             };

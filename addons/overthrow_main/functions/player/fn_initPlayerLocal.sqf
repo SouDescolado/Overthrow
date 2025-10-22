@@ -140,7 +140,7 @@ private _group = createGroup resistance;
 
 if (!_newplayer) then {
     _housepos = player getVariable "home";
-    if (isNil "_housepos" || (count _housepos) isEqualTo 0) exitWith { _newplayer = true };
+    if (isNil "_housepos" || _housepos isEqualTo []) exitWith { _newplayer = true };
     _town = _housepos call OT_fnc_nearestTown;
     _pos = server getVariable _town;
     {
@@ -274,9 +274,9 @@ if (_newplayer) then {
 
     //Free quad
     _pos = _housepos findEmptyPosition [5, 100, "C_Quadbike_01_F"];
-    if (count _pos == 0) then { _pos = _housepos findEmptyPosition [0, 100, "C_Quadbike_01_F"] };
+    if (_pos isEqualTo []) then { _pos = _housepos findEmptyPosition [0, 100, "C_Quadbike_01_F"] };
 
-    if (count _pos > 0) then {
+    if (_pos isNotEqualTo []) then {
         _veh = "C_Quadbike_01_F" createVehicle _pos;
         [_veh, getPlayerUID player] call OT_fnc_setOwner;
         clearWeaponCargoGlobal _veh;
@@ -446,7 +446,7 @@ player addEventHandler [
 
 {
     _pos = buildingpositions getVariable [_x, []];
-    if (count _pos isEqualTo 0) then {
+    if (_pos isEqualTo []) then {
         _bdg = OT_centerPos nearestObject parseNumber _x;
         _pos = position _bdg;
         buildingpositions setVariable [_x, _pos, true];
@@ -462,7 +462,7 @@ player call OT_fnc_mapSystem;
 {
     _x params ["_pos"];
     private _base = _pos nearObjects [OT_flag_IND, 5];
-    if ((count _base) > 0) then {
+    if (_base isNotEqualTo []) then {
         _base = _base # 0;
         _base addAction [
             "Set As Home",

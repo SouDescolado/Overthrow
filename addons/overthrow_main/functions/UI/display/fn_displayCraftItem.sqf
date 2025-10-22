@@ -12,7 +12,7 @@ private _def = [];
     if (_cls == _c && _q == _qty) exitWith { _def = _x };
 } forEach (OT_craftableItems);
 
-if (count _def > 0) then {
+if (_def isNotEqualTo []) then {
     _def params ["_cls", "_recipe", "_qty"];
 
     private _textctrl = (findDisplay 8000) displayCtrl 1100;

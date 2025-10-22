@@ -11,7 +11,7 @@ while { _count < _num } do {
 
     private _dir = (_frompos getDir _attackpos);
     private _pos = _frompos findEmptyPosition [10, 100, _vehtype];
-    if (count _pos == 0) then { _pos = _frompos findEmptyPosition [0, 100, _vehtype] };
+    if (_pos isEqualTo []) then { _pos = _frompos findEmptyPosition [0, 100, _vehtype] };
 
     _veh = createVehicle [_vehtype, _pos, [], 0, ""];
     _veh setVariable ["garrison", "HQ", false];
@@ -40,7 +40,7 @@ while { _count < _num } do {
 
     _attackpos = _attackpos findEmptyPosition [50, 200, _vehtype];
     _roads = _attackpos nearRoads 150;
-    if (count _roads > 0) then {
+    if (_roads isNotEqualTo []) then {
         _attackpos = ASLToAGL (getPosASL (selectRandom _roads));
     };
 

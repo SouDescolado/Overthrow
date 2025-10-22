@@ -11,14 +11,14 @@ private _house = false;
 while { !_found && _range < 1200 } do {
     _houses = nearestObjects [_search, ["house"], _range, false];
     _possible = [];
-    if (count _houses > 0) then {
+    if (_houses isNotEqualTo []) then {
         {
             if (!(_x call OT_fnc_hasOwner) && (typeOf _x) in _types) then {
                 _possible pushBack _x;
             };
         } forEach (_houses);
 
-        if (count _possible > 0) then {
+        if (_possible isNotEqualTo []) then {
             _house = selectRandom _possible;
             _found = true;
         };

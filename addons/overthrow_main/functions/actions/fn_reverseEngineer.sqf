@@ -2,7 +2,7 @@ private _idx = lbCurSel 1500;
 private _cls = lbData [1500, _idx];
 _cost = cost getVariable [_cls, []];
 private _blueprints = server getVariable ["GEURblueprints", []];
-if ((count _cost) > 0 && !(_cls in _blueprints)) then {
+if (_cost isNotEqualTo [] && !(_cls in _blueprints)) then {
     _blueprints pushBack _cls;
     server setVariable ["GEURblueprints", _blueprints, true];
     closeDialog 0;

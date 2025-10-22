@@ -45,7 +45,7 @@ if (_searchPos in OT_warehouseLocationCache) then {
         private _found = false;
         while { !_found && _range < 1550 } do {
             private _objects = nearestObjects [_searchPos, [OT_warehouse], _range];
-            if (count _objects > 0) then {
+            if (_objects isNotEqualTo []) then {
                 _warehouse = _objects # 0;
                 _found = true;
             };

@@ -18,7 +18,7 @@ private _activeshops = server getVariable [format ["activeshopsin%1", _town], []
 
 private _dest = [];
 
-if (count _activeshops > 0 && (random 100) > 50) then {
+if (_activeshops isNotEqualTo [] && (random 100) > 50) then {
     _shop = selectRandom _activeshops;
     _dest = (_shop select 0) findEmptyPosition [3, 50, OT_civType_local];
 } else {

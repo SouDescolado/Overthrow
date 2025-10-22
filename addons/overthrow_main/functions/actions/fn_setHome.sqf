@@ -11,7 +11,7 @@ if ((typeOf _building) in OT_allRepairableRuins) exitWith {
         if (_type isEqualTo _ruinClass) exitWith { _ruins = _x };
     } forEach (OT_repairableRuins);
 
-    if ((count _ruins) > 0) then {
+    if (_ruins isNotEqualTo []) then {
         _ruins params ["_ruinClass", "_buildClass", "_price"];
         _money = player getVariable ["money", 0];
         if (_money >= _price) then {

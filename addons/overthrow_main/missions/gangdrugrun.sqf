@@ -19,7 +19,7 @@ private _gangtown = _gang select 2;
             _destination = _posTown findEmptyPosition [5, 100, OT_civType_local];
         };
     };
-} forEach ([OT_allTowns, [], { random 100 }, "ASCEND", { !(_x isEqualTo _gangtown) }] call BIS_fnc_sortBy);
+} forEach ([OT_allTowns, [], { random 100 }, "ASCEND", { _x isNotEqualTo _gangtown }] call BIS_fnc_sortBy);
 
 _numitems = floor (2 + random 4);
 _reward = floor ((_startpos distance2D _destination) * 0.01 * _numitems);

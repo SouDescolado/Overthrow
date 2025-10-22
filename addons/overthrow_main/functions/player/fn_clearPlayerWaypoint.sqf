@@ -1,4 +1,4 @@
 OT_missionMarker = nil;
-while { (count (waypoints group player)) > 0 } do {
+while { (waypoints group player) isNotEqualTo [] } do {
     deleteWaypoint ((waypoints group player) select 0);
 };

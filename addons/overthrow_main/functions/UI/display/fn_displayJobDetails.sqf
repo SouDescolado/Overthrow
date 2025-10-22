@@ -9,7 +9,7 @@ private _job = [];
     if (_jobid isEqualTo _id) exitWith { _job = _j };
 } forEach (spawner getVariable ["OT_activeJobs", []]);
 
-if (count _job > 0) then {
+if (_job isNotEqualTo []) then {
     _job params ["_info", "_markerPos"];
     _info params ["_title", "_desc"];
     private _remains = spawner getVariable [format ["OT_jobRemain%1", _id], 0];

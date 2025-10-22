@@ -9,7 +9,7 @@ private _job = [];
     if (_jobid isEqualTo _id) exitWith { _job = _j };
 } forEach (spawner getVariable ["OT_activeJobs", []]);
 
-if (count _job > 0) then {
+if (_job isNotEqualTo []) then {
     _job params ["_info", "_markerPos"];
     [player, _markerPos, _info select 0] call OT_fnc_givePlayerWaypoint;
 };

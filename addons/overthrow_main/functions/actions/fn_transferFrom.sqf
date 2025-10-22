@@ -4,7 +4,7 @@ if (_veh isEqualTo player) exitWith {};
 
 private _objects = [];
 {
-    if !(_x isEqualTo _veh) then { _objects pushBack _x };
+    if (_x isNotEqualTo _veh) then { _objects pushBack _x };
 } forEach (player nearEntities [["Car", "ReammoBox_F", "Air", "Ship"], 20]);
 
 if (_objects isEqualTo []) exitWith {

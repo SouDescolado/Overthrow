@@ -6,8 +6,8 @@ private _source = _nozzle getVariable "ace_refuel_source";
 if ((typeOf _source) in OT_fuelPumps) then {
     private _last = _sink getVariable ["ot_lastFuel", fuel _sink];
     private _fueled = (fuel _sink) - _last;
-    private _litresFueled = _fueled * getNumber (configFile >> "CfgVehicles" >> typeOf _sink >> "fuelCapacity");
-    private _cargoCap = getNumber (configFile >> "CfgVehicles" >> typeOf _sink >> "ace_refuel_fuelCargo");
+    private _litresFueled = _fueled * getNumber (configOf _sink >> "fuelCapacity");
+    private _cargoCap = getNumber (configOf _sink >> "ace_refuel_fuelCargo");
     private _cargo = [_sink] call ace_refuel_fnc_getFuel;
 
     private _pricePer = [OT_nation, "FUEL", 100] call OT_fnc_getPrice;

@@ -9,7 +9,7 @@ _def = [];
     if (_cls == _c && _q isEqualTo _qty) exitWith { _def = _x };
 } forEach (OT_craftableItems);
 
-if (count _def > 0) then {
+if (_def isNotEqualTo []) then {
     private _err = false;
     _def params ["_cls", "_recipe", "_qty"];
 

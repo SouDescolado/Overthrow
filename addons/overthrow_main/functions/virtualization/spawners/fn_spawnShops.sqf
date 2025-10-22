@@ -14,7 +14,7 @@ _group setVariable ["VCM_Disable", true];
 _group setVariable ["lambs_danger_disableGroupAI", true];
 _groups pushBack _group;
 
-if (count _activeshops > 0) exitWith {
+if (_activeshops isNotEqualTo []) exitWith {
     {
         //find building for active shop
         _x params ["_pos", "_category"];
@@ -22,7 +22,7 @@ if (count _activeshops > 0) exitWith {
         _building = nearestBuilding _pos;
 
         //set start location based on building config
-        private _start = _building buildingPos getNumber (configFile >> "CfgVehicles" >> typeOf (_building) >> "ot_shopPos");
+        private _start = _building buildingPos getNumber (configOf _building >> "ot_shopPos");
         if (isNil "_start" || { _start isEqualTo "" } || { _start isEqualTo "''" }) then { _start = _building buildingPos 0 };
         private _facing = 0;
 

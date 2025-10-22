@@ -10,7 +10,7 @@ if (_currentCls != "") then {
     _text = format ["<t size='0.8' align='center'>Currently Producing</t><br/><t size='1.1' align='center'>%1</t><br/><br/>", _currentName];
 
     private _cost = cost getVariable [_currentCls, []];
-    if (count _cost > 0) then {
+    if (_cost isNotEqualTo []) then {
         _cost params ["_base", "_wood", "_steel", ["_plastic", 0]];
         private _b = 1;
         if (_base > 240) then {
@@ -78,7 +78,7 @@ ctrlSetText [1200, _pic];
 
 private _cost = cost getVariable [_cls, []];
 private _recipe = "";
-if (count _cost > 0) then {
+if (_cost isNotEqualTo []) then {
     _cost params ["_base", "_wood", "_steel", ["_plastic", 0]];
     private _b = 1;
     if (_base > 240) then {

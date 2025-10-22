@@ -41,7 +41,7 @@ if (_frombase isNotEqualTo "" && { (random 100) > _chance }) then {
         if ((count _waypoints) > 6) exitWith {};
     } forEach (OT_NATO_control call BIS_fnc_arrayShuffle);
 
-    if ((count _waypoints) > 0) then {
+    if (_waypoints isNotEqualTo []) then {
         _spend = _spend - 250;
         _resources = _resources - 250;
         spawner setVariable ["NATOlastairpatrol", time, false];

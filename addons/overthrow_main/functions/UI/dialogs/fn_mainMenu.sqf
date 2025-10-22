@@ -499,7 +499,7 @@ private _notifications = [];
 private _opacityList = ["FF", "EF", "DF", "CF", "BF", "AF", "9F", "8F", "7F", "6F", "5F", "4F", "3F", "2F", "1F", "0F"];
 for "_x" from 0 to (count OT_notifyHistory - 1) do {
     // Notifications are retreived back to front because the latest one is at the back
-    _notifications pushBack (format ["<t size='0.7' align='left' color='#%1FFFFFF'>%2</t>", _opacityList select _x, OT_notifyHistory select ((count OT_notifyHistory) - _x - 1)]);
+    _notifications pushBack (format ["<t size='0.7' align='left' color='#%1FFFFFF'>%2</t>", _opacityList select _x, OT_notifyHistory select (-1 - _x)]);
 };
 
 _txt = _notifications joinString "<br/>";

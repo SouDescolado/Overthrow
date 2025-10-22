@@ -16,7 +16,7 @@ private _item = [];
     if ((_x select 4) == _cls && (typeOf _veh) == (_x select 1)) exitWith { _item = _x };
 } forEach (OT_workshop);
 
-if (count _item > 0) then {
+if (_item isNotEqualTo []) then {
     private _free = _item select 3;
     if (backpack player isEqualTo _free) then {
         removeBackpack player;

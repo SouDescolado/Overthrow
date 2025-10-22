@@ -33,7 +33,7 @@ private _markerPos = _p2 select 0;
         _group = spawner getVariable [format ["spawn%1", _id], nil];
         _topos = _p2 select 0;
         _failed = false;
-        if (!isNil "_group" && (count units _group) > 0) then {
+        if (!isNil "_group" && (units _group) isNotEqualTo []) then {
             _pos = getPos (leader _group);
             if ((_pos distance2D _topos) < 50) exitWith { _failed = true };
         };
@@ -46,7 +46,7 @@ private _markerPos = _p2 select 0;
         params ["_missiondef"];
         _missiondef params ["_id", "_ty", "_p1", "_p2", "_hour"];
         _group = spawner getVariable [format ["spawn%1", _id], nil];
-        (count units _group) isEqualTo 0;
+        (units _group) isEqualTo [];
     },
     {
         //we dont need to do anything

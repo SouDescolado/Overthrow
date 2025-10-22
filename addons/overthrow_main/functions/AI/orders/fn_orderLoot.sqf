@@ -10,7 +10,7 @@ if (_unitInRecoveryTruck > -1) exitWith {
 };
 
 private _sortedTargets = nearestObjects [_selectedUnits # 0, ["Car", "ReammoBox_F", "Air", "Ship"], 20] select { alive _x };
-if (count _sortedTargets isEqualTo 0) exitWith {
+if (_sortedTargets isEqualTo []) exitWith {
     "Cannot find any containers or vehicles within 20m of first selected unit" call OT_fnc_notifyMinor;
 };
 private _target = _sortedTargets # 0;

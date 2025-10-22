@@ -1,5 +1,5 @@
 job_system_counter = job_system_counter + 1;
-if !(job_system_counter < 12) then {
+if (job_system_counter >= 12) then {
     job_system_counter = 0;
     {
         _x params ["_name", ["_target", ""], "_condition", "_code", "_repeat", "_chance", "_expires", "_requestable"];
@@ -96,7 +96,7 @@ if !(job_system_counter < 12) then {
                             _x params ["_cls"];
                             private _pos = server getVariable [format ["factionrep%1", _cls], []];
                             private _town = "";
-                            if (count _pos > 0) then {
+                            if (_pos isNotEqualTo []) then {
                                 private _standing = server getVariable [format ["standing%1", _cls], 0];
                                 private _inSpawnDistance = [_pos] call OT_fnc_inSpawnDistance;
                                 private _town = _pos call OT_fnc_nearestTown;

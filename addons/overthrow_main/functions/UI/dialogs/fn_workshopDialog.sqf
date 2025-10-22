@@ -4,7 +4,7 @@ createDialog "OT_dialog_workshop";
 
 private _veh = cursorTarget;
 
-private _pic = getText (configFile >> "CfgVehicles" >> (typeOf _veh) >> "editorPreview");
+private _pic = getText (configOf _veh >> "editorPreview");
 ctrlSetText [1201, _pic];
 
 lbClear 1500;

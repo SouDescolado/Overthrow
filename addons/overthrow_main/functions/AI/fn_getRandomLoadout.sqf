@@ -9,12 +9,12 @@ if (_unit isEqualType "") then {
 
 private _loadouts = spawner getVariable [format ["loadouts_%1", _index], []];
 private _loadout = [];
-if (count _loadouts > 0) then {
+if (_loadouts isNotEqualTo []) then {
     //return a cached loadout
     _loadout = selectRandom _loadouts;
 } else {
     //generate one and cache it
-    if ((count _baseloadout) isEqualTo 0) then {
+    if (_baseloadout isEqualTo []) then {
         _baseloadout = getUnitLoadout _unit;
     };
     private _options = [_baseloadout] + _params;

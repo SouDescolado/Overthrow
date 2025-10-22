@@ -3,7 +3,7 @@ _jobparams params ["_destinationName"];
 
 private _roads = (server getVariable [_destinationName, []]) nearRoads 75;
 private _destination = [];
-if (count _roads > 0) then {
+if (_roads isNotEqualTo []) then {
     _destination = getPos (_roads select 0);
 } else {
     _destination = server getVariable [_destinationName, []];

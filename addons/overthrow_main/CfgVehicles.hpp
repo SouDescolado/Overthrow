@@ -17,7 +17,7 @@
                 statement = "_target spawn OT_fnc_salvageWreck"; \
             }; \
             class OT_Unflip { \
-                condition = "!(canMove _target) && (alive _target) && ((vehicle player) isEqualTo player)"; \
+                condition = "!(canMove _target) && (alive _target) && (isNull objectParent player)"; \
                 displayName = "Unflip"; \
                 statement = "_target call OT_fnc_unflipVehicle"; \
             }; \
@@ -123,7 +123,7 @@ class CfgVehicles {
         class ACE_Actions {
             class ACE_MainActions {
                 class OT_InteractionActions {
-                    condition = "(alive _target) && (!isPlayer _target) && !(side _target isEqualTo west)";
+                    condition = "(alive _target) && (!isPlayer _target) && (side _target isNotEqualTo west)";
                     selection = "pelvis";
                     distance = 4;
                     displayName = "Talk";

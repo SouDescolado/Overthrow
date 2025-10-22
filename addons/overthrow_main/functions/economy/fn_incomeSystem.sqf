@@ -11,7 +11,7 @@ income_system_lasthour = date select 3;
 
 [
     "income_system_loop",
-    "_counter % 3 isEqualTo 0 && { !(income_system_lasthour isEqualTo (date select 3)) }",
+    "_counter % 3 isEqualTo 0 && { income_system_lasthour isNotEqualTo (date select 3) }",
     "
         income_system_lasthour = date select 3;
 

@@ -14,11 +14,11 @@ private _cfgMagazines = configFile >> "CfgMagazines";
 //helper functions
 private _removeMagazines = {
     params ["_newloadout", "_forcls"];
-    private _hasVest = count (_newloadout select 4) > 0;
-    private _hasBackpack = count (_newloadout select 5) > 0;
+    private _hasVest = (_newloadout select 4) isNotEqualTo [];
+    private _hasBackpack = (_newloadout select 5) isNotEqualTo [];
     private _magazines = getArray (_cfgWeapons >> _forcls >> "magazines");
     {
-        if !(_x isEqualTo "this") then {
+        if (_x isNotEqualTo "this") then {
             _magazines = _magazines + getArray (_cfgWeapons >> _forcls >> _x >> "magazines");
         };
     } forEach (getArray (_cfgWeapons >> _forcls >> "muzzles"));
@@ -51,11 +51,11 @@ private _removeMagazines = {
 private _newloadout = +_loadout; //clone the loadout
 
 //get some basic info about the loadout
-private _hasVest = count (_newloadout select 4) > 0;
-private _hasBackpack = count (_newloadout select 5) > 0;
-private _hasPrimary = count (_newloadout select 0) > 0;
-private _hasLauncher = count (_newloadout select 1) > 0;
-private _hasHandgun = count (_newloadout select 2) > 0;
+private _hasVest = (_newloadout select 4) isNotEqualTo [];
+private _hasBackpack = (_newloadout select 5) isNotEqualTo [];
+private _hasPrimary = (_newloadout select 0) isNotEqualTo [];
+private _hasLauncher = (_newloadout select 1) isNotEqualTo [];
+private _hasHandgun = (_newloadout select 2) isNotEqualTo [];
 
 //replace primary weapon
 if (_hasPrimary) then {
@@ -102,11 +102,11 @@ if (_hasPrimary) then {
 
     _secondmags = [];
     {
-        if !(_x isEqualTo "this") then {
+        if (_x isNotEqualTo "this") then {
             _secondmags = _secondmags + getArray (_cfgWeapons >> _wpn >> _x >> "magazines");
         };
     } forEach (getArray (_cfgWeapons >> _wpn >> "muzzles"));
-    if ((count _secondmags) > 0) then {
+    if (_secondmags isNotEqualTo []) then {
         if (_hasBackpack) then {
             //add all of them to backpack
             {

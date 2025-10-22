@@ -13,7 +13,7 @@ if (count _data isEqualTo 4) then {
         //turns something into something
         _baseprice = round (_baseprice * 1.2);
     };
-    if ((_data select 2) isEqualTo "" && !((_data select 3) isEqualTo "")) then {
+    if ((_data select 2) isEqualTo "" && (_data select 3) isNotEqualTo "") then {
         if ((_data select 3) == "OT_Steel") then {
             _baseprice = round (_baseprice * 2.4);
         };

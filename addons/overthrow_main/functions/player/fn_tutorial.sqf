@@ -5,7 +5,7 @@ sleep 0.3;
 
 private _acekey = "Left Windows (default)";
 private _acebind = ["ACE3 Common", "ace_interact_menu_InteractKey"] call CBA_fnc_getKeybind;
-if (count _acebind > 0) then {
+if (_acebind isNotEqualTo []) then {
     _acekey = (cba_keybinding_keynames) getVariable [str ((_acebind select 5) select 0), _acekey];
 };
 
