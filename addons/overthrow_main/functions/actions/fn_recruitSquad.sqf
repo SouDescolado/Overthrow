@@ -4,7 +4,7 @@ params ["_cls", "_pos"];
 
 private _cc = player getVariable ["OT_squadcount", 0];
 
-if ((_pos nearEntities ["CAManBase", 50]) findIf { side _x isEqualTo west || side _x isEqualTo east } != -1) exitWith {
+if ((_pos nearEntities ["CAManBase", 50]) findIf { side _x isEqualTo blufor || side _x isEqualTo opfor } != -1) exitWith {
     "You cannot recruit squads with enemies nearby" call OT_fnc_notifyMinor;
 };
 
@@ -18,7 +18,7 @@ if (_money < _cost) exitWith {
 
 [-_cost] call OT_fnc_money;
 
-private _group = createGroup resistance;
+private _group = createGroup independent;
 private _leader = false;
 {
     _civ = [_x, _pos, _group] call OT_fnc_createSoldier;

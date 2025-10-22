@@ -7,7 +7,7 @@ private _cache = _target getVariable "SeenCacheNATO";
 if (isNil "_cache" || { time > (_cache select 1) }) then {
     _cache = [
         (([_targetPosition, 1200, 1200, 0, false] nearEntities [["CAManBase"], false, true, true] findIf {
-            side _x isEqualTo west
+            side _x isEqualTo blufor
                 && {
                     (_x distance _target < 7)
                         || { (time - ((_x targetKnowledge _target) select 2)) < 10 }

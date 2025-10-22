@@ -5,11 +5,11 @@ if ((count _this) isEqualTo 3) then {
     //its a position
     {
         private _c = leader (group _x);
-        if (side _c isEqualTo west && !(_c getVariable ["OT_searching", false])) exitWith { _cop = _c };
+        if (side _c isEqualTo blufor && !(_c getVariable ["OT_searching", false])) exitWith { _cop = _c };
     } forEach (_this nearEntities ["CAManBase", 300]);
     if (isNil "_cop") exitWith {};
     {
-        if !(side _x == west || side _x == east) exitWith { _target = _x };
+        if !(side _x == blufor || side _x == opfor) exitWith { _target = _x };
     } forEach (_cop nearEntities ["CAManBase", 50]);
 } else {
     _target = _this select 0;
@@ -18,7 +18,7 @@ if ((count _this) isEqualTo 3) then {
     } else {
         {
             private _c = leader (group _x);
-            if (side _c isEqualTo west && !(_c getVariable ["OT_searching", false])) exitWith { _cop = _c };
+            if (side _c isEqualTo blufor && !(_c getVariable ["OT_searching", false])) exitWith { _cop = _c };
         } forEach (_target nearEntities ["CAManBase", 150]);
     };
 };
@@ -54,7 +54,7 @@ if (isPlayer _target) then {
     [_target, "AmovPercMstpSnonWnonDnon_AmovPercMstpSsurWnonDnon"] remoteExec ["playMove", _target, false];
     [_target, "MOVE"] remoteExec ["disableAI", _target, false];
 };
-private _posnow = position _target;
+private _posnow = getPos _target;
 private _timenow = time;
 
 private _cleanup = {
@@ -98,7 +98,7 @@ if ((_target distance _posnow) > 2) then {
         _wp setWaypointBehaviour "COMBAT";
         _wp setWaypointSpeed "FULL";
 
-        _posnow = position _target;
+        _posnow = getPos _target;
         _timenow = time;
         _cop doMove ASLToAGL (getPosASL _target);
         waitUntil {

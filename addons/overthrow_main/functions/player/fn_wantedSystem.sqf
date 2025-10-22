@@ -46,7 +46,7 @@ _unit addEventHandler [
                 _range = 50;
             };
 
-            if ((allGroups findIf { side _x in [west, east] && { (leader _x distance _me) < _range } }) isNotEqualTo -1) exitWith {
+            if ((allGroups findIf { side _x in [blufor, opfor] && { (leader _x distance _me) < _range } }) isNotEqualTo -1) exitWith {
                 _me setCaptive false;
                 [_me, _range] call OT_fnc_revealToNATO;
             };
@@ -81,7 +81,7 @@ if ((isPlayer _unit) && isNil "OT_ACEunconsciousChangedEHId") then {
             {
                 if (!isPlayer _x
                     && { isNull objectParent _x }
-                    && { (side _x isEqualTo resistance) || captive _x }
+                    && { (side _x isEqualTo independent) || captive _x }
                     && { _unit isNotEqualTo _x }
                     && { _havepi || { ("ACE_epinephrine" in (items _x)) } }
                 ) exitWith {

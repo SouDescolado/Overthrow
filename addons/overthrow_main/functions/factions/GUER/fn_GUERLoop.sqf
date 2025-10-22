@@ -59,7 +59,7 @@ if (_dead > 150) then {
 } forEach (spawner getVariable ["_noid_", []]);
 
 {
-    if ((_x isKindOf "Air") && { (alive _x) } && ((side _x) isEqualTo west) && (_x call OT_fnc_isRadarInRange) && { crew _x isNotEqualTo [] }) then {
+    if ((_x isKindOf "Air") && { (alive _x) } && ((side _x) isEqualTo blufor) && (_x call OT_fnc_isRadarInRange) && { crew _x isNotEqualTo [] }) then {
         [_x, 2500] call OT_fnc_revealToResistance;
     };
 } forEach (entities "Air");
@@ -223,13 +223,13 @@ if ((date select 4) != _lastmin) then {
             _townpos = server getVariable _x;
             if !(_town in _abandoned) then {
                 if ([_townpos] call OT_fnc_inSpawnDistance) then {
-                    if ((_townpos nearEntities ["CAManBase", 600]) findIf { side _x isEqualTo west } != -1) then {
+                    if ((_townpos nearEntities ["CAManBase", 600]) findIf { side _x isEqualTo blufor } != -1) then {
                         [_town, -1] call OT_fnc_stability;
                     };
                 };
             } else {
                 _stabchange = 0;
-                private _numcops = { side _x isEqualTo west } count (_townpos nearEntities ["CAManBase", 600]);
+                private _numcops = { side _x isEqualTo blufor } count (_townpos nearEntities ["CAManBase", 600]);
                 if (_numcops > 0) then {
                     _stabchange = _stabchange - _numcops;
                 };

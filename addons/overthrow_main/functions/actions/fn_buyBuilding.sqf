@@ -47,14 +47,14 @@ if (_handled) then {
             warehouse setVariable ["owned", _ownedWarehouses, true];
         };
 
-        buildingpositions setVariable [_id, position _building, true];
+        buildingpositions setVariable [_id, getPos _building, true];
         _owned pushBack _id;
         [player, "Building Purchased", format ["Bought: %1 in %2 for $%3", (typeOf _building) call OT_fnc_getClassDisplayName, _building call OT_fnc_nearestTown, _price]] call BIS_fnc_createLogRecord;
         _building addEventHandler ["Dammaged", OT_fnc_buildingDamagedHandler];
     } else {
         // Fetch the list of buildable houses
         private _buildableHouses = (OT_Buildables param [9, []]) param [2, []];
-        if ((typeOf _building) in OT_allRealEstate or { ((typeOf _building) in _buildableHouses) }) then {
+        if ((typeOf _building) in OT_allRealEstate || { ((typeOf _building) in _buildableHouses) }) then {
             private _id = [_building] call OT_fnc_getBuildID;
             [_building, nil] call OT_fnc_setOwner;
             private _leased = player getVariable ["leased", []];

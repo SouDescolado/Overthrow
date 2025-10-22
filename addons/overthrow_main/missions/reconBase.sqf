@@ -52,7 +52,7 @@ private _title = format ["Recon of %1", _base];
             private _group = _x;
             if ((typeName _group isEqualTo "GROUP") && !isNull (leader _group)) then {
                 if (isNull objectParent leader _group) then {
-                    if ((resistance knowsAbout (leader _x)) <= 1.2) then { _missedOne = true } else { _count = _count + (count units _group) }; //does the resistance know about the leader of this group?
+                    if ((independent knowsAbout (leader _x)) <= 1.2) then { _missedOne = true } else { _count = _count + (count units _group) }; //does the resistance know about the leader of this group?
                 }; //Removed check for vehicles as static guns are sometimes unspottable
             };
         } forEach (_groups);

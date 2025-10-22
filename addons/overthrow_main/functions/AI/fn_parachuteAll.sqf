@@ -24,15 +24,15 @@ private _dir = direction _vehicle;
         if (isPlayer _unit) then {
             [_unit, _chuteheight] spawn {
                 params ["_paraPlayer", "_chuteheight"];
-                waitUntil { (position _paraPlayer select 2) <= _chuteheight };
+                waitUntil { (getPos _paraPlayer select 2) <= _chuteheight };
                 _paraPlayer action ["openParachute", _paraPlayer];
             };
         };
-        waitUntil { !(alive _unit) || isTouchingGround _unit || (position _unit select 2) < 20 };
+        waitUntil { !(alive _unit) || isTouchingGround _unit || (getPos _unit select 2) < 20 };
 
         _unit allowDamage false; //So they dont hit trees or die on ground impact
 
-        waitUntil { !(alive _unit) || isTouchingGround _unit || (position _unit select 2) < 1 };
+        waitUntil { !(alive _unit) || isTouchingGround _unit || (getPos _unit select 2) < 1 };
 
         _unit action ["Eject", vehicle _unit];
         sleep 2;

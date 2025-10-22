@@ -142,7 +142,7 @@ OT_mapcache_bodies = [];
             };
             //All resistance static weapons
             if ((_x isKindOf "StaticWeapon") && { (isNull attachedTo _x) } && { (alive _x) }) then {
-                if (side _x isEqualTo civilian || side _x isEqualTo resistance || captive _x) then {
+                if (side _x isEqualTo civilian || side _x isEqualTo independent || captive _x) then {
                     _col = [0.5, 0.5, 0.5, 1];
                     if (!(isNull gunner _x) && { (alive gunner _x) }) then { _col = [0, 0.5, 0, 1] };
                     _i = "\A3\ui_f\data\map\markers\nato\o_art.paa";
@@ -159,7 +159,7 @@ OT_mapcache_bodies = [];
                 };
             };
             //Radar hits
-            if ((_x isKindOf "Air") && { (alive _x) } && ((side _x) isEqualTo west) && (_x call OT_fnc_isRadarInRange) && { crew _x isNotEqualTo [] }) then {
+            if ((_x isKindOf "Air") && { (alive _x) } && ((side _x) isEqualTo blufor) && (_x call OT_fnc_isRadarInRange) && { crew _x isNotEqualTo [] }) then {
                 _radar pushBack _x;
             };
         } forEach entities [["Car", "Air", "Ship", "StaticWeapon", OT_item_CargoContainer], ["Parachute"], false, false];

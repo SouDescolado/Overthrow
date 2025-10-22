@@ -4,7 +4,7 @@ params ["_town", "_soldier", "_amount"];
 
 private _posTown = server getVariable [format ["policepos%1", _town], server getVariable _town];
 
-private _group = createGroup resistance;
+private _group = createGroup independent;
 _group setVariable ["VCM_TOUGHSQUAD", true, true];
 _group setVariable ["VCM_NORESCUE", true, true];
 

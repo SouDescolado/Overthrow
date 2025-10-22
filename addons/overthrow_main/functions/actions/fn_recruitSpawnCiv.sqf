@@ -1,6 +1,6 @@
 if !(captive player) exitWith { "You cannot recruit while wanted" call OT_fnc_notifyMinor };
 
-if ((player nearEntities ["CAManBase", 50]) findIf { side _x isEqualTo west || side _x isEqualTo east } != -1) exitWith {
+if ((player nearEntities ["CAManBase", 50]) findIf { side _x isEqualTo blufor || side _x isEqualTo opfor } != -1) exitWith {
     "You cannot recruit with enemies nearby" call OT_fnc_notifyMinor;
 };
 

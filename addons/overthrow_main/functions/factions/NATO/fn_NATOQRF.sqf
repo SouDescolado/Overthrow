@@ -220,9 +220,9 @@ while {
     _enemy = 0;
 
     private _unitsAO = [_pos, 200, 200, 0, false] nearEntities [["CAManBase"], false, true, true] select { !(_x getVariable ["ace_isunconscious", false]) };
-    _alive = west countSide _unitsAO;
+    _alive = blufor countSide _unitsAO;
     {
-        if (side _x isEqualTo resistance || captive _x) then {
+        if (side _x isEqualTo independent || captive _x) then {
             // Players count twice
             _enemy = _enemy + ([1, 2] select (isPlayer _x));
         };
@@ -251,7 +251,7 @@ if (_progress > 0) then {
     //Recover resources
     server setVariable ["NATOresources", round (_strength * 0.5), true];
     {
-        if (side _x isEqualTo west) then {
+        if (side _x isEqualTo blufor) then {
             if ((units _x) isNotEqualTo []) then {
                 _lead = (units _x) select 0;
                 private _g = (_lead getVariable ["garrison", ""]);
@@ -273,9 +273,9 @@ if (_progress > 0) then {
                 deleteGroup _x;
             };
         };
-    } forEach (groups west);
+    } forEach (groups blufor);
     {
-        if (side _x isEqualTo west) then {
+        if (side _x isEqualTo blufor) then {
             if (_x getVariable ["garrison", ""] isEqualTo "HQ") then {
                 [_x] call OT_fnc_cleanup;
             };

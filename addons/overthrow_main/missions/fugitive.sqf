@@ -109,13 +109,13 @@ private _difficulty = 1.8;
         private _alreadyAlerted = _civ getVariable ["OT_fugitiveAlerted", false];
         private _alerted = false;
         {
-            if ((side _x == resistance || captive _x) && (_x call OT_fnc_unitSeenNATO)) then {
+            if ((side _x == independent || captive _x) && (_x call OT_fnc_unitSeenNATO)) then {
                 _x setCaptive false;
                 _alerted = true;
             };
         } forEach (_destination nearEntities ["CAManBase", 15]);
 
-        if (_alerted and !_alreadyAlerted) then {
+        if (_alerted && !_alreadyAlerted) then {
             _civ enableAI "MOVE";
             private _factionName = server getVariable format ["factionname%1", _faction];
             format ["Incoming message from %1: Traitor has been alerted.", _factionName] remoteExec ["OT_fnc_notifyMinor", 0, false];

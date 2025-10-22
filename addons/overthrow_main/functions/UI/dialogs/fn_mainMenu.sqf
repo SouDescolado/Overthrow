@@ -359,7 +359,7 @@ if (_b isEqualType []) then {
 
     // Fetch the list of buildable houses
     private _buildableHouses = (OT_Buildables param [9, []]) param [2, []];
-    if (!((_cls) in OT_allRealEstate + [OT_flag_IND]) and { !(_cls in _buildableHouses) }) then {
+    if (!((_cls) in OT_allRealEstate + [OT_flag_IND]) && { !(_cls in _buildableHouses) }) then {
         ctrlEnable [1609, false];
         ctrlEnable [1610, false];
         ctrlEnable [1608, false];

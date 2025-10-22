@@ -10,7 +10,7 @@ while {
     ("8Rnd_82mm_Mo_shells" in getArtilleryAmmo [_mortar]) && (alive _mortar) && ((units _mortarGroup) findIf { alive _x } != -1);
 } do {
     private _attacking = server getVariable ["NATOattacking", ""];
-    private _mortarpos = position _mortar;
+    private _mortarpos = getPos _mortar;
 
     if (_attacking != "" && !(_attacking in OT_allTowns)) then {
         _pos = server getVariable _attacking;
@@ -27,7 +27,7 @@ while {
                 sleep 3;
                 _mortarGroup setCombatMode "BLUE";
                 //Did anyone hear that?
-                if ((_mortarpos nearEntities ["CAManBase", 3000]) findIf { side _x isEqualTo resistance || captive _x } != -1) then {
+                if ((_mortarpos nearEntities ["CAManBase", 3000]) findIf { side _x isEqualTo independent || captive _x } != -1) then {
                     private _icons = spawner getVariable ["NATOmortars", []];
                     _found = false;
                     {
@@ -75,7 +75,7 @@ while {
                 sleep 3;
                 _mortarGroup setCombatMode "BLUE";
                 //Did anyone hear that?
-                if ((_mortarpos nearEntities ["CAManBase", 3000]) findIf { side _x isEqualTo resistance || captive _x } != -1) then {
+                if ((_mortarpos nearEntities ["CAManBase", 3000]) findIf { side _x isEqualTo independent || captive _x } != -1) then {
                     private _icons = spawner getVariable ["NATOmortars", []];
                     _found = false;
                     {

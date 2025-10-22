@@ -63,7 +63,7 @@ if !(captive _unit) then {
     if (_unit call OT_fnc_unitSeenCRIM && !_gottem) then {
         //get closest gang member
         private _ents = _unit nearEntities ["CAManBase", 1200];
-        private _i = _ents findIf { side _x isEqualTo east };
+        private _i = _ents findIf { side _x isEqualTo opfor };
         if (_i isNotEqualTo -1) then {
             private _member = _ents select _i;
             private _gangid = _member getVariable ["OT_gangid", -1];

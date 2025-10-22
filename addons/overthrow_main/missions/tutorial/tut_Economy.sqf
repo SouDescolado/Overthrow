@@ -58,7 +58,7 @@ private _actualMission = {
     player reveal [_veh, 4];
 
     //give waypoint
-    private _wp = [player, position _veh, "Wreck"] call OT_fnc_givePlayerWaypoint;
+    private _wp = [player, getPos _veh, "Wreck"] call OT_fnc_givePlayerWaypoint;
 
     private _loopCode = {
         params ["_loopCode", "_veh"];

@@ -37,7 +37,7 @@ diag_log format ["Overthrow: Economy version is %1", _version];
             // If there are no checkpoints (Malden), use one million as distance.
             _cdist = if (!isNil "_control") then { (getMarkerPos _control) distance _pos } else { 1000000 };
 
-            if (_obdist > 800 and _towndist > 200 and _cdist > 500) then {
+            if (_obdist > 800 && _towndist > 200 && _cdist > 500) then {
                 _allpos pushBack _pos;
             };
         };

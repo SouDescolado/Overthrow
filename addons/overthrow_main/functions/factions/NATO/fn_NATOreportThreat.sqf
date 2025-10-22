@@ -14,7 +14,7 @@ private _target = nil;
 if (_added) exitWith {
     //Already know this threat, update it's position if it's old
     if ((time - (_target select 5)) > 30) then {
-        _target set [1, position _veh];
+        _target set [1, getPos _veh];
         _target set [5, time]; //reset timeout counter
         spawner setVariable ["NATOknownTargets", _targets, true];
     };
@@ -42,5 +42,5 @@ call {
     };
 };
 
-_targets pushBack [_targetType, position _veh, _threat, _veh, false, time];
+_targets pushBack [_targetType, getPos _veh, _threat, _veh, false, time];
 spawner setVariable ["NATOknownTargets", _targets, true];

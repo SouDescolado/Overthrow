@@ -3,7 +3,7 @@ params ["_group", "_townPos"];
 _group setVariable ["VCM_NORESCUE", true];
 _group setVariable ["VCM_TOUGHSQUAD", true];
 
-private _start = position (leader _group);
+private _start = getPos (leader _group);
 
 _dest = _townPos call OT_fnc_getRandomRoadPosition;
 private _firstPos = _dest;

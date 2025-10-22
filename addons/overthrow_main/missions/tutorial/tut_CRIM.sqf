@@ -12,7 +12,7 @@ private _thistown = (getPosATL player) call OT_fnc_nearestTown;
 
 //Is there some already spawned within spawn distance?
 {
-    if (side _x isEqualTo east) then {
+    if (side _x isEqualTo opfor) then {
         _targets pushBack _x;
     };
 } forEach (player nearEntities ["CAManBase", OT_spawnDistance]);
@@ -79,7 +79,7 @@ private _group = group (_sorted select 0);
 player reveal [leader _group, 4];
 
 //give waypoint
-private _wp = [player, position leader _group, "Gang"] call OT_fnc_givePlayerWaypoint;
+private _wp = [player, getPos leader _group, "Gang"] call OT_fnc_givePlayerWaypoint;
 private _total = count units _group;
 
 private _loopCode = {

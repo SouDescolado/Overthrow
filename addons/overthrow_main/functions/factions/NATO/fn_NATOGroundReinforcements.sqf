@@ -6,7 +6,7 @@ if (_byair) then {
 };
 private _squadtype = selectRandom OT_NATO_GroundForces;
 private _spawnpos = _frompos;
-private _group1 = createGroup west;
+private _group1 = createGroup blufor;
 _group1 deleteGroupWhenEmpty true;
 
 // Spawn 4 soldiers to be seated in a transport vehicle

@@ -56,7 +56,7 @@ private _group = group (_sorted select 0);
 player reveal [leader _group, 4];
 
 //give waypoint
-private _wp = [player, position leader _group, "Customer"] call OT_fnc_givePlayerWaypoint;
+private _wp = [player, getPos leader _group, "Customer"] call OT_fnc_givePlayerWaypoint;
 
 private _loopCode = {
     params ["_loopCode", "_wp", "_group"];

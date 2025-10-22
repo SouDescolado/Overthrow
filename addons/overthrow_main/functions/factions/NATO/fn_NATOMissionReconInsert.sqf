@@ -33,7 +33,7 @@ if (isNil "_close") then {
 };
 // Group may not be moved into a vehicle, so it also needs space to spawn
 _start = [_close, 50, 200, 1, 0, 0, 0] call BIS_fnc_findSafePos;
-_group = [_start, west, OT_NATO_Group_Recon] call BIS_fnc_spawnGroup;
+_group = [_start, blufor, OT_NATO_Group_Recon] call BIS_fnc_spawnGroup;
 
 // These are special forces, they are much better than regular guys
 // Randomskill macro to add some variance to units

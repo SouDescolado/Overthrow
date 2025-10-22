@@ -22,7 +22,7 @@ if (_garrison == -1) then {
     _count = 0;
     _range = 15;
     _spawned = [];
-    _group = createGroup resistance;
+    _group = createGroup independent;
     _groups pushBack _group;
     while { _count < 2 } do {
         _start = [[[_pos, _range]]] call BIS_fnc_randomPos;

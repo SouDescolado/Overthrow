@@ -26,7 +26,7 @@ while { !(isNil "_group") && (units _group) isNotEqualTo [] } do {
     {
         _unit = _x;
         _iscar = false;
-        if (_unit isKindOf "LandVehicle" && (side _x isNotEqualTo west)) then {
+        if (_unit isKindOf "LandVehicle" && (side _x isNotEqualTo blufor)) then {
             _unit = driver _unit;
             _iscar = true;
             _f = false;
@@ -35,7 +35,7 @@ while { !(isNil "_group") && (units _group) isNotEqualTo [] } do {
                 _vehs pushBack _x;
             };
         };
-        if (_unit isKindOf "LandVehicle" && (side _x isEqualTo west)) then {
+        if (_unit isKindOf "LandVehicle" && (side _x isEqualTo blufor)) then {
             _friendly pushBack _x;
         };
         if !(_unit in _inrange || _unit in _searching || _unit in _searched) then {

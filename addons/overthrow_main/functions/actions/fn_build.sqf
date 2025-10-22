@@ -168,7 +168,7 @@ buildMoveCam = {
 
 buildOnKeyUp = {
     params ["", "_key"];
-    if (_key isEqualTo 42 or _key isEqualTo 54) then {
+    if (_key isEqualTo 42 || _key isEqualTo 54) then {
         //Shift
         OT_shiftHeld = false;
     };
@@ -327,7 +327,7 @@ buildOnMouseUp = {
 
 buildOnMouseWheel = {
     _z = _this select 1;
-    _pos = position buildCam;
+    _pos = getPos buildCam;
     private _distMul = 0.25 + (buildCam distance buildFocus) / 100;
 
     if (_z < 0) then {

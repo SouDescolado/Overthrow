@@ -281,7 +281,7 @@ private _hasList_buildableHouses = false;
 
                 // If the object is a player-built house, fetch its variables
                 private _houseParams = _x param [8, []];
-                if ((_houseParams isNotEqualTo []) or { _type in _buildableHouses }) then {
+                if ((_houseParams isNotEqualTo []) || { _type in _buildableHouses }) then {
                     _veh setVariable ["OT_house_isPlayerBuilt", true, true];
 
                     private _isLeased = _houseParams param [0, false];
@@ -468,7 +468,7 @@ sleep 0.3;
     _code = format ["fob%1", _pos];
     _garrison = server getVariable [format ["resgarrison%1", _code], []];
     if (_garrison isNotEqualTo []) then {
-        _group = createGroup resistance;
+        _group = createGroup independent;
         spawner setVariable [format ["resgarrison%1", _code], _group, true];
         {
             _x params ["_cls", "_loadout"];
@@ -503,7 +503,7 @@ sleep 0.3;
     _code = _x select 1;
     _garrison = server getVariable [format ["resgarrison%1", _code], []];
     if (_garrison isNotEqualTo []) then {
-        _group = createGroup resistance;
+        _group = createGroup independent;
         spawner setVariable [format ["resgarrison%1", _code], _group, true];
         {
             _x params ["_cls", "_loadout"];
@@ -562,7 +562,7 @@ private _built = (allMissionObjects "Static");
                     _bdg = objNull;
                     if (_pos isEqualTo []) then {
                         _bdg = OT_centerPos nearestObject parseNumber _x;
-                        buildingpositions setVariable [_x, position _bdg, true];
+                        buildingpositions setVariable [_x, getPos _bdg, true];
                     } else {
                         _bdg = _pos nearestObject parseNumber _x;
                     };
@@ -582,7 +582,7 @@ private _built = (allMissionObjects "Static");
     {
         if (isNil "_x") then { continue };
         private _ID = [_x] call OT_fnc_getBuildID;
-        private _pos = position _x;
+        private _pos = getPos _x;
         _leasedata pushBack [_ID, typeOf _x, _pos, _pos call OT_fnc_nearestTown];
         _leasedNew pushBack _ID;
     } forEach ([_uid, "leasedBuilt", []] call OT_fnc_getOfflinePlayerAttribute);

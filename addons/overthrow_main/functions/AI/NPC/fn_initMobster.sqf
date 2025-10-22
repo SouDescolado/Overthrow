@@ -66,7 +66,7 @@ _unit addWeaponGlobal _weapon;
         _unit addBackpack (selectRandom OT_allBackpacks);
         _launcher = OT_CRIM_Launchers select 0;
         _base = [_launcher] call BIS_fnc_baseWeapon;
-        _magazine = selectRandom (getArray (configFile / "CfgWeapons" / _base / "magazines"));
+        _magazine = selectRandom (getArray (configFile >> "CfgWeapons" >> _base >> "magazines"));
         _unit addMagazine _magazine;
         _unit addMagazine _magazine;
         _unit addMagazine _magazine;
@@ -104,7 +104,7 @@ _unit addWeaponGlobal _weapon;
 };
 
 _base = [_weapon] call BIS_fnc_baseWeapon;
-_magazine = selectRandom (getArray (configFile / "CfgWeapons" / _base / "magazines"));
+_magazine = selectRandom (getArray (configFile >> "CfgWeapons" >> _base >> "magazines"));
 _unit addMagazine _magazine;
 _unit addMagazine _magazine;
 _unit addMagazine _magazine;
@@ -149,7 +149,7 @@ for "_i" from 0 to (_numslots - 1) do {
 _weapon = selectRandom OT_allHandguns;
 _unit addWeaponGlobal _weapon;
 _base = [_weapon] call BIS_fnc_baseWeapon;
-_magazine = (getArray (configFile / "CfgWeapons" / _base / "magazines")) select 0;
+_magazine = (getArray (configFile >> "CfgWeapons" >> _base >> "magazines")) select 0;
 if !(isNil "_magazine") then {
     _unit addItem _magazine;
 };

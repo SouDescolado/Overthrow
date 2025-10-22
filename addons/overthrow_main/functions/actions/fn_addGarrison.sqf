@@ -9,7 +9,7 @@ if ((_pos distance _p) > 250) then {
     _code = _b select 1;
 };
 
-if (((_pos nearEntities ["CAManBase", 50]) findIf { side _x isEqualTo west || side _x isEqualTo east } != -1)
+if (((_pos nearEntities ["CAManBase", 50]) findIf { side _x isEqualTo blufor || side _x isEqualTo opfor } != -1)
     && _charge
 ) exitWith {
     "You cannot garrison with enemies nearby" call OT_fnc_notifyMinor;

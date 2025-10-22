@@ -10,7 +10,7 @@ private _money = player getVariable ["money", 0];
 
 private _options = [];
 
-if (side _civ isEqualTo west) exitWith {
+if (side _civ isEqualTo blufor) exitWith {
     _options pushBack ["Cancel", {}];
     _options call OT_fnc_playerDecision;
 };

@@ -3,7 +3,7 @@ private _numtokill = round (random 3) + 2;
 private _title = "Kill NATO";
 private _found = false;
 
-private _groups = [allGroups, [], { (leader _x) distance2D player }, "ASCEND", { (side leader _x) isEqualTo west && (units _x) isNotEqualTo [] && ((leader _x) distance2D player) < 300 }] call BIS_fnc_sortBy;
+private _groups = [allGroups, [], { (leader _x) distance2D player }, "ASCEND", { (side leader _x) isEqualTo blufor && (units _x) isNotEqualTo [] && ((leader _x) distance2D player) < 300 }] call BIS_fnc_sortBy;
 if (_groups isEqualTo []) exitWith { [] };
 
 private _group = _groups select 0;
@@ -18,7 +18,7 @@ private _params = [_group, _reward, _numtokill];
 //The data below is what is returned to the gun dealer/faction rep, _markerPos is where to put the mission marker, the code in {} brackets is the actual mission code, only run if the player accepts
 [
     [_title, _description],
-    position player,
+    getPos player,
     {
         //No setup
         true;

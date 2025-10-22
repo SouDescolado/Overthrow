@@ -17,7 +17,7 @@ waitUntil { alive player };
 player setCaptive true;
 player allowDamage false;
 
-_group = createGroup resistance;
+_group = createGroup independent;
 [player] joinSilent nil;
 [player] joinSilent _group;
 _recruits = server getVariable ["recruits", []];

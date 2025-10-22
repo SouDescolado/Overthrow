@@ -162,7 +162,7 @@ if (OT_showEnemyGroups) then {
             } forEach (units _x);
         };
         if (_alive) then {
-            private _ka = resistance knowsAbout _u;
+            private _ka = independent knowsAbout _u;
             if (_ka > 2) then {
                 private _approxPos = player getHideFrom _u;
                 if (_approxPos isEqualTo [0, 0, 0]) then {
@@ -179,7 +179,7 @@ if (OT_showEnemyGroups) then {
                 ];
             };
         };
-    } forEach (groups west);
+    } forEach (groups blufor);
     {
         private _u = leader _x;
         private _alive = alive _u;
@@ -192,7 +192,7 @@ if (OT_showEnemyGroups) then {
             } forEach (units _x);
         };
         if (_alive) then {
-            private _ka = resistance knowsAbout _u;
+            private _ka = independent knowsAbout _u;
             if (_ka > 2) then {
                 private _approxPos = player getHideFrom _u;
                 if (_approxPos isEqualTo [0, 0, 0]) then {
@@ -209,7 +209,7 @@ if (OT_showEnemyGroups) then {
                 ];
             };
         };
-    } forEach (groups east);
+    } forEach (groups opfor);
 };
 
 //If zoomed in draw shop, owned properties, faction rep, corpse cache and vehicle cache

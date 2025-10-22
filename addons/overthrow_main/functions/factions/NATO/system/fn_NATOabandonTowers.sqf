@@ -19,8 +19,8 @@ private _abandoned = server getVariable ["NATOabandoned", []];
     _x params ["_pos", "_name"];
     if !(_name in _abandoned) then {
         if ([_pos] call OT_fnc_inSpawnDistance) then {
-            private _numMil = { side _x isEqualTo west } count (_pos nearEntities ["CAManBase", 300]);
-            private _numRes = { side _x isEqualTo resistance || captive _x } count (_pos nearEntities ["CAManBase", 100]);
+            private _numMil = { side _x isEqualTo blufor } count (_pos nearEntities ["CAManBase", 300]);
+            private _numRes = { side _x isEqualTo independent || captive _x } count (_pos nearEntities ["CAManBase", 100]);
             if (_numMil < _numRes) then {
                 _abandoned pushBack _name;
                 _name setMarkerColor "ColorGUER";

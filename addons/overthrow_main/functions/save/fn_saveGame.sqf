@@ -115,7 +115,7 @@ private _tocheck = ((allMissionObjects "Static") + vehicles) select {
     (alive _x)
         && { (typeOf _x != OT_flag_IND) }
         && { !(typeOf _x isKindOf ["CAManBase", _cfgVeh]) }
-        && { (_x call OT_fnc_hasOwner) or (_x getVariable ["OT_forceSaveUnowned", false]) }
+        && { (_x call OT_fnc_hasOwner) || (_x getVariable ["OT_forceSaveUnowned", false]) }
         && { (_x getVariable ["OT_garrison", false]) isEqualTo false }
 };
 
@@ -158,7 +158,7 @@ private _vehicles = (_tocheck) apply {
         _x getVariable ["OT_init", ""]
     ];
 
-    if ((_type isKindOf ["AllVehicles", _cfgVeh] && !(_x getVariable ["OT_garrison", false])) or { _type isEqualTo OT_item_Storage }) then {
+    if ((_type isKindOf ["AllVehicles", _cfgVeh] && !(_x getVariable ["OT_garrison", false])) || { _type isEqualTo OT_item_Storage }) then {
         private _veh = _x;
         private _ammo = (_x weaponsTurret [0]) apply {
             [_x, _veh ammo _x];
@@ -245,7 +245,7 @@ private _squads = ((server getVariable ["squads", []]) select {
     _units = [];
     {
         if (alive _x) then {
-            _units pushBack [typeOf _x, position _x, getUnitLoadout _x];
+            _units pushBack [typeOf _x, getPos _x, getUnitLoadout _x];
         };
     } forEach (units _group);
     [_owner, _cls, "Not a group, pls recreate", _units, groupId _group];

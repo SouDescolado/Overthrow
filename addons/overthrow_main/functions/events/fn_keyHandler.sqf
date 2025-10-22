@@ -324,7 +324,7 @@ if (!dialog) then {
             };
 
             private _cTarget = cursorTarget;
-            if ((_cTarget isKindOf "CAManBase") && (alive _cTarget) && (!isPlayer _cTarget) && (side _cTarget isNotEqualTo west) && (_cTarget distance player) < 10) exitWith {
+            if ((_cTarget isKindOf "CAManBase") && (alive _cTarget) && (!isPlayer _cTarget) && (side _cTarget isNotEqualTo blufor) && (_cTarget distance player) < 10) exitWith {
                 _cTarget call OT_fnc_talkToCiv;
             };
             [] spawn OT_fnc_mainMenu;

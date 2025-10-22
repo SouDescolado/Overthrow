@@ -1,6 +1,6 @@
 params ["_exp", "_dir", "_pitch", "_unit"];
 
-if (side _unit isNotEqualTo resistance || !(captive _unit)) exitWith {};
+if (side _unit isNotEqualTo independent || !(captive _unit)) exitWith {};
 if (_unit call OT_fnc_unitSeen) then {
     _unit setCaptive false;
     "You have been seen placing an explosive" remoteExec ["OT_fnc_notifyMinor", _x, false];

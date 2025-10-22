@@ -192,13 +192,13 @@ call {
             server setVariable [format ["airgarrison%1", _airgarrison], _vg, false];
         };
     } else {
-        if (side _me isEqualTo west) then {
+        if (side _me isEqualTo blufor) then {
             [_town, -1] call OT_fnc_stability;
         };
-        if (side _me isEqualTo east) then {
+        if (side _me isEqualTo opfor) then {
             [_town, 1] call OT_fnc_stability;
         };
-        if ((side _me isEqualTo resistance) || captive _me) then {
+        if ((side _me isEqualTo independent) || captive _me) then {
             if !(_town in (server getVariable ["NATOabandoned", []])) then {
                 [_town, 1] call OT_fnc_stability;
             } else {
@@ -222,7 +222,7 @@ if (isPlayer _killer) then {
         [_town, _standingChange] call OT_fnc_support;
     };
 } else {
-    if (side _killer isEqualTo resistance) then {
+    if (side _killer isEqualTo independent) then {
         [_town, _standingChange] call OT_fnc_support;
     };
 };

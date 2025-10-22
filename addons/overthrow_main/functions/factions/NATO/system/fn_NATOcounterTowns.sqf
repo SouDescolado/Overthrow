@@ -34,8 +34,8 @@ private _lastAttack = time - (server getVariable ["NATOlastattack", 0]);
     private _population = server getVariable [format ["population%1", _town], 100];
     if (_town != _lastCounter) then {
         if ([_pos] call OT_fnc_inSpawnDistance) then {
-            private _numMil = { side _x isEqualTo west } count (_pos nearEntities ["CAManBase", 300]);
-            private _numRes = { side _x isEqualTo resistance || captive _x } count (_pos nearEntities ["CAManBase", 200]);
+            private _numMil = { side _x isEqualTo blufor } count (_pos nearEntities ["CAManBase", 300]);
+            private _numRes = { side _x isEqualTo independent || captive _x } count (_pos nearEntities ["CAManBase", 200]);
             if (_numMil < 3 && { _numRes > 0 }) then {
                 if ((time - _lastAttack) > 1200 && { (_resources > _population) } && { (random 100) > _chance }) then {
                     // Counter a town

@@ -5,7 +5,7 @@ if (_standing < 10 && (player nearObjects [OT_refugeeCamp, 50]) isEqualTo []) ex
     "+10 Resistance Support required to recruit, or you must be within 50m of a refugee camp" call OT_fnc_notifyMinor;
 };
 
-if ((player nearEntities ["CAManBase", 50]) findIf { side _x isEqualTo west || side _x isEqualTo east } != -1) exitWith { "You cannot recruit with enemies nearby" call OT_fnc_notifyMinor };
+if ((player nearEntities ["CAManBase", 50]) findIf { side _x isEqualTo blufor || side _x isEqualTo opfor } != -1) exitWith { "You cannot recruit with enemies nearby" call OT_fnc_notifyMinor };
 
 private _price = [_town, "CIV", _standing] call OT_fnc_getPrice;
 private _money = player getVariable ["money", 0];

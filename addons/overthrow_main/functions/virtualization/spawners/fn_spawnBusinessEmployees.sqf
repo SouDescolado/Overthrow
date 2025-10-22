@@ -6,7 +6,7 @@ private _groups = [];
 private _numCiv = server getVariable [format ["%1employ", _name], 0];
 if (_numCiv isEqualTo 0) exitWith { [] };
 
-private _group = createGroup resistance;
+private _group = createGroup independent;
 _group setBehaviour "SAFE";
 _groups pushBack _group;
 

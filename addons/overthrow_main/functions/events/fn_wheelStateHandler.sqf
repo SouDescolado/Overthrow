@@ -10,15 +10,15 @@ private _nearPlayers = (_vehicle nearEntities ["CAManBase", 10]) select { isPlay
 // All players around who are tampering with the vehicle will be revealed
 {
     switch (side _vehicle) do {
-        case east: {
+        case opfor: {
             _x setCaptive false;
             [_x] call OT_fnc_revealToCRIM;
         };
-        case west: {
+        case blufor: {
             _x setCaptive false;
             [_x] call OT_fnc_revealToNATO;
         };
-        //case resistance: {_x setCaptive false; [_x] call OT_fnc_revealToResistance};
+        //case independent: {_x setCaptive false; [_x] call OT_fnc_revealToResistance};
         default { diag_log format ["Overthrow: Couldn't find a side for %1", _vehicle] };
     };
     "You have been seen tampering with a vehicle" remoteExec ["OT_fnc_notifyMinor", _x, false];

@@ -104,7 +104,7 @@ private _difficulty = 1.8;
         private _alreadyAlerted = _civ getVariable ["OT_informantAlerted", false];
         private _alerted = false;
         {
-            if ((side _x isEqualTo resistance || captive _x) && (_x call OT_fnc_unitSeenNATO)) then {
+            if ((side _x isEqualTo independent || captive _x) && (_x call OT_fnc_unitSeenNATO)) then {
                 _x setCaptive false;
                 _alerted = true;
             };

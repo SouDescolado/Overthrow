@@ -123,7 +123,7 @@ class CfgVehicles {
         class ACE_Actions {
             class ACE_MainActions {
                 class OT_InteractionActions {
-                    condition = "(alive _target) && (!isPlayer _target) && (side _target isNotEqualTo west)";
+                    condition = "(alive _target) && (!isPlayer _target) && (side _target isNotEqualTo blufor)";
                     selection = "pelvis";
                     distance = 4;
                     displayName = "Talk";

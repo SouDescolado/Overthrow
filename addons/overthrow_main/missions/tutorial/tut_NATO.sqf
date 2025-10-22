@@ -10,7 +10,7 @@ private _thistown = (getPosATL player) call OT_fnc_nearestTown;
 
 //Is there some already spawned within spawn distance?
 {
-    if (side _x isEqualTo west) then {
+    if (side _x isEqualTo blufor) then {
         _targets pushBack _x;
     };
 } forEach (player nearEntities ["CAManBase", OT_spawnDistance]);

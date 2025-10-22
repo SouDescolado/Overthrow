@@ -1,6 +1,6 @@
 private _units = groupSelectedUnits player;
 if (count _units < 2) exitWith { "You must select at least 2 recruits" call OT_fnc_notifyMinor };
-_group = createGroup resistance;
+_group = createGroup independent;
 _cc = player getVariable ["OT_squadcount", 1];
 {
     if (_x != player) then {

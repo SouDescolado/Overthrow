@@ -135,7 +135,7 @@ if (player getVariable ["home", false] isEqualType []) then {
 };
 
 //ensure player is in own group, not one someone else left
-private _group = createGroup resistance;
+private _group = createGroup independent;
 [player] joinSilent _group;
 
 if (!_newplayer) then {
@@ -224,7 +224,7 @@ hcRemoveAllGroups player;
                     };
                 } forEach (OT_Squadables);
             };
-            _group = createGroup resistance;
+            _group = createGroup independent;
             _group setGroupIdGlobal [_name];
             {
                 _x params ["_type", "_pos", "_loadout"];
@@ -393,7 +393,7 @@ player addEventHandler [
                 ["play", _veh] call BIS_fnc_carAlarm;
                 [(getPos player) call OT_fnc_nearestTown, -5, "Stolen vehicle", player] call OT_fnc_support;
                 //does anyone hear the alarm?
-                if ((_veh nearEntities ["CAManBase", 200]) findIf { side _x isEqualTo west } != -1) then {
+                if ((_veh nearEntities ["CAManBase", 200]) findIf { side _x isEqualTo blufor } != -1) then {
                     player setCaptive false;
                     [player] call OT_fnc_revealToNATO;
                 };
@@ -448,7 +448,7 @@ player addEventHandler [
     _pos = buildingpositions getVariable [_x, []];
     if (_pos isEqualTo []) then {
         _bdg = OT_centerPos nearestObject parseNumber _x;
-        _pos = position _bdg;
+        _pos = getPos _bdg;
         buildingpositions setVariable [_x, _pos, true];
     };
 } forEach (player getVariable ["owned", []]);

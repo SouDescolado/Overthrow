@@ -27,7 +27,7 @@ while { _count < _numNATO } do {
     if (_pos isNotEqualTo []) then {
 
         private _groupcount = 0;
-        private _group = createGroup west;
+        private _group = createGroup blufor;
         _group setVariable ["VCM_TOUGHSQUAD", true, true];
         _group setVariable ["VCM_NORESCUE", true, true];
         _group deleteGroupWhenEmpty true;

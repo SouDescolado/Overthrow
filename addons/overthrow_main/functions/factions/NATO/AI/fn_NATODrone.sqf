@@ -31,7 +31,7 @@ while {
                 private _type = typeOf _x;
                 private _position = getPosASL _x;
 
-                if ((_x isKindOf "StaticWeapon") && { (side _x != west) }) exitWith {
+                if ((_x isKindOf "StaticWeapon") && { (side _x != blufor) }) exitWith {
                     if (([_drone, "VIEW"] checkVisibility [getPosASL _drone, _position]) > 0.01) then {
                         _targets pushBack ["SW", ASLToAGL _position, 100, _x];
                     };
@@ -54,7 +54,7 @@ while {
                 };
 
                 if ((crew _x) isNotEqualTo [] && { ((_x isKindOf "Car") || (_x isKindOf "Air") || (_x isKindOf "Ship")) && !(_type in (OT_allVehicles + OT_allBoats + OT_helis)) }) exitWith {
-                    if (side _x != west) then {
+                    if (side _x != blufor) then {
                         if (([_drone, "VIEW"] checkVisibility [getPosASL _drone, _position]) > 0.01) then {
 
                             //Determine threat
@@ -91,8 +91,8 @@ while {
 
     //look for concentrations of troops
     private _nearMen = _drone nearEntities ["CAManBase", 200];
-    private _numMil = { side _x isEqualTo west } count _nearMen;
-    private _numRes = { side _x isEqualTo resistance } count _nearMen;
+    private _numMil = { side _x isEqualTo blufor } count _nearMen;
+    private _numRes = { side _x isEqualTo independent } count _nearMen;
 
     if (_numRes > 10 && { _numMil isEqualTo 0 }) then {
         _targets pushBack ["INF", getPos _drone, 100, _drone];
