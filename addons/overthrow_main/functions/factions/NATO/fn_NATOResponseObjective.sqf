@@ -1,5 +1,3 @@
-private ["_group", "_population", "_posTown", "_vehs", "_soldier", "_vehtype", "_pos", "_wp", "_numgroups", "_attackpos", "_count", "_tgroup", "_ao"];
-
 params ["_objective", "_strength"];
 private _posTown = getMarkerPos _objective;
 
@@ -7,34 +5,33 @@ private _tskid = [independent, [format ["counter%1", _objective]], [format ["NAT
 
 format ["NATO is attacking %1", _objective] remoteExec ["OT_fnc_notifyMinor", 0, false];
 
-_fail = {
+private _fail = {
     params ["_tskid", "_objective"];
     [_tskid, "SUCCEEDED", true] spawn BIS_fnc_taskSetState;
     _objective setMarkerType OT_flagMarker;
 
-    _effect = "";
+    private _effect = "";
     if (_objective isEqualTo "The Fuel Depot") then {
         _effect = "(Vehicles are now cheaper)";
     };
     format ["Resistance has captured %1 (+100 Influence) %2", _objective, _effect] remoteExec ["OT_fnc_notifyGood", 0, false];
     100 remoteExec ["OT_fnc_influenceSilent", 0, false];
     private _posTown = getMarkerPos _objective;
-    _flag = _posTown nearObjects [OT_flag_NATO, 500];
+    private _flag = _posTown nearObjects [OT_flag_NATO, 500];
     if (_flag isNotEqualTo []) then {
         deleteVehicle (_flag select 0);
     };
-    _abandoned = server getVariable "NATOabandoned";
+    private _abandoned = server getVariable "NATOabandoned";
     _abandoned pushBack _objective;
     server setVariable ["NATOabandoned", _abandoned, true];
     format ["%1_restrict", _objective] setMarkerAlpha 0;
 };
 
-_success = {
+private _success = {
     params ["_tskid", "_objective"];
     //NATO has won
     [_tskid, "FAILED", true] spawn BIS_fnc_taskSetState;
-    _active = false;
-    _abandoned = server getVariable "NATOabandoned";
+    private _abandoned = server getVariable "NATOabandoned";
     _abandoned deleteAt (_abandoned find _objective);
     server setVariable ["NATOabandoned", _abandoned, true];
     server setVariable [format ["garrison%1", _objective], round (8 + random 12), true];

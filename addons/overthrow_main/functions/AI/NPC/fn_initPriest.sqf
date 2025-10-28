@@ -1,6 +1,5 @@
-private ["_unit"];
+params ["_unit"];
 
-_unit = _this select 0;
 _unit setSkill ["courage", 1];
 
 private _identity = call OT_fnc_randomLocalIdentity;
@@ -19,11 +18,10 @@ removeVest _unit;
 _unit addEventHandler [
     "FiredNear",
     {
-        _u = _this select 0;
+        params ["_u"];
         if !(_u getVariable ["fleeing", false]) then {
             _u setVariable ["fleeing", true, false];
             _u setBehaviour "COMBAT";
-            _by = _this select 1;
             _u allowFleeing 1;
             _u setSkill ["courage", 0];
         };

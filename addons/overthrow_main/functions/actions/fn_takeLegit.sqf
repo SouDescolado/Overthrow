@@ -1,4 +1,4 @@
-_veh = vehicle player;
+private _veh = vehicle player;
 
 if (_veh isEqualTo player) exitWith {};
 
@@ -8,9 +8,9 @@ format ["Taking legal inventory from vehicle"] call OT_fnc_notifyMinor;
 sleep 5;
 
 {
-    _count = 0;
-    _cls = _x select 0;
-    _added = 0;
+    private _count = 0;
+    private _cls = _x select 0;
+    private _added = 0;
     if (_cls in OT_allItems) then {
         while { _count < (_x select 1) } do {
             if (player canAdd _cls) then {

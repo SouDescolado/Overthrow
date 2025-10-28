@@ -61,7 +61,7 @@ private _doSalvage = {
             _wreck setDamage [0.8, false];
         };
         sleep 2;
-        _done = 0;
+        private _done = 0;
         for "_x" from 0 to (_steel - 1) do {
             if (!(_veh isKindOf "Truck_F" || _veh isKindOf "ReammoBox_F") && !(_veh canAdd "OT_Steel")) exitWith {
                 "Vehicle is full, use a truck or ammobox for more storage" call OT_fnc_notifyMinor;
@@ -80,7 +80,7 @@ private _doSalvage = {
 };
 
 private _objects = player nearEntities [["Car", "ReammoBox_F", "Air", "Ship"], 20];
-_filtered = [];
+private _filtered = [];
 {
     if (_x isNotEqualTo OT_salvageVehicle) then { _filtered pushBack _x };
 } forEach (_objects);

@@ -242,7 +242,7 @@ private _squads = ((server getVariable ["squads", []]) select {
         && { (units _group) findIf { alive _x } != -1 };
 }) apply {
     _x params ["_owner", "_cls", "_group"];
-    _units = [];
+    private _units = [];
     {
         if (alive _x) then {
             _units pushBack [typeOf _x, getPos _x, getUnitLoadout _x];
@@ -286,8 +286,7 @@ if !(_quiet) then {
 };
 
 {
-    _pos = _x select 0;
-    _code = _x select 1;
+    _x params ["", "_code"];
     private _group = spawner getVariable [format ["resgarrison%1", _code], grpNull];
     if !(isNull _group) then {
         private _soldiers = _group call _getGroupSoldiers;

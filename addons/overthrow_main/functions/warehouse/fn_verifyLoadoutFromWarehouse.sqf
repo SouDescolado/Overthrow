@@ -42,7 +42,6 @@ private _ignore = [];
                     _count = 0;
                     _missing pushBack _cls;
                 };
-                _totake = _count - _boxAmount;
                 if (_cls isKindOf ["Default", configFile >> "CfgMagazines"]) exitWith {
                     while { _count > _boxAmount } do {
                         _count = _count - 1;

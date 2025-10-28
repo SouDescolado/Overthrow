@@ -20,16 +20,15 @@ while { !(isNil "_group") && (units _group) isNotEqualTo [] } do {
     _group setVariable ["VCM_TOUGHSQUAD", true];
 
     _vehs = [];
-    _friendly = [];
+    private _friendly = [];
 
     private _leader = leader _group;
     {
-        _unit = _x;
-        _iscar = false;
+        private _unit = _x;
+        private _iscar = false;
         if (_unit isKindOf "LandVehicle" && (side _x isNotEqualTo blufor)) then {
             _unit = driver _unit;
             _iscar = true;
-            _f = false;
 
             if (!(_x in _vehs)) then {
                 _vehs pushBack _x;
@@ -76,8 +75,6 @@ while { !(isNil "_group") && (units _group) isNotEqualTo [] } do {
                 [_x] call OT_fnc_revealToNATO;
             };
         } else {
-            _iscar = false;
-            _veh = false;
 
             if (_x distance _start < _innerRange) then {
                 if !(_x in _searching || _x in _searched) then {
@@ -85,7 +82,7 @@ while { !(isNil "_group") && (units _group) isNotEqualTo [] } do {
                         _searching pushBack _x;
                         [_leader, { _this globalChat "Please wait... personal items will be stored in your vehicle" }] remoteExec ["call", _x, false];
                         if (!isNull objectParent _x) then {
-                            _v = objectParent _x;
+                            private _v = objectParent _x;
                             _v setVelocity [0, 0, 0];
                             {
                                 [_x, _v, true] call OT_fnc_dumpStuff;
@@ -94,23 +91,23 @@ while { !(isNil "_group") && (units _group) isNotEqualTo [] } do {
                     };
                 } else {
                     if (isPlayer _x && !(_x in _searched)) then {
-                        _msg = "Search complete, be on your way";
-                        _items = [];
-                        _unit = _x;
+                        private _msg = "Search complete, be on your way";
+                        private _items = [];
+                        private _unit = _x;
                         if (!isNull objectParent _x) then {
-                            _v = objectParent _x;
+                            private _v = objectParent _x;
                             _v setVelocity [0, 0, 0];
                         };
 
                         _items = (vehicle _x) call OT_fnc_unitStock;
 
                         {
-                            _cls = _x select 0;
+                            private _cls = _x select 0;
                             if (_cls in OT_allWeapons + OT_allMagazines + OT_illegalHeadgear + OT_illegalVests + OT_allStaticBackpacks + OT_allOptics) then {
                                 _foundweapons = true;
                             };
                             if (_cls in OT_illegalItems) then {
-                                _count = _x select 1;
+                                private _count = _x select 1;
                                 if (!isNull objectParent _unit) then {
                                     [_unit, _cls, _count] call CBA_fnc_removeItemCargo;
                                 } else {

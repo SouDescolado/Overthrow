@@ -1,21 +1,18 @@
-private ["_town", "_id", "_pos", "_building", "_tracked", "_civs", "_vehs", "_group", "_groups", "_all", "_shopkeeper"];
 if (!isServer) exitWith {};
 
-_count = 0;
 params ["_town", "_spawnid"];
-_posTown = server getVariable _town;
 sleep random 0.2;
-_shopkeeper = objNull;
+private _shopkeeper = objNull;
 private _activeshops = server getVariable [format ["activecarshopsin%1", _town], []];
 
 private _groups = [];
 {
     //find building for active shop
     private _pos = _x;
-    _building = nearestBuilding _pos;
+    private _building = nearestBuilding _pos;
 
     //create group for car dealer
-    _group = createGroup civilian;
+    private _group = createGroup civilian;
     _group setBehaviour "CARELESS";
     _groups pushBack _group;
 

@@ -44,7 +44,7 @@ if (!isNil "OT_OnDraw") then {
     waitUntil { !(isNil "OT_townData") && !(isNil "OT_economyLoadDone") };
     OT_allShopMarkers = [];
     {
-        _x params ["_tpos", "_tname"];
+        _x params ["", "_tname"];
 
         // We need to wait for the server...
         waitUntil {
@@ -59,7 +59,7 @@ if (!isNil "OT_OnDraw") then {
         {
             _x params ["_pos", "_name"];
             private _mrkName = format ["%1 %2", _pos select 0, _pos select 1];
-            _mrk = createMarkerLocal [_mrkName, _pos];
+            private _mrk = createMarkerLocal [_mrkName, _pos];
             _mrk setMarkerShapeLocal "ICON";
             _mrk setMarkerTypeLocal format ["ot_Shop%1", _name];
             _mrk setMarkerAlphaLocal 1;
@@ -69,7 +69,7 @@ if (!isNil "OT_OnDraw") then {
         {
             _x params ["_pos", "_name"];
             private _mrkName = format ["%1 %2", _pos select 0, _pos select 1];
-            _mrk = createMarkerLocal [_mrkName, _pos];
+            private _mrk = createMarkerLocal [_mrkName, _pos];
             _mrk setMarkerShapeLocal "ICON";
             _mrk setMarkerTypeLocal "ot_ShopHardware";
             _mrk setMarkerAlphaLocal 1;
@@ -78,7 +78,7 @@ if (!isNil "OT_OnDraw") then {
         //Vehicle Store Markers
         {
             private _mrkName = format ["%1 %2", _x select 0, _x select 1];
-            _mrk = createMarkerLocal [_mrkName, _x];
+            private _mrk = createMarkerLocal [_mrkName, _x];
             _mrk setMarkerShapeLocal "ICON";
             _mrk setMarkerTypeLocal "ot_ShopVehicle";
             _mrk setMarkerAlphaLocal 1;
@@ -87,7 +87,7 @@ if (!isNil "OT_OnDraw") then {
         //Pier Store Markers
         {
             private _mrkName = format ["%1 %2", _x select 0, _x select 1];
-            _mrk = createMarkerLocal [_mrkName, _x];
+            private _mrk = createMarkerLocal [_mrkName, _x];
             _mrk setMarkerShapeLocal "ICON";
             _mrk setMarkerTypeLocal "ot_ShopPier";
             _mrk setMarkerAlphaLocal 1;
@@ -143,9 +143,9 @@ OT_mapcache_bodies = [];
             //All resistance static weapons
             if ((_x isKindOf "StaticWeapon") && { (isNull attachedTo _x) } && { (alive _x) }) then {
                 if (side _x isEqualTo civilian || side _x isEqualTo independent || captive _x) then {
-                    _col = [0.5, 0.5, 0.5, 1];
+                    private _col = [0.5, 0.5, 0.5, 1];
                     if (!(isNull gunner _x) && { (alive gunner _x) }) then { _col = [0, 0.5, 0, 1] };
-                    _i = "\A3\ui_f\data\map\markers\nato\o_art.paa";
+                    private _i = "\A3\ui_f\data\map\markers\nato\o_art.paa";
                     if (_x isKindOf "StaticMortar") then { _i = "\A3\ui_f\data\map\markers\nato\o_mortar.paa" };
                     if !(someAmmo _x) then { _col set [3, 0.4] };
                     _vehs pushBack [
@@ -166,7 +166,7 @@ OT_mapcache_bodies = [];
         //Corpse cache
         {
             if (typeOf _x != "B_UAV_AI") then {
-                _p = getPosASL _x;
+                private _p = getPosASL _x;
                 _bodies pushBack [
                     "\overthrow_main\ui\markers\death.paa",
                     [1, 1, 1, 0.5],
@@ -180,7 +180,7 @@ OT_mapcache_bodies = [];
 
         //Cache Gun Dealer map icons
         {
-            _x params ["_tpos", "_tname"];
+            _x params ["", "_tname"];
             private _townPos = server getVariable format ["gundealer%1", _tname];
             if !(isNil "_townPos") then {
                 OT_mapcache_factions pushBackUnique [
@@ -209,7 +209,7 @@ OT_mapcache_bodies = [];
 
     OT_mapcache_factions = [];
     {
-        _x params ["_cls", "_name", "_side", "_flag"];
+        _x params ["_cls", "", "_side", "_flag"];
         if (_side isNotEqualTo 1) then {
             private _factionPos = server getVariable format ["factionrep%1", _cls];
             if !(isNil "_factionPos") then {

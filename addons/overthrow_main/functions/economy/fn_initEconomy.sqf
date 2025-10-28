@@ -13,13 +13,10 @@ OT_allShops = [];
     };
     private _pos = server getVariable _x;
 
-    private _info = [_name, _pos];
-
     private _low = [];
     private _med = [];
     private _hi = [];
     private _huge = [];
-    private _shops = [];
     private _allshops = [];
 
     {
@@ -84,8 +81,6 @@ private _spawn = selectRandom OT_spawnTowns;
 diag_log format ["Overthrow: Spawn town is %1", _spawn];
 server setVariable ["spawntown", _spawn, true];
 {
-    private _region = _x;
-
     private _towns = [_x] call OT_fnc_townsInRegion;
     server setVariable [format ["towns_%1", _x], _towns, true];
 } forEach (OT_regions);

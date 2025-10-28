@@ -11,7 +11,6 @@ _layer cutRsc ["OT_statsHUD", "PLAIN", 0, false];
         private _display = uiNamespace getVariable "OT_statsHUD";
         private _setText = _display displayCtrl 1001;
         _setText ctrlSetBackgroundColor [0, 0, 0, 0];
-        private _currentTxt = "";
 
         [OT_fnc_statsSystemLoop, _this, 1] call CBA_fnc_waitAndExecute;
     },

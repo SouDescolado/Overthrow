@@ -4,13 +4,13 @@ if (_b isEqualType []) then {
     _building = (_b select 0);
 };
 if (damage _building isEqualTo 1) exitWith {
-    _price = round ((_b select 1) * 0.25);
-    _money = player getVariable ["money", 0];
+    private _price = round ((_b select 1) * 0.25);
+    private _money = player getVariable ["money", 0];
     if (_money >= _price) then {
         [-_price] call OT_fnc_money;
         _building setDamage 0;
-        _id = [_building] call OT_fnc_getBuildID;
-        _damaged = owners getVariable ["damagedBuildings", []];
+        private _id = [_building] call OT_fnc_getBuildID;
+        private _damaged = owners getVariable ["damagedBuildings", []];
         if (_id in _damaged) then {
             _damaged deleteAt (_damaged find _id);
             owners setVariable ["damagedBuildings", _damaged, true];
@@ -36,18 +36,17 @@ if !(_b isEqualType []) exitWith {
 
 if !(captive player) exitWith { "You cannot lease buildings while wanted" call OT_fnc_notifyMinor };
 
-_handled = false;
-_type = "buy";
-_err = false;
+private _handled = false;
+private _err = false;
 _building = objNull;
 if (_b isEqualType []) then {
     _building = (_b select 0);
     if !(_building call OT_fnc_hasOwner) then {
         _handled = true;
     } else {
-        _owner = _building call OT_fnc_getOwner;
+        private _owner = _building call OT_fnc_getOwner;
         if (_owner isEqualTo getPlayerUID player) then {
-            _home = player getVariable "home";
+            private _home = player getVariable "home";
             if ((_home distance _building) < 5) exitWith {
                 "You cannot lease your home" call OT_fnc_notifyMinor;
                 _err = true;
@@ -65,15 +64,15 @@ if (_handled) then {
     };
 
     private _id = ([_building] call OT_fnc_getBuildID);
-    _leased = player getVariable ["leased", []];
+    private _leased = player getVariable ["leased", []];
     _leased pushBack _id;
     player setVariable ["leased", _leased, true];
 
-    _leasedata = player getVariable ["leasedata", []];
+    private _leasedata = player getVariable ["leasedata", []];
     _leasedata pushBack [_id, typeOf _building, getPos _building, _building call OT_fnc_nearestTown];
     player setVariable ["leasedata", _leasedata, true];
 
-    _mrkid = format ["bdg-%1", _building];
+    private _mrkid = format ["bdg-%1", _building];
     _mrkid setMarkerAlphaLocal 0.3;
     playSound "3DEN_notificationDefault";
     "Building leased" call OT_fnc_notifyMinor;

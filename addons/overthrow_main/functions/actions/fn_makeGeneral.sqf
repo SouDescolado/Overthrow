@@ -7,11 +7,11 @@ server setVariable ["generals", _generals, true];
 
 disableSerialization;
 
-_amgen = (getPlayerUID player) in (server getVariable ["generals", []]);
+private _amgen = (getPlayerUID player) in (server getVariable ["generals", []]);
 
-_isonline = false;
-_on = "Offline";
-_player = objNull;
+private _isonline = false;
+private _on = "Offline";
+private _player = objNull;
 {
     if (getPlayerUID _x isEqualTo _uid) exitWith {
         _isonline = true;
@@ -20,7 +20,7 @@ _player = objNull;
     };
 } forEach (allPlayers);
 
-_money = 0;
+private _money = 0;
 if (_isonline) then {
     _money = _player getVariable ["money", 0];
 } else {
@@ -31,13 +31,13 @@ if (_uid in (server getVariable ["generals", []])) then {
     _on = _on + " (General)";
 };
 
-_text = format ["<t size='0.8'>%1</t><br/>", lbText [1500, _idx]];
+private _text = format ["<t size='0.8'>%1</t><br/>", lbText [1500, _idx]];
 _text = _text + format ["<t size='0.65'>%1</t><br/>", _on];
 
 if (_amgen) then {
     _text = _text + format ["<t size='0.65'>$%1</t>", [_money, 1, 0, true] call CBA_fnc_formatNumber];
 };
 
-_textctrl = (findDisplay 8000) displayCtrl 1102;
+private _textctrl = (findDisplay 8000) displayCtrl 1102;
 _textctrl ctrlSetStructuredText parseText _text;
 ctrlEnable [1600, false];

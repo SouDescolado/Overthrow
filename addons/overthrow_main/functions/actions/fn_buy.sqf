@@ -1,9 +1,6 @@
 private _idx = lbCurSel 1500;
 private _cls = lbData [1500, _idx];
 
-private _town = player call OT_fnc_nearestTown;
-private _standing = [_town] call OT_fnc_support;
-
 private _price = lbValue [1500, _idx];
 if (_price isEqualTo -1) exitWith {};
 
@@ -17,9 +14,9 @@ if (_money < _price) exitWith { "You cannot afford that!" call OT_fnc_notifyMino
 //If faction dealer, increase standing
 private _civ = OT_interactingWith;
 if (!isNil "_civ" && _civ getVariable ["factionrep", false] && !((_cls isKindOf "Land") || (_cls isKindOf "Air") || (_cls isKindOf "Ship"))) then {
-    _faction = _civ getVariable ["faction", ""];
+    private _faction = _civ getVariable ["faction", ""];
     if (_faction isNotEqualTo "") then {
-        _increase = floor (_price / 1000);
+        private _increase = floor (_price / 1000);
         if (_increase > 0) then {
             private _factionName = server getVariable format ["factionname%1", _faction];
             server setVariable [format ["standing%1", _faction], (server getVariable [format ["standing%1", _faction], 0]) + _increase, true];
@@ -52,7 +49,7 @@ if (OT_interactingWith getVariable ["factionrep", false] && ((_cls isKindOf "Lan
         _blueprints pushBack _cls;
         [-_price] call OT_fnc_money;
         server setVariable ["GEURblueprints", _blueprints, true];
-        _factionName = OT_interactingWith getVariable ["factionrepname", ""];
+        private _factionName = OT_interactingWith getVariable ["factionrepname", ""];
         format ["%1 has bought %2 blueprint from %3", name player, _cls call OT_fnc_vehicleGetName, _factionName] remoteExec ["OT_fnc_notifyMinor", 0, false];
         closeDialog 0;
     };
@@ -71,7 +68,7 @@ if (_cls == OT_item_UAV) exitWith {
 
     private _veh = createVehicle [_cls, _pos, [], 0, ""];
     _veh setVariable ["OT_spawntrack", true, true]; //Tells virtualization to track this vehicle like it's a player.
-    private _crew = createVehicleCrew _veh;
+    createVehicleCrew _veh;
     {
         [_x, getPlayerUID player] call OT_fnc_setOwner;
     } forEach (crew _veh);
@@ -163,14 +160,6 @@ if ((_cls isKindOf ["Launcher", configFile >> "CfgWeapons"])
 ) exitWith {
     [-_price] call OT_fnc_money;
 
-    private _box = objNull;
-    {
-        private _owner = _x call OT_fnc_getOwner;
-        if (!isNil "_owner") then {
-            if (_owner == getPlayerUID player) exitWith { _box = _x };
-        };
-    } forEach (nearestObjects [player, [OT_item_Storage], 1200]);
-
     // @todo probably add to box if possible
     player addWeaponGlobal _cls;
 
@@ -199,7 +188,7 @@ if (_b != "Vehicle") then {
         };
     };
 } else {
-    _veh = vehicle player;
+    private _veh = vehicle player;
     if ((!(_veh isKindOf "Truck_F")) && (!(_veh canAdd [_cls, 1]))) then {
         "This vehicle is full, use a truck for more storage" call OT_fnc_notifyMinor;
         _handled = false;

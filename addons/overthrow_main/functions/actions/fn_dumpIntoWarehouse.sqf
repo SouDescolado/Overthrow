@@ -11,8 +11,8 @@ if (hmd _unit != "") then {
 };
 
 {
-    _count = 0;
-    _cls = _x select 0;
+    private _count = 0;
+    private _cls = _x select 0;
     while { _count < (_x select 1) } do {
         [_cls] call {
             params ["_cls"];

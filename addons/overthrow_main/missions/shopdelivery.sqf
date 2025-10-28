@@ -1,6 +1,3 @@
-params ["_jobid", "_jobparams"];
-_jobparams params ["_gangid"];
-private _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
 private _civ = OT_interactingWith;
 
 private _cat = _civ getVariable "OT_shopCategory";
@@ -11,7 +8,7 @@ private _destination = [];
 private _destinationName = "";
 private _itemcls = "";
 
-_numitems = floor (1 + random 2);
+private _numitems = floor (1 + random 2);
 
 //Find an item this store sells
 
@@ -38,7 +35,7 @@ private _itemname = _itemcls call OT_fnc_weaponGetName;
     private _posTown = server getVariable _town;
     if ([_posTown, _startpos] call OT_fnc_regionIsConnected) exitWith {
         _destinationName = _town;
-        _building = [_posTown, OT_allHouses] call OT_fnc_getRandomBuilding;
+        private _building = [_posTown, OT_allHouses] call OT_fnc_getRandomBuilding;
         _destination = selectRandom (_building call BIS_fnc_buildingPositions);
         if (isNil "_destination") then {
             _destination = _posTown findEmptyPosition [5, 100, OT_civType_local];
@@ -46,10 +43,10 @@ private _itemname = _itemcls call OT_fnc_weaponGetName;
     };
 } forEach ([OT_allTowns, [], { random 100 }, "ASCEND"] call BIS_fnc_sortBy);
 
-_reward = floor ((_startpos distance2D _destination) * 0.005 * _numitems);
+private _reward = floor ((_startpos distance2D _destination) * 0.005 * _numitems);
 
-_markerPos = _destination;
-_params = [_destination, _itemcls, _numitems, _reward, _starttown];
+private _markerPos = _destination;
+private _params = [_destination, _itemcls, _numitems, _reward, _starttown];
 
 //Build a mission description and title
 private _description = format ["I need someone to deliver %1 x %2 to a customer in %3. You have 6 hours.</t><br/><br/><t size='0.9' align='center'>Reward: $%4, +2 Resistance Support", _numitems, _itemname, _destinationName, _reward];
@@ -65,9 +62,9 @@ private _title = format ["Deliver %1 x %2 for %3 store in %4", _numitems, _itemn
             "You don't have enough room in your inventory for the items" call OT_fnc_notifyMinor;
             false;
         };
-        _group = createGroup civilian;
+        private _group = createGroup civilian;
         _group setBehaviour "CARELESS";
-        _civ = _group createUnit [OT_civType_local, _destination, [], 0, "NONE"];
+        private _civ = _group createUnit [OT_civType_local, _destination, [], 0, "NONE"];
         _civ disableAI "MOVE";
         _civ setVariable ["OT_delivery", [_itemcls, _numitems], true];
 
@@ -83,7 +80,7 @@ private _title = format ["Deliver %1 x %2 for %3 store in %4", _numitems, _itemn
         _this pushBack _civ;
 
         //give the items to the player
-        _count = 0;
+        private _count = 0;
         while { _count < _numitems } do {
             player addItem _itemcls;
             _count = _count + 1;
@@ -102,12 +99,12 @@ private _title = format ["Deliver %1 x %2 for %3 store in %4", _numitems, _itemn
         _civ getVariable ["OT_deliveryDone", false];
     },
     {
-        params ["_destination", "_itemcls", "_numitems", "_reward", "_starttown", "_civ", "_wassuccess"];
+        params ["", "_itemcls", "_numitems", "_reward", "_starttown", "_civ", "_wassuccess"];
         _civ call OT_fnc_cleanup;
 
         //If mission was a success
         if (_wassuccess) then {
-            _player = _civ getVariable ["OT_deliveredBy", objNull];
+            private _player = _civ getVariable ["OT_deliveredBy", objNull];
 
             //apply support and pay money
             [

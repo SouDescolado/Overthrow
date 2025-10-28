@@ -1,14 +1,13 @@
 params ["_pos", "_typecls"];
 
-private ["_canplace", "_base", "_isbase", "_owner", "_typecls", "_estate"];
-_isbase = false;
-_canplace = true;
+private _isbase = false;
+private _canplace = true;
 
 if (_typecls != "Base") then {
     private _ob = player call OT_fnc_nearestLocation;
     if ((_ob select 1) isEqualTo "Business") then {
-        _obpos = (_ob select 2) select 0;
-        _obname = (_ob select 0);
+        private _obpos = (_ob select 2) select 0;
+        private _obname = (_ob select 0);
 
         if (_obpos distance _pos < 250) then {
             if (_obname in (server getVariable ["GEURowned", []])) then {
@@ -23,7 +22,7 @@ if (_typecls != "Base") then {
             _canplace = true;
         };
     };
-    _base = _pos call OT_fnc_nearestBase;
+    private _base = _pos call OT_fnc_nearestBase;
     if !(isNil "_base") then {
         if ((_base select 0) distance _pos < 100) then {
             _isbase = true;
@@ -39,7 +38,7 @@ if (_typecls != "Base") then {
     };
 } else {
     _isbase = true;
-    _base = _pos call OT_fnc_nearestBase;
+    private _base = _pos call OT_fnc_nearestBase;
     if !(isNil "_base") then {
         if ((_base select 0) distance _pos < 300) then {
             _canplace = false;
@@ -57,12 +56,12 @@ if (!_canplace) exitWith { false };
 
 if !(_isbase) then {
     //Building proximity check
-    _estate = _pos call OT_fnc_nearestRealEstate;
+    private _estate = _pos call OT_fnc_nearestRealEstate;
     if (_estate isEqualType []) then {
-        _b = _estate select 0;
+        private _b = _estate select 0;
         if (typeOf _b isEqualTo OT_item_Tent) exitWith { _canplace = false };
         if (_b call OT_fnc_hasOwner) then {
-            _owner = _b call OT_fnc_getOwner;
+            private _owner = _b call OT_fnc_getOwner;
             if (_owner != getPlayerUID player) then {
                 if (_typecls != "Camp" && _typecls != "Base") then {
                     _canplace = false;
@@ -83,9 +82,9 @@ if !(_isbase) then {
 };
 
 if (_typecls isEqualTo "Base") then {
-    _town = _pos call OT_fnc_nearestTown;
-    _postown = server getVariable _town;
-    _dist = 200;
+    private _town = _pos call OT_fnc_nearestTown;
+    private _postown = server getVariable _town;
+    private _dist = 200;
     if ((_postown distance _pos) < _dist) then { _canplace = false };
 };
 

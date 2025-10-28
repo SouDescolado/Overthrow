@@ -8,6 +8,6 @@ if (_obj isEqualType "") exitWith {
 if !(_obj isEqualType objNull) exitWith {};
 _obj setVariable ["owner", _owner, true];
 if ((getObjectType _obj) != 8 && (_obj isKindOf "Building")) exitWith {
-    _id = [_obj] call OT_fnc_getBuildID;
+    private _id = [_obj] call OT_fnc_getBuildID;
     owners setVariable [_id, _owner, true];
 };

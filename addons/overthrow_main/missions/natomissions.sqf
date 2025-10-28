@@ -1,8 +1,8 @@
-params ["_jobid", "_jobparams"];
+params ["", "_jobparams"];
 _jobparams params ["_missiondef"];
 
 private _params = [_missiondef];
-_missiondef params ["_missionid", "_missiontype", "_p1", "_p2", "_hour"];
+_missiondef params ["", "_missiontype", "_p1", "_p2", "_hour"];
 
 //Build a mission description and title
 private _description = "";
@@ -29,12 +29,12 @@ private _markerPos = _p2 select 0;
         //Fail check...
         //something is alive and made it to destination
         params ["_missiondef"];
-        _missiondef params ["_id", "_ty", "_p1", "_p2", "_hour"];
-        _group = spawner getVariable [format ["spawn%1", _id], nil];
-        _topos = _p2 select 0;
-        _failed = false;
+        _missiondef params ["_id", "", "", "_p2"];
+        private _group = spawner getVariable [format ["spawn%1", _id], nil];
+        private _topos = _p2 select 0;
+        private _failed = false;
         if (!isNil "_group" && (units _group) isNotEqualTo []) then {
-            _pos = getPos (leader _group);
+            private _pos = getPos (leader _group);
             if ((_pos distance2D _topos) < 50) exitWith { _failed = true };
         };
 
@@ -44,8 +44,8 @@ private _markerPos = _p2 select 0;
         //Succeed check...
         //everyone is dead
         params ["_missiondef"];
-        _missiondef params ["_id", "_ty", "_p1", "_p2", "_hour"];
-        _group = spawner getVariable [format ["spawn%1", _id], nil];
+        _missiondef params ["_id"];
+        private _group = spawner getVariable [format ["spawn%1", _id], nil];
         (units _group) isEqualTo [];
     },
     {

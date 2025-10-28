@@ -13,12 +13,11 @@ if (_force) exitWith {
 
 if (_vehicle isEqualType grpNull) exitWith {
     if ((units _vehicle) isEqualTo []) exitWith { deleteGroup _vehicle };
-    private _l = (units _vehicle) select 0;
     [
         { !([(_this # 0)] call OT_fnc_inSpawnDistance) },
         {
-            _vehs = [];
-            _this params ["_l", "_vehicle"];
+            private _vehs = [];
+            params ["", "_vehicle"];
             {
                 if (!isNull objectParent _x) then { _vehs pushBackUnique (objectParent _x) };
                 if !(_x call OT_fnc_hasOwner) then {
@@ -45,7 +44,7 @@ if (OT_adminMode) then {
 [
     { !([(_this select 0)] call OT_fnc_inSpawnDistance) },
     {
-        _this params ["_vehicle"];
+        params ["_vehicle"];
         if (_vehicle isKindOf "CAManBase") then {
             if (!isNull objectParent _vehicle) then { [(objectParent _vehicle)] call OT_fnc_cleanup };
         } else {

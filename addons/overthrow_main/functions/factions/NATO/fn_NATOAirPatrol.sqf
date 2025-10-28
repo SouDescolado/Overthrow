@@ -38,14 +38,14 @@ if !(_frombase in _abandoned) then {
     sleep 1;
 
     {
-        _wp = _group addWaypoint [_x, 50];
+        private _wp = _group addWaypoint [_x, 50];
         _wp setWaypointType "SAD";
         _wp setWaypointBehaviour "SAFE";
         _wp setWaypointSpeed "FULL";
         _wp setWaypointTimeout [300, 300, 300];
     } forEach (_waypoints);
 
-    _timeout = time + ((count _waypoints) * 300);
+    private _timeout = time + ((count _waypoints) * 300);
 
     waitUntil {
         sleep 10;
@@ -60,7 +60,7 @@ if !(_frombase in _abandoned) then {
 
     if (isNil "_veh" || !alive _veh) exitWith {};
 
-    _wp = _group addWaypoint [_frompos, 50];
+    private _wp = _group addWaypoint [_frompos, 50];
     _wp setWaypointType "MOVE";
     _wp setWaypointBehaviour "SAFE";
     _wp setWaypointSpeed "FULL";

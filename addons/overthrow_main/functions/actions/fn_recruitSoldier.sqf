@@ -1,8 +1,6 @@
 if !(captive player) exitWith { "You cannot recruit while wanted" call OT_fnc_notifyMinor };
 
-private _cls = _this select 0;
-private _pos = _this select 1;
-private _group = _this select 2;
+params ["_cls", "_pos", "_group"];
 
 if ((_pos nearEntities ["CAManBase", 50]) findIf { side _x isEqualTo blufor || side _x isEqualTo opfor } != -1) exitWith {
     "You cannot recruit with enemies nearby" call OT_fnc_notifyMinor;

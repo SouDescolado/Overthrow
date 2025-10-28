@@ -22,7 +22,7 @@ if (_job isNotEqualTo []) then {
         _remainTxt = format ["Expires in %1 hrs %2 mins", _hrs, _mins];
     };
 
-    _textctrl = (findDisplay 8000) displayCtrl 1100;
+    private _textctrl = (findDisplay 8000) displayCtrl 1100;
 
     _textctrl ctrlSetStructuredText parseText format [
         "

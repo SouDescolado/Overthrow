@@ -14,7 +14,7 @@ if (_cls == "Police") then {
 //calculate cost
 private _cost = floor (([OT_nation, "CIV", 0] call OT_fnc_getPrice) * 1.5);
 
-_loadout params ["_primary", "_secondary", "_handgun", "_uniform", "_vest", "_backpack", "_helmet", "_goggles", "_bino", "_assigned"];
+_loadout params ["_primary", "_secondary", "_handgun", "_uniform", "_vest", "_backpack", "_helmet", "_goggles", "", "_assigned"];
 
 private _allitems = [];
 {
@@ -73,7 +73,7 @@ private _bought = [];
 {
     _x params ["_cls", "_num"];
     if (_cls isNotEqualTo "ItemMap") then {
-        _whqty = _cls call OT_fnc_qtyInWarehouse;
+        private _whqty = _cls call OT_fnc_qtyInWarehouse;
         if (_whqty < _num) then { _num = _num - _whqty } else { _num = 0 };
         if (_num > 0) then {
             _cost = _cost + (([OT_nation, _cls, 30] call OT_fnc_getPrice) * _num);

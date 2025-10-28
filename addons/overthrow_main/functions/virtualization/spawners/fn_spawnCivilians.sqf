@@ -7,16 +7,11 @@ private _hometown = _town;
 private _groups = [];
 
 private _pop = server getVariable format ["population%1", _town];
-private _stability = server getVariable format ["stability%1", _town];
 private _posTown = server getVariable _town;
 
 waitUntil { !isNil "OT_economyLoadDone" };
 
-private _mSize = 350;
-if (_town in OT_capitals) then {
-    _mSize = 900;
-};
-private _numciv = 0;
+private _numCiv = 0;
 
 if (_pop > 5) then {
     _numCiv = round (_pop * OT_spawnCivPercentage);
@@ -30,8 +25,6 @@ if (_pop > 5) then {
 if (_numCiv > 50) then {
     _numCiv = 50;
 };
-
-private _hour = date select 3;
 
 /*
 private _church = server getVariable [format["churchin%1",_town],[]];
@@ -57,7 +50,7 @@ private _mayorpos = _town call OT_fnc_getRandomRoadPosition;
 private _group = createGroup [civilian, true];
 _group setBehaviour "SAFE";
 _groups pushBack _group;
-_mayor = _group createUnit ["C_Man_formal_1_F", _mayorpos, [], 0, "NONE"];
+private _mayor = _group createUnit ["C_Man_formal_1_F", _mayorpos, [], 0, "NONE"];
 _mayor setBehaviour "CARELESS";
 _mayor setVariable ["hometown", _hometown, true];
 [_mayor] call OT_fnc_initMayor;
@@ -72,8 +65,8 @@ while { _count < _numCiv } do {
 
     private _home = _town call OT_fnc_getRandomRoadPosition;
     while { (_groupCount < _pergroup) && (_count < _numCiv) } do {
-        _pos = _home getPos [10, random 360];
-        _civ = _group createUnit [OT_civType_local, _pos, [], 0, "NONE"];
+        private _pos = _home getPos [10, random 360];
+        private _civ = _group createUnit [OT_civType_local, _pos, [], 0, "NONE"];
         _civ setBehaviour "SAFE";
         _civ setVariable ["hometown", _hometown, true];
         [_civ] call OT_fnc_initCivilian;
@@ -105,16 +98,16 @@ private _gangs = OT_civilians getVariable [format ["gangs%1", _town], []];
             private _home = _gang select 4; //camp position
 
             //Spawn the camp
-            _veh = createVehicle ["Campfire_burning_F", _home, [], 0, "CAN_COLLIDE"];
+            private _veh = createVehicle ["Campfire_burning_F", _home, [], 0, "CAN_COLLIDE"];
             _groups pushBack _veh;
 
-            _numtents = 2 + round (random 3);
-            _count = 0;
+            private _numtents = 2 + round (random 3);
+            private _count = 0;
 
             while { _count < _numtents } do {
                 //this code is in tents
-                _d = random 360;
-                _p = _home getPos [(2 + random 7), _d];
+                private _d = random 360;
+                private _p = _home getPos [(2 + random 7), _d];
                 _p = _p findEmptyPosition [1, 40, "Land_TentDome_F"];
                 _veh = createVehicle ["Land_TentDome_F", _p, [], 0, "CAN_COLLIDE"];
                 _veh setDir _d;
@@ -127,7 +120,7 @@ private _gangs = OT_civilians getVariable [format ["gangs%1", _town], []];
             _leaderGroup setVariable ["VCM_TOUGHSQUAD", true, true];
             _leaderGroup setVariable ["VCM_NORESCUE", true, true];
             private _pos = _home getPos [10, random 360];
-            _civ = _leaderGroup createUnit [OT_CRIM_Unit, _pos, [], 0, "NONE"];
+            private _civ = _leaderGroup createUnit [OT_CRIM_Unit, _pos, [], 0, "NONE"];
             _civ setRank "COLONEL";
             _civ setBehaviour "SAFE";
             _civ setVariable ["NOAI", true, false];
@@ -137,7 +130,7 @@ private _gangs = OT_civilians getVariable [format ["gangs%1", _town], []];
             [_civ, _town, _gangid] call OT_fnc_initCrimLeader;
             _civ setVariable ["hometown", _town, true];
 
-            _wp = _leaderGroup addWaypoint [_home, 0];
+            private _wp = _leaderGroup addWaypoint [_home, 0];
             _wp setWaypointType "GUARD";
             _wp = _leaderGroup addWaypoint [_home, 0];
             _wp setWaypointType "CYCLE";

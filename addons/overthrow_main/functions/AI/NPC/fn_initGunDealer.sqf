@@ -1,6 +1,4 @@
-private ["_unit", "_group"];
-
-_unit = _this select 0;
+private _unit = _this select 0;
 
 (group _unit) setVariable ["VCM_Disable", true];
 (group _unit) setVariable ["lambs_danger_disableGroupAI", true];
@@ -18,7 +16,7 @@ removeVest _unit;
 
 _unit setVariable ["NOAI", true, false];
 
-_group = group _unit;
+private _group = group _unit;
 
 _group setBehaviour "CARELESS";
 [_unit, "self"] call OT_fnc_setOwner;

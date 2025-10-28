@@ -1,7 +1,5 @@
 //This code is called by the gun dealer or faction rep to retrieve the description and parameters of the mission
-private _numtokill = round (random 3) + 2;
 private _title = "Kill NATO";
-private _found = false;
 
 private _groups = [allGroups, [], { (leader _x) distance2D player }, "ASCEND", { (side leader _x) isEqualTo blufor && (units _x) isNotEqualTo [] && ((leader _x) distance2D player) < 300 }] call BIS_fnc_sortBy;
 if (_groups isEqualTo []) exitWith { [] };
@@ -35,7 +33,7 @@ private _params = [_group, _reward, _numtokill];
         _numleft isEqualTo 0;
     },
     {
-        params ["_group", "_reward", "_numtokill", "_wassuccess"];
+        params ["", "_reward", "", "_wassuccess"];
         if (_wassuccess) then {
             [_reward] call OT_fnc_money;
         };

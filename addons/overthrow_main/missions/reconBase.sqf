@@ -1,8 +1,8 @@
-params ["_jobid", "_jobparams"];
+params ["", "_jobparams"];
 _jobparams params ["_base", "_markerPos"];
 
 private _count = 0;
-_params = [_base, _count];
+private _params = [_base, _count];
 private _effect = "<t size='0.9'>Reward: $500 to player closest to base</t>";
 
 //Build a mission description and title
@@ -25,7 +25,6 @@ private _title = format ["Recon of %1", _base];
         //Success Check
         params ["_base", "_oldcount"];
 
-        private _closestPlayer = nil;
         private _loc = server getVariable _base;
         private _players = [];
         {
@@ -38,16 +37,14 @@ private _title = format ["Recon of %1", _base];
 
         if (_players isEqualTo []) exitWith { false };
 
-        _closestPlayer = (_players select 0) select 1;
-
         private _spawnid = spawner getVariable [format ["spawnid%1", _base], ""];
         if (_spawnid isEqualTo "") exitWith { false }; //Base has not been spawned yet
         //Get groups in spawn
-        _groups = spawner getVariable [_spawnid, []];
+        private _groups = spawner getVariable [_spawnid, []];
         if (_groups isEqualTo []) exitWith { false }; //Base is empty/not spawned atm
 
-        _count = 0;
-        _missedOne = false;
+        private _count = 0;
+        private _missedOne = false;
         {
             private _group = _x;
             if ((typeName _group isEqualTo "GROUP") && !isNull (leader _group)) then {
@@ -65,7 +62,7 @@ private _title = format ["Recon of %1", _base];
         !_missedOne;
     },
     {
-        params ["_base", "_count", "_wassuccess"];
+        params ["_base", "", "_wassuccess"];
 
         //If mission was a success
         if (_wassuccess) then {

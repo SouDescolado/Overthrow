@@ -1,8 +1,8 @@
 createDialog "OT_dialog_garrison";
 disableSerialization;
 
-_b = player call OT_fnc_nearestRealEstate;
-_name = "Base";
+private _b = player call OT_fnc_nearestRealEstate;
+private _name = "Base";
 if (_b isEqualType []) then {
     if (typeOf (_b select 0) isEqualTo OT_flag_IND) then {
         _name = "";
@@ -11,15 +11,15 @@ if (_b isEqualType []) then {
         } forEach (server getVariable ["bases", []]);
     };
 } else {
-    _ob = player call OT_fnc_nearestObjective;
+    private _ob = player call OT_fnc_nearestObjective;
     _name = _ob select 1;
 };
 
-_textctrl = (findDisplay 9000) displayCtrl 1100;
+private _textctrl = (findDisplay 9000) displayCtrl 1100;
 _textctrl ctrlSetStructuredText parseText format ["<t size='1.5' align='center'>%1</t>", _name];
 
-_btn = (findDisplay 9000) displayCtrl 1600;
-_soldier = ((OT_Recruitables select 0) select 0) call OT_fnc_getSoldier;
+private _btn = (findDisplay 9000) displayCtrl 1600;
+private _soldier = ((OT_Recruitables select 0) select 0) call OT_fnc_getSoldier;
 _btn ctrlSetTooltip format ["$%1", [_soldier select 0, 1, 0, true] call CBA_fnc_formatNumber];
 
 _btn = (findDisplay 9000) displayCtrl 1601;
@@ -43,7 +43,7 @@ _soldier = ((OT_Recruitables select 9) select 0) call OT_fnc_getSoldier;
 _btn ctrlSetTooltip format ["$%1", [_soldier select 0, 1, 0, true] call CBA_fnc_formatNumber];
 
 _btn = (findDisplay 9000) displayCtrl 1606;
-_cost = [OT_nation, "I_HMG_01_high_weapon_F", 0] call OT_fnc_getPrice;
+private _cost = [OT_nation, "I_HMG_01_high_weapon_F", 0] call OT_fnc_getPrice;
 _cost = _cost + ([OT_nation, "CIV", 0] call OT_fnc_getPrice);
 _cost = _cost + 300;
 _btn ctrlSetTooltip format ["$%1", [_cost, 1, 0, true] call CBA_fnc_formatNumber];

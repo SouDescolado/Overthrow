@@ -5,11 +5,9 @@ if (_veh isEqualTo player) exitWith {};
 private _objects = [];
 
 private _b = player call OT_fnc_nearestRealEstate;
-private _iswarehouse = false;
 if (_b isEqualType []) then {
     private _building = _b select 0;
     if ((typeOf _building) isEqualTo OT_warehouse && _building call OT_fnc_hasOwner) then {
-        _iswarehouse = true;
         _objects pushBack _building;
     };
 };
@@ -21,10 +19,8 @@ if (_b isEqualType []) then {
 if (_objects isEqualTo []) exitWith {
     "Cannot find any containers or other vehicles within 20m of this vehicle" call OT_fnc_notifyMinor;
 };
-_sorted = [_objects, [], { _x distance player }, "ASCEND"] call BIS_fnc_sortBy;
-_target = _sorted select 0;
 
-_doTransfer = {
+private _doTransfer = {
     private _veh = vehicle player;
     private _target = _this;
     private _toname = (typeOf _target) call OT_fnc_vehicleGetName;
@@ -34,13 +30,13 @@ _doTransfer = {
 
     [5, false] call OT_fnc_progressBar;
 
-    _full = false;
+    private _full = false;
     if (_iswarehouse) then {
         private _warehouse = [player] call OT_fnc_nearestWarehouse;
         if (_warehouse == objNull) exitWith { hint "No warehouse near by!" };
         {
             private _count = 0;
-            _d = _warehouse getVariable [_x, false];
+            private _d = _warehouse getVariable [_x, false];
             if (_d isEqualType []) then {
                 _d params ["_cls", ["_num", 0, [0]]];
                 if (_num > 0) then {

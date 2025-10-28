@@ -14,9 +14,9 @@ sleep 20;
         private _numplayers = count (allPlayers - (entities 'HeadlessClient_F'));
         propaganda_system_lasthour = date select 3;
         if (_numplayers > 0) then {
-            _totalStability = 0;
-            _totalPop = 0;
-            _abandoned = server getVariable ['NATOabandoned', []];
+            private _totalStability = 0;
+            private _totalPop = 0;
+            private _abandoned = server getVariable ['NATOabandoned', []];
             {
                 private _town = _x;
                 private _townPos = server getVariable _town;
@@ -35,8 +35,8 @@ sleep 20;
                     };
                 } else {
                     if (_commsAbandoned) then {
-                        _police = server getVariable [format ['garrison%1', _town], 0];
-                        _chance = 20;
+                        private _police = server getVariable [format ['garrison%1', _town], 0];
+                        private _chance = 20;
                         if (_police < 4) then {
                             _chance = 50;
                         };

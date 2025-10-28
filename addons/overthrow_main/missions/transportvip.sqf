@@ -1,5 +1,5 @@
 //This code is called by the gun dealer or faction rep to retrieve the description and parameters of the mission
-params ["_jobid", "_jobparams"];
+params ["", "_jobparams"];
 _jobparams params ["_faction"];
 
 private _factionName = server getVariable format ["factionname%1", _faction];
@@ -7,9 +7,7 @@ private _pickupTown = "";
 private _startpos = getPos player;
 private _pickup = [];
 private _destinationTown = "";
-private _type = "";
 private _destination = [];
-private _abandoned = server getVariable ["NATOabandoned", []];
 
 //Here is where we might randomize the parameters a bit
 //Find a pickup town
@@ -18,7 +16,7 @@ private _abandoned = server getVariable ["NATOabandoned", []];
     private _posTown = server getVariable _town;
     if ([_posTown, _startpos] call OT_fnc_regionIsConnected) exitWith {
         _pickupTown = _town;
-        _building = [_posTown, OT_allHouses] call OT_fnc_getRandomBuilding;
+        private _building = [_posTown, OT_allHouses] call OT_fnc_getRandomBuilding;
         _pickup = selectRandom (_building call BIS_fnc_buildingPositions);
         if (isNil "_pickup") then {
             _pickup = _posTown findEmptyPosition [5, 100, OT_civType_local];
@@ -32,7 +30,7 @@ private _abandoned = server getVariable ["NATOabandoned", []];
     private _posTown = server getVariable _town;
     if ([_posTown, _pickup] call OT_fnc_regionIsConnected) exitWith {
         _destinationTown = _town;
-        _building = [_posTown, OT_allHouses] call OT_fnc_getRandomBuilding;
+        private _building = [_posTown, OT_allHouses] call OT_fnc_getRandomBuilding;
         _destination = getPos _building;
         if (isNil "_destination") then {
             _destination = _posTown findEmptyPosition [5, 100, OT_civType_local];
@@ -60,7 +58,7 @@ private _title = format ["Operative transport for %1", _factionName];
     [_title, _description],
     _markerPos,
     {
-        params ["_faction", "_pickup", "_destination", "_identity"];
+        params ["", "_pickup", "", "_identity"];
 
         //Spawn the dude
         private _civ = (group player) createUnit [OT_civType_gunDealer, _pickup, [], 0, "NONE"];
@@ -95,9 +93,9 @@ private _title = format ["Operative transport for %1", _factionName];
     },
     {
         //Cleanup
-        params ["_faction", "_pickup", "_destination", "_identity", "_civ", "_wassuccess"];
+        params ["_faction", "", "", "", "_civ", "_wassuccess"];
 
-        _group = createGroup civilian;
+        private _group = createGroup civilian;
         [_civ] joinSilent nil;
         [_civ] joinSilent _group;
         [_group] call OT_fnc_cleanup;

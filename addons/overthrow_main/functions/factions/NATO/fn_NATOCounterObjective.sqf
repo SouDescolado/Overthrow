@@ -10,18 +10,18 @@ private _tskid = [independent, [format ["attack%1", _objective]], [format ["NATO
 
 format ["NATO is counter-attacking %1", _objective] remoteExec ["OT_fnc_notifyMinor", 0, false];
 
-_fail = {
-    params ["_tskid", "_objective"];
+private _fail = {
+    params ["_tskid"];
     [_tskid, "SUCCEEDED", true] spawn BIS_fnc_taskSetState;
 };
 
-_success = {
+private _success = {
     params ["_tskid", "_objective"];
     //NATO has won
     [_tskid, "FAILED", true] spawn BIS_fnc_taskSetState;
-    _abandoned = server getVariable "NATOabandoned";
+    private _abandoned = server getVariable "NATOabandoned";
     _abandoned deleteAt (_abandoned find _objective);
-    _count = { (_x getVariable ["garrison", ""]) isEqualTo _objective } count (allUnits);
+    private _count = { (_x getVariable ["garrison", ""]) isEqualTo _objective } count (allUnits);
     server setVariable [format ["garrison%1", _objective], _count, true];
     if (_objective isEqualTo OT_NATO_HQ) then {
         _objective setMarkerType "ot_HQ";

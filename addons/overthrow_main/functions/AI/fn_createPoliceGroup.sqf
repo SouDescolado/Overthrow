@@ -9,9 +9,9 @@ _group setVariable ["VCM_TOUGHSQUAD", true, true];
 _group setVariable ["VCM_NORESCUE", true, true];
 
 for "_i" from 1 to _amount do {
-    _pos = [[[_posTown, 35]]] call BIS_fnc_randomPos;
+    private _pos = [[[_posTown, 35]]] call BIS_fnc_randomPos;
 
-    _unit = [_soldier, _pos, _group] call OT_fnc_createSoldier;
+    private _unit = [_soldier, _pos, _group] call OT_fnc_createSoldier;
     [_unit] joinSilent _group;
     _unit setRank "SERGEANT";
     [_unit, _town] call OT_fnc_initPolice;

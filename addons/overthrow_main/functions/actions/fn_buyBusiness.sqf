@@ -4,7 +4,6 @@ if ((_b select 1) isEqualTo "Business") then {
         private _name = (_b select 0);
         private _pos = (_b select 2) select 0;
         private _price = _name call OT_fnc_getBusinessPrice;
-        private _err = true;
         private _money = [] call OT_fnc_resistanceFunds;
         if (_money >= _price) then {
             [-_price] call OT_fnc_resistanceFunds;
@@ -29,7 +28,6 @@ if ((_b select 1) isEqualTo "Business") then {
             if (!(_name in _owned)) then {
                 private _pos = OT_factoryPos;
                 private _price = _name call OT_fnc_getBusinessPrice;
-                private _err = true;
                 private _money = [] call OT_fnc_resistanceFunds;
                 if (_money >= _price) then {
                     [-_price] call OT_fnc_resistanceFunds;

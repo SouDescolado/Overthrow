@@ -1,9 +1,7 @@
-private ["_items", "_myitems"];
+private _items = [];
+private _done = [];
 
-_items = [];
-_done = [];
-
-_myitems = [];
+private _myitems = [];
 
 if (_this isKindOf "CAManBase") then {
     _myitems = (items _this) + (magazines _this);
@@ -19,7 +17,7 @@ if !(isNil "_myitems") then {
             _done pushBack _x;
             _items pushBack [_x, 1];
         } else {
-            _cls = _x;
+            private _cls = _x;
             {
                 if ((_x select 0) isEqualTo _cls) then {
                     _x set [1, (_x select 1) + 1];

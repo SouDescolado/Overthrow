@@ -33,7 +33,7 @@ disableUserInput true;
         disableUserInput false;
         if ((!alive player) || (!alive _veh)) exitWith {};
 
-        _money = player getVariable ["money", 0];
+        private _money = player getVariable ["money", 0];
         _money = _money - _price;
         player setVariable ["money", _money, true];
 

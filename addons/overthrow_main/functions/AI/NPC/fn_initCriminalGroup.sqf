@@ -3,12 +3,10 @@ params ["_group", "_townPos"];
 _group setVariable ["VCM_NORESCUE", true];
 _group setVariable ["VCM_TOUGHSQUAD", true];
 
-private _start = getPos (leader _group);
-
-_dest = _townPos call OT_fnc_getRandomRoadPosition;
+private _dest = _townPos call OT_fnc_getRandomRoadPosition;
 private _firstPos = _dest;
 
-_wp = _group addWaypoint [_dest, 5];
+private _wp = _group addWaypoint [_dest, 5];
 _wp setWaypointType "MOVE";
 _wp setWaypointBehaviour "SAFE";
 _wp setWaypointSpeed "LIMITED";

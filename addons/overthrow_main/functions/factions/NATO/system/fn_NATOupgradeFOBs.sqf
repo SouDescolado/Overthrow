@@ -19,18 +19,18 @@ private _fobs = server getVariable ["NATOfobs", []];
 
 {
     _x params ["_pos", "_garrison", "_upgrades"];
-    _max = 16;
+    private _max = 16;
     if ((_garrison < _max) && { (_spend > 150) } && { (random 100 > _chance) }) exitWith {
         _x set [1, _garrison + 4];
         _spend = _spend - 150;
         _resources = _resources - 150;
-        _group = createGroup blufor;
+        private _group = createGroup blufor;
         _group deleteGroupWhenEmpty true;
-        _count = 0;
+        private _count = 0;
         while { _count < 4 } do {
-            _start = [[[_pos, 50]]] call BIS_fnc_randomPos;
+            private _start = [[[_pos, 50]]] call BIS_fnc_randomPos;
 
-            _civ = _group createUnit [selectRandom OT_NATO_Units_LevelOne, _start, [], 0, "NONE"];
+            private _civ = _group createUnit [selectRandom OT_NATO_Units_LevelOne, _start, [], 0, "NONE"];
             _civ setVariable ["garrison", "HQ", false];
             _civ setRank "LIEUTENANT";
             _civ setVariable ["VCOM_NOPATHING_Unit", true, false];

@@ -16,7 +16,7 @@ if (_cls isEqualTo "WAGE") then {
     _stability = ((server getVariable [format ["stability%1", _town], 100]) / 100);
 };
 
-_population = server getVariable [format ["population%1", _town], 1000];
+private _population = server getVariable [format ["population%1", _town], 1000];
 if (_town isEqualTo OT_nation) then { _population = 100 };
 if (_population > 2000) then { _population = 2000 };
 _population = 1 - (_population / 2000);

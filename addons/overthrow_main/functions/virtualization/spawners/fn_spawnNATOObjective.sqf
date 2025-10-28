@@ -16,7 +16,6 @@ private _groups = [];
 
 //Spawn supply cache
 private _supplypos = spawner getVariable [format ["NATOsupply%1", _name], false];
-private _diff = server getVariable ["OT_difficulty", 1];
 if (_supplypos isEqualType []) then {
     //Spawn an ammobox
     private _start = _supplypos findEmptyPosition [2, 20, OT_item_Storage];
@@ -258,13 +257,10 @@ private _airgarrison = server getVariable [format ["airgarrison%1", _name], []];
 } forEach (_airgarrison);
 
 private _vehgarrison = server getVariable [format ["vehgarrison%1", _name], []];
-_pos = [];
-private _road = objNull;
 {
     private _vgroup = createGroup blufor;
     _groups pushBack _vgroup;
     private _vehtype = _x;
-    private _got = false;
     private _pos = _posTown findEmptyPosition [10, 250, _vehtype];
     if (_pos isEqualTo []) then { _pos = _posTown findEmptyPosition [0, 250, _vehtype] };
     private _dir = random 360;
@@ -282,7 +278,7 @@ private _road = objNull;
         if (_vehtype in OT_staticWeapons) then {
             //put sandbags
             private _p = _pos getPos [1.5, _dir];
-            _veh = OT_NATO_Sandbag_Curved createVehicle _p;
+            private _veh = OT_NATO_Sandbag_Curved createVehicle _p;
             _veh setPos _p;
             _veh setDir (_dir - 180);
             _groups pushBack _veh;

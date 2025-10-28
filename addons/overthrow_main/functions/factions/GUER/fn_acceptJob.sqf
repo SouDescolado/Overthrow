@@ -11,8 +11,8 @@ private _activeJobIds = spawner getVariable ["OT_activeJobIds", []];
 _activeJobIds pushBack _id;
 spawner setVariable ["OT_activeJobIds", _activeJobIds, false];
 
-_active = spawner getVariable ["OT_activeJobs", []];
-_j = [_id, _job, 1, _expiry];
+private _active = spawner getVariable ["OT_activeJobs", []];
+private _j = [_id, _job, 1, _expiry];
 _active pushBack _j;
 spawner setVariable ["OT_activeJobs", _active, true];
 "Job accepted, you can find it in the 'Jobs' screen" call OT_fnc_notifyMinor;

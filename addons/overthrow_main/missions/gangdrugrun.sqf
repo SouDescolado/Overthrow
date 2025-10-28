@@ -1,4 +1,4 @@
-params ["_jobid", "_jobparams"];
+params ["", "_jobparams"];
 _jobparams params ["_gangid"];
 private _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
 
@@ -13,7 +13,7 @@ private _gangtown = _gang select 2;
     private _posTown = server getVariable _town;
     if ([_posTown, _startpos] call OT_fnc_regionIsConnected) exitWith {
         _destinationName = _town;
-        _building = [_posTown, OT_allHouses] call OT_fnc_getRandomBuilding;
+        private _building = [_posTown, OT_allHouses] call OT_fnc_getRandomBuilding;
         _destination = selectRandom (_building call BIS_fnc_buildingPositions);
         if (isNil "_destination") then {
             _destination = _posTown findEmptyPosition [5, 100, OT_civType_local];
@@ -21,11 +21,11 @@ private _gangtown = _gang select 2;
     };
 } forEach ([OT_allTowns, [], { random 100 }, "ASCEND", { _x isNotEqualTo _gangtown }] call BIS_fnc_sortBy);
 
-_numitems = floor (2 + random 4);
-_reward = floor ((_startpos distance2D _destination) * 0.01 * _numitems);
+private _numitems = floor (2 + random 4);
+private _reward = floor ((_startpos distance2D _destination) * 0.01 * _numitems);
 
-_markerPos = _destination;
-_params = [_destination, _gangid, _numitems, _reward];
+private _markerPos = _destination;
+private _params = [_destination, _gangid, _numitems, _reward];
 
 //Build a mission description and title
 private _description = format ["We need someone to deliver %1 x Ganja to a customer in %2. You have 6 hours.</t><br/><br/><t size='0.9' align='center'>Reward: +5 rep (%3), $%4", _numitems, _destinationName, _gangname, _reward];
@@ -41,9 +41,9 @@ private _title = format ["Deliver %2 x Ganja for %1", _gangname, _numitems];
             "You don't have enough room in your inventory for the Ganja" call OT_fnc_notifyMinor;
             false;
         };
-        _group = createGroup civilian;
+        private _group = createGroup civilian;
         _group setBehaviour "CARELESS";
-        _civ = _group createUnit [OT_civType_local, _destination, [], 0, "NONE"];
+        private _civ = _group createUnit [OT_civType_local, _destination, [], 0, "NONE"];
         _civ disableAI "MOVE";
         _civ setVariable ["OT_delivery", ["OT_Ganja", _numitems], true];
 
@@ -59,7 +59,7 @@ private _title = format ["Deliver %2 x Ganja for %1", _gangname, _numitems];
         _this pushBack _civ;
 
         //give the items to the player
-        _count = 0;
+        private _count = 0;
         while { _count < _numitems } do {
             player addItem "OT_Ganja";
             _count = _count + 1;
@@ -78,13 +78,12 @@ private _title = format ["Deliver %2 x Ganja for %1", _gangname, _numitems];
         _civ getVariable ["OT_deliveryDone", false];
     },
     {
-        params ["_destination", "_gangid", "_numitems", "_reward", "_civ", "_wassuccess"];
+        params ["", "_gangid", "_numitems", "_reward", "_civ", "_wassuccess"];
         _civ call OT_fnc_cleanup;
 
         //If mission was a success
         if (_wassuccess) then {
             _player = _civ getVariable ["OT_deliveredBy", objNull];
-            private _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
             //apply standing and pay money
             [
                 _reward,

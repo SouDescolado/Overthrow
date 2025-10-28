@@ -64,7 +64,6 @@ if (_create isEqualType 1) then {
                 ]) exitWith {
                     private _ang = (getDir _building) - 190;
                     private _p = [_building buildingPos 1, 2.3, _ang] call BIS_fnc_relPos; // Not equivalent to getPos alt syntax!
-                    private _dir = (getDir _building) - 180;
 
                     private _guns = { alive _x } count (nearestObjects [_p, ["I_HMG_01_high_F", "I_GMG_01_high_F"], 5]);
                     if (_guns == 0) then {
@@ -118,7 +117,7 @@ if (_create isEqualType 1) then {
             _dir = random 360;
             //put sandbags
             private _sp = _p getPos [1.5, _dir];
-            _veh = OT_NATO_Sandbag_Curved createVehicle _sp;
+            private _veh = OT_NATO_Sandbag_Curved createVehicle _sp;
             _veh setPos _sp;
             _veh setDir (_dir - 180);
             _sp = _p getPos [-1.5, _dir];
@@ -138,7 +137,7 @@ if (_create isEqualType 1) then {
                 format ["You need $%1", _cost] call OT_fnc_notifyMinor;
             };
             [-_cost] call OT_fnc_money;
-            _garrison = server getVariable [format ["resgarrison%1", _code], []];
+            private _garrison = server getVariable [format ["resgarrison%1", _code], []];
             _garrison pushBack [_create, []];
             server setVariable [format ["resgarrison%1", _code], _garrison, true];
         };

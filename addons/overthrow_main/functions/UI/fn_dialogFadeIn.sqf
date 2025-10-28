@@ -1,4 +1,4 @@
-_display = (findDisplay (_this # 0));
+private _display = (findDisplay (_this # 0));
 
 {
     _x ctrlSetFade 1;

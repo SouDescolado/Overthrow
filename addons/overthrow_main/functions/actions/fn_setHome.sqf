@@ -12,20 +12,20 @@ if ((typeOf _building) in OT_allRepairableRuins) exitWith {
     } forEach (OT_repairableRuins);
 
     if (_ruins isNotEqualTo []) then {
-        _ruins params ["_ruinClass", "_buildClass", "_price"];
-        _money = player getVariable ["money", 0];
+        _ruins params ["", "_buildClass", "_price"];
+        private _money = player getVariable ["money", 0];
         if (_money >= _price) then {
             [-_price] call OT_fnc_money;
-            _id = [_building] call OT_fnc_getBuildID;
-            _damaged = owners getVariable ["damagedBuildings", []];
+            private _id = [_building] call OT_fnc_getBuildID;
+            private _damaged = owners getVariable ["damagedBuildings", []];
             if (_id in _damaged) then {
                 _damaged deleteAt (_damaged find _id);
                 owners setVariable ["damagedBuildings", _damaged, true];
             };
-            _pos = getPosATL _building;
-            _dir = [vectorDir _building, vectorUp _building];
+            private _pos = getPosATL _building;
+            private _dir = [vectorDir _building, vectorUp _building];
             deleteVehicle _building;
-            _veh = createVehicle [_buildClass, _pos, [], 0, "CAN_COLLIDE"];
+            private _veh = createVehicle [_buildClass, _pos, [], 0, "CAN_COLLIDE"];
             _veh enableDynamicSimulation true;
             _veh setVectorDirAndUp _dir;
             _veh setPosATL _pos;
@@ -36,13 +36,13 @@ if ((typeOf _building) in OT_allRepairableRuins) exitWith {
     };
 };
 if (typeOf _building isEqualTo OT_warehouse) exitWith {
-    _price = round ((_b select 1) * 0.25);
-    _money = player getVariable ["money", 0];
+    private _price = round ((_b select 1) * 0.25);
+    private _money = player getVariable ["money", 0];
     if (_money >= _price) then {
         [-_price] call OT_fnc_money;
         _building setDamage 0;
-        _id = [_building] call OT_fnc_getBuildID;
-        _damaged = owners getVariable ["damagedBuildings", []];
+        private _id = [_building] call OT_fnc_getBuildID;
+        private _damaged = owners getVariable ["damagedBuildings", []];
         if (_id in _damaged) then {
             _damaged deleteAt (_damaged find _id);
             owners setVariable ["damagedBuildings", _damaged, true];

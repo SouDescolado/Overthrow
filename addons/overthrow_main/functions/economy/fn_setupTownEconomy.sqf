@@ -3,7 +3,6 @@ params ["_town"];
 private _dist = 600;
 if (_town in OT_sprawling || _town in OT_capitals) then { _dist = 1000 };
 private _posTown = server getVariable _town;
-private _stability = server getVariable [format ["stability%1", _town], 100];
 private _population = server getVariable [format ["population%1", _town], 0];
 
 private _activeShops = [];
@@ -32,10 +31,10 @@ if (count _shops > (count OT_itemCategoryDefinitions) - 1) then {
     {
         _x params ["_category"];
         if (_category != "Hardware") then {
-            _c = 0;
-            _pos = [];
+            private _c = 0;
+            private _pos = [];
             while { _c < 10 } do {
-                _shop = selectRandom _shops;
+                private _shop = selectRandom _shops;
                 _pos = getPos _shop;
                 if !(_pos in OT_allShops) exitWith {};
                 _c = _c + 1;
@@ -83,7 +82,7 @@ if (OT_piers isNotEqualTo []) then {
     {
         private _po = getPos _x;
         if !(_po in _piers) then {
-            _do = true;
+            private _do = true;
             {
                 if (_x distance _po < 80) exitWith { _do = false };
             } forEach (_piers);

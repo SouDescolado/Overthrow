@@ -8,7 +8,6 @@ if (isNil "OT_localPlayerInitDone" || { !(isNil "OT_localPlayerInitDone") && { !
     ] call CBA_fnc_waitUntilAndExecute;
 };
 
-private _currentObject = _this;
 private _currentObjectType = typeOf _this;
 
 if (_currentObjectType == OT_item_Map) then {
@@ -134,7 +133,7 @@ if (_this isKindOf "CAManBase" || _this isKindOf "FlagCarrier") exitWith {};
 
 if (_this isKindOf "Building" || _this isKindOf "LandVehicle") exitWith {};
 
-_dir = 0;
+private _dir = 0;
 if (_currentObjectType == "C_Rubberboat") then {
     _dir = 90;
 };

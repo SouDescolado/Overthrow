@@ -1,7 +1,7 @@
 params ["_id", "_job", "_repeat", "_expires"];
 _job params ["_info", "_markerPos", "_setup", "_fail", "_success", "_end", "_jobparams"];
 if !(_jobparams call _setup) exitWith {
-    _active = spawner getVariable ["OT_activeJobs", []];
+    private _active = spawner getVariable ["OT_activeJobs", []];
     private _idx = -1;
     {
         _x params ["_cid"];
@@ -29,7 +29,7 @@ if !(_jobparams call _setup) exitWith {
         };
         [
             {
-                (_this select 0) params ["_done", "_id", "_job", "_repeat", "_info", "_markerPos", "_setup", "_fail", "_success", "_end", "_jobparams", "_expires", "_lastdate"];
+                (_this select 0) params ["_done", "_id", "_job", "_repeat", "", "", "", "_fail", "_success", "_end", "_jobparams", "_expires", "_lastdate"];
                 private _handle = _this select 1;
                 private _remains = spawner getVariable [format ["OT_jobRemain%1", _id], 0];
                 if (!_done) then {
@@ -55,7 +55,7 @@ if !(_jobparams call _setup) exitWith {
                     }) then {
                         _jobparams pushBack _wassuccess;
                         _jobparams call _end;
-                        _active = spawner getVariable ["OT_activeJobs", []];
+                        private _active = spawner getVariable ["OT_activeJobs", []];
                         private _idx = -1;
                         {
                             _x params ["_cid"];
@@ -82,7 +82,7 @@ if !(_jobparams call _setup) exitWith {
 
                         if (_remains > 0) then {
                             if (_repeat < 1) then {
-                                _completed = server getVariable ["OT_completedJobIds", []];
+                                private _completed = server getVariable ["OT_completedJobIds", []];
                                 _completed pushBack _id;
                                 server setVariable ["OT_completedJobIds", _completed];
                             };

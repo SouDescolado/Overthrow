@@ -13,14 +13,14 @@ while {
     private _mortarpos = getPos _mortar;
 
     if (_attacking != "" && !(_attacking in OT_allTowns)) then {
-        _pos = server getVariable _attacking;
-        _distance = (_pos distance _mortar);
+        private _pos = server getVariable _attacking;
+        private _distance = (_pos distance _mortar);
 
-        _timesince = time - (server getVariable ["NATOattackstart", time]);
+        private _timesince = time - (server getVariable ["NATOattackstart", time]);
         if (_timesince < 300) then {
             if (_distance < 4000 && _distance > 500) then {
                 _mortarGroup setCombatMode "RED";
-                _p = _pos getPos [150, random 360];
+                private _p = _pos getPos [150, random 360];
                 _mortar commandArtilleryFire [_p, "8Rnd_82mm_Mo_shells", 1];
                 sleep (3 + (random 3));
                 _mortar commandArtilleryFire [_p, "8Rnd_82mm_Mo_shells", 1];
@@ -29,10 +29,10 @@ while {
                 //Did anyone hear that?
                 if ((_mortarpos nearEntities ["CAManBase", 3000]) findIf { side _x isEqualTo independent || captive _x } != -1) then {
                     private _icons = spawner getVariable ["NATOmortars", []];
-                    _found = false;
+                    private _found = false;
                     {
                         if ((_x select 0) isEqualTo _mortarpos) exitWith {
-                            _range = (_x select 1) - round ((_x select 1) * 0.25);
+                            private _range = (_x select 1) - round ((_x select 1) * 0.25);
                             _x set [1, _range];
                             _x set [2, _mortarpos getPos [_range, random 360]];
                         };
@@ -47,13 +47,13 @@ while {
     } else {
         private _targets = [spawner getVariable ["NATOknownTargets", []], [], { _x select 2 }, "DESCEND"] call BIS_fnc_sortBy;
         {
-            _x params ["_ty", "_pos", "_pri", "_obj", "_done"];
-            _distance = (_pos distance2D _mortar);
-            _town = _pos call OT_fnc_nearestTown;
+            _x params ["_ty", "_pos", "_pri", "", "_done"];
+            private _distance = (_pos distance2D _mortar);
+            private _town = _pos call OT_fnc_nearestTown;
 
             // Make sure we don't shell towns. The safezone around a town depends on the population
-            _towndist = _pos distance2D (server getVariable [_town, _pos]);
-            _safezone = 200 + ((server getVariable format ["population%1", _town]) / 2);
+            private _towndist = _pos distance2D (server getVariable [_town, _pos]);
+            private _safezone = 200 + ((server getVariable format ["population%1", _town]) / 2);
 
             if (!(_ty == "H" || _ty == "P" || _ty == "V")
                 && _pri > 80
@@ -77,10 +77,10 @@ while {
                 //Did anyone hear that?
                 if ((_mortarpos nearEntities ["CAManBase", 3000]) findIf { side _x isEqualTo independent || captive _x } != -1) then {
                     private _icons = spawner getVariable ["NATOmortars", []];
-                    _found = false;
+                    private _found = false;
                     {
                         if ((_x select 0) isEqualTo _mortarpos) exitWith {
-                            _range = (_x select 1) - round ((_x select 1) * 0.25);
+                            private _range = (_x select 1) - round ((_x select 1) * 0.25);
                             _x set [1, _range];
                             _x set [2, _mortarpos getPos [_range, random 360]];
                         };

@@ -10,7 +10,6 @@ private _inf = 0;
     if (_town in OT_allTowns) then {
         private _population = server getVariable format ["population%1", _town];
         private _stability = server getVariable format ["stability%1", _town];
-        private _garrison = server getVariable [format ['police%1', _town], 0];
         private _add = round (_population * 4 * (_stability / 100));
         if (_stability > 49) then {
             _add = round (_add * 4);

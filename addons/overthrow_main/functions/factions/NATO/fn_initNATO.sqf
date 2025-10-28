@@ -108,8 +108,8 @@ for "_i" from 1 to 5 do {
 };
 spawner setVariable [format ["loadouts_%1", OT_NATO_Unit_Police], _loadouts, false];
 
-private _loadout = getUnitLoadout OT_NATO_Unit_PoliceCommander;
-private _loadouts = [];
+_loadout = getUnitLoadout OT_NATO_Unit_PoliceCommander;
+_loadouts = [];
 for "_i" from 1 to 5 do {
     _loadouts pushBack ([_loadout, OT_allBLUSMG] call OT_fnc_randomizeLoadout);
 };
@@ -180,7 +180,7 @@ if ((server getVariable "StartupType") == "NEW" || (server getVariable ["NATOver
                 _statics = OT_NATO_StaticGarrison_LevelThree;
             };
             if ((random 150) < ((count _groundvehs) + _base)) then {
-                _veh = (selectRandom _groundvehs);
+                private _veh = (selectRandom _groundvehs);
                 diag_log format ["Adding %1 to %2", _veh call OT_fnc_vehicleGetName, _name];
                 _statics pushBackUnique _veh;
             };
@@ -189,10 +189,10 @@ if ((server getVariable "StartupType") == "NEW" || (server getVariable ["NATOver
             if (_name isEqualTo OT_NATO_HQ) then {
                 _garrison = 48;
                 server setVariable [format ["vehgarrison%1", _name], ["B_T_APC_Tracked_01_AA_F", "B_T_APC_Tracked_01_AA_F", "B_GMG_01_high_F", "B_GMG_01_high_F", "B_GMG_01_high_F", "B_HMG_01_high_F", "B_HMG_01_high_F", "B_HMG_01_high_F"], true];
-                _garr = [];
+                private _garr = [];
                 {
                     _x params ["_class", "_num"];
-                    _count = 0;
+                    private _count = 0;
                     while { _count < _num } do {
                         _count = _count + 1;
                         _garr pushBack _class;
@@ -247,7 +247,7 @@ if ((server getVariable "StartupType") == "NEW" || (server getVariable ["NATOver
     //Weighted airport list to distribute air vehicles
     private _prilist = [];
     {
-        _x params ["_pos", "_name", "_worth"];
+        _x params ["", "_name", "_worth"];
         if (_name != OT_NATO_HQ) then {
             _prilist pushBack _name;
             if (_worth > 900) then {
@@ -281,9 +281,9 @@ if ((server getVariable "StartupType") == "NEW" || (server getVariable ["NATOver
             _airvehs = OT_allBLUOffensiveVehicles select { getText (configFile >> "CfgVehicles" >> _x >> "faction") == OT_fallback_faction_NATO && { _x isKindOf "Air" } };
         };
         {
-            _name = _x;
+            private _name = _x;
             if ((random 200) < (count _airvehs)) then {
-                _type = selectRandom _airvehs;
+                private _type = selectRandom _airvehs;
                 private _garrison = server getVariable [format ["airgarrison%1", _name], []];
                 _garrison pushBack _type;
                 server setVariable [format ["airgarrison%1", _name], _garrison, true];
@@ -294,7 +294,7 @@ if ((server getVariable "StartupType") == "NEW" || (server getVariable ["NATOver
     //Distribute static AA to airfields
     {
         _x params ["", "_name"];
-        _vehs = server getVariable [format ["vehgarrison%1", _name], []];
+        private _vehs = server getVariable [format ["vehgarrison%1", _name], []];
         _vehs = _vehs + OT_NATO_Vehicles_StaticAAGarrison;
         server setVariable [format ["vehgarrison%1", _name], _vehs, true];
     } forEach (OT_airportData);
@@ -408,21 +408,21 @@ diag_log "Overthrow: NATO Init Done";
             if (_this > 89) exitWith {
                 //Add a random launcher (1% chance)
                 _done = _done + 100;
-                _wpn = selectRandom OT_allBLULaunchers;
+                private _wpn = selectRandom OT_allBLULaunchers;
                 _wpns pushBack [_wpn, 1 + (round (random (2 - _diff)))];
                 _mags pushBack [(getArray (configFile >> "CfgWeapons" >> _wpn >> "magazines")) select 0, 5];
             };
             if (_this > 85) exitWith {
                 //Add a random rifle (4% chance)
                 _done = _done + 50;
-                _wpn = selectRandom OT_allBLURifles;
+                private _wpn = selectRandom OT_allBLURifles;
                 _wpns pushBack [_wpn, 1 + (round (random (2 - _diff)))];
                 _mags pushBack [(getArray (configFile >> "CfgWeapons" >> _wpn >> "magazines")) select 0, 5];
             };
             if (_this > 75) exitWith {
                 //Add a random pistol (10% chance)
                 _done = _done + 25;
-                _wpn = selectRandom OT_allBLUPistols;
+                private _wpn = selectRandom OT_allBLUPistols;
                 _wpns pushBack [_wpn, 1 + (round (random (3 - _diff)))];
                 _mags pushBack [(getArray (configFile >> "CfgWeapons" >> _wpn >> "magazines")) select 0, 5];
             };
@@ -498,7 +498,7 @@ private _revealed = server getVariable ["revealedFOBs", []];
     private _id = str _pos;
     if (_id in _revealed) then {
         //create marker
-        _mrkid = createMarkerLocal [format ["natofob%1", _id], _pos];
+        private _mrkid = createMarkerLocal [format ["natofob%1", _id], _pos];
         _mrkid setMarkerShapeLocal "ICON";
         _mrkid setMarkerTypeLocal "mil_Flag";
         _mrkid setMarkerColorLocal "ColorBLUFOR";

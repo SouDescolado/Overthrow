@@ -1,6 +1,4 @@
-private ["_unit"];
-
-_unit = _this select 0;
+params ["_unit"];
 
 (group _unit) setVariable ["VCM_Disable", true];
 (group _unit) setVariable ["lambs_danger_disableGroupAI", true];
@@ -21,7 +19,7 @@ removeVest _unit;
 _unit addEventHandler [
     "FiredNear",
     {
-        _u = _this select 0;
+        params ["_u"];
         _u setUnitPos "DOWN";
     }
 ];

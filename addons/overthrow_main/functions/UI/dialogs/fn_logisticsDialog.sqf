@@ -15,7 +15,7 @@ lbClear 1500;
             _t = "km";
         };
 
-        _idx = lbAdd [1500, format ["%1 (%2%3)", _name, _dis, _t]];
+        private _idx = lbAdd [1500, format ["%1 (%2%3)", _name, _dis, _t]];
         lbSetPicture [1500, _idx, _pic];
         lbSetData [1500, _idx, _veh call BIS_fnc_netId];
         private _color = [0.9, 0.9, 0.9, 1];

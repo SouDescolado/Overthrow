@@ -19,11 +19,11 @@ while { _count < _amt } do {
     OT_civilians setVariable [format ["%1", _civid], _civ];
 
     if (_spawn && [_townpos] call OT_fnc_inSpawnDistance) then {
-        _pos = (_gang select 4);
-        _group = spawner getVariable [format ["gangspawn%1", _gangid], grpNull];
+        private _pos = (_gang select 4);
+        private _group = spawner getVariable [format ["gangspawn%1", _gangid], grpNull];
         //Spawn new gang member at camp
 
-        private _pos = _pos getPos [10, random 360];
+        _pos = _pos getPos [10, random 360];
         private _civ = _group createUnit [OT_CRIM_Unit, _pos, [], 0, "NONE"];
         [_civ] joinSilent nil;
         [_civ] joinSilent _group;

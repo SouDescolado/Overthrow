@@ -1,6 +1,4 @@
-private ["_unit"];
-
-_unit = _this select 0;
+private _unit = _this select 0;
 
 private _identity = call OT_fnc_randomLocalIdentity;
 _identity set [1, selectRandom OT_clothes_shops];

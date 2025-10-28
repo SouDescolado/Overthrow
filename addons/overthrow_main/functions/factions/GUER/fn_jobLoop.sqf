@@ -2,7 +2,7 @@ job_system_counter = job_system_counter + 1;
 if (job_system_counter >= 12) then {
     job_system_counter = 0;
     {
-        _x params ["_name", ["_target", ""], "_condition", "_code", "_repeat", "_chance", "_expires", "_requestable"];
+        _x params ["_name", ["_target", ""], "_condition", "", "", "_chance", "", "_requestable"];
         if !(_requestable) then {
             private _jobdef = _x;
             private _completed = server getVariable ["OT_completedJobIds", []];
@@ -30,7 +30,7 @@ if (job_system_counter >= 12) then {
                         private _schedule = server getVariable ["NATOschedule", []];
                         private _numAbandoned = count (server getVariable ["NATOabandoned", []]);
                         {
-                            _x params ["_missionid", "_mission", "_p1", "_p2"];
+                            _x params ["_missionid", "_mission", "", "_p2"];
                             if !(isNil "_p2") then {
                                 private _id = format ["%1-%2", _name, _missionid];
                                 if (([_mission, _numAbandoned] call _condition) && !(_id in _completed) && !(_id in _activeJobs)) then {
@@ -95,7 +95,6 @@ if (job_system_counter >= 12) then {
                         {
                             _x params ["_cls"];
                             private _pos = server getVariable [format ["factionrep%1", _cls], []];
-                            private _town = "";
                             if (_pos isNotEqualTo []) then {
                                 private _standing = server getVariable [format ["standing%1", _cls], 0];
                                 private _inSpawnDistance = [_pos] call OT_fnc_inSpawnDistance;

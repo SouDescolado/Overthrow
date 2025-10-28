@@ -1,15 +1,15 @@
 disableSerialization;
 
-_town = player call OT_fnc_nearestTown;
+private _town = player call OT_fnc_nearestTown;
 if !(_town in (server getVariable ["NATOabandoned", []])) exitWith { "This police station is under NATO control" call OT_fnc_notifyMinor };
 
-_garrison = server getVariable [format ['police%1', _town], 0];
+private _garrison = server getVariable [format ['police%1', _town], 0];
 createDialog "OT_dialog_police";
 
 private _soldier = "Police" call OT_fnc_getSoldier;
-_price = _soldier param [0, 500];
+private _price = _soldier param [0, 500];
 
-_effect = floor (_garrison / 2);
+private _effect = floor (_garrison / 2);
 if (_effect isEqualTo 0) then { _effect = "None" } else { _effect = format ["+%1 Stability/10 mins", _effect] };
 
 if !(call OT_fnc_playerIsGeneral) then {

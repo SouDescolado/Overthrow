@@ -1,5 +1,3 @@
-private ["_id", "_pos", "_building", "_tracked", "_vehs", "_group", "_all", "_shopkeeper", "_groups"];
-
 params ["_faction", "_name", "_spawnid"];
 sleep random 2;
 
@@ -13,7 +11,7 @@ private _group = createGroup civilian;
 _group setBehaviour "CARELESS";
 _groups pushBack _group;
 
-_shopkeeper = _group createUnit [OT_civType_shopkeeper, _pos, [], 0, "NONE"];
+private _shopkeeper = _group createUnit [OT_civType_shopkeeper, _pos, [], 0, "NONE"];
 
 private _identity = call OT_fnc_randomLocalIdentity;
 _identity set [3, selectRandom OT_allGlasses];

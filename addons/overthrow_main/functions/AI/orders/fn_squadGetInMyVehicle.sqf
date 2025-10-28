@@ -1,6 +1,6 @@
 {
-    _veh = vehicle player;
-    _squad = _x;
+    private _veh = vehicle player;
+    private _squad = _x;
     (units _x) allowGetIn true;
     if !(isNull _veh || _veh isEqualTo player) then {
         _squad addVehicle _veh;

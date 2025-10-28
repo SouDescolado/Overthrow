@@ -1,7 +1,6 @@
 if (!hasInterface) exitWith {};
 
-private _counter = _this select 0;
-private _del = _this select 1;
+params ["_counter", "_del"];
 if !(_del) then {
     with uiNamespace do {
         ctrlDelete (uiNamespace getVariable "pBar");

@@ -18,7 +18,7 @@ params ["_spend", "_chance"];
 private _resources = server getVariable ["NATOresources", 2000];
 
 {
-    _x params ["_ty", "_pos", "_threat", "_target", ["_done", false]];
+    _x params ["_ty", "_pos", "", "", ["_done", false]];
     if (!_done) then {
         private _chance = 85;
         if (_diff > 1) then { _chance = 80 };

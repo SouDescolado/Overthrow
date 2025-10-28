@@ -8,8 +8,6 @@ if (_target isEqualTo player) then {
 if (isNull _target || isNil "_target") exitWith {};
 
 private _objects = [];
-private _b = player call OT_fnc_nearestRealEstate;
-private _iswarehouse = false;
 
 if (!_notvehicle) then {
     {

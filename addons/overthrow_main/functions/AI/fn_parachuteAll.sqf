@@ -36,7 +36,6 @@ private _dir = direction _vehicle;
 
         _unit action ["Eject", vehicle _unit];
         sleep 2;
-        private _inv = name _unit;
         private _id = [_unit] call OT_fnc_getBuildID;
         _unit setUnitLoadout (spawner getVariable [format ["eject_%1", _id], []]);
         spawner setVariable [format ["eject_%1", _id], nil, false];

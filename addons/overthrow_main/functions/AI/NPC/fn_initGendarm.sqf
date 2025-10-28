@@ -8,13 +8,10 @@ _identity pushBack (selectRandom OT_voices_local);
 
 _unit setVariable ["garrison", _town, false];
 
-private _stability = server getVariable format ["stability%1", _town];
-
 _unit addEventHandler [
     "HandleDamage",
     {
-        _me = _this select 0;
-        _src = _this select 3;
+        private _src = _this select 3;
         if (captive _src) then {
             if (!isNull objectParent _src || (_src call OT_fnc_unitSeenNATO)) then {
                 _src setCaptive false;

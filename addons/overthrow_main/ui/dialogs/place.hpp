@@ -76,7 +76,7 @@ class OT_dialog_input {
         class RscEdit_1400: RscOverthrowEdit {
             idc = 1400;
 
-            onKeyDown = "_key = _this select 1; _name = ctrlText 1400; if (_key == 28 && _name != '') then { [] call OT_inputHandler; closeDialog 0; };";
+            onKeyDown = "private _key = _this select 1; private _name = ctrlText 1400; if (_key == 28 && _name != '') then { [] call OT_inputHandler; closeDialog 0; };";
             text = ""; //--- ToDo: Localize;
             x = "0.37625 * safeZoneW + safeZoneX";
             y = "0.412 * safeZoneH + safeZoneY";

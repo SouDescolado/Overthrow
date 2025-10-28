@@ -15,25 +15,25 @@ _group setFormation "COLUMN";
 private _track = objNull;
 
 if ([_topos, _fromregion] call OT_fnc_regionIsConnected) then {
-    _convoypos = _frompos getPos [120, random 360];
+    private _convoypos = _frompos getPos [120, random 360];
     private _road = [_convoypos, 150] call BIS_fnc_nearestRoad;
     if (!isNull _road) then {
-        _roadscon = roadsConnectedTo _road;
+        private _roadscon = roadsConnectedTo _road;
         if (count _roadscon isEqualTo 2) then {
             _convoypos = getPosATL _road;
             _dir = (_road getDir (_roadscon select 0));
         };
     };
     {
-        _pos = _convoypos findEmptyPosition [10, 100, _x];
+        private _pos = _convoypos findEmptyPosition [10, 100, _x];
         if (_pos isEqualTo []) then { _pos = _convoypos findEmptyPosition [0, 100, _x] };
-        _veh = createVehicle [_x, _pos, [], 0, ""];
+        private _veh = createVehicle [_x, _pos, [], 0, ""];
         _veh setVariable ["garrison", "HQ", false];
 
         _veh setDir (_dir);
         _group addVehicle _veh;
         createVehicleCrew _veh;
-        _driver = driver _veh;
+        private _driver = driver _veh;
         _driver disableAI "AUTOCOMBAT";
         _veh setConvoySeparation 20;
         {
@@ -49,16 +49,16 @@ if ([_topos, _fromregion] call OT_fnc_regionIsConnected) then {
     } forEach (_vehtypes);
 
     {
-        _pos = _convoypos findEmptyPosition [10, 100, OT_NATO_Vehicle_HVT];
+        private _pos = _convoypos findEmptyPosition [10, 100, OT_NATO_Vehicle_HVT];
         if (_pos isEqualTo []) then { _pos = _convoypos findEmptyPosition [0, 100, OT_NATO_Vehicle_HVT] };
-        _veh = createVehicle [OT_NATO_Vehicle_HVT, _pos, [], 0, ""];
+        private _veh = createVehicle [OT_NATO_Vehicle_HVT, _pos, [], 0, ""];
         _veh setVariable ["garrison", "HQ", false];
 
         _veh setDir (_dir);
         _group addVehicle _veh;
         createVehicleCrew _veh;
 
-        _driver = driver _veh;
+        private _driver = driver _veh;
         _driver disableAI "AUTOCOMBAT";
         _veh setConvoySeparation 20;
         {
@@ -82,15 +82,15 @@ if ([_topos, _fromregion] call OT_fnc_regionIsConnected) then {
     if (_hvts isNotEqualTo []) then {
         private _count = 0;
         while { _count < _numsupport } do {
-            _vehtype = selectRandom OT_NATO_Vehicles_GroundSupport;
-            _pos = _convoypos findEmptyPosition [10, 100, _vehtype];
+            private _vehtype = selectRandom OT_NATO_Vehicles_GroundSupport;
+            private _pos = _convoypos findEmptyPosition [10, 100, _vehtype];
             if (_pos isEqualTo []) then { _pos = _convoypos findEmptyPosition [0, 100, _vehtype] };
-            _veh = createVehicle [_vehtype, _pos, [], 0, ""];
+            private _veh = createVehicle [_vehtype, _pos, [], 0, ""];
             _veh setVariable ["garrison", "HQ", false];
             _veh setDir (_dir);
             _group addVehicle _veh;
             createVehicleCrew _veh;
-            _driver = driver _veh;
+            private _driver = driver _veh;
             _driver disableAI "AUTOCOMBAT";
             _veh setConvoySeparation 20;
             {
@@ -104,7 +104,7 @@ if ([_topos, _fromregion] call OT_fnc_regionIsConnected) then {
         };
     };
     sleep 5;
-    _wp = _group addWaypoint [ASLToATL _topos, 50];
+    private _wp = _group addWaypoint [ASLToATL _topos, 50];
     _wp setWaypointType "MOVE";
     _wp setWaypointFormation "COLUMN";
     _wp setWaypointBehaviour "SAFE";

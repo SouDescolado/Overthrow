@@ -30,16 +30,13 @@ private _markerPos = _destination; //randomize the marker position a bit
 private _description = format ["A traitor of %1 has fled here and is hiding in %2 under NATO protection. %1 will pay handsomely and be very grateful if you could just.. make them disappear. <br/><br/>Reward: +20 (%1), $2500", _factionName, _destinationName];
 private _title = format ["%1 Traitor in %2", _factionName, _destinationName];
 
-//This next number multiplies the reward
-private _difficulty = 1.8;
-
 //The data below is what is returned to the gun dealer/faction rep, _markerPos is where to put the mission marker, the code in {} brackets is the actual mission code, only run if the player accepts
 [
     [_title, _description],
     _markerPos,
     {
         //Spawn a dude and some protection
-        params ["_faction", "_destination", "_destinationName", "_jobid"];
+        params ["", "_destination", "", "_jobid"];
 
         //Spawn the dude
         private _group = createGroup blufor;
@@ -94,7 +91,7 @@ private _difficulty = 1.8;
             _count = _count + 1;
         };
 
-        _wp = _bgroup addWaypoint [_destination, 0];
+        private _wp = _bgroup addWaypoint [_destination, 0];
         _wp setWaypointType "GUARD";
         _wp = _bgroup addWaypoint [_destination, 0];
         _wp setWaypointType "CYCLE";
@@ -103,7 +100,7 @@ private _difficulty = 1.8;
     {
         //Fail check...
         //no fail, just set anyone too close wanted
-        params ["_faction", "_destination", "_destinationName", "_jobid"];
+        params ["_faction", "_destination", "", "_jobid"];
 
         private _civ = spawner getVariable [format ["fugitive%1", _jobid], objNull];
         private _alreadyAlerted = _civ getVariable ["OT_fugitiveAlerted", false];
@@ -130,7 +127,7 @@ private _difficulty = 1.8;
         !alive (spawner getVariable [format ["fugitive%1", _this select 3], objNull]);
     },
     {
-        params ["_faction", "_destination", "_destinationName", "_jobid", "_wassuccess"];
+        params ["_faction", "", "", "_jobid", "_wassuccess"];
 
         //If mission was a success
         if (_wassuccess) then {

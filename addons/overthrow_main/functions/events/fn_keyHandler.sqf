@@ -82,7 +82,7 @@ if (!dialog) then {
                     ] call OT_fnc_dynamicText;
 
                     sleep 20;
-                    _gundealer = spawner getVariable format ["gundealer%1", player call OT_fnc_nearestTown];
+                    private _gundealer = spawner getVariable format ["gundealer%1", player call OT_fnc_nearestTown];
                     [player, getPos _gundealer, "Gun Dealer"] call OT_fnc_givePlayerWaypoint;
                     sleep 3;
                     hint "Go and speak to the local gun dealer. Head towards the marked location, you have nothing to worry about as long as you are not carrying/wearing any illegal items.";
@@ -92,19 +92,19 @@ if (!dialog) then {
                         (player distance2D getPosASL _gundealer) < 5;
                     };
 
-                    _lines = [
+                    private _lines = [
                         "Hello? Do I know you?",
                         format ["No you don't. My name is %1 and I heard that you might be able to help me", name player],
                         "Oh, really? Well that depends. With what?"
                     ];
 
                     _gundealer = spawner getVariable format ["gundealer%1", player call OT_fnc_nearestTown];
-                    _done = {
-                        _options = [
+                    private _done = {
+                        private _options = [
                             [
                                 "I am sick of NATO pushing us around, what can I do about it?",
                                 {
-                                    _gundealer = spawner getVariable format ["gundealer%1", player call OT_fnc_nearestTown];
+                                    private _gundealer = spawner getVariable format ["gundealer%1", player call OT_fnc_nearestTown];
                                     [
                                         player,
                                         _gundealer,
@@ -142,7 +142,7 @@ if (!dialog) then {
                             [
                                 format ["There's too much crime in %1, and NATO isn't doing anything about it", OT_nation],
                                 {
-                                    _gundealer = spawner getVariable format ["gundealer%1", player call OT_fnc_nearestTown];
+                                    private _gundealer = spawner getVariable format ["gundealer%1", player call OT_fnc_nearestTown];
                                     [
                                         player,
                                         _gundealer,
@@ -186,7 +186,7 @@ if (!dialog) then {
                             [
                                 "I want to make some cash, and I don't care about breaking the law",
                                 {
-                                    _gundealer = spawner getVariable format ["gundealer%1", player call OT_fnc_nearestTown];
+                                    private _gundealer = spawner getVariable format ["gundealer%1", player call OT_fnc_nearestTown];
                                     [
                                         player,
                                         _gundealer,
@@ -221,7 +221,7 @@ if (!dialog) then {
                             [
                                 "I want to make some cash, legally",
                                 {
-                                    _gundealer = spawner getVariable format ["gundealer%1", player call OT_fnc_nearestTown];
+                                    private _gundealer = spawner getVariable format ["gundealer%1", player call OT_fnc_nearestTown];
                                     [
                                         player,
                                         _gundealer,
@@ -270,10 +270,10 @@ if (!dialog) then {
             if (!isNull objectParent player) exitWith {
                 private _ferry = player getVariable ["OT_ferryDestination", []];
                 if (count _ferry isEqualTo 3) exitWith {
-                    _veh = vehicle player;
+                    private _veh = vehicle player;
 
                     disableUserInput true;
-                    _town = _ferry call OT_fnc_nearestTown;
+                    private _town = _ferry call OT_fnc_nearestTown;
 
                     private _cost = player getVariable ["OT_ferryCost", 0];
                     if ((player getVariable ["money", 0]) < _cost) exitWith {

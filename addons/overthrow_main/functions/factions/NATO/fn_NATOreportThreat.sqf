@@ -4,7 +4,7 @@ private _added = false;
 private _targets = spawner getVariable ["NATOknownTargets", []];
 private _target = nil;
 {
-    _o = _x select 3;
+    private _o = _x select 3;
     if (_o isEqualTo _veh) then {
         _added = true;
         _target = _x;

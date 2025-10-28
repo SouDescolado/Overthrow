@@ -8,21 +8,19 @@ private _idx = lbCurSel 1500;
 private _cls = lbData [1500, _idx];
 private _num = _this select 0;
 private _d = _warehouse getVariable [format ["item_%1", _cls], [_cls, 0]];
-_d params ["_wCls", ["_in", 0, [0]]];
+_d params ["", ["_in", 0, [0]]];
 
 if (_num > _in || _num isEqualTo -1) then {
     _num = _in;
 };
 
-_count = 0;
+private _count = 0;
 private _veh = (vehicle player);
-private _iswarehouse = false;
 if (_veh isEqualTo player) then {
-    _b = OT_warehouseTarget call OT_fnc_nearestRealEstate;
+    private _b = OT_warehouseTarget call OT_fnc_nearestRealEstate;
     if (_b isEqualType []) then {
-        _building = _b select 0;
+        private _building = _b select 0;
         if ((typeOf _building) == OT_warehouse && _building call OT_fnc_hasOwner) then {
-            _iswarehouse = true;
             _veh = OT_warehouseTarget;
         };
     };
@@ -30,8 +28,6 @@ if (_veh isEqualTo player) then {
 if (_veh isEqualTo player) exitWith {
     "No warehouse within range" call OT_fnc_notifyMinor;
 };
-
-private _attachmentsToRemove = [];
 
 while { _count < _num } do {
     if ((!(_veh isKindOf "Truck_F")) && (!(_veh isKindOf OT_item_Storage)) && (!(_veh canAdd _cls))) exitWith {
@@ -45,7 +41,7 @@ while { _count < _num } do {
             _veh addWeaponCargoGlobal [_cls, 1];
 
             // Search for linked items
-            _linkedItems = [];
+            private _linkedItems = [];
             {
                 _linkedItems pushBack (getText (_x >> "item"));
             } forEach (configProperties [configFile >> "CfgWeapons" >> _cls >> "LinkedItems", "(getText (_x >> 'item') != '')", true]);
@@ -59,7 +55,7 @@ while { _count < _num } do {
             _veh addWeaponCargoGlobal [_cls, 1];
 
             // Search for linked items
-            _linkedItems = [];
+            private _linkedItems = [];
             {
                 _linkedItems pushBack (getText (_x >> "item"));
             } forEach (configProperties [configFile >> "CfgWeapons" >> _cls >> "LinkedItems", "(getText (_x >> 'item') != '')", true]);
@@ -73,7 +69,7 @@ while { _count < _num } do {
             _veh addWeaponCargoGlobal [_cls, 1];
 
             // Search for linked items
-            _linkedItems = [];
+            private _linkedItems = [];
             {
                 _linkedItems pushBack (getText (_x >> "item"));
             } forEach (configProperties [configFile >> "CfgWeapons" >> _cls >> "LinkedItems", "(getText (_x >> 'item') != '')", true]);

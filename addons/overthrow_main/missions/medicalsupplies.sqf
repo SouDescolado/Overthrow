@@ -1,4 +1,4 @@
-params ["_jobid", "_jobparams"];
+params ["", "_jobparams"];
 _jobparams params ["_destinationName"];
 
 private _roads = (server getVariable [_destinationName, []]) nearRoads 75;
@@ -46,10 +46,8 @@ private _title = format ["%1 needs %2 x %3", _destinationName, _numitems, _itemN
     },
     {
         //Success Check
-        params ["_destination", "_destinationName", "_itemcls", "_numitems"];
-        private _numavailable = 0;
+        params ["_destination", "", "_itemcls", "_numitems"];
         private _found = false;
-        private _driver = objNull;
         {
             private _c = _x;
 

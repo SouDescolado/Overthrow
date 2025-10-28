@@ -9,10 +9,9 @@ if (_b isEqualType []) then {
     } else {
         private _owner = _building call OT_fnc_getOwner;
         if (_owner isEqualTo getPlayerUID player) then {
-            _home = player getVariable "home";
+            private _home = player getVariable "home";
             if (_home distance _building < 5) exitWith {
                 "You cannot sell your home" call OT_fnc_notifyMinor;
-                _err = true;
             };
             _type = "sell";
             _handled = true;
@@ -20,13 +19,11 @@ if (_b isEqualType []) then {
     };
 };
 if (_handled) then {
-    _b params ["_building", "_price", "_sell", "_lease", "_totaloccupants"];
+    _b params ["_building", "_price", "_sell"];
 
     if (typeOf _building isEqualTo OT_flag_IND) exitWith {
         [] call OT_fnc_garrisonDialog;
     };
-
-    private _town = _building call OT_fnc_nearestTown;
 
     private _money = player getVariable ["money", 0];
 

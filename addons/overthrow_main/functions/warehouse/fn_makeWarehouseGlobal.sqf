@@ -63,7 +63,6 @@ private _result = createHashMap;
 // Set all the current variables to nil so the save system (hopefully) clears them up
 {
     private _key = _x;
-    private _value = _y;
     _warehouse setVariable [format ["item_%1", _key], nil, true];
 } forEach _warehouseItems;
 

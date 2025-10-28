@@ -54,9 +54,8 @@ OT_regions = [];
 OT_missions = [];
 OT_localMissions = [];
 {
-    _name = configName _x;
-    _script = getText (_x >> "script");
-    _code = compileScript [_script, true];
+    private _script = getText (_x >> "script");
+    private _code = compileScript [_script, true];
     OT_missions pushBack _code;
 } forEach ("true" configClasses (configFile >> "CfgOverthrowMissions"));
 
@@ -611,12 +610,12 @@ OT_allBLURifleMagazines = [];
                         if (_base isKindOf ["Rifle", _cfgWeapons]) then {
                             private _mass = getNumber (_cfgWeapons >> _base >> "WeaponSlotsInfo" >> "mass");
                             _base call {
-                                _itemType = ([_cls] call BIS_fnc_itemType) select 1;
+                                private _itemType = ([_cls] call BIS_fnc_itemType) select 1;
                                 if (_itemType isEqualTo "MachineGun") exitWith { OT_allBLUMachineGuns pushBackUnique _base };
                                 if ((_this select [0, 7]) == "srifle_" || (_this isKindOf ["Rifle_Long_Base_F", _cfgWeapons])) exitWith { OT_allBLUSniperRifles pushBackUnique _base };
                                 if ("_GL_" in _this) exitWith { OT_allBLUGLRifles pushBackUnique _base };
                                 private _events = "" configClasses (_cfgWeapons >> _base >> "Eventhandlers");
-                                _add = true;
+                                private _add = true;
                                 {
                                     private _n = configName _x;
                                     if (_n isEqualTo "RHS_BoltAction") exitWith { _add = false }; //ignore RHS bolt-action rifles
@@ -686,7 +685,7 @@ private _caliberRegex = "(\d*\.\d+)\s*x\s*(\d+)|(\d+)\.(\d+)|\.(\d+)|(\d+)x(\d+)
             private _magCaliber = _magName regexFind [_caliberRegex];
             if (_magCaliber isNotEqualTo []) exitWith { _caliber = _magCaliber # 0 # 0 # 0 };
             private _magDescription = getText (_cfgMagazines >> _x >> "descriptionShort");
-            private _magCaliber = _magDescription regexFind [_caliberRegex];
+            _magCaliber = _magDescription regexFind [_caliberRegex];
             if (_magCaliber isNotEqualTo []) exitWith { _caliber = _magCaliber # 0 # 0 # 0 };
         } forEach _magazines;
     };
@@ -808,10 +807,7 @@ private _caliberRegex = "(\d*\.\d+)\s*x\s*(\d+)|(\d+)\.(\d+)|\.(\d+)|(\d+)x(\d+)
 OT_allLegalClothing = [];
 {
     private _name = configName _x;
-    private _short = getText (_cfgWeapons >> _name >> "descriptionShort");
-    private _supply = getText (_cfgWeapons >> _name >> "ItemInfo" >> "containerClass");
     private _mass = getNumber (_cfgWeapons >> _name >> "ItemInfo" >> "mass");
-    private _carry = getNumber (_cfgVehicles >> _supply >> "maximumLoad");
     private _cost = round (_mass * 4);
 
     private _c = _name splitString "_";

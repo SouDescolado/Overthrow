@@ -1,45 +1,40 @@
-private ["_group", "_population", "_posTown", "_vehs", "_soldier", "_vehtype", "_pos", "_wp", "_numgroups", "_attackpos", "_count", "_tgroup", "_ao"];
-
-_posTown = _this;
+private _posTown = _this;
 
 private _close = nil;
 private _dist = 8000;
-private _closest = "";
 private _abandoned = server getVariable ["NATOabandoned", []];
 private _town = _posTown call OT_fnc_nearestTown;
 private _region = server getVariable format ["region_%1", _town];
 {
-    _pos = _x select 0;
-    _name = _x select 1;
+    _x params ["_pos", "_name"];
     if (_pos inArea _region && !(_name in _abandoned)) then {
-        _d = (_pos distance _posTown);
+        private _d = (_pos distance _posTown);
         if (_d < _dist) then {
             _dist = _d;
             _close = _pos;
-            _closest = _name;
         };
     };
 } forEach (OT_NATOobjectives);
-_isHQ = false;
+private _isHQ = false;
 if (isNil "_close") then {
     _isHQ = true;
     _close = OT_NATO_HQPos;
 };
-_start = [_close, 50, 200, 1, 0, 0, 0] call BIS_fnc_findSafePos;
-_group = [_start, blufor, (configFile >> "CfgGroups" >> "West" >> OT_faction_NATO >> "Infantry" >> OT_NATO_Group_Recon)] call BIS_fnc_spawnGroup;
+private _start = [_close, 50, 200, 1, 0, 0, 0] call BIS_fnc_findSafePos;
+private _group = [_start, blufor, (configFile >> "CfgGroups" >> "West" >> OT_faction_NATO >> "Infantry" >> OT_NATO_Group_Recon)] call BIS_fnc_spawnGroup;
 
 sleep 0.5;
 
-_dir = (_close getDir _posTown);
+private _dir = (_close getDir _posTown);
 
-_ao = getPos (nearestLocation [_posTown, "Hill"]);
+private _ao = getPos (nearestLocation [_posTown, "Hill"]);
 
 if (_isHQ) then {
-    _tgroup = createGroup blufor;
+    private _tgroup = createGroup blufor;
 
-    _spawnpos = OT_NATO_HQPos findEmptyPosition [15, 100, OT_NATO_Vehicle_AirTransport_Small];
+    private _spawnpos = OT_NATO_HQPos findEmptyPosition [15, 100, OT_NATO_Vehicle_AirTransport_Small];
     if (_spawnpos isEqualTo []) then { _spawnpos = OT_NATO_HQPos findEmptyPosition [8, 100, OT_NATO_Vehicle_AirTransport_Small] };
-    _veh = OT_NATO_Vehicle_AirTransport_Small createVehicle _spawnpos;
+    private _veh = OT_NATO_Vehicle_AirTransport_Small createVehicle _spawnpos;
     _veh setDir _dir;
     _tgroup addVehicle _veh;
 
@@ -57,8 +52,8 @@ if (_isHQ) then {
 
     sleep 2;
 
-    _moveto = OT_NATO_HQPos getPos [500, _dir];
-    _wp = _tgroup addWaypoint [_moveto, 0];
+    private _moveto = OT_NATO_HQPos getPos [500, _dir];
+    private _wp = _tgroup addWaypoint [_moveto, 0];
     _wp setWaypointType "MOVE";
     _wp setWaypointBehaviour "COMBAT";
     _wp setWaypointSpeed "FULL";
@@ -98,8 +93,8 @@ if (_isHQ) then {
         _x addCuratorEditableObjects [units _tgroup, true];
     } forEach allCurators;
 } else {
-    _moveto = _start getPos [50, _dir];
-    _wp = _group addWaypoint [_moveto, 5];
+    private _moveto = _start getPos [50, _dir];
+    private _wp = _group addWaypoint [_moveto, 5];
     _wp setWaypointType "MOVE";
     _wp setWaypointBehaviour "SAFE";
 };
@@ -113,6 +108,6 @@ sleep 2;
     _x setVariable ["VCOM_NOPATHING_Unit", true, false];
 } forEach (units _group);
 
-_wp = _group addWaypoint [_ao, 10];
+private _wp = _group addWaypoint [_ao, 10];
 _wp setWaypointType "SAD";
 _wp setWaypointBehaviour "STEALTH";

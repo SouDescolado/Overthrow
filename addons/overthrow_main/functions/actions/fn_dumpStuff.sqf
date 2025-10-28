@@ -1,10 +1,10 @@
 // _unit may be non-local
 params ["_unit", "_t", ["_linkedItems", false]];
 
-_full = false;
-_istruck = true;
+private _full = false;
+private _isTruck = true;
 if (count _this isEqualTo 2) then {
-    _istruck = (_t isKindOf "Truck_F") || (_t isKindOf "ReammoBox_F");
+    _isTruck = (_t isKindOf "Truck_F") || (_t isKindOf "ReammoBox_F");
 };
 
 if (binocular _unit != "") then {

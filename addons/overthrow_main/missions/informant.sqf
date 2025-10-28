@@ -1,4 +1,4 @@
-params ["_jobid", "_jobparams"];
+params ["_jobid"];
 
 //Here is where we might randomize the parameters a bit
 private _abandoned = server getVariable ["NATOabandoned", []];
@@ -26,16 +26,13 @@ private _markerPos = _destination; //randomize the marker position a bit
 private _description = format ["A defector from the resistance is hiding in %1 under NATO protection and giving them sensitive information. He needs to be silenced. <br/><br/>Reward: $1500", _destinationName];
 private _title = format ["NATO informant in %1", _destinationName];
 
-//This next number multiplies the reward
-private _difficulty = 1.8;
-
 //The data below is what is returned to the gun dealer/faction rep, _markerPos is where to put the mission marker, the code in {} brackets is the actual mission code, only run if the player accepts
 [
     [_title, _description],
     _markerPos,
     {
         //Spawn a dude and some protection
-        params ["_destination", "_destinationName", "_jobid"];
+        params ["_destination", "", "_jobid"];
 
         //Spawn the dude
         private _group = createGroup [blufor, true];
@@ -89,7 +86,7 @@ private _difficulty = 1.8;
             _count = _count + 1;
         };
 
-        _wp = _bgroup addWaypoint [_destination, 0];
+        private _wp = _bgroup addWaypoint [_destination, 0];
         _wp setWaypointType "GUARD";
         _wp = _bgroup addWaypoint [_destination, 0];
         _wp setWaypointType "CYCLE";
@@ -98,7 +95,7 @@ private _difficulty = 1.8;
     {
         //Fail check...
         //no fail, just set anyone too close wanted
-        params ["_destination", "_destinationName", "_jobid"];
+        params ["_destination", "", "_jobid"];
 
         private _civ = spawner getVariable [format ["informant%1", _jobid], objNull];
         private _alreadyAlerted = _civ getVariable ["OT_informantAlerted", false];
@@ -124,7 +121,7 @@ private _difficulty = 1.8;
         !alive (spawner getVariable [format ["informant%1", _this select 2], objNull]);
     },
     {
-        params ["_destination", "_destinationName", "_jobid", "_wassuccess"];
+        params ["_destination", "", "_jobid", "_wassuccess"];
 
         //If mission was a success
         if (_wassuccess) then {

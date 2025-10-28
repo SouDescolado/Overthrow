@@ -1,8 +1,8 @@
-_town = _this select 0;
+private _town = _this select 0;
 if !(_town in OT_allTowns) exitWith {};
 
-_townmrk = format ["%1-abandon", _town];
-_stability = (server getVariable [format ["stability%1", _town], 0]) + (_this select 1);
+private _townmrk = format ["%1-abandon", _town];
+private _stability = (server getVariable [format ["stability%1", _town], 0]) + (_this select 1);
 if (_stability < 0) then { _stability = 0 };
 if (_stability > 100) then { _stability = 100 };
 server setVariable [format ["stability%1", _town], _stability, true];
@@ -14,14 +14,14 @@ if (([_pos] call OT_fnc_inSpawnDistance) && _stability < 50 && _stability > 0) t
     format ["[%1] Stability %5%2%4 = %3%4", _town, (_this select 1), _stability, "%", _a] remoteExec ["OT_fnc_notifySilent", 0, false];
 };
 
-_abandoned = server getVariable "NATOabandoned";
+private _abandoned = server getVariable "NATOabandoned";
 if (_town in _abandoned) then {
     _townmrk setMarkerAlpha 1;
 } else {
     _townmrk setMarkerAlpha 0;
 };
 
-_garrison = server getVariable [format ['police%1', _town], 0];
+private _garrison = server getVariable [format ['police%1', _town], 0];
 if (_stability < 50) then {
     if (_garrison > 0) then {
         _townmrk setMarkerType "OT_Police";

@@ -6,14 +6,14 @@ private _possible = spawner getVariable [format ["gangpositions%1", _town], []];
 private _gangs = OT_civilians getVariable [format ["gangs%1", _town], []];
 private _gangid = -1;
 if (_possible isNotEqualTo []) then {
-    _home = selectRandom _possible;
+    private _home = selectRandom _possible;
     _home set [2, 0];
 
     _gangid = (OT_civilians getVariable ["autogangid", -1]) + 1;
     OT_civilians setVariable ["autogangid", _gangid];
-    _vest = selectRandom OT_allProtectiveVests;
-    _weapon = selectRandom (OT_CRIM_Weapons + OT_allCheapRifles);
-    _loadout = [(format ["gang%1", _gangid]), OT_CRIMBaseLoadout, [[_weapon]]] call OT_fnc_getRandomLoadout;
+    private _vest = selectRandom OT_allProtectiveVests;
+    private _weapon = selectRandom (OT_CRIM_Weapons + OT_allCheapRifles);
+    private _loadout = [(format ["gang%1", _gangid]), OT_CRIMBaseLoadout, [[_weapon]]] call OT_fnc_getRandomLoadout;
     (_loadout # 4) set [0, _vest];
 
     //Gang format [members,leader,town,vest,camp pos,loadout,resources,level,name]
@@ -31,13 +31,13 @@ if (_possible isNotEqualTo []) then {
         private _groups = spawner getVariable [str _spawnid, []];
         _groups pushBack _veh;
 
-        _numtents = 2 + round (random 3);
-        _count = 0;
+        private _numtents = 2 + round (random 3);
+        private _count = 0;
 
         while { _count < _numtents } do {
             //this code is in tents
-            _d = random 360;
-            _p = _home getPos [(2 + random 7), _d];
+            private _d = random 360;
+            private _p = _home getPos [(2 + random 7), _d];
             _p = _p findEmptyPosition [1, 40, "Land_TentDome_F"];
             _veh = createVehicle ["Land_TentDome_F", _p, [], 0, "CAN_COLLIDE"];
             _veh enableDynamicSimulation true;
@@ -52,7 +52,7 @@ if (_possible isNotEqualTo []) then {
         _leaderGroup setVariable ["VCM_NORESCUE", true, true];
         _leaderGroup setVariable ["lambs_danger_disableGroupAI", true];
         private _pos = _home getPos [10, random 360];
-        _civ = _leaderGroup createUnit [OT_CRIM_Unit, _pos, [], 0, "NONE"];
+        private _civ = _leaderGroup createUnit [OT_CRIM_Unit, _pos, [], 0, "NONE"];
         _civ setRank "COLONEL";
         _civ setVariable ["NOAI", true, false];
         _civ setBehaviour "SAFE";
@@ -61,7 +61,7 @@ if (_possible isNotEqualTo []) then {
         _civ setVariable ["OT_gangid", _gangid, true];
         [_civ, _town, _gangid] call OT_fnc_initCrimLeader;
 
-        _wp = _leaderGroup addWaypoint [_home, 0];
+        private _wp = _leaderGroup addWaypoint [_home, 0];
         _wp setWaypointType "GUARD";
         _wp = _leaderGroup addWaypoint [_home, 0];
         _wp setWaypointType "CYCLE";

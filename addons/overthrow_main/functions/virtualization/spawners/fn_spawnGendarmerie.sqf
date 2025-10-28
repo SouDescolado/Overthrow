@@ -6,7 +6,6 @@ private _abandoned = server getVariable ["NATOabandoned", []];
 private _stability = server getVariable format ["stability%1", _town];
 if (_town in _abandoned) exitWith {};
 
-private _posTown = server getVariable _town;
 private _groups = [];
 private _numNATO = server getVariable format ["garrison%1", _town];
 private _count = 0;
@@ -26,7 +25,6 @@ while { _count < _numNATO } do {
 
     if (_pos isNotEqualTo []) then {
 
-        private _groupcount = 0;
         private _group = createGroup blufor;
         _group setVariable ["VCM_TOUGHSQUAD", true, true];
         _group setVariable ["VCM_NORESCUE", true, true];

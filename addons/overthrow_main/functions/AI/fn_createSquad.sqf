@@ -1,7 +1,7 @@
 private _units = groupSelectedUnits player;
 if (count _units < 2) exitWith { "You must select at least 2 recruits" call OT_fnc_notifyMinor };
-_group = createGroup independent;
-_cc = player getVariable ["OT_squadcount", 1];
+private _group = createGroup independent;
+private _cc = player getVariable ["OT_squadcount", 1];
 {
     if (_x != player) then {
         _x setVariable ["NOAI", false, false];
@@ -14,11 +14,11 @@ player hcSetGroup [_group, groupId _group, "teamgreen"];
 
 player setVariable ["OT_squadcount", _cc, true];
 
-_recruits = server getVariable ["squads", []];
+private _recruits = server getVariable ["squads", []];
 _recruits pushBack [getPlayerUID player, "CUSTOM", _group, []];
 server setVariable ["squads", _recruits, true];
 
-_remove = [];
+private _remove = [];
 _recruits = server getVariable ["recruits", []];
 {
     if ((_x select 2) in _units) then {

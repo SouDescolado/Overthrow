@@ -1,4 +1,3 @@
-private ["_town", "_id", "_pos", "_building", "_tracked", "_civs", "_vehs", "_group", "_groups", "_all", "_shopkeeper"];
 if (!isServer) exitWith {};
 
 sleep random 0.5;
@@ -6,20 +5,16 @@ sleep random 0.5;
 params ["_town", "_spawnid"];
 private _activeshops = server getVariable [format ["activepiersin%1", _town], []];
 
-_count = 0;
+private _shopkeeper = objNull;
 
-_posTown = server getVariable _town;
-
-_shopkeeper = objNull;
-
-_group = createGroup civilian;
+private _group = createGroup civilian;
 _group setBehaviour "CARELESS";
-_groups = [_group];
+private _groups = [_group];
 {
     private _pos = _x;
-    _building = nearestBuilding _pos;
+    private _building = nearestBuilding _pos;
 
-    _dir = getDir _building;
+    private _dir = getDir _building;
     _shopkeeper = _group createUnit [OT_civType_carDealer, [_pos, [0, 0, 2]] call BIS_fnc_vectorAdd, [], 0, "NONE"];
     _shopkeeper disableAI "MOVE";
     _shopkeeper disableAI "AUTOCOMBAT";

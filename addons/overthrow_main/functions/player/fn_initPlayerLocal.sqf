@@ -154,8 +154,8 @@ if (!_newplayer) then {
 
 (group player) setVariable ["VCM_Disable", true];
 
-_recruits = server getVariable ["recruits", []];
-_newrecruits = [];
+private _recruits = server getVariable ["recruits", []];
+private _newrecruits = [];
 {
     if !(_x params [
         ["_owner", ""],
@@ -205,16 +205,16 @@ _newrecruits = [];
 } forEach (_recruits);
 server setVariable ["recruits", _newrecruits, true];
 
-_squads = server getVariable ["squads", []];
-_newsquads = [];
-_cc = 1;
+private _squads = server getVariable ["squads", []];
+private _newsquads = [];
+private _cc = 1;
 // Remove all the HC groups
 hcRemoveAllGroups player;
 {
     _x params ["_owner", "_cls", "_group", "_units"];
     if (_owner isEqualTo (getPlayerUID player)) then {
         if !(_group isEqualType grpNull) then {
-            _name = _cls;
+            private _name = _cls;
             if (count _x > 4) then {
                 _name = _x select 4;
             } else {
@@ -228,7 +228,7 @@ hcRemoveAllGroups player;
             _group setGroupIdGlobal [_name];
             {
                 _x params ["_type", "_pos", "_loadout"];
-                _civ = _group createUnit [_type, _pos, [], 0, "NONE"];
+                private _civ = _group createUnit [_type, _pos, [], 0, "NONE"];
                 _civ setSkill 0.5 + (random 0.4);
                 _civ setUnitLoadout _loadout;
                 [_civ, (selectRandom OT_faces_local)] remoteExecCall ["setFace", 0, _civ];
@@ -245,7 +245,7 @@ player setVariable ["OT_squadcount", _cc, true];
 server setVariable ["squads", _newsquads, true];
 
 if (_newplayer) then {
-    _clothes = (selectRandom OT_clothes_guerilla);
+    private _clothes = (selectRandom OT_clothes_guerilla);
     player forceAddUniform _clothes;
     player setVariable ["uniform", _clothes, true];
     private _money = 100;
@@ -263,11 +263,11 @@ if (_newplayer) then {
     if (OT_randomSpawnTown) then {
         _town = selectRandom OT_spawnTowns;
     };
-    _house = _town call OT_fnc_getPlayerHome;
+    private _house = _town call OT_fnc_getPlayerHome;
     _housepos = getPos _house;
 
     //Put a light on at home
-    _light = "#lightpoint" createVehicle [_housepos select 0, _housepos select 1, (_housepos select 2) + 2.2];
+    private _light = "#lightpoint" createVehicle [_housepos select 0, _housepos select 1, (_housepos select 2) + 2.2];
     _light setLightBrightness 0.11;
     _light setLightAmbient [.9, .9, .6];
     _light setLightColor [.5, .5, .4];
@@ -277,7 +277,7 @@ if (_newplayer) then {
     if (_pos isEqualTo []) then { _pos = _housepos findEmptyPosition [0, 100, "C_Quadbike_01_F"] };
 
     if (_pos isNotEqualTo []) then {
-        _veh = "C_Quadbike_01_F" createVehicle _pos;
+        private _veh = "C_Quadbike_01_F" createVehicle _pos;
         [_veh, getPlayerUID player] call OT_fnc_setOwner;
         clearWeaponCargoGlobal _veh;
         clearMagazineCargoGlobal _veh;
@@ -302,7 +302,7 @@ if (_newplayer) then {
     } forEach (_furniture);
     player setVariable ["owned", [[_house] call OT_fnc_getBuildID], true];
 };
-_count = 0;
+private _count = 0;
 {
     if !(_x isKindOf "Vehicle") then {
         if (_x call OT_fnc_hasOwner) then {
@@ -351,7 +351,6 @@ player addEventHandler [
     "WeaponAssembled",
     {
         params ["_me", "_wpn"];
-        private _pos = getPosATL _wpn;
         if (typeOf _wpn in OT_staticWeapons) then {
             if (_me call OT_fnc_unitSeen) then {
                 _me setCaptive false;
@@ -419,9 +418,9 @@ player addEventHandler [
                 };
             };
         };
-        _g = _veh getVariable ["vehgarrison", false];
+        private _g = _veh getVariable ["vehgarrison", false];
         if (_g isEqualType "") then {
-            _vg = server getVariable format ["vehgarrison%1", _g];
+            private _vg = server getVariable format ["vehgarrison%1", _g];
             _vg deleteAt (_vg find (typeOf _veh));
             server setVariable [format ["vehgarrison%1", _g], _vg, false];
             _veh setVariable ["vehgarrison", nil, true];
@@ -432,7 +431,7 @@ player addEventHandler [
         };
         _g = _veh getVariable ["airgarrison", false];
         if (_g isEqualType "") then {
-            _vg = server getVariable format ["airgarrison%1", _g];
+            private _vg = server getVariable format ["airgarrison%1", _g];
             _vg deleteAt (_vg find (typeOf _veh));
             server setVariable [format ["airgarrison%1", _g], _vg, false];
             _veh setVariable ["airgarrison", nil, true];
@@ -447,7 +446,7 @@ player addEventHandler [
 {
     _pos = buildingpositions getVariable [_x, []];
     if (_pos isEqualTo []) then {
-        _bdg = OT_centerPos nearestObject parseNumber _x;
+        private _bdg = OT_centerPos nearestObject parseNumber _x;
         _pos = getPos _bdg;
         buildingpositions setVariable [_x, _pos, true];
     };

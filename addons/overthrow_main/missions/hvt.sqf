@@ -1,4 +1,4 @@
-params ["_jobid", "_jobparams"];
+params ["", "_jobparams"];
 _jobparams params ["_base", "_id"];
 
 private _params = [_base, _id];
@@ -23,8 +23,8 @@ private _markerPos = server getVariable _base;
     },
     {
         //Success.. easy.. if target is dedded
-        params ["_base", "_id"];
-        _found = false;
+        params ["", "_id"];
+        private _found = false;
         {
             if ((_x select 0) isEqualTo _id) exitWith { _found = true };
         } forEach (OT_NATOhvts);

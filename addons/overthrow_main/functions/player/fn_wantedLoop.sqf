@@ -71,7 +71,7 @@ if !(captive _unit) then {
 
             if (_gangid > -1) then {
                 private _name = "The gang";
-                _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
+                private _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
                 if (_gang isNotEqualTo []) then {
                     _name = _gang select 8;
                 };

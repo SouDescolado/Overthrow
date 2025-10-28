@@ -15,7 +15,7 @@ if (_data isEqualTo "ERROR") exitWith {
     diag_log "UPLOAD DIALOG encountered an error with data transmited";
 };
 
-_editData = str _data;
+private _editData = str _data;
 _editData = [_editData, "<NULL-object>", "objNull"] call OT_fnc_findReplace;
 _editData = [_editData, ",any]", ",nil]"] call OT_fnc_findReplace;
 

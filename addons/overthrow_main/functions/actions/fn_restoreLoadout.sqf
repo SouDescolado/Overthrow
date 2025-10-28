@@ -48,7 +48,6 @@ if (_secondary isNotEqualTo []) then {
 
 if (_tertiary isNotEqualTo []) then {
     private _tWpn = _tertiary select 0;
-    private _tItems = [_tertiary select 1, _tertiary select 2, _tertiary select 3];
     private _tAmmo = (_tertiary select 4) select 0;
 
     if ([_ammobox, _tWpn, 1] call CBA_fnc_removeWeaponCargo) then {

@@ -13,14 +13,14 @@ if (!_amgen) then {
 
 lbClear 1500;
 {
-    _uid = _x;
-    _name = players_NS getVariable [format ["name%1", _uid], "Player"];
-    _idx = lbAdd [1500, _name];
-    _pic = "\A3\Ui_f\data\GUI\Cfg\Ranks\sergeant_gs.paa";
+    private _uid = _x;
+    private _name = players_NS getVariable [format ["name%1", _uid], "Player"];
+    private _idx = lbAdd [1500, _name];
+    private _pic = "\A3\Ui_f\data\GUI\Cfg\Ranks\sergeant_gs.paa";
     if (_uid in (server getVariable ["generals", []])) then {
         _pic = "\A3\Ui_f\data\GUI\Cfg\Ranks\general_gs.paa";
     };
-    _col = [0.8, 0.8, 0.8, 1];
+    private _col = [0.8, 0.8, 0.8, 1];
     {
         if (getPlayerUID _x isEqualTo _uid) exitWith { _col = [1, 1, 1, 1] };
     } forEach (allPlayers);
@@ -32,61 +32,61 @@ lbClear 1500;
 lbClear 1501;
 {
 
-    _name = _x select 1;
+    private _name = _x select 1;
     if (_name in (server getVariable ["GEURowned", []])) then {
-        _idx = lbAdd [1501, format ["%1", _name]];
+        private _idx = lbAdd [1501, format ["%1", _name]];
         lbSetData [1501, _idx, _name];
     };
 } forEach (OT_economicData);
 
-_tax = server getVariable ["taxrate", 0];
-_damaged = owners getVariable ["damagedBuildings", []];
+private _tax = server getVariable ["taxrate", 0];
+private _damaged = owners getVariable ["damagedBuildings", []];
 private _lease = 0;
 {
-    _x params ["_id", "_cls", "_pos", "_town"];
+    _x params ["_id", "_cls", "", "_town"];
     if !(_id in _damaged) then {
         private _data = [_cls, _town] call OT_fnc_getRealEstateData;
-        _tl = (_data select 2);
+        private _tl = (_data select 2);
         _lease = _lease + _tl;
     };
 } forEach (player getVariable ["leasedata", []]);
 
 if (_lease > 0) then {
-    _tt = 0;
+    private _tt = 0;
     if (_tax > 0) then {
         _tt = round (_lease * (_tax / 100));
     };
     _lease = _lease - _tt;
 };
 
-_t = call OT_fnc_getTaxIncome;
-_taxtotal = _t select 0;
-_totax = 0;
+private _t = call OT_fnc_getTaxIncome;
+private _taxtotal = _t select 0;
+private _totax = 0;
 
 if (_tax > 0) then {
     _totax = round (_taxtotal * (_tax / 100));
 };
-_numPlayers = count ([] call CBA_fnc_players);
-_taxper = round (_taxtotal / _numPlayers);
-_totaxper = round (_totax / _numPlayers);
+private _numPlayers = count ([] call CBA_fnc_players);
+private _taxper = round (_taxtotal / _numPlayers);
+private _totaxper = round (_totax / _numPlayers);
 
 private _perhr = ([OT_nation, "WAGE", 0] call OT_fnc_getPrice) * 6;
 private _wages = 0;
 private _income = 0;
 {
     if (_x != "Factory") then {
-        _num = server getVariable [format ["%1employ", _x], 0];
+        private _num = server getVariable [format ["%1employ", _x], 0];
         _wages = _wages + (_num * _perhr);
         if (_num > 20) then { _num = 20 };
-        _data = _x call OT_fnc_getBusinessData;
+        private _data = _x call OT_fnc_getBusinessData;
         if (count _data isEqualTo 2) then {
             _income = _income + ((_num * 200) * 6);
         };
     };
 } forEach (server getVariable ["GEURowned", []]);
 
-_balance = _totax - _wages;
-_text = "<t align='center' size='0.7'>Balance Sheet (per 6 hrs)</t><br/>";
+private _balance = _totax - _wages;
+private _text = "<t align='center' size='0.7'>Balance Sheet (per 6 hrs)</t><br/>";
 
 if ((getPlayerUID player) in (server getVariable ["generals", []])) then {
     _text = _text + format ["<t align='left' size='0.65'>Resistance Funds: $%1</t><br/>", [server getVariable ["money", 0], 1, 0, true] call CBA_fnc_formatNumber];
@@ -107,5 +107,5 @@ _text = _text + format ["<t size='0.8'>Balance (Resistance): $%1</t><br/>", [_ba
 _text = _text + format ["<t size='0.8'>Balance (You): $%1</t><br/>", [_lease + (_taxper - _totaxper), 1, 0, true] call CBA_fnc_formatNumber];
 
 disableSerialization;
-_textctrl = (findDisplay 8000) displayCtrl 1106;
+private _textctrl = (findDisplay 8000) displayCtrl 1106;
 _textctrl ctrlSetStructuredText parseText _text;

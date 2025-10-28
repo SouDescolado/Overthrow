@@ -1,6 +1,6 @@
 private _idx = lbCurSel 1500;
 private _cls = lbData [1500, _idx];
-_cost = cost getVariable [_cls, []];
+private _cost = cost getVariable [_cls, []];
 private _blueprints = server getVariable ["GEURblueprints", []];
 if (_cost isNotEqualTo [] && !(_cls in _blueprints)) then {
     _blueprints pushBack _cls;

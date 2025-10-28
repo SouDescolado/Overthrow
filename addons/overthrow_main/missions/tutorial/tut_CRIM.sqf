@@ -24,10 +24,10 @@ if (_targets isEqualTo []) exitWith {
     private _done = false;
     {
         _x params ["_pos", "_t"];
-        _gangshere = OT_civilians getVariable [format ["gangs%1", _t], []];
+        private _gangshere = OT_civilians getVariable [format ["gangs%1", _t], []];
         if (_t isNotEqualTo _thistown) then {
             if (_gangshere isNotEqualTo []) then {
-                _gang = OT_civilians getVariable [format ["gang%1", _gangshere select 0], []];
+                private _gang = OT_civilians getVariable [format ["gang%1", _gangshere select 0], []];
                 if (_gang isNotEqualTo []) then {
                     if ((_gang select 0) isNotEqualTo []) then {
                         _destination = _pos;

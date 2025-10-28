@@ -6,8 +6,6 @@ private _squadtype = selectRandom OT_NATO_GroundForces;
 // Spawn a group to be seated in a transport vehicle
 private _group1 = [_frompos, blufor, _squadtype] call BIS_fnc_spawnGroup;
 _group1 deleteGroupWhenEmpty true;
-private _group2 = "";
-private _tgroup = false;
 
 sleep 0.5;
 private _allunits = [];
@@ -61,12 +59,12 @@ sleep 15;
 if (_tgroup isEqualType grpNull) then {
     _veh setDamage 0;
     _dir = _attackpos getDir _frompos;
-    _roads = _ao nearRoads 150;
+    private _roads = _ao nearRoads 150;
     private _dropos = _ao;
     if (_roads isNotEqualTo []) then {
         _dropos = ASLToAGL (getPosASL (_roads select -1));
     };
-    _move = _tgroup addWaypoint [_dropos, 0];
+    private _move = _tgroup addWaypoint [_dropos, 0];
     _move setWaypointBehaviour "SAFE";
     _move setWaypointType "MOVE";
 
@@ -75,7 +73,7 @@ if (_tgroup isEqualType grpNull) then {
     _move setWaypointType "TR UNLOAD";
     _move setWaypointCompletionRadius 50;
 
-    _wp = _tgroup addWaypoint [_frompos, 0];
+    private _wp = _tgroup addWaypoint [_frompos, 0];
     _wp setWaypointType "MOVE";
     _wp setWaypointBehaviour "CARELESS";
     _wp setWaypointCompletionRadius 25;
@@ -86,7 +84,7 @@ if (_tgroup isEqualType grpNull) then {
     _wp setWaypointStatements ["true", "[vehicle this] call OT_fnc_cleanup"];
 };
 sleep 10;
-_wp = _group1 addWaypoint [_attackpos, 100];
+private _wp = _group1 addWaypoint [_attackpos, 100];
 _wp setWaypointType "SAD";
 _wp setWaypointBehaviour "COMBAT";
 _wp setWaypointSpeed "FULL";
@@ -131,7 +129,7 @@ if (_tgroup isEqualType grpNull) then {
                 } forEach ((crew _veh) - (units _tgroup));
                 _done = true;
 
-                _wp = _tgroup addWaypoint [_frompos, 0];
+                private _wp = _tgroup addWaypoint [_frompos, 0];
                 _wp setWaypointType "MOVE";
                 _wp setWaypointBehaviour "CARELESS";
                 _wp setWaypointCompletionRadius 50;

@@ -5,8 +5,6 @@ if (!OT_adminMode && _ft > 1) then {
 
 private _veh = vehicle player;
 
-private _isgen = call OT_fnc_playerIsGeneral;
-
 if !(_veh call OT_fnc_playerIsOwner) then {
     ctrlEnable [1605, false];
 } else {

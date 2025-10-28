@@ -6,11 +6,11 @@ ctrlEnable [1600, false];
 
 refreshRecruits = {
     lbClear 1500;
-    _t = 1;
+    private _t = 1;
     {
-        _recruit = _x;
+        private _recruit = _x;
         if !(isPlayer _x) then {
-            _idx = lbAdd [1500, format ["%1. %2 (%3) [%4/%5]", _t, name _x, rank _x, _recruit getVariable ["OT_xp", 0], OT_rankXP select (rankId _recruit)]];
+            private _idx = lbAdd [1500, format ["%1. %2 (%3) [%4/%5]", _t, name _x, rank _x, _recruit getVariable ["OT_xp", 0], OT_rankXP select (rankId _recruit)]];
             lbSetValue [1500, _idx, _t];
         };
         _t = _t + 1;
@@ -19,9 +19,9 @@ refreshRecruits = {
 
 recruitSelected = {
     ctrlEnable [1600, true];
-    _recruit = (units group player) select (lbValue [1500, lbCurSel 1500] - 1);
+    private _recruit = (units group player) select (lbValue [1500, lbCurSel 1500] - 1);
     disableSerialization;
-    _ctrl = (findDisplay 8004) displayCtrl 1100;
+    private _ctrl = (findDisplay 8004) displayCtrl 1100;
     _ctrl ctrlSetStructuredText parseText format [
         "
 		<t align='center' size='1.3'>%1</t><br/><br/>
@@ -38,12 +38,12 @@ recruitSelected = {
 };
 
 dismissRecruit = {
-    _recruit = (units group player) select (lbValue [1500, lbCurSel 1500] - 1);
+    private _recruit = (units group player) select (lbValue [1500, lbCurSel 1500] - 1);
     [_recruit] call OT_fnc_cleanupUnit;
     ctrlEnable [1600, false];
     [] call refreshRecruits;
     disableSerialization;
-    _ctrl = (findDisplay 8004) displayCtrl 1100;
+    private _ctrl = (findDisplay 8004) displayCtrl 1100;
     _ctrl ctrlSetStructuredText parseText "";
 };
 

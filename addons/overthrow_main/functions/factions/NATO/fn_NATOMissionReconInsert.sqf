@@ -7,33 +7,30 @@ params ["_knownPos", "_objective"];
 private _posTarget = _knownPos;
 private _close = nil;
 private _dist = 2000;
-private _closest = "";
 private _abandoned = server getVariable ["NATOabandoned", []];
 {
-    _pos = _x select 0;
-    _name = _x select 1;
+    _x params ["_pos", "_name"];
     if (([_pos, _knownPos] call OT_fnc_regionIsConnected) && !(_name in _abandoned)) then {
-        _d = (_pos distance _knownPos);
+        private _d = (_pos distance _knownPos);
         if (_d < _dist) then {
             _dist = _d;
             _close = _pos;
-            _closest = _name;
         };
     };
 } forEach (OT_NATOobjectives);
-_isAir = false;
+private _isAir = false;
 if (isNil "_close") then {
     _isAir = true;
     {
-        _x params ["_obpos", "_name", "_pri"];
+        _x params ["_obpos", "_name"];
         if !(_name in _abandoned) exitWith {
             _close = _obpos;
         };
     } forEach (OT_airportData call BIS_fnc_arrayShuffle);
 };
 // Group may not be moved into a vehicle, so it also needs space to spawn
-_start = [_close, 50, 200, 1, 0, 0, 0] call BIS_fnc_findSafePos;
-_group = [_start, blufor, OT_NATO_Group_Recon] call BIS_fnc_spawnGroup;
+private _start = [_close, 50, 200, 1, 0, 0, 0] call BIS_fnc_findSafePos;
+private _group = [_start, blufor, OT_NATO_Group_Recon] call BIS_fnc_spawnGroup;
 
 // These are special forces, they are much better than regular guys
 // Randomskill macro to add some variance to units
@@ -49,12 +46,12 @@ _group allowFleeing 0.33; // Make them less likely to flee
 
 sleep 0.5;
 
-_dir = (_close getDir _posTarget);
+private _dir = (_close getDir _posTarget);
 
 if (_isAir) then {
 
     //Determine direction to attack from (preferrably away from water)
-    _attackDir = random 360;
+    private _attackDir = random 360;
     if (surfaceIsWater (_posTarget getPos [150, _attackDir])) then {
         _attackDir = _attackDir + 180;
         if (_attackDir > 359) then { _attackDir = _attackDir - 359 };
@@ -68,12 +65,12 @@ if (_isAir) then {
         };
     };
     _attackDir = _attackDir - 45;
-    _ao = _posTarget getPos [(350 + random 150), (_attackDir + random 90)];
-    _tgroup = createGroup blufor;
+    private _ao = _posTarget getPos [(350 + random 150), (_attackDir + random 90)];
+    private _tgroup = createGroup blufor;
 
-    _spawnpos = _close findEmptyPosition [15, 100, OT_NATO_Vehicle_AirTransport_Small];
+    private _spawnpos = _close findEmptyPosition [15, 100, OT_NATO_Vehicle_AirTransport_Small];
     if (_spawnpos isEqualTo []) then { _spawnpos = _close findEmptyPosition [8, 100, OT_NATO_Vehicle_AirTransport_Small] };
-    _veh = OT_NATO_Vehicle_AirTransport_Small createVehicle _spawnpos;
+    private _veh = OT_NATO_Vehicle_AirTransport_Small createVehicle _spawnpos;
     _veh setDir _dir;
     _tgroup addVehicle _veh;
 
@@ -91,8 +88,8 @@ if (_isAir) then {
 
     sleep 2;
 
-    _moveto = _close getPos [500, _dir];
-    _wp = _tgroup addWaypoint [_moveto, 0];
+    private _moveto = _close getPos [500, _dir];
+    private _wp = _tgroup addWaypoint [_moveto, 0];
     _wp setWaypointType "MOVE";
     _wp setWaypointBehaviour "COMBAT";
     _wp setWaypointSpeed "FULL";
@@ -143,7 +140,7 @@ sleep 2;
     _x setVariable ["OT_targetPos", _knownPos, true];
 } forEach (units _group);
 
-_wp = _group addWaypoint [_knownPos, 0];
+private _wp = _group addWaypoint [_knownPos, 0];
 _wp setWaypointType "MOVE";
 _wp setWaypointBehaviour "STEALTH";
 _wp setWaypointSpeed "FULL";

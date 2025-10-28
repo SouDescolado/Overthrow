@@ -1,6 +1,4 @@
-private ["_unit"];
-
-_unit = _this select 0;
+private _unit = _this select 0;
 _unit setSkill ["courage", 1];
 
 _unit setVariable ["mayor", true, true];

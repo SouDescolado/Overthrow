@@ -14,7 +14,7 @@ if (_trackcounter > 5) then {
         [_x] call OT_fnc_savePlayerData;
     } forEach (allPlayers - (entities "HeadlessClient_F"));
 
-    _track = [];
+    private _track = [];
     {
         if (_x getVariable ["OT_spawntrack", false]) then {
             _track pushBack _x;
@@ -70,34 +70,34 @@ if ((date select 3) != _lasthr) then {
     {
         if (_x != "Factory") then {
             private _perhr = [OT_nation, "WAGE", 0] call OT_fnc_getPrice;
-            _num = server getVariable [format ["%1employ", _x], 0];
-            _enum = _num;
+            private _num = server getVariable [format ["%1employ", _x], 0];
+            private _enum = _num;
             if (_enum > 20) then {
                 _enum = 20;
             };
-            _funds = [] call OT_fnc_resistanceFunds;
-            _towage = (_num * _perhr);
+            private _funds = [] call OT_fnc_resistanceFunds;
+            private _towage = (_num * _perhr);
             if (_funds >= _towage) then {
                 [-_towage] call OT_fnc_resistanceFunds;
                 _wages = _wages + (_num * _perhr);
-                _data = _x call OT_fnc_getBusinessData;
+                private _data = _x call OT_fnc_getBusinessData;
 
-                _pos = _data select 0;
-                _outnum = 2 * _num;
-                _innum = 2 * _num;
-                _intotal = _innum;
+                private _pos = _data select 0;
+                private _outnum = 2 * _num;
+                private _innum = 2 * _num;
+                private _intotal = _innum;
                 if (_num > 0) then {
                     if (count _data isEqualTo 2 && _x != "Factory") then {
-                        _income = _enum * 200;
+                        private _income = _enum * 200;
                         [_income] call OT_fnc_resistanceFunds;
                     };
                     if (count _data isEqualTo 3) then {
-                        _input = _data select 2;
-                        _income = 0;
-                        _sellprice = round (([OT_nation, _input, 0] call OT_fnc_getSellPrice) * 1.2);
-                        _container = _pos nearestObject OT_item_CargoContainer;
+                        private _input = _data select 2;
+                        private _income = 0;
+                        private _sellprice = round (([OT_nation, _input, 0] call OT_fnc_getSellPrice) * 1.2);
+                        private _container = _pos nearestObject OT_item_CargoContainer;
                         if (_container isEqualTo objNull) then {
-                            _p = _pos findEmptyPosition [5, 100, OT_item_CargoContainer];
+                            private _p = _pos findEmptyPosition [5, 100, OT_item_CargoContainer];
                             _container = OT_item_CargoContainer createVehicle _p;
                             [_container, (server getVariable ["generals", []]) select 0] call OT_fnc_setOwner;
                             clearWeaponCargoGlobal _container;
@@ -106,8 +106,8 @@ if ((date select 3) != _lasthr) then {
                             clearItemCargoGlobal _container;
                         };
                         {
-                            _stock = _x call OT_fnc_unitStock;
-                            _c = _x;
+                            private _stock = _x call OT_fnc_unitStock;
+                            private _c = _x;
                             {
                                 _x params ["_cls", "_amt"];
                                 if (_cls isEqualTo _input) exitWith {
@@ -125,11 +125,11 @@ if ((date select 3) != _lasthr) then {
                         [_income] call OT_fnc_resistanceFunds;
                     };
                     if (count _data isEqualTo 4) then {
-                        _input = _data select 2;
-                        _output = _data select 3;
-                        _container = _pos nearestObject OT_item_CargoContainer;
+                        private _input = _data select 2;
+                        private _output = _data select 3;
+                        private _container = _pos nearestObject OT_item_CargoContainer;
                         if (_container isEqualTo objNull) then {
-                            _p = _pos findEmptyPosition [5, 100, OT_item_CargoContainer];
+                            private _p = _pos findEmptyPosition [5, 100, OT_item_CargoContainer];
                             _container = OT_item_CargoContainer createVehicle _p;
                             [_container, (server getVariable ["generals", []]) select 0] call OT_fnc_setOwner;
                             clearWeaponCargoGlobal _container;
@@ -138,9 +138,9 @@ if ((date select 3) != _lasthr) then {
                             clearItemCargoGlobal _container;
                         };
                         if (_input != "") then {
-                            _inputnum = 0;
+                            private _inputnum = 0;
                             {
-                                _c = _x;
+                                private _c = _x;
                                 {
                                     _x params ["_cls", "_amt"];
                                     if (_cls isEqualTo _input) exitWith {
@@ -159,9 +159,9 @@ if ((date select 3) != _lasthr) then {
                         };
                         if (_output != "" && _outnum > 0) then {
                             if (_output in ["OT_Sugarcane", "ACE_Banana"]) then {
-                                _foundFertilizer = false;
+                                private _foundFertilizer = false;
                                 {
-                                    _c = _x;
+                                    private _c = _x;
                                     {
                                         _x params ["_cls", "_amt"];
                                         if (_cls isEqualTo "OT_Fertilizer") exitWith {
@@ -195,15 +195,15 @@ if ((date select 4) != _lastmin) then {
     };
 
     //chance to reveal an FOB
-    _revealed = server getVariable ["revealedFOBs", []];
+    private _revealed = server getVariable ["revealedFOBs", []];
     {
         _x params ["_pos"];
         private _id = str _pos;
         private _town = _pos call OT_fnc_nearestTown;
-        _support = [_town] call OT_fnc_support;
+        private _support = [_town] call OT_fnc_support;
         if (!(_id in _revealed) && (_support > (random 2000))) then {
             _revealed pushBack _id;
-            _mrkid = createMarkerLocal [format ["natofob%1", _id], _pos];
+            private _mrkid = createMarkerLocal [format ["natofob%1", _id], _pos];
             _mrkid setMarkerShapeLocal "ICON";
             _mrkid setMarkerTypeLocal "mil_Flag";
             _mrkid setMarkerColorLocal "ColorBLUFOR";
@@ -219,8 +219,8 @@ if ((date select 4) != _lastmin) then {
     if (_stabcounter >= 10) then {
         _stabcounter = 0;
         {
-            _town = _x;
-            _townpos = server getVariable _x;
+            private _town = _x;
+            private _townpos = server getVariable _x;
             if !(_town in _abandoned) then {
                 if ([_townpos] call OT_fnc_inSpawnDistance) then {
                     if ((_townpos nearEntities ["CAManBase", 600]) findIf { side _x isEqualTo blufor } != -1) then {
@@ -228,12 +228,12 @@ if ((date select 4) != _lastmin) then {
                     };
                 };
             } else {
-                _stabchange = 0;
+                private _stabchange = 0;
                 private _numcops = { side _x isEqualTo blufor } count (_townpos nearEntities ["CAManBase", 600]);
                 if (_numcops > 0) then {
                     _stabchange = _stabchange - _numcops;
                 };
-                _police = server getVariable [format ["police%1", _town], 0];
+                private _police = server getVariable [format ["police%1", _town], 0];
                 if (_police > 0) then {
                     _stabchange = _stabchange + floor (_police / 2);
                 };
@@ -252,10 +252,10 @@ if ((date select 4) != _lastmin) then {
     if ("Factory" in (server getVariable ["GEURowned", []])) then {
         private _currentCls = server getVariable ["GEURproducing", ""];
         if (_currentCls != "") then {
-            _queue = server getVariable ["factoryQueue", []];
-            _changed = false;
+            private _queue = server getVariable ["factoryQueue", []];
+            private _changed = false;
             if (_queue isNotEqualTo []) then {
-                _item = _queue select 0;
+                private _item = _queue select 0;
                 if ((_item select 0) != _currentCls) then {
                     server setVariable ["GEURproducetime", 0, true];
                     server setVariable ["GEURproducing", "", true];
@@ -265,18 +265,18 @@ if ((date select 4) != _lastmin) then {
             if (_changed) exitWith {
                 _queue = server getVariable ["factoryQueue", []];
                 if (_queue isNotEqualTo []) then {
-                    _item = _queue select 0;
+                    private _item = _queue select 0;
                     server setVariable ["GEURproducing", _item select 0, true];
                 };
             };
 
-            _cost = cost getVariable [_currentCls, []];
+            private _cost = cost getVariable [_currentCls, []];
             if (_cost isNotEqualTo []) then {
                 _cost params ["_base", "_wood", "_steel", "_plastic"];
                 if (isNil "_plastic") then {
                     _plastic = 0;
                 };
-                _b = 1;
+                private _b = 1;
                 if (_base > 240) then {
                     _b = 10;
                 };
@@ -289,12 +289,12 @@ if ((date select 4) != _lastmin) then {
                 if (_base > 50000) then {
                     _b = 60;
                 };
-                _timetoproduce = _b + (round (_wood + 1)) + (round (_steel * 0.2)) + (round (_plastic * 5));
+                private _timetoproduce = _b + (round (_wood + 1)) + (round (_steel * 0.2)) + (round (_plastic * 5));
                 if (_timetoproduce > 120) then { _timetoproduce = 120 };
                 if (_timetoproduce < 5) then { _timetoproduce = 5 };
-                _timespent = server getVariable ["GEURproducetime", 0];
+                private _timespent = server getVariable ["GEURproducetime", 0];
 
-                _numtoproduce = 1;
+                private _numtoproduce = 1;
                 if (_wood < 1 && _wood > 0) then {
                     _numtoproduce = round (1 / _wood);
                 };
@@ -304,12 +304,12 @@ if ((date select 4) != _lastmin) then {
                 if (_plastic < 1 && _plastic > 0) then {
                     _numtoproduce = round (1 / _plastic);
                 };
-                _costtoproduce = round ((_base * _numtoproduce) * 0.6);
+                private _costtoproduce = round ((_base * _numtoproduce) * 0.6);
 
                 if (_timespent isEqualTo 0) then {
                     private _veh = OT_factoryPos nearestObject OT_item_CargoContainer;
                     if (_veh isEqualTo objNull) then {
-                        _p = OT_factoryPos findEmptyPosition [5, 100, OT_item_CargoContainer];
+                        private _p = OT_factoryPos findEmptyPosition [5, 100, OT_item_CargoContainer];
                         if (_p isNotEqualTo []) then {
                             _veh = OT_item_CargoContainer createVehicle _p;
                             [_veh, (server getVariable ["generals", []]) select 0] call OT_fnc_setOwner;
@@ -333,7 +333,7 @@ if ((date select 4) != _lastmin) then {
                         [-_costtoproduce] call OT_fnc_resistanceFunds;
                         _timespent = _timespent + OT_factoryProductionMulti;
                     } else {
-                        _need = "";
+                        private _need = "";
                         if !(_dowood) then { _need = _need + format ["%1 x wood ", _wood] };
                         if !(_dosteel) then { _need = _need + format ["%1 x steel ", _steel] };
                         if !(_doplastic) then { _need = _need + format ["%1 x plastic ", _plastic] };
@@ -349,7 +349,7 @@ if ((date select 4) != _lastmin) then {
 
                     _queue = server getVariable ["factoryQueue", []];
                     if (_queue isNotEqualTo []) then {
-                        _item = _queue select 0;
+                        private _item = _queue select 0;
                         if (_item select 1 > 1) then {
                             _item set [1, (_item select 1) - 1];
                         } else {
@@ -361,9 +361,9 @@ if ((date select 4) != _lastmin) then {
                     server setVariable ["GEURproducing", ""];
 
                     if (!(_currentCls isKindOf "Bag_Base") && _currentCls isKindOf "AllVehicles") then {
-                        _p = OT_factoryVehicleSpawn findEmptyPosition [5, 100, _currentCls];
+                        private _p = OT_factoryVehicleSpawn findEmptyPosition [5, 100, _currentCls];
                         if (_p isNotEqualTo []) then {
-                            _veh = _currentCls createVehicle _p;
+                            private _veh = _currentCls createVehicle _p;
                             //[_veh,(server getVariable ["generals",[]]) select 0] call OT_fnc_setOwner;
                             _veh setVariable ["OT_forceSaveUnowned", true, true]; // Save this vehicle even if it is unowned (we know somebody must have requested it at the factory, so they'll come back and claim it... eventually)
                             clearWeaponCargoGlobal _veh;
@@ -379,7 +379,7 @@ if ((date select 4) != _lastmin) then {
                     } else {
                         private _veh = OT_factoryPos nearestObject OT_item_CargoContainer;
                         if (_veh isEqualTo objNull) then {
-                            _p = OT_factoryPos findEmptyPosition [5, 100, OT_item_CargoContainer];
+                            private _p = OT_factoryPos findEmptyPosition [5, 100, OT_item_CargoContainer];
                             _veh = OT_item_CargoContainer createVehicle _p;
                             [_veh, (server getVariable ["generals", []]) select 0] call OT_fnc_setOwner;
                             clearWeaponCargoGlobal _veh;
@@ -412,9 +412,9 @@ if ((date select 4) != _lastmin) then {
                 server setVariable ["GEURproducetime", _timespent, true];
             };
         } else {
-            _queue = server getVariable ["factoryQueue", []];
+            private _queue = server getVariable ["factoryQueue", []];
             if (_queue isNotEqualTo []) then {
-                _item = _queue select 0;
+                private _item = _queue select 0;
                 server setVariable ["GEURproducing", _item select 0, true];
             };
         };
@@ -423,8 +423,8 @@ if ((date select 4) != _lastmin) then {
     {
         _x params ["_owner", "_name", "_unit", "_rank"];
         if (_unit isEqualType objNull) then {
-            _xp = _unit getVariable ["OT_xp", 0];
-            _player = spawner getVariable [_owner, objNull];
+            private _xp = _unit getVariable ["OT_xp", 0];
+            private _player = spawner getVariable [_owner, objNull];
             if (_rank == "PRIVATE" && _xp > (OT_rankXP select 0)) then {
                 _x set [3, "CORPORAL"];
                 _unit setRank "CORPORAL";

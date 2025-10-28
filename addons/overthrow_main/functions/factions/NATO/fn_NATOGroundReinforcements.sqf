@@ -4,8 +4,6 @@ private _vehtype = OT_NATO_Vehicle_Transport_Light;
 if (_byair) then {
     _vehtype = OT_NATO_Vehicle_AirTransport select 0;
 };
-private _squadtype = selectRandom OT_NATO_GroundForces;
-private _spawnpos = _frompos;
 private _group1 = createGroup blufor;
 _group1 deleteGroupWhenEmpty true;
 
@@ -89,7 +87,7 @@ spawner setVariable ["NATOattackforce", (spawner getVariable ["NATOattackforce",
 
 sleep 5;
 if (_byair && _tgroup isEqualType grpNull) then {
-    _wp = _tgroup addWaypoint [_frompos, 0];
+    private _wp = _tgroup addWaypoint [_frompos, 0];
     _wp setWaypointType "MOVE";
     _wp setWaypointBehaviour "COMBAT";
     _wp setWaypointSpeed "FULL";
@@ -117,7 +115,7 @@ if (_byair && _tgroup isEqualType grpNull) then {
     if (_tgroup isEqualType grpNull) then {
         _veh setDamage 0;
         _dir = (_attackpos getDir _frompos);
-        _roads = _ao nearRoads 150;
+        private _roads = _ao nearRoads 150;
         private _dropos = _ao;
 
         //Try to make sure drop position is on a bigger road
@@ -126,13 +124,13 @@ if (_byair && _tgroup isEqualType grpNull) then {
             if (isOnRoad _pos) exitWith { _dropos = _pos };
         } forEach (_roads);
 
-        _move = _tgroup addWaypoint [_dropos, 0];
+        private _move = _tgroup addWaypoint [_dropos, 0];
         _move setWaypointBehaviour "CARELESS";
         _move setWaypointTimeout [30, 30, 30];
         _move setWaypointType "TR UNLOAD";
         _move setWaypointCompletionRadius 50;
 
-        _wp = _tgroup addWaypoint [_frompos, 0];
+        private _wp = _tgroup addWaypoint [_frompos, 0];
         _wp setWaypointType "MOVE";
         _wp setWaypointBehaviour "CARELESS";
         _wp setWaypointCompletionRadius 25;
@@ -145,7 +143,7 @@ if (_byair && _tgroup isEqualType grpNull) then {
 };
 sleep 10;
 
-_wp = _group1 addWaypoint [_attackpos, 100];
+private _wp = _group1 addWaypoint [_attackpos, 100];
 _wp setWaypointType "SAD";
 _wp setWaypointBehaviour "COMBAT";
 _wp setWaypointSpeed "FULL";

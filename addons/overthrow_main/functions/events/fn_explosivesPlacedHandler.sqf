@@ -1,4 +1,4 @@
-params ["_exp", "_dir", "_pitch", "_unit"];
+private _unit = _this select 3;
 
 if (side _unit isNotEqualTo independent || !(captive _unit)) exitWith {};
 if (_unit call OT_fnc_unitSeen) then {

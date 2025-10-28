@@ -20,7 +20,6 @@ private _total = 0;
 
 {
     _x params ["_cls", "_qty"];
-    private _count = 0;
     if ((_doillegal || _cls in _combinedItems) && !(_cls in OT_allClothing)) then {
         private _baseprice = [OT_nation, _cls, 0] call OT_fnc_getSellPrice;
         private _costprice = round (_baseprice * 0.6); //The cost of export

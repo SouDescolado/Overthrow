@@ -30,7 +30,6 @@ private _lastAttack = time - (server getVariable ["NATOlastattack", 0]);
     private _town = _x;
     if (_town in _abandoned) then { continue };
     private _pos = server getVariable [_town, [0, 0, 0]];
-    private _stability = server getVariable [format ["stability%1", _town], 0];
     private _population = server getVariable [format ["population%1", _town], 100];
     if (_town != _lastCounter) then {
         if ([_pos] call OT_fnc_inSpawnDistance) then {

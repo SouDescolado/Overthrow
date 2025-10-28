@@ -1,11 +1,11 @@
 if !(captive player) exitWith { "You cannot build while wanted" call OT_fnc_notifyMinor };
-_base = player call OT_fnc_nearestBase;
-_closest = "";
-_isBase = false;
-_isobj = false;
-_center = getPos player;
+private _base = player call OT_fnc_nearestBase;
+private _closest = "";
+private _isBase = false;
+private _isobj = false;
+private _center = getPos player;
 modeMax = 350;
-_buildlocation = "base";
+private _buildlocation = "base";
 if !(isNil "_base") then {
     if ((_base select 0) distance player < 120) then {
         _closest = _base select 1;
@@ -16,11 +16,11 @@ if !(isNil "_base") then {
 };
 
 if (!_isBase) then {
-    _obj = player call OT_fnc_nearestObjectiveNoComms;
-    _objpos = _obj select 0;
+    private _obj = player call OT_fnc_nearestObjectiveNoComms;
+    private _objpos = _obj select 0;
 
-    _town = player call OT_fnc_nearestTown;
-    _townpos = server getVariable _town;
+    private _town = player call OT_fnc_nearestTown;
+    private _townpos = server getVariable _town;
 
     _closest = _town;
     _center = _townpos;
@@ -49,10 +49,10 @@ if ((!_isBase) && !(_closest in (server getVariable ["NATOabandoned", []]))) exi
 if ((player distance _center) > modeMax) exitWith { format ["You need to be within %1m of the %2.", modeMax, _buildlocation] call OT_fnc_notifyMinor };
 
 openMap false;
-_playerpos = (getPos player);
+private _playerpos = (getPos player);
 
-_campos = [(_playerpos select 0) + 35, (_playerpos select 1) + 35, (_playerpos select 2) + 70];
-_start = [_playerpos select 0, _playerpos select 1, 2];
+private _campos = [(_playerpos select 0) + 35, (_playerpos select 1) + 35, (_playerpos select 2) + 70];
+private _start = [_playerpos select 0, _playerpos select 1, 2];
 buildCam = "camera" camCreate _start;
 
 buildFocus = createVehicle ["Sign_Sphere10cm_F", _start getPos [1000, getDir player], [], 0, "NONE"];
@@ -90,7 +90,7 @@ canBuildHere = false;
 modeCenter = _center;
 
 buildOnMouseMove = {
-    params ["_control", "_mouseX", "_mouseY"];
+    params ["", "_mouseX", "_mouseY"];
     modeValue = screenToWorld getMousePosition;
     modeValue = [modeValue select 0, modeValue select 1, 0];
     if (!isNull modeTarget) then {
@@ -215,7 +215,7 @@ buildOnKeyDown = {
         };
 
         if (isNull modeTarget) exitWith {};
-        _dir = buildRotation;
+        private _dir = buildRotation;
 
         if (_key isEqualTo 57 && modeMode isEqualTo 1) exitWith {
             //Space
@@ -224,17 +224,17 @@ buildOnKeyDown = {
             modeIndex = modeIndex + 1;
             if (modeIndex > ((count modeValues) - 1)) then { modeIndex = 0 };
 
-            _cls = modeValues select modeIndex;
+            private _cls = modeValues select modeIndex;
 
             modeTarget = createVehicle [_cls, modeValue, [], 0, "CAN_COLLIDE"];
             modeTarget enableDynamicSimulation true;
             modeTarget setDir _dir;
         };
-        _amt = 5;
+        private _amt = 5;
         if (_key isEqualTo 16) exitWith {
             //Q
             _handled = true;
-            _newDir = _dir - _amt;
+            private _newDir = _dir - _amt;
             if (_newDir < 0) then { _newDir = 359 };
             modeTarget setDir (_newDir);
             buildRotation = _newDir;
@@ -242,7 +242,7 @@ buildOnKeyDown = {
         if (_key isEqualTo 18) exitWith {
             //E
             _handled = true;
-            _newDir = _dir + _amt;
+            private _newDir = _dir + _amt;
             if (_newDir > 359) then { _newDir = 0 };
             modeTarget setDir (_newDir);
             buildRotation = _newDir;
@@ -269,16 +269,16 @@ buildOnMouseUp = {
     if (_btn isEqualTo 0 && _sx > (safeZoneX + (0.1 * safeZoneW)) && _sx < (safeZoneX + (0.9 * safeZoneW))) then {
         //Click LMB
         if (!isNull modeTarget && canBuildHere) then {
-            _money = player getVariable "money";
+            private _money = player getVariable "money";
             if (_money < modePrice) then {
                 "You cannot afford that" call OT_fnc_notifyMinor;
             } else {
 
-                _created = objNull;
+                private _created = objNull;
                 playSound "3DEN_notificationDefault";
                 player setVariable ["money", _money - modePrice, true];
                 if (modeMode isEqualTo 0) then {
-                    _objects = [modeValue, getDir modeTarget, modeValues] call BIS_fnc_objectsMapper;
+                    private _objects = [modeValue, getDir modeTarget, modeValues] call BIS_fnc_objectsMapper;
                     {
                         clearWeaponCargoGlobal _x;
                         clearMagazineCargoGlobal _x;
@@ -311,7 +311,7 @@ buildOnMouseUp = {
                     _created setVariable ["OT_init", modeCode, true];
                     [_created, modeValue, modeCode] remoteExec ["OT_fnc_initBuilding", 2];
                 };
-                _clu = createVehicle ["Land_ClutterCutter_large_F", (getPos modeTarget), [], 0, "CAN_COLLIDE"];
+                private _clu = createVehicle ["Land_ClutterCutter_large_F", (getPos modeTarget), [], 0, "CAN_COLLIDE"];
                 _clu enableDynamicSimulation true;
             };
             deleteVehicle modeVisual;
@@ -326,8 +326,8 @@ buildOnMouseUp = {
 };
 
 buildOnMouseWheel = {
-    _z = _this select 1;
-    _pos = getPos buildCam;
+    private _z = _this select 1;
+    private _pos = getPos buildCam;
     private _distMul = 0.25 + (buildCam distance buildFocus) / 100;
 
     if (_z < 0) then {
@@ -351,18 +351,18 @@ modeCode = "";
 build = {
     canBuildHere = false;
     modeSelected = _this;
-    _def = [];
+    private _def = [];
     {
         if ((_x select 0) isEqualTo modeSelected) exitWith { _def = _x };
     } forEach (OT_Buildables);
     modeIndex = 0;
-    _name = _def select 0;
-    _description = _def select 5;
+    private _name = _def select 0;
+    private _description = _def select 5;
     modeCode = _def select 3;
     modeValues = _def select 2;
     modePrice = _def select 1;
-    _isTemplate = _def select 4;
-    _buildcls = "";
+    private _isTemplate = _def select 4;
+    private _buildcls = "";
     if (_isTemplate) then {
         modeMode = 0;
         _buildcls = (modeValues select 0) select 0;

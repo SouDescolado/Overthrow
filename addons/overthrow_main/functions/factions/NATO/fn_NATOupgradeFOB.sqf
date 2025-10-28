@@ -2,8 +2,8 @@ params ["_pos", "_upgrades"];
 
 {
     if (_x isEqualTo "Barriers") then {
-        _p = _pos getPos [8, 0];
-        _v = OT_NATO_Barrier_Small createVehicle _p;
+        private _p = _pos getPos [8, 0];
+        private _v = OT_NATO_Barrier_Small createVehicle _p;
         _v setDir 180;
 
         sleep 0.3;
@@ -25,10 +25,10 @@ params ["_pos", "_upgrades"];
         _v setDir 90;
     };
     if (_x isEqualTo "HMG") then {
-        _gun = OT_NATO_StaticGarrison_LevelOne select 0;
+        private _gun = OT_NATO_StaticGarrison_LevelOne select 0;
 
-        _p = _pos getPos [8.5, 45];
-        _v = _gun createVehicle _p;
+        private _p = _pos getPos [8.5, 45];
+        private _v = _gun createVehicle _p;
         _v setDir 45;
         createVehicleCrew _v;
 
@@ -72,11 +72,11 @@ params ["_pos", "_upgrades"];
         _v setDir 135;
     };
     if (_x isEqualTo "Mortar") then {
-        _p = _pos findEmptyPosition [3, 50, OT_NATO_Mortar];
-        _v = OT_NATO_Mortar createVehicle _p;
+        private _p = _pos findEmptyPosition [3, 50, OT_NATO_Mortar];
+        private _v = OT_NATO_Mortar createVehicle _p;
         createVehicleCrew _v;
 
-        _g = grpNull;
+        private _g = grpNull;
         {
             _x disableAI "AUTOTARGET";
             _x disableAI "FSM";

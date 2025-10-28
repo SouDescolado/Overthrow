@@ -17,11 +17,9 @@ params ["_leader"];
 private _group = group _leader;
 private _targetPos = _leader getVariable ["OT_targetPos", objNull];
 
-private _gotExplosives = (units _group) select -1;
 private _demoExpert = objNull;
 {
     if ("DemoCharge_Remote_Mag" in (magazines _x)) then {
-        _gotExplosives = true;
         _demoExpert = _x;
     };
 } forEach (units _group);
@@ -59,10 +57,10 @@ private _charges = [];
 private _runTo = [0, 0, 0];
 for "_i" from 0 to 30 do {
     if (_i >= 30) exitWith { _runTo = _targetPos getPos [(1000 + random 1000), random 360] };
-    _testPos = _targetPos getPos [(1000 + random 1000), random 360];
+    private _testPos = _targetPos getPos [(1000 + random 1000), random 360];
     if !(surfaceIsWater _testPos) exitWith { _runTo = _testPos };
 };
-_wp = _group addWaypoint [_runTo, 0];
+private _wp = _group addWaypoint [_runTo, 0];
 _wp setWaypointType "MOVE";
 _wp setWaypointBehaviour "COMBAT";
 _wp setWaypointSpeed "FULL";

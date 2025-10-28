@@ -20,7 +20,7 @@ private _fobs = server getVariable ["NATOfobs", []];
 
 private _frombase = "";
 {
-    _x params ["_obpos", "_name"];
+    _x params ["", "_name"];
     if !(_name in _abandoned) then {
         _frombase = _name;
     };

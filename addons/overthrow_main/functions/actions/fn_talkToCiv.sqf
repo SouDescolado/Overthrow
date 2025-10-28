@@ -5,8 +5,6 @@ OT_interactingWith = _civ;
 private _town = player call OT_fnc_nearestTown;
 private _standing = [_town] call OT_fnc_support;
 private _civprice = [_town, "CIV", _standing] call OT_fnc_getPrice;
-private _influence = player getVariable "influence";
-private _money = player getVariable ["money", 0];
 
 private _options = [];
 
@@ -26,7 +24,6 @@ private _canBuyBoats = false;
 private _canBuyGuns = false;
 private _canSell = false;
 private _canSellDrugs = true;
-private _canIntel = true;
 private _canMission = false;
 private _canTute = false;
 private _canGangJob = false;
@@ -54,33 +51,28 @@ if (_civ getVariable ["gundealer", false]) then {
     _canSellDrugs = false;
     _canRecruit = false;
     _canBuyGuns = true;
-    _canIntel = false;
     _canTute = true;
 };
 if (!isNil { _civ getVariable "employee" }) then {
     _canSellDrugs = false;
     _canRecruit = false;
     _canBuyGuns = false;
-    _canIntel = false;
 };
 if (_civ getVariable ["notalk", false]) then {
     _canSellDrugs = false;
     _canRecruit = false;
     _canBuyGuns = false;
-    _canIntel = false;
 };
 if (_civ getVariable ["factionrep", false]) then {
     _canSellDrugs = false;
     _canRecruit = false;
     _canBuyGuns = false;
-    _canIntel = false;
     _canMission = true;
 };
 if (_civ getVariable ["crimleader", false]) then {
     _canSellDrugs = true;
     _canRecruit = false;
     _canBuyGuns = false;
-    _canIntel = false;
     _canMission = false;
     _canGangJob = true;
 };
@@ -88,32 +80,27 @@ if (_civ getVariable ["criminal", false]) then {
     _canSellDrugs = true;
     _canRecruit = false;
     _canBuyGuns = false;
-    _canIntel = false;
     _canMission = false;
 };
 if (_civ getVariable ["mayor", false]) then {
     _canSellDrugs = false;
     _canRecruit = false;
     _canBuyGuns = false;
-    _canIntel = false;
     _canMission = false;
     _isMayor = true;
 };
 
 if (_civ call OT_fnc_hasOwner) then {
     _canRecruit = false;
-    _canIntel = false;
     _canSellDrugs = false;
 };
 
 if ((_civ getVariable ["garrison", ""]) isNotEqualTo "") then {
     _canRecruit = false;
-    _canIntel = false;
     _canSellDrugs = false;
 };
 if ((_civ getVariable ["polgarrison", ""]) isNotEqualTo "") then {
     _canRecruit = false;
-    _canIntel = false;
     _canSellDrugs = false;
 };
 
@@ -121,14 +108,13 @@ private _delivery = _civ getVariable ["OT_delivery", []];
 if (_delivery isNotEqualTo []) then {
     _delivery params ["_itemcls", "_numitems"];
     _canRecruit = false;
-    _canIntel = false;
     _canSellDrugs = false;
     _options pushBack [
         format ["Deliver %1 x %2", _numitems, _itemcls call OT_fnc_weaponGetName],
         {
             params ["_civ", "_itemcls", "_numitems"];
-            _stock = player call OT_fnc_unitStock;
-            _found = false;
+            private _stock = player call OT_fnc_unitStock;
+            private _found = false;
             {
                 _x params ["_cls", "_num"];
                 if (_cls isEqualTo _itemcls && _num >= _numitems) exitWith {
@@ -142,7 +128,7 @@ if (_delivery isNotEqualTo []) then {
                     ["I have a delivery for you", selectRandom ["About time!", "OK, thanks", "Sweet, thanks"]],
                     {
                         params ["_civ", "_itemcls", "_numitems"];
-                        _count = 0;
+                        private _count = 0;
                         while { _count < _numitems } do {
                             [player, _itemcls] call {
                                 params ["_unit", "_cls"];
@@ -196,7 +182,7 @@ if (_canRecruit) then {
 if (_canGangJob) then {
     private _gangid = _civ getVariable ["OT_gangid", -1];
     if (_gangid > -1) then {
-        _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
+        private _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
         if (_gang isNotEqualTo []) then {
             private _name = _gang select 8;
             private _rep = player getVariable [format ["gangrep%1", _gangid], 0];
@@ -229,11 +215,11 @@ if (_canGangJob) then {
                             _talk pushBack format ["I dunno, you've been a big help to us but support for your 'resistance' isnt great around here."];
                             _code = {
                                 params ["_civ", "_town", "_gangid", "_gang", "_name"];
-                                _gangoptions = [];
+                                private _gangoptions = [];
                                 _gangoptions pushBack [
                                     "Offer $5000",
                                     {
-                                        params ["_civ", "_town", "_gangid", "_gang", "_name"];
+                                        params ["_civ", "", "_gangid"];
                                         private _cash = player getVariable ["money", 0];
                                         if (_cash >= 5000) then {
                                             [
@@ -276,8 +262,8 @@ if (_canGangJob) then {
 };
 
 if (_canMission) then {
-    _factionName = _civ getVariable ["factionrepname", ""];
-    _faction = _civ getVariable ["faction", ""];
+    private _factionName = _civ getVariable ["factionrepname", ""];
+    private _faction = _civ getVariable ["faction", ""];
     private _standing = server getVariable [format ["standing%1", _faction], 0];
     _options pushBack format ["<t align='center' size='2'>%1</t><br/><br/><t align='center' size='0.8'>Current Standing: +%2", _factionName, _standing];
 
@@ -293,11 +279,11 @@ if (_canMission) then {
         format ["Buy Gear"],
         {
             private _civ = OT_interactingWith;
-            _faction = _civ getVariable ["faction", ""];
+            private _faction = _civ getVariable ["faction", ""];
             private _standing = server getVariable [format ["standing%1", _faction], 0];
 
-            _gear = spawner getVariable [format ["facweapons%1", _faction], []];
-            _s = [];
+            private _gear = spawner getVariable [format ["facweapons%1", _faction], []];
+            private _s = [];
             {
                 if !(_x in OT_allExplosives) then {
                     _s pushBack [_x, -1];
@@ -311,19 +297,19 @@ if (_canMission) then {
         format ["Buy Blueprints"],
         {
             private _civ = OT_interactingWith;
-            _faction = _civ getVariable ["faction", ""];
-            _factionName = _civ getVariable ["factionrepname", ""];
+            private _faction = _civ getVariable ["faction", ""];
+            private _factionName = _civ getVariable ["factionrepname", ""];
             private _standing = server getVariable [format ["standing%1", _faction], 0];
 
-            _gear = spawner getVariable [format ["facvehicles%1", _faction], []];
-            _s = [];
-            _blueprints = server getVariable ["GEURblueprints", []];
+            private _gear = spawner getVariable [format ["facvehicles%1", _faction], []];
+            private _s = [];
+            private _blueprints = server getVariable ["GEURblueprints", []];
 
             {
                 if !(_x in _blueprints) then {
-                    _cost = cost getVariable [_x, [100, 0, 0, 0]];
-                    _req = 0;
-                    _base = _cost select 0;
+                    private _cost = cost getVariable [_x, [100, 0, 0, 0]];
+                    private _req = 0;
+                    private _base = _cost select 0;
                     if (_base > 1000) then { _req = 10 };
                     if (_base > 5000) then { _req = 20 };
                     if (_base > 10000) then { _req = 40 };
@@ -351,7 +337,7 @@ if (_canBuy) then {
             private _town = player call OT_fnc_nearestTown;
             private _standing = [_town] call OT_fnc_support;
 
-            _cat = _civ getVariable "OT_shopCategory";
+            private _cat = _civ getVariable "OT_shopCategory";
             player setVariable ["OT_shopTarget", "Self", false];
 
             createDialog "OT_dialog_buy";
@@ -359,7 +345,7 @@ if (_canBuy) then {
             if (_cat isEqualTo "Clothing") then {
                 [_town, _standing] call OT_fnc_buyClothesDialog;
             } else {
-                _s = [];
+                private _s = [];
                 {
                     if ((_x select 0) isEqualTo _cat) exitWith {
                         {
@@ -395,7 +381,7 @@ if (_canTute) then {
             private _name = "";
             private _revealed = server getVariable ["revealedGangs", []];
             {
-                _x params ["_pos", "_name"];
+                _x params ["", "_name"];
                 private _gangs = OT_civilians getVariable [format ["gangs%1", _name], []];
                 private _found = false;
                 if (_gangs isNotEqualTo []) then {
@@ -418,10 +404,10 @@ if (_canTute) then {
                     _talk pushBack "Thanks!";
                     _talk pushBack "Anything for the resistance";
                     _code = {
-                        params ["_town", "_gangid", "_gang"];
+                        params ["", "_gangid", "_gang"];
                         private _town = player call OT_fnc_nearestTown;
-                        _mrkid = format ["gang%1", _town];
-                        _mrk = createMarkerLocal [_mrkid, _gang select 4];
+                        private _mrkid = format ["gang%1", _town];
+                        createMarkerLocal [_mrkid, _gang select 4];
                         _mrkid setMarkerTypeLocal "ot_Camp";
                         _mrkid setMarkerColor "colorOPFOR";
                         private _revealed = server getVariable ["revealedGangs", []];
@@ -432,7 +418,7 @@ if (_canTute) then {
                     _talk pushBack format ["I do, but I doubt they'd like it if I told you where they were"];
                     _code = {
                         params ["_town", "_gangid", "_gang", "_name"];
-                        _gangoptions = [];
+                        private _gangoptions = [];
                         _gangoptions pushBack [
                             "Offer $50",
                             {
@@ -445,11 +431,11 @@ if (_canTute) then {
                                         _civ,
                                         ["What if I gave you $50?", format ["Yeah, OK. I know of a gang called %1, I'll mark their camp on your map, maybe they'll have some jobs for you", _name]],
                                         {
-                                            params ["_town", "_gangid", "_gang", "_name"];
+                                            params ["", "_gangid", "_gang"];
                                             private _town = player call OT_fnc_nearestTown;
                                             [-50] call OT_fnc_money;
-                                            _mrkid = format ["gang%1", _town];
-                                            _mrk = createMarkerLocal [_mrkid, _gang select 4];
+                                            private _mrkid = format ["gang%1", _town];
+                                            createMarkerLocal [_mrkid, _gang select 4];
                                             _mrkid setMarkerTypeLocal "ot_Camp";
                                             _mrkid setMarkerColor "colorOPFOR";
                                             private _revealed = server getVariable ["revealedGangs", []];
@@ -484,7 +470,7 @@ if (_canTute) then {
         }
     ];
 
-    _done = player getVariable ["OT_tutesDone", []];
+    private _done = player getVariable ["OT_tutesDone", []];
     if !("NATO" in _done) then {
         _options pushBack [
             "So, about those NATO soldiers...",
@@ -548,17 +534,16 @@ if (_canBuyBoats) then {
         {
             createDialog "OT_dialog_buy";
             {
-                private _civ = OT_interactingWith;
-                _cls = _x select 0;
+                private _cls = _x select 0;
                 private _town = player call OT_fnc_nearestTown;
                 private _standing = [_town] call OT_fnc_support;
 
-                _price = [_town, _cls, _standing] call OT_fnc_getPrice;
+                private _price = [_town, _cls, _standing] call OT_fnc_getPrice;
                 if ("fuel depot" in (server getVariable "NATOabandoned")) then {
                     _price = round (_price * 0.5);
                 };
                 (_cls call OT_fnc_getClassDisplayInfo) params ["_pic", "_name"];
-                _idx = lbAdd [1500, format ["%1", _name]];
+                private _idx = lbAdd [1500, format ["%1", _name]];
                 lbSetPicture [1500, _idx, _pic];
                 lbSetData [1500, _idx, _cls];
                 lbSetValue [1500, _idx, _price];
@@ -569,7 +554,7 @@ if (_canBuyBoats) then {
         "Ferry Service",
         {
             "Where do you want to go?" call OT_fnc_notifyMinor;
-            _ferryoptions = [];
+            private _ferryoptions = [];
             {
                 private _p = markerPos (_x);
                 private _t = _p call OT_fnc_nearestTown;
@@ -586,12 +571,12 @@ if (_canBuyBoats) then {
                         };
                         private _cost = floor ((player distance _destpos) * 0.005);
                         player setVariable ["OT_ferryCost", _cost, false];
-                        _money = player getVariable ["money", 0];
+                        private _money = player getVariable ["money", 0];
                         if (_money < _cost) then {
                             "You cannot afford that!" call OT_fnc_notifyMinor;
                         } else {
                             [-_cost] call OT_fnc_money;
-                            _veh = OT_vehType_ferry createVehicle _pos;
+                            private _veh = OT_vehType_ferry createVehicle _pos;
 
                             clearWeaponCargoGlobal _veh;
                             clearMagazineCargoGlobal _veh;
@@ -651,7 +636,7 @@ if (_canBuyBoats) then {
                                 [player] spawn OT_fnc_NATOsearch;
                             };
                             if (!alive _driver) exitWith {};
-                            _timeout = time + 800;
+                            private _timeout = time + 800;
 
                             _wp = _g addWaypoint [_pos, 0];
                             _wp setWaypointType "MOVE";
@@ -696,8 +681,8 @@ if (_canSell) then {
             private _town = player call OT_fnc_nearestTown;
             private _standing = [_town] call OT_fnc_support;
 
-            _cat = _civ getVariable "OT_shopCategory";
-            _categorystock = [player, _cat] call OT_fnc_unitStock;
+            private _cat = _civ getVariable "OT_shopCategory";
+            private _categorystock = [player, _cat] call OT_fnc_unitStock;
 
             player setVariable ["OT_shopTarget", "Self", false];
             player setVariable ["OT_shopTargetCategory", _cat, false];
@@ -728,18 +713,18 @@ OT_drugQty = 0;
 
 if (_canSellDrugs) then {
     {
-        _drugcls = _x;
+        private _drugcls = _x;
         if (_x in items player && !(_civ getVariable ["OT_askedDrugs", false])) then {
 
-            _drugname = _x call OT_fnc_weaponGetName;
+            private _drugname = _x call OT_fnc_weaponGetName;
             _options pushBack [
                 format ["Sell %1", _drugname],
                 {
                     OT_drugSelling = _this;
-                    _drugcls = _this;
-                    _drugname = _drugcls call OT_fnc_weaponGetName;
+                    private _drugcls = _this;
+                    private _drugname = _drugcls call OT_fnc_weaponGetName;
                     if (!(_drugcls in items player)) exitWith {};
-                    _num = 0;
+                    private _num = 0;
                     {
                         if (_x select 0 isEqualTo _drugcls) exitWith { _num = _x select 1 };
                     } forEach (player call OT_fnc_unitStock);

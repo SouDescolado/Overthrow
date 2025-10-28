@@ -8,7 +8,7 @@ if !("ItemMap" in assignedItems player) exitWith { hint "You need a map to fast 
 
 if (_ftrules > 0 && !((primaryWeapon player) isEqualTo "" && (secondaryWeapon player) isEqualTo "" && (handgunWeapon player) isEqualTo "")) exitWith { hint "You cannot fast travel holding a weapon" };
 
-_foundweapon = false;
+private _foundweapon = false;
 if (!isNull objectParent player && _ftrules > 0) then {
     {
         if (!((primaryWeapon _x) isEqualTo "" && (secondaryWeapon _x) isEqualTo "" && (handgunWeapon _x) isEqualTo "")) exitWith { _foundweapon = true };
@@ -63,7 +63,7 @@ OT_FastTravel_MapSingleClickEHId = addMissionEventHandler [
 
         private _buildings = _pos nearObjects [OT_item_Tent, 30];
         if (_buildings isNotEqualTo []) then {
-            _bdg = (_buildings select 0);
+            private _bdg = (_buildings select 0);
             if (_bdg getVariable ["owner", ""] isNotEqualTo "") then {
                 _handled = true;
             };

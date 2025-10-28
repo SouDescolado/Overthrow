@@ -130,7 +130,7 @@ if (_totalAmmo > 0) then {
     };
 };
 
-_textctrl = (findDisplay 8000) displayCtrl 1100;
+private _textctrl = (findDisplay 8000) displayCtrl 1100;
 
 _textctrl ctrlSetStructuredText parseText format [
     "

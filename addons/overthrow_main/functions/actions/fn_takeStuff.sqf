@@ -1,8 +1,5 @@
 // _unit may be non-local
-private ["_unit", "_t"];
-
-_unit = _this select 0;
-_t = _this select 1;
+params ["_unit", "_t"];
 
 if (vest _unit != "") then {
     _t addVest vest _unit;
@@ -18,8 +15,8 @@ if (hmd _unit != "") then {
 };
 
 {
-    _count = 0;
-    _cls = _x select 0;
+    private _count = 0;
+    private _cls = _x select 0;
     while { _count < (_x select 1) } do {
         if (_cls isKindOf ["Default", configFile >> "CfgMagazines"]) then {
             _unit removeMagazineGlobal _cls;

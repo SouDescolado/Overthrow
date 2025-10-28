@@ -12,7 +12,7 @@ _groups pushBack _group;
 
 while { _count < _numCiv } do {
     _pos = [[[_pos, 50]]] call BIS_fnc_randomPos;
-    _civ = _group createUnit [OT_civType_worker, _pos, [], 0, "NONE"];
+    private _civ = _group createUnit [OT_civType_worker, _pos, [], 0, "NONE"];
     _civ setBehaviour "SAFE";
     private _identity = call OT_fnc_randomLocalIdentity;
     _identity set [1, ""]; // Retain original worker clothes

@@ -2,14 +2,14 @@ closeDialog 0;
 private _idx = lbCurSel 1500;
 inputData = lbData [1500, _idx];
 OT_inputHandler = {
-    _input = ctrlText 1400;
+    private _input = ctrlText 1400;
     if (_input isEqualType "" && count _input > 64) exitWith { hint "You can't send that much!" };
-    _val = parseNumber _input;
-    _cash = server getVariable ["money", 0];
+    private _val = parseNumber _input;
+    private _cash = server getVariable ["money", 0];
     if (_val > _cash) then { _val = _cash };
     if (_val > 0) then {
         [-_val] call OT_fnc_resistanceFunds;
-        _player = objNull;
+        private _player = objNull;
         private _uid = inputData;
         {
             if (getPlayerUID _x isEqualTo _uid) exitWith { _player = _x };

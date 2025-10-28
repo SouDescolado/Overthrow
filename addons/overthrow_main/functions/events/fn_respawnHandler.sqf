@@ -1,6 +1,5 @@
 if (isDedicated) exitWith {};
-_new = _this select 0;
-_old = _this select 1;
+params ["_new", "_old"];
 
 if (isNull (_old)) exitWith {};
 
@@ -17,15 +16,12 @@ waitUntil { alive player };
 player setCaptive true;
 player allowDamage false;
 
-_group = createGroup independent;
+private _group = createGroup independent;
 [player] joinSilent nil;
 [player] joinSilent _group;
-_recruits = server getVariable ["recruits", []];
-_newrecruits = [];
+private _recruits = server getVariable ["recruits", []];
 {
-    _owner = _x select 0;
-    _name = _x select 1;
-    _civ = _x select 2;
+    _x params ["_owner", "", "_civ"];
     if (_owner isEqualTo (getPlayerUID player)) then {
         if (_civ isEqualType objNull) then {
             if (_civ call OT_fnc_playerIsOwner) then {
@@ -52,18 +48,17 @@ removeVest player;
 player setVariable ["ot_isSmoking", false];
 player addWeaponGlobal "ItemMap";
 
-_housepos = _old getVariable "home";
-_town = _housepos call OT_fnc_nearestTown;
+private _housepos = _old getVariable "home";
 player setPos (_housepos findEmptyPosition [1, 20, typeOf _new]);
-_clothes = uniform _old;
+private _clothes = uniform _old;
 player forceAddUniform _clothes;
 [] spawn OT_fnc_setupPlayer;
 
 call {
     disableSerialization;
-    _display = uiNamespace getVariable "OT_statsHUD";
+    private _display = uiNamespace getVariable "OT_statsHUD";
     if (isNil "_display") exitWith {};
-    _setText = _display displayCtrl 1001;
+    private _setText = _display displayCtrl 1001;
     _setText ctrlSetStructuredText (parseText "");
     _setText ctrlCommit 0;
 };

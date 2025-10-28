@@ -13,7 +13,7 @@ while { _count < _num } do {
     private _pos = _frompos findEmptyPosition [10, 100, _vehtype];
     if (_pos isEqualTo []) then { _pos = _frompos findEmptyPosition [0, 100, _vehtype] };
 
-    _veh = createVehicle [_vehtype, _pos, [], 0, ""];
+    private _veh = createVehicle [_vehtype, _pos, [], 0, ""];
     _veh setVariable ["garrison", "HQ", false];
 
     clearWeaponCargoGlobal _veh;
@@ -39,12 +39,12 @@ while { _count < _num } do {
     } forEach (allCurators);
 
     _attackpos = _attackpos findEmptyPosition [50, 200, _vehtype];
-    _roads = _attackpos nearRoads 150;
+    private _roads = _attackpos nearRoads 150;
     if (_roads isNotEqualTo []) then {
         _attackpos = ASLToAGL (getPosASL (selectRandom _roads));
     };
 
-    _wp = _group addWaypoint [_attackpos, 0];
+    private _wp = _group addWaypoint [_attackpos, 0];
     _wp setWaypointType "SAD";
     _wp setWaypointBehaviour "COMBAT";
     _wp setWaypointTimeout [600, 600, 600];

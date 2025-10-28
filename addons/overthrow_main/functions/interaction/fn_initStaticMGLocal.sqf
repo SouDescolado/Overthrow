@@ -1,15 +1,13 @@
-private ["_wpn"];
-_wpn = _this;
+private _wpn = _this;
 if !(_wpn getVariable ["actioned", false]) then {
     _wpn addAction [
         "Rearm",
         {
-            _w = _this select 0;
-            _p = _this select 1;
+            params ["_w", "_p"];
             if (_p call OT_fnc_unitSeen) then {
                 _p setCaptive false;
             };
-            _ammocount = { _x isEqualTo OT_ammo_50cal } count (magazineCargo _p);
+            private _ammocount = { _x isEqualTo OT_ammo_50cal } count (magazineCargo _p);
             if (_ammocount >= 4) then {
                 disableUserInput true;
                 _p removeMagazineGlobal OT_ammo_50cal;

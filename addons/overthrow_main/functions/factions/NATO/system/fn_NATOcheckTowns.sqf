@@ -29,7 +29,6 @@ private _popControl = call OT_fnc_getControlledPopulation;
     private _pos = server getVariable [_town, [0, 0, 0]];
     private _stability = server getVariable [format ["stability%1", _town], 0];
     private _population = server getVariable [format ["population%1", _town], 100];
-    private _garrison = server getVariable [format ["garrison%1", _town], 10];
     // Limit towns checked to those within range of players
     if ([_pos] call OT_fnc_inSpawnDistance) then {
         // Send QRF to Town with > 100 population
@@ -40,7 +39,7 @@ private _popControl = call OT_fnc_getControlledPopulation;
             if (_popControl > 1000) then { _multiplier = 4 };
             if (_popControl > 2000) then { _multiplier = 5 };
 
-            _strength = _population * _multiplier;
+            private _strength = _population * _multiplier;
             if (_strength > _resources) then { _strength = _resources };
             if (_town in OT_NATO_priority) then { _strength = _resources };
             server setVariable ["NATOattacking", _town, true];

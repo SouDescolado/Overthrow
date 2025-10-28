@@ -1,5 +1,4 @@
 ot_weather_getWeather = {
-    private _forecast = _this;
     private _wavetarget = 0;
     private _fogtarget = 0;
     private _overtarget = 0;
@@ -50,9 +49,9 @@ ot_weather_change_forecast = "Clear";
 if ((server getVariable "StartupType") == "NEW" || (server getVariable ["weatherversion", 0]) < 1) then {
     server setVariable ["weatherversion", 1, false];
 
-    _mode = selectRandom ["Clear", "Cloudy"];
-    _weather = _mode call ot_weather_getWeather;
-    _newOvercast = _weather select 0;
+    private _mode = selectRandom ["Clear", "Cloudy"];
+    private _weather = _mode call ot_weather_getWeather;
+    private _newOvercast = _weather select 0;
 
     skipTime -24;
     86400 setOvercast _newOvercast;
@@ -74,11 +73,10 @@ if ((server getVariable "StartupType") == "NEW" || (server getVariable ["weather
     server setVariable ["temperature", (_weather select 5), true];
     server setVariable ["forecast", _mode, true];
     ot_weather_change_forecast = _mode;
-    _count = 0;
 } else {
     ot_weather_change_forecast = server getVariable ["forecast", "Clear"];
-    _weather = ot_weather_change_forecast call ot_weather_getWeather;
-    _newOvercast = _weather select 0;
+    private _weather = ot_weather_change_forecast call ot_weather_getWeather;
+    private _newOvercast = _weather select 0;
     skipTime -24;
     86400 setOvercast _newOvercast;
     86400 setFog 0;
@@ -95,7 +93,7 @@ if ((server getVariable "StartupType") == "NEW" || (server getVariable ["weather
         10 setRain _this;
     };
 
-    _date = server getVariable ["timedate", OT_startDate];
+    private _date = server getVariable ["timedate", OT_startDate];
     setDate _date;
     120 setFog 0; //Tanoa fog wtf
     forceWeatherChange;
@@ -125,7 +123,6 @@ ot_weather_change_time = 350 + (random 600);
 
         private _mode = ot_weather_change_forecast;
         ot_weather_change_forecast = 'Clear';
-        _count = 0;
         [_mode, _stormchance, _cloudychance, _rainchance] call {
             params ['_mode', '_stormchance', '_cloudychance', '_rainchance'];
             if (_mode isEqualTo 'Clear') exitWith {
@@ -143,9 +140,9 @@ ot_weather_change_time = 350 + (random 600);
                 if ((random 100) > _cloudychance) exitWith { ot_weather_change_forecast = 'Clear' };
             };
         };
-        _weather = ot_weather_change_forecast call ot_weather_getWeather;
+        private _weather = ot_weather_change_forecast call ot_weather_getWeather;
 
-        _newOvercast = (_weather select 0);
+        private _newOvercast = (_weather select 0);
         120 setOvercast _newOvercast;
         120 setFog 0;
         120 setWaves (_weather select 2);

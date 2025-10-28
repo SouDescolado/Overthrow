@@ -6,8 +6,6 @@ player setVariable ["OT_tutesDone", _done, true];
 
 private _actualMission = {
     private _targets = [];
-    private _destination = [];
-    private _thistown = (getPosATL player) call OT_fnc_nearestTown;
 
     //Is there some already spawned within spawn distance?
     {
@@ -58,12 +56,11 @@ private _actualMission = {
     player reveal [_veh, 4];
 
     //give waypoint
-    private _wp = [player, getPos _veh, "Wreck"] call OT_fnc_givePlayerWaypoint;
+    [player, getPos _veh, "Wreck"] call OT_fnc_givePlayerWaypoint;
 
     private _loopCode = {
         params ["_loopCode", "_veh"];
         if (player distance _veh < 10 && "ToolKit" in items player) then {
-            _reached = true;
             "Use your interaction key on the wreck to talk to salvage it.
             The items you get can be sold at any Hardware store,
             just drive up to it and press 'Y'" call OT_fnc_notifyMinor;
@@ -80,7 +77,7 @@ if !("ToolKit" in items player) then {
     "Go and grab the toolkit from your ammobox at home,
     you'll need a backpack to carry it" call OT_fnc_notifyMinor;
     private _home = player getVariable "home";
-    private _wp = [player, _home, "Grab Toolkit"] call OT_fnc_givePlayerWaypoint;
+    [player, _home, "Grab Toolkit"] call OT_fnc_givePlayerWaypoint;
     private _loop = {
         params ["_loop", "_actualMission"];
         if ("ToolKit" in items player) then {

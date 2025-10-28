@@ -1,6 +1,5 @@
-_item = _this select 0;
-_veh = _this select 1;
-_pos = getPosATL _veh;
+params ["_item", "_veh"];
+private _pos = getPosATL _veh;
 
 if (_item in OT_illegalItems) then {
     {

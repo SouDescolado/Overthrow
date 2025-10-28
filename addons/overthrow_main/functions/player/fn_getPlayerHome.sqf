@@ -24,7 +24,7 @@ while { !_found && _range < 1200 } do {
 
 if (!_found) exitWith {
     //Spawn town is full, make a new one
-    _town = selectRandom (OT_spawnTowns - [_this]);
+    private _town = selectRandom (OT_spawnTowns - [_this]);
     server setVariable ["spawntown", _town, true];
     _town call OT_fnc_getPlayerHome;
 };

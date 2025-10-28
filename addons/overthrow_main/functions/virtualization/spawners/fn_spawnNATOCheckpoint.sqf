@@ -1,8 +1,6 @@
 params ["_start", "_name", "_spawnid"];
 sleep random 0.2;
 
-private _count = 0;
-
 private _numNATO = server getVariable format ["garrison%1", _name];
 if (isNil "_numNATO") then {
     //New checkpoint was added
@@ -24,8 +22,6 @@ if (_start isEqualTo [] || _start # 1 isEqualTo 0) exitWith {
     [];
 };
 
-private _vehtype = selectRandom OT_vehTypes_civ;
-
 private _roadscon = roadsConnectedTo _road;
 private _dir = (_road getDir (_roadscon select 0));
 if (isNil "_dir") then { _dir = 90 };
@@ -35,19 +31,17 @@ private _vehs = [_start, _dir, OT_tpl_checkpoint] call BIS_fnc_objectsMapper;
 private _groups = [];
 private _soldiers = [];
 
-_count = 0;
-_range = 100;
-_groupcount = 0;
+private _count = 0;
 
-_group = createGroup blufor;
+private _group = createGroup blufor;
 _group setVariable ["VCM_TOUGHSQUAD", true, true];
 _group setVariable ["VCM_NORESCUE", true, true];
 _groups pushBack _group;
-_groupcount = 1;
+private _groupcount = 1;
 
 _start = _start getPos [7, _dir - 90];
 
-_civ = _group createUnit [OT_NATO_Unit_TeamLeader, _start, [], 0, "NONE"];
+private _civ = _group createUnit [OT_NATO_Unit_TeamLeader, _start, [], 0, "NONE"];
 _civ setVariable ["garrison", _name, false];
 _civ setRank "MAJOR";
 _soldiers pushBack _civ;

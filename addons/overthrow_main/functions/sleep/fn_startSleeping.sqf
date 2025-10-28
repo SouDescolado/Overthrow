@@ -1,7 +1,7 @@
 closeDialog 0;
 player allowDamage false;
 showCinemaBorder false;
-_camz = "camera" camCreate [getPosATL player # 0, getPosATL player # 1, ((getPosATL player # 2) + 2.5)];
+private _camz = "camera" camCreate [getPosATL player # 0, getPosATL player # 1, ((getPosATL player # 2) + 2.5)];
 _camz camSetTarget player;
 _camz cameraEffect ["internal", "BACK"];
 _camz camSetFov 0.75;
@@ -9,7 +9,7 @@ _camz camCommit 0;
 
 cutText ["", "BLACK OUT", 8];
 _camz camSetPos [(getPosATL player # 0), (getPosATL player # 1), (getPosATL player # 2) + 50];
-_relPos = player getRelPos [1000, random 360];
+private _relPos = player getRelPos [1000, random 360];
 _camz camSetTarget [(_relPos # 0), (_relPos # 1), (_relPos # 2) + 100];
 _camz camSetFov 1.2;
 _camz camCommit 8;

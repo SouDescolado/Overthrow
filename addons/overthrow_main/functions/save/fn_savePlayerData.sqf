@@ -8,14 +8,14 @@ private _data = [];
     private _v = _player getVariable _x;
     if (!isNil "_v") then {
         if (_x isEqualTo "home" && !(_v isEqualType [])) then {
-            _owned = (_player getVariable "owned");
+            private _owned = (_player getVariable "owned");
             if (_owned isEqualTo []) then {
                 diag_log format ["Warning: Player %1 owns no buildings to be set as home", name _player];
                 //fallback to current pos
                 _v = getPos _player;
             } else {
-                _buildid = _owned select 0;
-                _pos = buildingpositions getVariable [_buildid, []];
+                private _buildid = _owned select 0;
+                private _pos = buildingpositions getVariable [_buildid, []];
                 if (_pos isEqualTo []) then {
                     //fallback to current pos
                     _v = getPos player;

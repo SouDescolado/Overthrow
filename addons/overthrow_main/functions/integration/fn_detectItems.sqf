@@ -30,7 +30,6 @@ private _getprice = {
     };
 
     private _price = round (_mass * 1.5);
-    private _steel = 0;
     private _wood = 0;
     private _plastic = 0;
     private _steel = ceil (_mass * 0.2);
@@ -45,7 +44,7 @@ private _getprice = {
         if (_mass isEqualTo 1) then {
             _plastic = 0.1;
         };
-        private _res = [_mass] call {
+        [_mass] call {
             params ["_mass"];
             _price = _mass * 4;
             if ("blood" in _cls) exitWith {
@@ -136,7 +135,7 @@ private _getprice = {
 } forEach ("
     (getNumber (_x >> 'scope') isEqualTo 2)
         && {
-            _parents = ([_x, true] call BIS_fnc_returnParents);
+            private _parents = ([_x, true] call BIS_fnc_returnParents);
             'Bag_Base' in _parents
                 && { getText (_x >> 'Faction') isEqualTo 'Default' }
                 && { !('Weapon_Bag_Base' in _parents) }

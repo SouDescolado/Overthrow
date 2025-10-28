@@ -13,7 +13,7 @@ if (isNull _group) then {
     // Add new member to existing group
     _pos = [[[_pos, 50]]] call BIS_fnc_randomPos;
 
-    _civ = _group createUnit [OT_civType_worker, _pos, [], 0, "NONE"];
+    private _civ = _group createUnit [OT_civType_worker, _pos, [], 0, "NONE"];
 
     _civ setBehaviour "SAFE";
     private _identity = call OT_fnc_randomLocalIdentity;

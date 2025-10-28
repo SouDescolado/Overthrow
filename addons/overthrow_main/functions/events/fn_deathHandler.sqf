@@ -18,7 +18,7 @@ if (_killer call OT_fnc_unitSeen) then {
     _killer setVariable ["lastkill", time, true];
 };
 
-_town = _me call OT_fnc_nearestTown;
+private _town = _me call OT_fnc_nearestTown;
 
 if (isPlayer _me) exitWith {
     if !(_town in (server getVariable ["NATOabandoned", []])) then {
@@ -29,22 +29,19 @@ if (isPlayer _me) exitWith {
     _me setCaptive true;
 };
 
-_civ = _me getVariable "civ";
-_garrison = _me getVariable "garrison";
-_employee = _me getVariable "employee";
-_vehgarrison = _me getVariable "vehgarrison";
-_polgarrison = _me getVariable "polgarrison";
-_airgarrison = _me getVariable "airgarrison";
-_criminal = _me getVariable "criminal";
-_crimleader = _me getVariable "crimleader";
-_mobster = _me getVariable "mobster";
-_mobboss = _me getVariable "mobboss";
-_hvt = _me getVariable "hvt_id";
-_reveal = false;
+private _civ = _me getVariable "civ";
+private _garrison = _me getVariable "garrison";
+private _employee = _me getVariable "employee";
+private _vehgarrison = _me getVariable "vehgarrison";
+private _polgarrison = _me getVariable "polgarrison";
+private _airgarrison = _me getVariable "airgarrison";
+private _criminal = _me getVariable "criminal";
+private _crimleader = _me getVariable "crimleader";
+private _hvt = _me getVariable "hvt_id";
 
-_standingChange = 0;
+private _standingChange = 0;
 
-_bounty = _me getVariable ["OT_bounty", 0];
+private _bounty = _me getVariable ["OT_bounty", 0];
 if (_bounty > 0) then {
     [_killer, _bounty] call OT_fnc_rewardMoney;
     [_killer, _bounty] call OT_fnc_experience;
@@ -60,7 +57,7 @@ call {
     if (!isNil "_hvt") exitWith {
         private _diff = server getVariable ["OT_difficulty", 1];
         _killer setVariable ["BLUkills", (_killer getVariable ["BLUkills", 0]) + 1, true];
-        _idx = 0;
+        private _idx = 0;
         {
             if ((_x select 0) isEqualTo _hvt) exitWith {};
             _idx = _idx + 1;
@@ -77,7 +74,7 @@ call {
     };
     if (!isNil "_employee") exitWith {
         _killer setVariable ["CIVkills", (_killer getVariable ["CIVkills", 0]) + 1, true];
-        _pop = server getVariable format ["employ%1", _employee];
+        private _pop = server getVariable format ["employ%1", _employee];
         if (_pop > 0) then {
             server setVariable [format ["employ%1", _mobsterid], _pop - 1, true];
         };
@@ -85,19 +82,19 @@ call {
     };
     if (!isNil "_criminal") exitWith {
         _killer setVariable ["OPFkills", (_killer getVariable ["OPFkills", 0]) + 1, true];
-        _civid = _me getVariable ["OT_civid", -1];
-        _gangid = _me getVariable ["OT_gangid", -1];
-        _hometown = _me getVariable ["hometown", ""];
-        _reward = 50;
-        _stability = 2;
+        private _civid = _me getVariable ["OT_civid", -1];
+        private _gangid = _me getVariable ["OT_gangid", -1];
+        private _hometown = _me getVariable ["hometown", ""];
+        private _reward = 50;
+        private _stability = 2;
         _standingChange = 1;
         if (_civid > -1) then {
             OT_civilians setVariable [format ["%1", _civid], nil, true];
 
             if (_gangid > -1) then {
-                _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
+                private _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
                 if (_gang isNotEqualTo []) then {
-                    _members = _gang select 0;
+                    private _members = _gang select 0;
                     _members deleteAt (_members find _civid);
                     _gang set [0, _members];
                     OT_civilians setVariable [format ["gang%1", _gangid], _gang, true];
@@ -112,25 +109,23 @@ call {
     };
     if (!isNil "_crimleader") exitWith {
         _killer setVariable ["OPFkills", (_killer getVariable ["OPFkills", 0]) + 1, true];
-        _gangid = _me getVariable ["OT_gangid", -1];
-        _civid = _me getVariable ["OT_civid", -1];
-        _gangid = _me getVariable ["OT_gangid", -1];
-        _hometown = _me getVariable ["hometown", ""];
-        _reward = 500 + ((round random 6) * 50);
-        _stability = 10;
+        private _gangid = _me getVariable ["OT_gangid", -1];
+        private _hometown = _me getVariable ["hometown", ""];
+        private _reward = 500 + ((round random 6) * 50);
+        private _stability = 10;
         _standingChange = 10;
 
         if (_gangid > -1) then {
-            _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
+            private _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
             if (_gang isNotEqualTo []) then {
                 private _name = _gang select 8;
                 OT_civilians setVariable [format ["gang%1", _gangid], nil, true];
-                _gangs = OT_civilians getVariable [format ["gangs%1", _hometown], []];
+                private _gangs = OT_civilians getVariable [format ["gangs%1", _hometown], []];
                 _gangs deleteAt (_gangs find _gangid);
                 OT_civilians setVariable [format ["gangs%1", _hometown], _gangs, true];
                 format ["The leader of %2 in %1 has been eliminated", _hometown, _name] remoteExec ["OT_fnc_notifyMinor", 0, false];
                 spawner setVariable [format ["nogang%1", _hometown], time + 3600, false]; //No gangs in this town for 1 hr real-time
-                _mrkid = format ["gang%1", _hometown];
+                private _mrkid = format ["gang%1", _hometown];
                 deleteMarker _mrkid;
             };
         };
@@ -141,21 +136,21 @@ call {
         [_killer, _gangid, -25] call OT_fnc_gangRep;
     };
     if (!isNil "_polgarrison") exitWith {
-        _pop = server getVariable format ["police%1", _polgarrison];
+        private _pop = server getVariable format ["police%1", _polgarrison];
         if (_pop > 0) then {
             _pop = _pop - 1;
             server setVariable [format ["police%1", _polgarrison], _pop, true];
             format ["A police officer has been killed in %1", _polgarrison] remoteExec ["OT_fnc_notifyMinor", 0, false];
         };
         [_town, -2] call OT_fnc_stability;
-        _mrkid = format ["%1-police", _polgarrison];
+        private _mrkid = format ["%1-police", _polgarrison];
         _mrkid setMarkerText format ["%1", _pop];
     };
     if (!isNil "_garrison" || !isNil "_vehgarrison" || !isNil "_airgarrison") then {
         _killer setVariable ["BLUkills", (_killer getVariable ["BLUkills", 0]) + 1, true];
         if (!isNil "_garrison") then {
             server setVariable ["NATOresourceGain", (server getVariable ["NATOresourceGain", 0]) + 1, true];
-            _pop = server getVariable [format ["garrison%1", _garrison], 0];
+            private _pop = server getVariable [format ["garrison%1", _garrison], 0];
             if (_pop > 0) then {
                 _pop = _pop - 1;
                 server setVariable [format ["garrison%1", _garrison], _pop, true];
@@ -166,9 +161,8 @@ call {
             } else {
                 [_killer, 25] call OT_fnc_experience;
             };
-            _reveal = true;
-            _townpop = server getVariable [format ["population%1", _town], 0];
-            _stab = -1;
+            private _townpop = server getVariable [format ["population%1", _town], 0];
+            private _stab = -1;
             if (_townpop < 350 && (random 100) > 50) then {
                 _stab = -2;
             };
@@ -181,13 +175,13 @@ call {
         };
 
         if (!isNil "_vehgarrison") then {
-            _vg = server getVariable format ["vehgarrison%1", _vehgarrison];
+            private _vg = server getVariable format ["vehgarrison%1", _vehgarrison];
             _vg deleteAt (_vg find (typeOf _me));
             server setVariable [format ["vehgarrison%1", _vehgarrison], _vg, false];
         };
 
         if (!isNil "_airgarrison") then {
-            _vg = server getVariable format ["airgarrison%1", _airgarrison];
+            private _vg = server getVariable format ["airgarrison%1", _airgarrison];
             _vg deleteAt (_vg find (typeOf _me));
             server setVariable [format ["airgarrison%1", _airgarrison], _vg, false];
         };

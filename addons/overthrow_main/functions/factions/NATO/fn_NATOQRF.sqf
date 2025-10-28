@@ -1,5 +1,4 @@
 params ["_pos", "_strength", "_success", "_fail", "_params", "_garrison"];
-private _totalStrength = _strength;
 private _numPlayers = count (allPlayers - (entities "HeadlessClient_F"));
 private _popControl = call OT_fnc_getControlledPopulation;
 
@@ -25,12 +24,8 @@ if (_popControl > 3000) then {
 
 spawner setVariable ["NATOattackforce", [], false];
 //determine possible vectors && distribute strength to each
-private _town = _pos call OT_fnc_nearestTown;
-private _region = server getVariable format ["region_%1", _town];
 
-_ground = [];
-_air = [];
-_abandoned = server getVariable ["NATOabandoned", []];
+private _abandoned = server getVariable ["NATOabandoned", []];
 
 ([_pos] call OT_fnc_NATOGetAttackVectors) params ["_ground", "_air"];
 
@@ -40,8 +35,8 @@ private _count = 0;
 {
     _x params ["_obpos", "_name", "_pri"];
 
-    _dir = (_pos getDir _obpos);
-    _ao = [_pos, _dir] call OT_fnc_getAO;
+    private _dir = (_pos getDir _obpos);
+    private _ao = [_pos, _dir] call OT_fnc_getAO;
 
     if (_pri > 100 && _popControl > 1000 && _popControl > (random 2000)) then {
         [_obpos, _ao, _pos, 0] spawn OT_fnc_NATOAPCInsertion;
@@ -67,8 +62,8 @@ if (_strength >= 150) then {
     {
         _x params ["_obpos", "_name", "_pri"];
 
-        _dir = (_pos getDir _obpos);
-        _ao = [_pos, _dir] call OT_fnc_getAO;
+        private _dir = (_pos getDir _obpos);
+        private _ao = [_pos, _dir] call OT_fnc_getAO;
         [_obpos, _ao, _pos, true, 300] spawn OT_fnc_NATOGroundForces;
         diag_log format ["Overthrow: NATO Sent ground forces by air from %1 %2", _name, str _obpos];
         _strength = _strength - 150;
@@ -88,8 +83,7 @@ sleep 2;
 
 if (_strength > 500 && _air isNotEqualTo []) then {
     //Send CAS
-    _obpos = (_air select 0) select 0;
-    _name = (_air select 0) select 1;
+    (_air select 0) params ["_obpos", "_name"];
     [_obpos, _pos, 10] spawn OT_fnc_NATOAirSupport;
     _strength = _strength - 300;
     diag_log format ["Overthrow: NATO Sent CAS from %1 %2", _name, str _obpos];
@@ -99,8 +93,7 @@ sleep 2;
 if (_popControl > 1000 && _strength > 1000 && _air isNotEqualTo []) then {
     //Send more CAS
     private _from = selectRandom _air;
-    _obpos = _from select 0;
-    _name = _from select 1;
+    _from params ["_obpos", "_name"];
     [_obpos, _pos, 120] spawn OT_fnc_NATOAirSupport;
     _strength = _strength - 300;
     diag_log format ["Overthrow: NATO Sent extra CAS from %1 %2", _name, str _obpos];
@@ -114,9 +107,8 @@ if (_popControl > 2000 && _strength > 1500) then {
 
 //Send ground support
 if ((_ground isNotEqualTo []) && (_strength > 250)) then {
-    _obpos = (_ground select 0) select 0;
-    _name = (_ground select 0) select 1;
-    _send = 100;
+    (_ground select 0) params ["_obpos", "_name"];
+    private _send = 100;
     if (_strength > 1000) then {
         _send = 300;
     };
@@ -131,8 +123,7 @@ sleep 2;
 
 //Send tanks
 if ((_ground isNotEqualTo []) && (_strength > 1500) && (_popControl > 500)) then {
-    _obpos = (_ground select 0) select 0;
-    _name = (_ground select 0) select 1;
+    (_ground select 0) params ["_obpos", "_name"];
     [_obpos, _pos, 100, 0] spawn OT_fnc_NATOTankSupport;
     _strength = _strength - 500;
     diag_log format ["Overthrow: NATO Sent tank from %1 %2", _name, str _obpos];
@@ -142,10 +133,10 @@ sleep 2;
 //Send delayed APC in mid-game
 if (_popControl > 1000) then {
     {
-        _x params ["_obpos", "_name", "_pri"];
+        _x params ["_obpos", "_name"];
         if (_strength >= 200) then {
-            _dir = (_pos getDir _obpos);
-            _ao = [_pos, _dir] call OT_fnc_getAO;
+            private _dir = (_pos getDir _obpos);
+            private _ao = [_pos, _dir] call OT_fnc_getAO;
             [_obpos, _ao, _pos, 300] spawn OT_fnc_NATOAPCInsertion;
             diag_log format ["Overthrow: NATO Sent APC reinforcements from %1", _name];
             _strength = _strength - 200;
@@ -216,8 +207,8 @@ while {
     sleep 5;
     !_over;
 } do {
-    _alive = 0;
-    _enemy = 0;
+    private _alive = 0;
+    private _enemy = 0;
 
     private _unitsAO = [_pos, 200, 200, 0, false] nearEntities [["CAManBase"], false, true, true] select { !(_x getVariable ["ace_isunconscious", false]) };
     _alive = blufor countSide _unitsAO;
@@ -234,7 +225,7 @@ while {
 
     _progress = _progress + ((-20 max (_alive - _enemy)) min 10);
 
-    _progressPercent = 0;
+    private _progressPercent = 0;
     if (_progress isNotEqualTo 0) then { _progressPercent = _progress / 1500 };
     server setVariable ["QRFprogress", _progressPercent, true];
 
@@ -253,7 +244,7 @@ if (_progress > 0) then {
     {
         if (side _x isEqualTo blufor) then {
             if ((units _x) isNotEqualTo []) then {
-                _lead = (units _x) select 0;
+                private _lead = (units _x) select 0;
                 private _g = (_lead getVariable ["garrison", ""]);
                 if !(_g isEqualType "") then { _g = "HQ" };
                 if (_g isEqualTo "HQ") then {

@@ -1,6 +1,4 @@
-private _veh = _this select 0;
-private _pos = _this select 1;
-private _fnc = _this select 2;
+params ["_veh", "_pos", "_fnc"];
 if ((_fnc select [0, 6]) != "OT_fnc") then {
     //Legacy building Init
 

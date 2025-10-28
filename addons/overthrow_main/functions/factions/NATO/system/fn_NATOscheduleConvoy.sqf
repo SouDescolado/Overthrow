@@ -16,7 +16,7 @@ params ["_spend"];
 
 private _resources = server getVariable ["NATOresources", 2000];
 private _abandoned = server getVariable ["NATOabandoned", []];
-_schedule = server getVariable ["NATOschedule", []];
+private _schedule = server getVariable ["NATOschedule", []];
 
 private _start = selectRandom (OT_objectiveData + OT_airportData);
 _start params ["_startPos", "_startName"];
@@ -32,7 +32,7 @@ private _end = [];
 if (_end isNotEqualTo []) then {
     //Schedule a convoy
     private _id = format ["CONVOY%1", round (random 99999)];
-    _hour = (date select 3) + 2;
+    private _hour = (date select 3) + 2;
     if (_hour > 5 && _hour < 17) then {
         spawner setVariable ["NATOlastconvoy", time, false];
         _spend = _spend - 500;

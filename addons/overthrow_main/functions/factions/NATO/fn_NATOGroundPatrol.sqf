@@ -36,13 +36,13 @@ if !(_frombase in _abandoned) then {
     sleep 1;
     private _attackpos = _topos getPos [random 200, random 360];
 
-    _wp = _group addWaypoint [_attackpos, 50];
+    private _wp = _group addWaypoint [_attackpos, 50];
     _wp setWaypointType "SAD";
     _wp setWaypointBehaviour "SAFE";
     _wp setWaypointSpeed "FULL";
     _wp setWaypointTimeout [1200, 1200, 1200];
 
-    _timeout = time + 1200;
+    private _timeout = time + 1200;
 
     waitUntil {
         sleep 10;

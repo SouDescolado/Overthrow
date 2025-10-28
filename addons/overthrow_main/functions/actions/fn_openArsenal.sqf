@@ -9,8 +9,6 @@ private _magazines = [];
 private _items = ["ItemMap"];
 private _backpacks = [];
 
-private _closed = -1;
-
 private _missing = [];
 
 if (_target isEqualType "") then {
@@ -32,7 +30,7 @@ if (_target isEqualType "") then {
     // The items the unit has BEFORE they get to use the warehouse.
     private _oldUnitItems = uniqueUnitItems [_unit, 2, 2, 2, 2, true];
 
-    _closed = [
+    [
         "ace_arsenal_displayClosed",
         {
             _thisArgs params ["_unit", "_oldUnitItems"];
@@ -88,12 +86,12 @@ if (_target isEqualType "") then {
     _backpacks = backpackCargo _ammobox;
     _backpacks = _backpacks arrayIntersect _backpacks;
 
-    _closed = [
+    [
         "ace_arsenal_displayClosed",
         {
-            _thisArgs params ["_target", "_unit", "_ammobox"];
+            _thisArgs params ["", "_unit", "_ammobox"];
             private _ignore = [];
-            _boxstock = _ammobox call OT_fnc_unitStock;
+            private _boxstock = _ammobox call OT_fnc_unitStock;
             {
                 _x params [["_cls", ""], ["_count", 0]];
                 diag_log _cls;
@@ -130,7 +128,6 @@ if (_target isEqualType "") then {
                                 _count = 0;
                                 _missing pushBack _cls;
                             };
-                            _totake = _count - _boxAmount;
                             if (_cls isKindOf ["Default", configFile >> "CfgMagazines"]) exitWith {
                                 while { _count > _boxAmount } do {
                                     _count = _count - 1;

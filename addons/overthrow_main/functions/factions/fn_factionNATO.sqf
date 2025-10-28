@@ -1,8 +1,5 @@
 if (!isServer) exitWith {};
 
-private _abandoned = [];
-private _resources = 0;
-
 private _nextTurn = 30; //wait 30 seconds from game start until spending resources
 
 server setVariable ["NATOattacking", "", true];
@@ -20,8 +17,8 @@ publicVariable "OT_nextNATOTurn";
         private _numplayers = count (allPlayers - (entities "HeadlessClient_F"));
         if (_numplayers > 0) then {
             private _countered = (server getVariable ["NATOattacking", ""]) isNotEqualTo "";
-            _knownTargets = spawner getVariable ["NATOknownTargets", []];
-            _schedule = server getVariable ["NATOschedule", []];
+            private _knownTargets = spawner getVariable ["NATOknownTargets", []];
+            private _schedule = server getVariable ["NATOschedule", []];
             private _popControl = call OT_fnc_getControlledPopulation;
             private _diff = server getVariable ["OT_difficulty", 1];
 
@@ -31,7 +28,7 @@ publicVariable "OT_nextNATOTurn";
                 private _idx = -1;
                 private _remove = [];
                 {
-                    _x params ["_id", "_ty", "_p1", "_p2", "_hour"];
+                    private _hour = _x select 4;
                     if (!isNil "_hour" && _hour < 23 && _hour == (date select 3)) exitWith {
                         _remove pushBack _forEachIndex;
                         _idx = _forEachIndex;
@@ -42,9 +39,9 @@ publicVariable "OT_nextNATOTurn";
                 if (_idx > -1) then {
                     _item params ["_id", "_mission", "_p1", "_p2"];
                     if (_mission isEqualTo "CONVOY") then {
-                        _vehtypes = [];
-                        _numveh = round (random 2) + 2;
-                        _count = 0;
+                        private _vehtypes = [];
+                        private _numveh = round (random 2) + 2;
+                        private _count = 0;
                         while { _count < _numveh } do {
                             _count = _count + 1;
                             _vehtypes pushBack (selectRandom OT_NATO_Vehicles_Convoy);
@@ -90,17 +87,15 @@ publicVariable "OT_nextNATOTurn";
             if (time >= OT_nextNATOTurn && !_countered) then {
                 OT_lastNATOTurn = time;
                 publicVariable "OT_lastNATOTurn";
-                _lastAttack = time - (server getVariable ["NATOlastattack", 0]);
-                _resourceGain = server getVariable ["NATOresourceGain", 0];
+                private _resourceGain = server getVariable ["NATOresourceGain", 0];
                 //NATO turn
-                _nextTurn = OT_NATOwait + random OT_NATOwait;
+                private _nextTurn = OT_NATOwait + random OT_NATOwait;
                 OT_nextNATOTurn = time + _nextTurn;
                 publicVariable "OT_nextNATOTurn";
 
-                _count = 0;
-                _chance = 98;
-                _gain = 75;
-                _mul = 50;
+                private _chance = 98;
+                private _gain = 75;
+                private _mul = 50;
                 if (_diff > 1) then {
                     _gain = 150;
                     _mul = 100;
@@ -116,7 +111,7 @@ publicVariable "OT_nextNATOTurn";
                 _gain = _gain + (5 * count ([] call CBA_fnc_players)); // 5 extra resources per player in-game
 
                 // Recover resources
-                _resources = server getVariable ["NATOresources", 2000];
+                private _resources = server getVariable ["NATOresources", 2000];
                 _resources = _resources + _gain + _resourceGain + ((round (_popControl * 0.01)) * _mul);
                 server setVariable ["NATOresources", _resources];
 
@@ -130,7 +125,7 @@ publicVariable "OT_nextNATOTurn";
 
                 //Decide on spend
                 _resources = server getVariable ["NATOresources", 2000];
-                _spend = 0;
+                private _spend = 0;
                 if (_resources > 500) then {
                     _spend = 500;
                 };
@@ -172,7 +167,7 @@ publicVariable "OT_nextNATOTurn";
                 };
 
                 //Send a ground patrol
-                private _last = spawner getVariable ["NATOlastpatrol", 0];
+                _last = spawner getVariable ["NATOlastpatrol", 0];
                 if ((time - _last) > 1200 && _spend > 150) then {
                     _spend = [_spend, _chance] call OT_fnc_NATOsendGroundPatrol;
                 };
@@ -198,8 +193,8 @@ publicVariable "OT_nextNATOTurn";
                 _spend = [_spend, _chance] call OT_fnc_NATOupgradeFOBs;
             };
             //Finish
-            _resources = server getVariable ["NATOresources", 2000];
-            _limit = 3000;
+            private _resources = server getVariable ["NATOresources", 2000];
+            private _limit = 3000;
             if (_diff > 0 && _popControl > 1000) then { _limit = _limit + 500 };
             if (_diff > 1 && _popControl > 1000) then { _limit = _limit + 500 };
             if (_popControl > 2000) then { _limit = _limit + 500 };
@@ -211,7 +206,7 @@ publicVariable "OT_nextNATOTurn";
             private _abandoned = server getVariable ["NATOabandoned", []];
             server setVariable ["NATOabandoned", _abandoned, true];
 
-            private _knownTargets = spawner getVariable ["NATOknownTargets", []];
+            _knownTargets = spawner getVariable ["NATOknownTargets", []];
             spawner setVariable ["NATOknownTargets", _knownTargets, true];
 
             server setVariable ["NATOschedule", _schedule, true];

@@ -5,7 +5,7 @@ disableSerialization;
 private _id = _ctrl lbData _index;
 private _s = _id splitString "-";
 _s params ["_cls", "_qty"];
-private _qty = parseNumber _qty;
+_qty = parseNumber _qty;
 private _def = [];
 {
     _x params ["_c", "_r", "_q"];
@@ -20,7 +20,7 @@ if (_def isNotEqualTo []) then {
     private _recipeText = "";
     {
         _x params ["_rcls", "_rqty"];
-        _name = _rcls call {
+        private _name = _rcls call {
             params ["_rcls"];
             if (_rcls isEqualTo "Uniform_Base") exitWith { "Clothing" }; // allows hierarchy w/o display name to have display name in recipe menu
             if (_rcls isEqualTo "CA_LauncherMagazine") exitWith { "Rocket" };

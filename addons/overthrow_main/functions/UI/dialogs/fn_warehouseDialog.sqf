@@ -1,7 +1,7 @@
 buttonSetAction [1604, '[] spawn OT_fnc_warehouseDialog'];
 private _cursel = lbCurSel 1500;
 lbClear 1500;
-_SearchTerm = ctrlText 1700;
+private _SearchTerm = ctrlText 1700;
 
 private _warehouse = [player] call OT_fnc_nearestWarehouse;
 if (_warehouse == objNull) exitWith { hint "No warehouse near by!" };

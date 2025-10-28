@@ -2,7 +2,6 @@ if (!isServer) exitWith {};
 if (count (vehicles) > 200) exitWith {};
 if (OT_spawnVehiclePercentage isEqualTo 0) exitWith {};
 sleep random 1;
-private _count = 0;
 
 params ["_town", "_spawnid"];
 private _posTown = server getVariable _town;
@@ -28,24 +27,24 @@ if (_numVeh > 6) then { _numVeh = 6 };
 private _loops = 0;
 while { (_count < _numVeh) && (_loops < 50) } do {
     private _start = [[[_posTown, _mSize]]] call BIS_fnc_randomPos;
-    _roads = _start nearRoads 75;
+    private _roads = _start nearRoads 75;
     if (_roads isNotEqualTo []) then {
-        _road = _roads select 0;
-        _pos = getPosATL _road;
-        _vehtype = "";
+        private _road = _roads select 0;
+        private _pos = getPosATL _road;
+        private _vehtype = "";
         if (_pop > 600) then {
             _vehtype = selectRandom (OT_vehTypes_civ - OT_vehTypes_civignore);
         } else {
             _vehtype = OT_vehTypes_civ selectRandomWeighted OT_vehWeights_civ;
         };
         if !(_vehtype in OT_vehTypes_civignore) then {
-            _dirveh = 0;
-            _roadscon = roadsConnectedTo _road;
+            private _dirveh = 0;
+            private _roadscon = roadsConnectedTo _road;
             if (count _roadscon isEqualTo 2) then {
                 _dirveh = (_road getDir (_roadscon select 0));
                 if (isNil "_dirveh") then { _dirveh = random 359 };
-                _posVeh = _pos getPos [6, _dirveh + 90];
-                _posEmpty = _posVeh findEmptyPosition [4, 15, _vehtype];
+                private _posVeh = _pos getPos [6, _dirveh + 90];
+                private _posEmpty = _posVeh findEmptyPosition [4, 15, _vehtype];
                 //dont bother if the position isnt empty for 4m
                 if (_posEmpty isEqualTo []) then {
                     _posVeh = [];
@@ -53,7 +52,7 @@ while { (_count < _numVeh) && (_loops < 50) } do {
                     if ((_posVeh distance _posEmpty) > 4) then { _posVeh = [] };
                 };
                 if (_posVeh isNotEqualTo []) then {
-                    _veh = _vehtype createVehicle _posEmpty;
+                    private _veh = _vehtype createVehicle _posEmpty;
                     _veh setVariable ["ambient", true, true];
                     clearItemCargoGlobal _veh;
                     _veh setFuel (0.2 + (random 0.5));
@@ -62,25 +61,25 @@ while { (_count < _numVeh) && (_loops < 50) } do {
                     _count = _count + 1;
 
                     if ((random 100) > 90 && (count allUnits < 300)) then {
-                        _group = createGroup civilian;
+                        private _group = createGroup civilian;
                         _group setVariable ["lambs_danger_disableGroupAI", true];
                         _groups pushBack _group;
-                        _civ = _group createUnit [OT_civType_local, _pos, [], 0, "NONE"];
+                        private _civ = _group createUnit [OT_civType_local, _pos, [], 0, "NONE"];
                         _civ setBehaviour "SAFE";
                         [_civ] call OT_fnc_initCivilian;
                         [_civ, call OT_fnc_randomLocalIdentity] call OT_fnc_applyIdentity;
                         _civ moveInDriver _veh;
 
-                        _region = server getVariable format ["region_%1", _town];
-                        _moveto = _posVeh;
+                        private _region = server getVariable format ["region_%1", _town];
+                        private _moveto = _posVeh;
                         if (isNil "_region") then {
                             _moveto = _posVeh call OT_fnc_getRandomRoadPosition;
                         } else {
-                            _dest = selectRandom (server getVariable format ["towns_%1", _region]);
+                            private _dest = selectRandom (server getVariable format ["towns_%1", _region]);
                             _moveto = _dest call OT_fnc_getRandomRoadPosition;
                         };
 
-                        _wp = _group addWaypoint [_moveto, 0];
+                        private _wp = _group addWaypoint [_moveto, 0];
 
                         _wp setWaypointType "MOVE";
                         _wp setWaypointSpeed "LIMITED";

@@ -106,14 +106,14 @@ private _hasList_buildableHouses = false;
             if (isNil "_x") then { continue };
             _x params ["_pos", "_name", "_owner"];
 
-            _veh = createVehicle [OT_flag_IND, _pos, [], 0, "CAN_COLLIDE"];
+            private _veh = createVehicle [OT_flag_IND, _pos, [], 0, "CAN_COLLIDE"];
 
             _veh enableDynamicSimulation true;
             [_veh, _owner] call OT_fnc_setOwner;
             _veh = createVehicle ["Land_ClutterCutter_large_F", _pos, [], 0, "CAN_COLLIDE"];
             _veh enableDynamicSimulation true;
 
-            _mrkid = format ["%1-base", _pos];
+            private _mrkid = format ["%1-base", _pos];
             createMarkerLocal [_mrkid, _pos];
             _mrkid setMarkerShapeLocal "ICON";
             _mrkid setMarkerTypeLocal "mil_Flag";
@@ -162,7 +162,7 @@ private _hasList_buildableHouses = false;
                     params ["_itemClassL", "_itemData"];
                     if (isNil "_x") then { continue };
                     if (_itemData isEqualType []) then {
-                        _itemData params ["_cls", ["_num", 0, [0]]];
+                        _itemData params ["", ["_num", 0, [0]]];
                         if (_num > 0) then {
                             warehouse setVariable [format ["item_%1", _itemClassL], _itemData, true];
                         };
@@ -201,26 +201,25 @@ private _hasList_buildableHouses = false;
     };
     if (_key == "vehicles") then {
         _set = false;
-        _ccc = 0;
+        private _ccc = 0;
         {
             if (isNil "_x") then { continue };
-            _type = _x select 0;
+            private _type = _x select 0;
             if (_type isEqualTo "Land_MapBoard_F") then {
                 //Backwards-compatability map upgrade for old saves
                 _type = OT_item_Map;
             };
             if !(_type isKindOf "CAManBase") then {
-                _pos = ((_x select 1) # 0);
-                _simulation = ((_x select 1) # 1);
-                _posFormat = (_x select 1) param [2, 0]; // Assume format 0 by default (posATL)
-                _dir = _x select 2;
-                _stock = _x select 3;
-                _owner = _x select 4;
-                _name = "";
+                private _pos = ((_x select 1) # 0);
+                private _posFormat = (_x select 1) param [2, 0]; // Assume format 0 by default (posATL)
+                private _dir = _x select 2;
+                private _stock = _x select 3;
+                private _owner = _x select 4;
+                private _name = "";
                 if (count _x > 5) then {
                     _name = _x select 5;
                 };
-                _veh = createVehicle [_type, [0, 0, 1000], [], 0, "CAN_COLLIDE"];
+                private _veh = createVehicle [_type, [0, 0, 1000], [], 0, "CAN_COLLIDE"];
                 if !(_type isKindOf "LandVehicle" || _type isKindOf "Air" || _type isKindOf "Ship") then {
                     _veh enableDynamicSimulation true;
                 };
@@ -239,7 +238,7 @@ private _hasList_buildableHouses = false;
                     if !(_veh isKindOf "Building") then {
                         _veh setFuel _fuel;
                         {
-                            _d = (_dmg select 2) select _forEachIndex;
+                            private _d = (_dmg select 2) select _forEachIndex;
                             if (_d > 0) then {
                                 _veh setHitPointDamage [_x, _d, false];
                             };
@@ -254,14 +253,13 @@ private _hasList_buildableHouses = false;
                         };
                         if (count (_x select 7) > 4) then {
                             //Ammo
-                            _ammo = (_x select 7) select 4;
                             {
                                 _veh setAmmo [_x select 0, _x select 1];
                             } forEach ((_x select 7) select 4);
                         };
                         if (count (_x select 7) > 5) then {
                             //Attached
-                            _a = (_x select 7) select 5;
+                            private _a = (_x select 7) select 5;
                             if (_a isNotEqualTo []) then {
                                 _a params ["_attached", "_am"];
                                 _veh setVariable ["OT_attachedClass", _attached, true];
@@ -307,7 +305,7 @@ private _hasList_buildableHouses = false;
                     _veh setVectorDirAndUp _dir;
                 };
                 if (_type isKindOf "Building") then {
-                    _clu = createVehicle ["Land_ClutterCutter_large_F", _pos, [], 0, "CAN_COLLIDE"];
+                    private _clu = createVehicle ["Land_ClutterCutter_large_F", _pos, [], 0, "CAN_COLLIDE"];
                     _clu enableDynamicSimulation true;
                 };
 
@@ -359,7 +357,7 @@ private _hasList_buildableHouses = false;
                 } forEach (_stock);
 
                 if (count _x > 6) then {
-                    _code = (_x select 6);
+                    private _code = (_x select 6);
                     if (_code != "") then {
                         [_veh, getPos _veh, _code] call OT_fnc_initBuilding;
                     };
@@ -367,8 +365,8 @@ private _hasList_buildableHouses = false;
                 };
 
                 if (_type isEqualTo OT_policeStation) then {
-                    _town = _pos call OT_fnc_nearestTown;
-                    _mrkid = format ["%1-police", _town];
+                    private _town = _pos call OT_fnc_nearestTown;
+                    private _mrkid = format ["%1-police", _town];
                     createMarkerLocal [_mrkid, _pos];
                     _mrkid setMarkerShapeLocal "ICON";
                     _mrkid setMarkerTypeLocal "o_installation";
@@ -377,7 +375,7 @@ private _hasList_buildableHouses = false;
                 };
 
                 if (_type isEqualTo OT_warehouse) then {
-                    _mrkid = format ["bdg-%1", _veh];
+                    private _mrkid = format ["bdg-%1", _veh];
                     createMarkerLocal [_mrkid, _pos];
                     _mrkid setMarkerShapeLocal "ICON";
                     _mrkid setMarkerTypeLocal "OT_warehouse";
@@ -386,7 +384,7 @@ private _hasList_buildableHouses = false;
                 };
 
                 if (_type isEqualTo OT_item_tent) then {
-                    _mrkid = format ["%1-camp", _owner];
+                    private _mrkid = format ["%1-camp", _owner];
                     createMarkerLocal [_mrkid, _pos];
                     _mrkid setMarkerShapeLocal "ICON";
                     _mrkid setMarkerTypeLocal "ot_Camp";
@@ -464,11 +462,11 @@ sleep 0.3;
 
 {
     if (isNil "_x") then { continue };
-    _pos = _x select 0;
-    _code = format ["fob%1", _pos];
-    _garrison = server getVariable [format ["resgarrison%1", _code], []];
+    private _pos = _x select 0;
+    private _code = format ["fob%1", _pos];
+    private _garrison = server getVariable [format ["resgarrison%1", _code], []];
     if (_garrison isNotEqualTo []) then {
-        _group = createGroup independent;
+        private _group = createGroup independent;
         spawner setVariable [format ["resgarrison%1", _code], _group, true];
         {
             _x params ["_cls", "_loadout"];
@@ -493,17 +491,17 @@ sleep 0.3;
     _mrkid setMarkerColorLocal "ColorWhite";
     _mrkid setMarkerAlphaLocal 1;
     _mrkid setMarkerText (_x select 1);
-    _veh = OT_flag_IND createVehicle _pos;
+    private _veh = OT_flag_IND createVehicle _pos;
     [_veh, (server getVariable ["generals", [getPlayerUID player]]) select 0] call OT_fnc_setOwner;
 } forEach (server getVariable ["bases", []]);
 
 {
     if (isNil "_x") then { continue };
-    _pos = _x select 0;
-    _code = _x select 1;
-    _garrison = server getVariable [format ["resgarrison%1", _code], []];
+    private _pos = _x select 0;
+    private _code = _x select 1;
+    private _garrison = server getVariable [format ["resgarrison%1", _code], []];
     if (_garrison isNotEqualTo []) then {
-        _group = createGroup independent;
+        private _group = createGroup independent;
         spawner setVariable [format ["resgarrison%1", _code], _group, true];
         {
             _x params ["_cls", "_loadout"];
@@ -529,8 +527,8 @@ private _revealed = server getVariable ["revealedGangs", []];
     private _gang = OT_civilians getVariable [format ["gang%1", _x], []];
 
     if (_gang isNotEqualTo []) then {
-        _mrkid = format ["gang%1", _gang select 2];
-        _mrk = createMarkerLocal [_mrkid, _gang select 4];
+        private _mrkid = format ["gang%1", _gang select 2];
+        createMarkerLocal [_mrkid, _gang select 4];
         _mrkid setMarkerTypeLocal "ot_Camp";
         _mrkid setMarkerColor "colorOPFOR";
     };
@@ -550,16 +548,16 @@ private _built = (allMissionObjects "Static");
             {
                 if (false /*typename _x isEqualTo "ARRAY"*/ ) then {
                     //old save with positions
-                    _buildings = (_x nearObjects ["Building", 8]);
+                    private _buildings = (_x nearObjects ["Building", 8]);
                     if (_buildings isNotEqualTo []) then {
-                        _bdg = _buildings select 0;
+                        private _bdg = _buildings select 0;
                         [_bdg, _uid] call OT_fnc_setOwner;
                     };
                 } else {
                     [_x, _uid] call OT_fnc_setOwner;
 
-                    _pos = buildingpositions getVariable [_x, []];
-                    _bdg = objNull;
+                    private _pos = buildingpositions getVariable [_x, []];
+                    private _bdg = objNull;
                     if (_pos isEqualTo []) then {
                         _bdg = OT_centerPos nearestObject parseNumber _x;
                         buildingpositions setVariable [_x, getPos _bdg, true];

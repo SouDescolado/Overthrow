@@ -11,8 +11,6 @@ private _sellcls = lbData [1500, _idx];
 if (isNil "_sellcls" || { _sellcls isEqualTo "" }) exitWith { OT_selling = false };
 
 private _price = [_town, _sellcls, _standing] call OT_fnc_getSellPrice;
-private _done = false;
-private _mynum = 0;
 
 if (isNil "_price") exitWith { OT_selling = false };
 
@@ -56,7 +54,7 @@ if ((player getVariable ["OT_shopTarget", "Self"]) isEqualTo "Vehicle") then {
     if (_qty > 0) then {
         //still need to find more items in backpacks, uniforms etc
         {
-            _x params ["_itemcls", "_item"];
+            _x params ["", "_item"];
             {
                 private _c = _x;
                 private _q = _y;

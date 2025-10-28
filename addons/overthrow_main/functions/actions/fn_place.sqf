@@ -98,8 +98,8 @@ if (_cost > 0) then {
         2
     ] call OT_fnc_dynamicText;
 
-    _keyhandler = {
-        params ["_ctrl", "_key", "_shift", "_ctrlKey", "_alt"];
+    private _keyhandler = {
+        params ["", "_key", "_shift"];
 
         private _dir = modeRotation;
         if (_key isEqualTo 19) exitWith {
@@ -245,9 +245,9 @@ if (_cost > 0) then {
                 _mrkid setMarkerColorLocal "ColorWhite";
                 _mrkid setMarkerAlphaLocal 1;
                 _mrkid setMarkerText format ["Camp %1", name player];
-                _builder = name player;
+                private _builder = name player;
                 {
-                    _desc = (getPos modeTarget) call BIS_fnc_locationDescription;
+                    private _desc = (getPos modeTarget) call BIS_fnc_locationDescription;
                     [_x, format ["New Camp %1", _desc], format ["%1 placed a camp %2", _builder, _desc]] call BIS_fnc_createLogRecord;
                 } forEach ([] call CBA_fnc_players);
             };

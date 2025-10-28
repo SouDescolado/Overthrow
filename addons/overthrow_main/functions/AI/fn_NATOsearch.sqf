@@ -133,15 +133,13 @@ if ((_target distance _posnow) > 2) exitWith {
     [_target] call OT_fnc_revealToNATO;
 };
 
-private _msg = "";
-
 if (isPlayer _target) then {
     private _foundillegal = false;
     private _foundweapons = false;
     {
-        _cls = _x select 0;
+        private _cls = _x select 0;
         if (_cls in OT_allWeapons + OT_allMagazines + OT_illegalHeadgear + OT_illegalVests + OT_allStaticBackpacks + OT_allOptics) then {
-            _count = _x select 1;
+            private _count = _x select 1;
             for "_i" from 1 to _count do {
                 _target removeItem _cls;
                 _cop addItem _cls;
@@ -149,7 +147,7 @@ if (isPlayer _target) then {
             _foundweapons = true;
         };
         if (_cls in OT_illegalItems) then {
-            _count = _x select 1;
+            private _count = _x select 1;
             for "_i" from 1 to _count do {
                 _target removeItem _cls;
                 _cop addItem _cls;
@@ -169,14 +167,13 @@ if (isPlayer _target) then {
         } else {
             if (isPlayer _target) then {
                 private _stealth = _target getVariable ["OT_stealth", 1];
-                _chance = 100;
+                private _chance = 100;
                 if (_stealth > 1) then {
                     _chance = 100 - (_stealth * 20);
                 };
                 if ((random 100) < _chance) then {
                     [_cop, "We found some illegal items and confiscated them, be on your way"] remoteExec ["globalChat", _target, false];
                     "NATO confiscated illegal items" remoteExecCall ["hint", _target, false];
-                    private _town = _target call OT_fnc_nearestTown;
                 } else {
                     [_cop, "Thank you for your co-operation"] remoteExec ["globalChat", _target, false];
                 };

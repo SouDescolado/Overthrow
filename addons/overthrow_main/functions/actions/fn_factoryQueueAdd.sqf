@@ -7,10 +7,10 @@ if (_idx isEqualTo -1) exitWith {};
 private _cls = lbData [1500, _idx];
 
 private _queueitem = [_cls, 0];
-_doadd = true;
+private _doadd = true;
 
 if (_queue isNotEqualTo []) then {
-    _i = _queue select -1;
+    private _i = _queue select -1;
     if ((_i select 0) isEqualTo _cls) then {
         _queueitem = _i;
         _doadd = false;

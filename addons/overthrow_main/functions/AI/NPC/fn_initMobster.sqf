@@ -1,5 +1,4 @@
-private ["_unit", "_numslots", "_weapon", "_magazine", "_base", "_config"];
-_unit = _this;
+private _unit = _this;
 
 _unit setVariable ["mobster", true, false];
 
@@ -11,8 +10,7 @@ private _fullname = [format ["%1 %2", _firstname, _lastname], _firstname, _lastn
 _unit addEventHandler [
     "HandleDamage",
     {
-        _me = _this select 0;
-        _src = _this select 3;
+        private _src = _this select 3;
         if (captive _src) then {
             if (!isNull objectParent _src || (_src call OT_fnc_unitSeenCRIM)) then {
                 _src setCaptive false;
@@ -43,7 +41,7 @@ if (OT_hasTFAR) then {
 } else {
     _unit linkItem "ItemRadio";
 };
-_hour = date select 3;
+private _hour = date select 3;
 if (_hour < 8 || _hour > 15) then {
     _unit linkItem "O_NVGoggles_ghex_F";
 };
@@ -55,7 +53,7 @@ if ((random 100) < 15) then {
     _unit addItem "OT_Ganja";
 };
 
-_weapon = selectRandom (OT_CRIM_Weapons);
+private _weapon = selectRandom (OT_CRIM_Weapons);
 
 _unit addWeaponGlobal _weapon;
 
@@ -64,9 +62,9 @@ _unit addWeaponGlobal _weapon;
     if ((random 100) > 98) exitWith {
         //This guy has a launcher
         _unit addBackpack (selectRandom OT_allBackpacks);
-        _launcher = OT_CRIM_Launchers select 0;
-        _base = [_launcher] call BIS_fnc_baseWeapon;
-        _magazine = selectRandom (getArray (configFile >> "CfgWeapons" >> _base >> "magazines"));
+        private _launcher = OT_CRIM_Launchers select 0;
+        private _base = [_launcher] call BIS_fnc_baseWeapon;
+        private _magazine = selectRandom (getArray (configFile >> "CfgWeapons" >> _base >> "magazines"));
         _unit addMagazine _magazine;
         _unit addMagazine _magazine;
         _unit addMagazine _magazine;
@@ -103,8 +101,8 @@ _unit addWeaponGlobal _weapon;
     };
 };
 
-_base = [_weapon] call BIS_fnc_baseWeapon;
-_magazine = selectRandom (getArray (configFile >> "CfgWeapons" >> _base >> "magazines"));
+private _base = [_weapon] call BIS_fnc_baseWeapon;
+private _magazine = selectRandom (getArray (configFile >> "CfgWeapons" >> _base >> "magazines"));
 _unit addMagazine _magazine;
 _unit addMagazine _magazine;
 _unit addMagazine _magazine;
@@ -125,13 +123,13 @@ if ((random 100) > 90) then {
     _unit addItem "ACE_M84";
 };
 
-_config = configFile >> "CfgWeapons" >> _weapon >> "WeaponSlotsInfo";
-_numslots = count (_config);
+private _config = configFile >> "CfgWeapons" >> _weapon >> "WeaponSlotsInfo";
+private _numslots = count (_config);
 for "_i" from 0 to (_numslots - 1) do {
     if (isClass (_config select _i)) then {
-        _slot = configName (_config select _i);
-        _com = _config >> _slot >> "compatibleItems";
-        _items = [];
+        private _slot = configName (_config select _i);
+        private _com = _config >> _slot >> "compatibleItems";
+        private _items = [];
         if (isClass (_com)) then {
             for "_t" from 0 to (count (_com) - 1) do {
                 _items pushBack (configName (_com select _t));
@@ -140,7 +138,7 @@ for "_i" from 0 to (_numslots - 1) do {
             _items = getArray (_com);
         };
         if (_items isNotEqualTo []) then {
-            _cls = selectRandom _items;
+            private _cls = selectRandom _items;
             _unit addPrimaryWeaponItem _cls;
         };
     };

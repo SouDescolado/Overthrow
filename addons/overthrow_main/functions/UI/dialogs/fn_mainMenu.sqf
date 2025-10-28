@@ -67,24 +67,20 @@ _ctrl ctrlSetStructuredText parseText format [
 ];
 
 //Nearest building info
-_b = player call OT_fnc_nearestRealEstate;
-_buildingTxt = "";
+private _b = player call OT_fnc_nearestRealEstate;
+private _buildingTxt = "";
 
 if (_b isEqualType []) then {
-    _building = _b select 0;
-    _price = _b select 1;
-    _sell = _b select 2;
-    _lease = _b select 3;
-    _totaloccupants = _b select 4;
+    _b params ["_building", "_price", "_sell", "_lease"];
 
-    _cls = typeOf _building;
+    private _cls = typeOf _building;
     ([_cls, true] call OT_fnc_getClassDisplayInfo) params ["_pic", "_name"];
 
     ctrlSetText [1201, _pic];
 
     if (_building call OT_fnc_hasOwner) then {
-        _owner = _building call OT_fnc_getOwner;
-        _ownername = players_NS getVariable format ["name%1", _owner];
+        private _owner = _building call OT_fnc_getOwner;
+        private _ownername = players_NS getVariable format ["name%1", _owner];
         if (isNil "_ownername") then { _ownername = "Someone" };
 
         if (_cls isEqualTo OT_warehouse) exitWith {
@@ -114,8 +110,8 @@ if (_b isEqualType []) then {
         };
 
         if (_owner isEqualTo getPlayerUID player) then {
-            _leased = player getVariable ["leased", []];
-            _id = [_building] call OT_fnc_getBuildID;
+            private _leased = player getVariable ["leased", []];
+            private _id = [_building] call OT_fnc_getBuildID;
             if (_id in _leased) then {
                 _ownername = format ["%1 (Leased)", _ownername];
             };
@@ -244,7 +240,7 @@ if (_b isEqualType []) then {
         };
 
         if (_cls isEqualTo OT_flag_IND) then {
-            _base = [];
+            private _base = [];
             {
                 if ((_x select 0) distance _building < 5) exitWith { _base = _x };
             } forEach (server getVariable ["bases", []]);
@@ -319,9 +315,9 @@ if (_b isEqualType []) then {
     };
 
     if (_cls isEqualTo OT_policeStation) then {
-        _owner = _building call OT_fnc_getOwner;
+        private _owner = _building call OT_fnc_getOwner;
         if (!isNil "_owner") then {
-            _ownername = players_NS getVariable format ["name%1", _owner];
+            private _ownername = players_NS getVariable format ["name%1", _owner];
             ctrlSetText [1608, "Sell"];
             ctrlEnable [1608, false];
             ctrlSetText [1609, "Manage"];
@@ -339,9 +335,9 @@ if (_b isEqualType []) then {
     };
 
     if (_cls isEqualTo "Land_Cargo_House_V4_F") then {
-        _owner = _building call OT_fnc_getOwner;
+        private _owner = _building call OT_fnc_getOwner;
         if (!isNil "_owner") then {
-            _ownername = players_NS getVariable format ["name%1", _owner];
+            private _ownername = players_NS getVariable format ["name%1", _owner];
             ctrlSetText [1608, "Sell"];
             ctrlEnable [1608, false];
             ctrlEnable [1609, false];
@@ -378,7 +374,7 @@ if (_b isEqualType []) then {
     ctrlEnable [1610, false];
 };
 private _areaText = "";
-_areatxtctrl = (findDisplay 8001) displayCtrl 1101;
+private _areatxtctrl = (findDisplay 8001) displayCtrl 1101;
 private _ob = player call OT_fnc_nearestObjective;
 _ob params ["_obpos", "_obname"];
 if (_obpos distance player < 250) then {
@@ -423,7 +419,7 @@ if (_obpos distance player < 250) then {
                 ctrlEnable [1620, false];
                 ctrlEnable [1621, false];
             } else {
-                _price = _obname call OT_fnc_getBusinessPrice;
+                private _price = _obname call OT_fnc_getBusinessPrice;
                 ctrlSetText [1201, "\overthrow_main\ui\closed.paa"];
                 _areaText = format [
                     "
@@ -458,7 +454,7 @@ if (_obpos distance player < 250) then {
                 ctrlSetText [1620, "Manage"];
                 ctrlEnable [1621, false];
             } else {
-                _price = _obname call OT_fnc_getBusinessPrice;
+                private _price = _obname call OT_fnc_getBusinessPrice;
                 _areaText = format [
                     "
 					<t align='left' size='0.8'>%1</t><br/>
@@ -477,7 +473,7 @@ if (_obpos distance player < 250) then {
                 };
             };
         } else {
-            _base = player call OT_fnc_nearestBase;
+            private _base = player call OT_fnc_nearestBase;
             if !(isNil "_base" && { (_base select 0) distance player < 100 }) then {
                 ctrlEnable [1621, true];
             } else {
@@ -493,7 +489,7 @@ _areatxtctrl ctrlSetStructuredText parseText _areaText;
 OT_interactingWith = objNull;
 _buildingtextctrl ctrlSetStructuredText parseText _buildingTxt;
 
-_notifytxtctrl = (findDisplay 8001) displayCtrl 1150;
+private _notifytxtctrl = (findDisplay 8001) displayCtrl 1150;
 
 private _notifications = [];
 private _opacityList = ["FF", "EF", "DF", "CF", "BF", "AF", "9F", "8F", "7F", "6F", "5F", "4F", "3F", "2F", "1F", "0F"];
@@ -502,5 +498,5 @@ for "_x" from 0 to (count OT_notifyHistory - 1) do {
     _notifications pushBack (format ["<t size='0.7' align='left' color='#%1FFFFFF'>%2</t>", _opacityList select _x, OT_notifyHistory select (-1 - _x)]);
 };
 
-_txt = _notifications joinString "<br/>";
+private _txt = _notifications joinString "<br/>";
 _notifytxtctrl ctrlSetStructuredText parseText _txt;

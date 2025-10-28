@@ -52,7 +52,7 @@ private _abandoned = server getVariable ["NATOabandoned", []];
                 private _added = false;
                 _x params ["_ty", "_pos", "_pri", "_obj"];
                 {
-                    _o = _x select 3;
+                    private _o = _x select 3;
                     if (_o isEqualTo _obj) then {
                         _added = true;
                     };

@@ -36,7 +36,7 @@ if (_lowest isNotEqualTo "") then {
 
         private _fobsNear = false;
         {
-            _pb = _x select 0;
+            private _pb = _x select 0;
             if (_pb distance2D _pos < 500) then {
                 _fobsNear = true;
             };

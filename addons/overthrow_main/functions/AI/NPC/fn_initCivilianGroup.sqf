@@ -9,8 +9,6 @@ _g setVariable ["lambs_danger_disableGroupAI", true];
 
 _g setBehaviour "SAFE";
 
-private _start = getPosATL ((units _g) select 0);
-if (isNil "_start") exitWith {};
 private _town = (leader _g) getVariable "hometown";
 if (isNil "_town") then { _town = (leader _g) call OT_fnc_nearestTown };
 
@@ -19,7 +17,7 @@ private _activeshops = server getVariable [format ["activeshopsin%1", _town], []
 private _dest = [];
 
 if (_activeshops isNotEqualTo [] && (random 100) > 50) then {
-    _shop = selectRandom _activeshops;
+    private _shop = selectRandom _activeshops;
     _dest = (_shop select 0) findEmptyPosition [3, 50, OT_civType_local];
 } else {
     _dest = _town call OT_fnc_getRandomRoadPosition;

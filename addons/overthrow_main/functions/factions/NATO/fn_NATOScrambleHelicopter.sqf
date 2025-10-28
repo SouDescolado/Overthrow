@@ -47,13 +47,13 @@ if !(isNil "_from") then {
     private _dir = (_targetpos getDir _frompos);
     private _attackpos = _targetpos getPos [(100 + random 300), _dir];
 
-    _wp = _group addWaypoint [_attackpos, 50];
+    private _wp = _group addWaypoint [_attackpos, 50];
     _wp setWaypointType "SAD";
     _wp setWaypointBehaviour "COMBAT";
     _wp setWaypointSpeed "FULL";
     _wp setWaypointTimeout [500, 600, 700];
 
-    _timeout = time + 600;
+    private _timeout = time + 600;
 
     waitUntil {
         sleep 10;

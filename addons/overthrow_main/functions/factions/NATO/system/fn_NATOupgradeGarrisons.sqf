@@ -20,8 +20,8 @@ private _abandoned = server getVariable ["NATOabandoned", []];
 {
     _x params ["_pos", "_name", "_pri"];
     if !(_name in _abandoned) then {
-        _garrison = server getVariable [format ["garrison%1", _name], 0];
-        _max = 8;
+        private _garrison = server getVariable [format ["garrison%1", _name], 0];
+        private _max = 8;
         if (_pri > 300) then {
             _max = 12;
         };

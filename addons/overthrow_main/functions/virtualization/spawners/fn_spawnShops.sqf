@@ -1,6 +1,3 @@
-private ["_id", "_pos", "_building", "_tracked", "_vehs", "_group", "_all", "_shopkeeper", "_groups"];
-
-private _hour = date select 3;
 params ["_town", "_spawnid"];
 
 private _activeshops = server getVariable [format ["activeshopsin%1", _town], []];
@@ -18,8 +15,7 @@ if (_activeshops isNotEqualTo []) exitWith {
     {
         //find building for active shop
         _x params ["_pos", "_category"];
-        private _pos = _x select 0;
-        _building = nearestBuilding _pos;
+        private _building = nearestBuilding _pos;
 
         //set start location based on building config
         private _start = _building buildingPos getNumber (configOf _building >> "ot_shopPos");
@@ -39,7 +35,7 @@ if (_activeshops isNotEqualTo []) exitWith {
         } forEach (_vehs);
 
         //create shopkeeper as member of group
-        _shopkeeper = _group createUnit [OT_civType_shopkeeper, _start, [], 0, "CAN_COLLIDE"];
+        private _shopkeeper = _group createUnit [OT_civType_shopkeeper, _start, [], 0, "CAN_COLLIDE"];
 
         _shopkeeper setDir _facing;
         doStop _shopkeeper;
@@ -52,7 +48,7 @@ if (_activeshops isNotEqualTo []) exitWith {
         [_shopkeeper] call OT_fnc_initShopkeeper;
 
         //Put a light on
-        _light = "#lightpoint" createVehicle [_pos select 0, _pos select 1, (_pos select 2) + 2.2];
+        private _light = "#lightpoint" createVehicle [_pos select 0, _pos select 1, (_pos select 2) + 2.2];
         _light setLightBrightness 0.13;
         _light setLightAmbient [.9, .9, .6];
         _light setLightColor [.5, .5, .4];

@@ -55,7 +55,7 @@ if (_stealth isEqualTo 5) then {
 };
 
 buyPerk = {
-    _perk = _this select 0;
+    private _perk = _this select 0;
     disableSerialization;
 
     private _fitness = player getVariable [format ["OT_%1", _perk], 1];
@@ -66,8 +66,8 @@ buyPerk = {
 
     _fitness = _fitness + 1;
     player setVariable [format ["OT_%1", _perk], _fitness, true];
-    _idc = 1600;
-    _idcc = 1100;
+    private _idc = 1600;
+    private _idcc = 1100;
     if (_perk isEqualTo "trade") then {
         _idc = 1601;
         _idcc = 1101;
@@ -83,7 +83,7 @@ buyPerk = {
     player setVariable ["influence", _inf - _price, true];
 
     private _ctrl = (findDisplay 8003) displayCtrl _idcc;
-    _txt = format ["<t size=""2"">Fitness</t><br/><t size=""1.1"">Level %1</t><br/><t size=""0.7"">Increases the distance you can sprint</t>", _fitness];
+    private _txt = format ["<t size=""2"">Fitness</t><br/><t size=""1.1"">Level %1</t><br/><t size=""0.7"">Increases the distance you can sprint</t>", _fitness];
     if (_perk isEqualTo "trade") then {
         _txt = format ["<t size=""2"">Trade</t><br/><t size=""1.1"">Level %1</t><br/><t size=""0.7"">Ability to negotiate better purchasing prices</t>", _fitness];
     };

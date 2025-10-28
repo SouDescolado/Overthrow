@@ -28,26 +28,26 @@ income_system_lasthour = date select 3;
             private _inf = 1;
             private _total = 0;
 
-            _t = call OT_fnc_getTaxIncome;
+            private _t = call OT_fnc_getTaxIncome;
             _total = _t select 0;
             _inf = _t select 1;
 
-            _totax = 0;
-            _tax = server getVariable ['taxrate', 0];
+            private _totax = 0;
+            private _tax = server getVariable ['taxrate', 0];
             if (_tax > 0) then {
                 _totax = round (_total * (_tax / 100));
             };
 
             {
                 private _owned = _x getVariable ['leasedata', []];
-                _lease = 0;
+                private _lease = 0;
                 {
-                    _x params ['_id', '_cls', '_pos', '_town'];
+                    _x params ['', '_cls', '', '_town'];
                     private _data = [_cls, _town] call OT_fnc_getRealEstateData;
                     _lease = _lease + (_data select 2);
                 } forEach (_owned);
                 if (_lease > 0) then {
-                    _tt = 0;
+                    private _tt = 0;
                     if (_tax > 0) then {
                         _tt = round (_lease * (_tax / 100));
                     };
@@ -59,10 +59,10 @@ income_system_lasthour = date select 3;
             [_totax] call OT_fnc_resistanceFunds;
             _total = _total - _totax;
 
-            _numPlayers = count (allPlayers - (entities 'HeadlessClient_F'));
+            private _numPlayers = count (allPlayers - (entities 'HeadlessClient_F'));
             if (_numPlayers > 0) then {
                 if (isNil '_total') then { _total = 0 };
-                _perPlayer = round (_total / _numPlayers);
+                private _perPlayer = round (_total / _numPlayers);
                 if (_perPlayer > 0) then {
                     private _diff = server getVariable ['OT_difficulty', 1];
                     if (_diff isEqualTo 0) then { _perPlayer = round (_perPlayer * 1.2) };
@@ -70,7 +70,7 @@ income_system_lasthour = date select 3;
 
                     _inf remoteExec ['OT_fnc_influenceSilent', 0, false];
                     {
-                        _money = _x getVariable ['money', 0];
+                        private _money = _x getVariable ['money', 0];
                         _x setVariable ['money', _money + _perPlayer, true];
                     } forEach (allPlayers - (entities 'HeadlessClient_F'));
                     format ['Tax income: $%1 (+%2 Influence)', [_perPlayer, 1, 0, true] call CBA_fnc_formatNumber, _inf] remoteExec ['OT_fnc_notifyMinor', 0, false];

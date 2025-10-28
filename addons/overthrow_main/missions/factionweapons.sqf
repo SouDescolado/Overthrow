@@ -1,4 +1,4 @@
-params ["_jobid", "_jobparams"];
+params ["", "_jobparams"];
 _jobparams params ["_faction"];
 
 private _reppos = server getVariable [format ["factionrep%1", _faction], getPos player];
@@ -10,11 +10,8 @@ if (_roads isNotEqualTo []) then {
     _destination = _reppos;
 };
 
-private _items = [];
-
 private _itemcls = selectRandom (OT_allBLURifles + OT_allBLUGLRifles + OT_allBLUMachineGuns);
 private _itemName = _itemcls call OT_fnc_weaponGetName;
-private _cost = (cost getVariable [_itemcls, [1]]) select 0;
 private _numitems = floor (5 + random 15);
 
 private _params = [_destination, _faction, _itemcls, _numitems];
@@ -39,7 +36,7 @@ private _title = format ["%1 requests %2 x %3", _factionName, _numitems, _itemNa
     },
     {
         //Success Check
-        params ["_destination", "_faction", "_itemcls", "_numitems"];
+        params ["_destination", "", "_itemcls", "_numitems"];
         private _numavailable = 0;
         {
             private _c = _x;

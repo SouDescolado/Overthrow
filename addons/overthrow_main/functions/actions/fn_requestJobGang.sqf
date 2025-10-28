@@ -1,6 +1,5 @@
 closeDialog 0;
 private _gotjob = false;
-private _jobdef = [];
 private _activeJobs = spawner getVariable ["OT_activeJobIds", []];
 private _completed = server getVariable ["OT_completedJobIds", []];
 private _params = [];
@@ -10,8 +9,7 @@ private _gangid = OT_interactingWith getVariable ["OT_gangid", -1];
 private _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
 private _expiry = 0;
 {
-    _x params ["_name", ["_target", ""], "_condition", "_code", "_repeat", "_chance", "_expires"];
-    _jobdef = _x;
+    _x params ["_name", ["_target", ""], "_condition", "_code", "", "", "_expires"];
     _jobcode = _code;
     _expiry = _expires;
     call {
@@ -36,17 +34,16 @@ OT_jobShowingID = _id;
 OT_jobShowingExpiry = _expiry;
 OT_jobsOffered pushBack _id;
 if (_job isEqualTo []) exitWith { call OT_fnc_requestJobGang };
-_job params ["_info", "_markerPos", "_setup", "_fail", "_success", "_end", "_jobparams"];
 
 OT_jobShowingType = "gang";
 
 createDialog "OT_dialog_joboffer";
 disableSerialization;
 
-_job params ["_info", "_markerPos"];
+_job params ["_info"];
 _info params ["_title", "_desc"];
 
-_textctrl = (findDisplay 8000) displayCtrl 1199;
+private _textctrl = (findDisplay 8000) displayCtrl 1199;
 
 _textctrl ctrlSetStructuredText parseText format [
     "

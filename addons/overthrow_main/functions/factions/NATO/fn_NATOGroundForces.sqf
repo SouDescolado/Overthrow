@@ -9,7 +9,6 @@ private _spawnpos = _frompos;
 private _group1 = [_spawnpos, blufor, _squadtype] call BIS_fnc_spawnGroup;
 _group1 deleteGroupWhenEmpty true;
 private _group2 = "";
-private _tgroup = false;
 if !(_byair) then {
     sleep 0.3;
     private _squadtype = selectRandom OT_NATO_GroundForces;
@@ -109,7 +108,7 @@ if !(_byair) then {
 
 sleep 5;
 if (_byair && _tgroup isEqualType grpNull) then {
-    _wp = _tgroup addWaypoint [_frompos, 0];
+    private _wp = _tgroup addWaypoint [_frompos, 0];
     _wp setWaypointType "MOVE";
     _wp setWaypointBehaviour "COMBAT";
     _wp setWaypointSpeed "FULL";
@@ -137,7 +136,7 @@ if (_byair && _tgroup isEqualType grpNull) then {
     if (_tgroup isEqualType grpNull) then {
         _veh setDamage 0;
         _dir = (_attackpos getDir _frompos);
-        _roads = _ao nearRoads 150;
+        private _roads = _ao nearRoads 150;
         private _dropos = _ao;
 
         //Try to make sure drop position is on a bigger road
@@ -146,13 +145,13 @@ if (_byair && _tgroup isEqualType grpNull) then {
             if (isOnRoad _pos) exitWith { _dropos = _pos };
         } forEach (_roads);
 
-        _move = _tgroup addWaypoint [_dropos, 0];
+        private _move = _tgroup addWaypoint [_dropos, 0];
         _move setWaypointBehaviour "CARELESS";
         _move setWaypointTimeout [30, 30, 30];
         _move setWaypointType "TR UNLOAD";
         _move setWaypointCompletionRadius 50;
 
-        _wp = _tgroup addWaypoint [_frompos, 0];
+        private _wp = _tgroup addWaypoint [_frompos, 0];
         _wp setWaypointType "MOVE";
         _wp setWaypointBehaviour "CARELESS";
         _wp setWaypointCompletionRadius 25;
@@ -165,13 +164,13 @@ if (_byair && _tgroup isEqualType grpNull) then {
 };
 sleep 10;
 
-_wp1 = _group1 addWaypoint [_attackpos, 100];
+private _wp1 = _group1 addWaypoint [_attackpos, 100];
 _wp1 setWaypointType "SAD";
 _wp1 setWaypointBehaviour "COMBAT";
 _wp1 setWaypointSpeed "FULL";
 
 if !(_byair) then {
-    _wp2 = _group2 addWaypoint [_attackpos, 100];
+    private _wp2 = _group2 addWaypoint [_attackpos, 100];
     _wp2 setWaypointType "SAD";
     _wp2 setWaypointBehaviour "COMBAT";
     _wp2 setWaypointSpeed "FULL";
@@ -182,7 +181,7 @@ if !(_byair) then {
 [
     { server getVariable ["NATOattacking", ""] isEqualTo "" && { !([_this # 2] call OT_fnc_inSpawnDistance) } },
     {
-        _this params ["_group1", "_group2", "_attackpos"];
+        params ["_group1", "_group2"];
         {
             if (alive _x) then { continue };
             [_x] call OT_fnc_cleanup;

@@ -1,6 +1,5 @@
 params ["_town", "_strength"];
 
-private _population = server getVariable format ["population%1", _town];
 private _posTown = server getVariable _town;
 
 //Sneaky recon team first
@@ -11,18 +10,18 @@ private _tskid = [independent, [format ["attack%1", _town]], [format ["NATO is a
 
 format ["NATO is counter-attacking %1", _town] remoteExec ["OT_fnc_notifyMinor", 0, false];
 
-_fail = {
+private _fail = {
     params ["_tskid", "_town"];
     [_town, 15] call OT_fnc_stability;
     [_tskid, "SUCCEEDED", true] spawn BIS_fnc_taskSetState;
 };
 
-_success = {
+private _success = {
     params ["_tskid", "_town"];
     //NATO has won
     [_tskid, "FAILED", true] spawn BIS_fnc_taskSetState;
     [_town, 35] call OT_fnc_stability;
-    _abandoned = server getVariable "NATOabandoned";
+    private _abandoned = server getVariable "NATOabandoned";
     _abandoned deleteAt (_abandoned find _town);
     server setVariable ["NATOabandoned", _abandoned, true];
     server setVariable [format ["NATOpatrolsent%1", _town], false];

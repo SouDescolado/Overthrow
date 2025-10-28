@@ -53,10 +53,9 @@ _this spawn {
         if (_warehouse == objNull) exitWith { hint "No warehouse near by!" };
         {
             _x params ["_cls", "_num"];
-            _d = _warehouse getVariable [format ["item_%1", _cls], [_cls, 0]];
+            private _d = _warehouse getVariable [format ["item_%1", _cls], [_cls, 0]];
             if (_d isEqualType []) then {
-                _d params ["_wCls", ["_in", 0]];
-                _in = _d select 1;
+                private _in = _d select 1;
                 _warehouse setVariable [format ["item_%1", _cls], [_cls, _in + _num], true];
             };
         } forEach (_target call OT_fnc_unitStock);

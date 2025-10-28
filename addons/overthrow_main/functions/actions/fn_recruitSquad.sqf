@@ -9,7 +9,7 @@ if ((_pos nearEntities ["CAManBase", 50]) findIf { side _x isEqualTo blufor || s
 };
 
 private _squad = _cls call OT_fnc_getSquad;
-_squad params ["_cost", "_soldiers", "_bought", "_shortname"];
+_squad params ["_cost", "_soldiers", "", "_shortname"];
 
 private _money = player getVariable ["money", 0];
 if (_money < _cost) exitWith {
@@ -21,7 +21,7 @@ if (_money < _cost) exitWith {
 private _group = createGroup independent;
 private _leader = false;
 {
-    _civ = [_x, _pos, _group] call OT_fnc_createSoldier;
+    private _civ = [_x, _pos, _group] call OT_fnc_createSoldier;
     _civ setVariable ["OT_spawntrack", true, true];
     player reveal [_civ, 4];
     if (!_leader) then {

@@ -37,16 +37,15 @@ createVehicleCrew _veh;
     _x setVariable ["garrison", "HQ", false];
     _x setVariable ["NOAI", true, false];
 } forEach (crew _veh);
-_allunits = (units _group);
 sleep 1;
 
 {
     _x addCuratorEditableObjects [[_veh]];
 } forEach (allCurators);
 
-_topos = _attackpos getPos [random 200, random 360];
+private _topos = _attackpos getPos [random 200, random 360];
 
-_wp = _group addWaypoint [_topos, 600];
+private _wp = _group addWaypoint [_topos, 600];
 _wp setWaypointType "SAD";
 _wp setWaypointBehaviour "COMBAT";
 _wp setWaypointSpeed "FULL";

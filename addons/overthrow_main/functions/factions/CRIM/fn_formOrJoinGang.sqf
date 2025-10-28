@@ -1,12 +1,11 @@
 params ["_town"];
 
-_gangs = OT_civilians getVariable [format ["gangs%1", _town], []];
-_townpos = server getVariable _town;
+private _gangs = OT_civilians getVariable [format ["gangs%1", _town], []];
 
 if (_gangs isNotEqualTo []) then {
     //make a gang larger (maybe)
-    _gangid = _gangs select 0;
-    _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
+    private _gangid = _gangs select 0;
+    private _gang = OT_civilians getVariable [format ["gang%1", _gangid], []];
     if (_gang isEqualTo "") exitWith {
         //cleanup old gangs
         _gangs deleteAt (_gangs find _gangid);

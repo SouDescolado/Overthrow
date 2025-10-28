@@ -55,8 +55,8 @@ if (_price > -1) then {
         _desc = "Gets you from A to B, not guaranteed to stay upright.";
     };
     if (_cls in OT_allExplosives) then {
-        _cost = cost getVariable _cls;
-        _chems = server getVariable ["reschems", 0];
+        private _cost = cost getVariable _cls;
+        private _chems = server getVariable ["reschems", 0];
         _desc = format ["Required: %1 x chemicals (%2 available)<br/>%3", _cost select 3, _chems, _desc];
     };
 } else {
@@ -68,7 +68,7 @@ if (_price > -1) then {
 
 ctrlSetText [1200, _pic];
 
-_textctrl = (findDisplay 8000) displayCtrl 1100;
+private _textctrl = (findDisplay 8000) displayCtrl 1100;
 
 if (_price isEqualType 0) then {
     _price = "$" + ([_price, 1, 0, true] call CBA_fnc_formatNumber);

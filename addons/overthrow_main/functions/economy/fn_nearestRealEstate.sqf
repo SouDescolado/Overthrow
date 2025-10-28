@@ -1,5 +1,3 @@
-private ["_buildings", "_building", "_gotbuilding", "_price", "_lease", "_sell", "_totaloccupants"];
-
 private _buildings = _this nearObjects ["Building", 30];
 private _gotbuilding = false;
 private _building = objNull;
@@ -16,7 +14,7 @@ if (!isNil "modeTarget") then {
         _gotbuilding = true;
     };
 } forEach (_sorted);
-_ret = false;
+private _ret = false;
 if (_gotbuilding) then {
     _ret = _building call OT_fnc_getRealEstateData;
     _ret = [_building, _ret select 0, _ret select 1, _ret select 2, _ret select 3];

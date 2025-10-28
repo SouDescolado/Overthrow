@@ -1,6 +1,5 @@
 closeDialog 0;
 private _gotjob = false;
-private _jobdef = [];
 private _activeJobs = spawner getVariable ["OT_activeJobIds", []];
 private _completed = server getVariable ["OT_completedJobIds", []];
 private _params = [];
@@ -8,15 +7,13 @@ private _id = "";
 private _jobcode = {};
 private _expiry = 0;
 {
-    _x params ["_name", ["_target", ""], "_condition", "_code", "_repeat", "_chance", "_expires"];
-    _jobdef = _x;
+    _x params ["_name", ["_target", ""], "_condition", "_code", "", "", "_expires"];
     _jobcode = _code;
     _expiry = _expires;
     call {
         if ((toLowerANSI _target) isEqualTo "shop") exitWith {
             //get the town we're in
             private _nearest = player call OT_fnc_nearestTown;
-            private _loc = server getVariable _nearest;
             _id = format ["%1-%2", _name, _nearest];
             private _stability = server getVariable [format ["stability%1", _nearest], 100];
             private _support = [_nearest] call OT_fnc_support;
@@ -39,17 +36,16 @@ OT_jobShowingID = _id;
 OT_jobShowingExpiry = _expiry;
 OT_jobsOffered pushBack _id;
 if (_job isEqualTo []) exitWith { call OT_fnc_requestJobShop };
-_job params ["_info", "_markerPos", "_setup", "_fail", "_success", "_end", "_jobparams"];
 
 OT_jobShowingType = "shop";
 
 createDialog "OT_dialog_joboffer";
 disableSerialization;
 
-_job params ["_info", "_markerPos"];
+_job params ["_info"];
 _info params ["_title", "_desc"];
 
-_textctrl = (findDisplay 8000) displayCtrl 1199;
+private _textctrl = (findDisplay 8000) displayCtrl 1199;
 
 _textctrl ctrlSetStructuredText parseText format [
     "

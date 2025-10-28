@@ -25,7 +25,6 @@ _ctrl ctrlSetPosition [0 * safeZoneW + safeZoneX, -1 * safeZoneH + safeZoneY, 1 
 _ctrl ctrlSetStructuredText parseText _text2show;
 _ctrl ctrlCommit 0;
 [_ctrl] call BIS_fnc_CtrlFitToTextHeight;
-private _origPos = ctrlPosition _ctrl;
 
 _ctrl ctrlSetPosition [(ctrlPosition _ctrl) # 0, (-0.05 - (ctrlPosition _ctrl) # 3) * safeZoneH + safeZoneY, (ctrlPosition _ctrl) # 2, (ctrlPosition _ctrl) # 3];
 _ctrl ctrlCommit 0;
