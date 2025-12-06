@@ -7,13 +7,13 @@ _civ removeAllEventHandlers "FiredNear";
 
 _civ setSkill 0.1 + (random 0.3);
 _civ setRank "PRIVATE";
-_civ setVariable ["NOAI",true,true];
+_civ setVariable ["NOAI", true, true];
 
 _civ call OT_fnc_wantedSystem;
 
-private _recruits = server getVariable ["recruits",[]];
+private _recruits = server getVariable ["recruits", []];
 private _nameparts = [name _civ];
 _nameparts append (name _civ splitString " ");
 
-_recruits pushBack [getPlayerUID player,_nameparts,_civ,"PRIVATE",[],typeOf _civ];
-server setVariable ["recruits",_recruits,true];
+_recruits pushBack [getPlayerUID player, _nameparts, _civ, "PRIVATE", [], typeOf _civ];
+server setVariable ["recruits", _recruits, true];

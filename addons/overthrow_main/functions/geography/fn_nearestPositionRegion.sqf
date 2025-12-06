@@ -1,12 +1,11 @@
-_things = _this select 0;
-_region = _this select 2;
+params ["_things", "_origin", "_region"];
 
-_ret = [];
+private _ret = [];
 {
 
-	if(_x inArea _region) then {
-		_ret pushBack _x;
-	};
-}forEach (_things);
+    if (_x inArea _region) then {
+        _ret pushBack _x;
+    };
+} forEach (_things);
 
-[_ret,_this select 1] call BIS_fnc_nearestPosition
+[_ret, _origin] call BIS_fnc_nearestPosition;

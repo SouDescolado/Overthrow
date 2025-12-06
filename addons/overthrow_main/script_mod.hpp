@@ -35,7 +35,7 @@
 #define VERSION_AR MAJOR,MINOR,PATCHLVL,BUILD
 
 // MINIMAL required ARMA version for the addon
-#define REQUIRED_VERSION 2.10
+#define REQUIRED_VERSION 2.12
 
 // MINIMAL required CBA_A3 version for the addon
 #define REQUIRED_CBA_VERSION {3,15,8}

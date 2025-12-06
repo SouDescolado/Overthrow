@@ -1,5 +1,5 @@
-params ["_unit","_danger"];
-_danger params ["_dangercause","_dangerpos","_dangeruntil","_dangercausedby"];
+params ["_unit", "_danger"];
+_danger params ["_dangercause", "_dangerpos", "_dangeruntil", "_dangercausedby"];
 
 /*
 DEFINE_ENUM_BEG(DangerCause)

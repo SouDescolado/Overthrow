@@ -9,10 +9,13 @@ _this # 0 - The drone object.
 _this # 1 - The spawner object(?).
 */
 
-params ["_drone","_obname"];
+params ["_drone", "_obname"];
 private _targets = [];
 
-while {sleep 10; alive _drone} do {
+while {
+    sleep 10;
+    alive _drone;
+} do {
     if (((getPos _drone) # 2) < 2) exitWith {
         //Drone has landed?
         [_drone] call OT_fnc_cleanupVehicle;
@@ -22,13 +25,13 @@ while {sleep 10; alive _drone} do {
     {
         if (alive _x) then {
             // The drone will sometimes miss targets
-            if ((random 100) < 50) then {continue};
+            if ((random 100) < 50) then { continue };
             [_x, _drone, _targets] spawn {
                 params ["_x", "_drone", "_targets"];
                 private _type = typeOf _x;
                 private _position = getPosASL _x;
 
-                if ((_x isKindOf "StaticWeapon") && {(side _x != west)}) exitWith {
+                if ((_x isKindOf "StaticWeapon") && { (side _x != blufor) }) exitWith {
                     if (([_drone, "VIEW"] checkVisibility [getPosASL _drone, _position]) > 0.01) then {
                         _targets pushBack ["SW", ASLToAGL _position, 100, _x];
                     };
@@ -50,8 +53,8 @@ while {sleep 10; alive _drone} do {
                     };
                 };
 
-                if ((count crew _x) > 0 && {((_x isKindOf "Car") || (_x isKindOf "Air") || (_x isKindOf "Ship")) && !(_type in (OT_allVehicles + OT_allBoats + OT_helis))}) exitWith {
-                    if (side _x != west) then {
+                if ((crew _x) isNotEqualTo [] && { ((_x isKindOf "Car") || (_x isKindOf "Air") || (_x isKindOf "Ship")) && !(_type in (OT_allVehicles + OT_allBoats + OT_helis)) }) exitWith {
+                    if (side _x != blufor) then {
                         if (([_drone, "VIEW"] checkVisibility [getPosASL _drone, _position]) > 0.01) then {
 
                             //Determine threat
@@ -63,7 +66,7 @@ while {sleep 10; alive _drone} do {
                                     _threat = 150;
                                 };
 
-                                if (_x getVariable ["OT_attachedClass",""] isNotEqualTo "") exitWith {
+                                if (_x getVariable ["OT_attachedClass", ""] isNotEqualTo "") exitWith {
                                     _threat = 100;
                                 };
 
@@ -88,10 +91,10 @@ while {sleep 10; alive _drone} do {
 
     //look for concentrations of troops
     private _nearMen = _drone nearEntities ["CAManBase", 200];
-    private _numMil = {side _x isEqualTo west} count _nearMen;
-    private _numRes = {side _x isEqualTo resistance} count _nearMen;;
+    private _numMil = { side _x isEqualTo blufor } count _nearMen;
+    private _numRes = { side _x isEqualTo independent } count _nearMen;
 
-    if (_numRes > 10 && {_numMil isEqualTo 0}) then {
+    if (_numRes > 10 && { _numMil isEqualTo 0 }) then {
         _targets pushBack ["INF", getPos _drone, 100, _drone];
     };
 

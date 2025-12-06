@@ -1,36 +1,39 @@
-_leader = _this;
+private _leader = _this;
 
-_group = group _leader;
-private _targetPos = _leader getVariable ["OT_targetPos",objNull];
+private _group = group _leader;
+private _targetPos = _leader getVariable ["OT_targetPos", objNull];
 
-_gotexp = false;
-_expert = objNull;
+private _gotexp = false;
+private _expert = objNull;
 {
-    if("DemoCharge_Remote_Mag" in magazines _x) then {
+    if ("DemoCharge_Remote_Mag" in magazines _x) then {
         _gotexp = true;
         _expert = _x;
     };
-}forEach(units _group);
+} forEach (units _group);
 
-if(_gotexp) then {
-    _p = _targetPos;
-    _expert setVariable ["NOAI",true,true];
+if (_gotexp) then {
+    private _p = _targetPos;
+    _expert setVariable ["NOAI", true, true];
     _group setCombatMode "COMBAT";
     _expert commandMove _p;
-    waitUntil {sleep 1;(!alive _expert) || (_expert distance _targetPos) < 10};
-    if(alive _expert) then {
+    waitUntil {
+        sleep 1;
+        (!alive _expert) || (_expert distance _targetPos) < 10;
+    };
+    if (alive _expert) then {
         _expert removeMagazineGlobal "DemoCharge_Remote_Mag";
-        _p set [2,1];
-        _charge = "DemoCharge_Remote_Ammo" createVehicle _p;
+        _p set [2, 1];
+        private _charge = "DemoCharge_Remote_Ammo" createVehicle _p;
         _charge setPosATL _p;
 
         //run away!
-        _runto = _p getPos [(1000 + random 1000), random 360];
-        _wp = _group addWaypoint [_runto,0];
+        private _runto = _p getPos [(1000 + random 1000), random 360];
+        private _wp = _group addWaypoint [_runto, 0];
         _wp setWaypointType "MOVE";
         _wp setWaypointBehaviour "COMBAT";
         _wp setWaypointSpeed "FULL";
-        _expert setVariable ["NOAI",false,true];
+        _expert setVariable ["NOAI", false, true];
 
         sleep 120;
         [[_charge], 0] call ace_explosives_fnc_scriptedExplosive;

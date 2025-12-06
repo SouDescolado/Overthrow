@@ -7,19 +7,35 @@ loadScreen = "\overthrow_main\campaign\OTCE-splash.jpg";
 
 overviewText = "Welcome to Malden, called the “Gibraltar of the North Sea” by many. This group of islands has been occupied by the French since the 19th century and has become one of NATO's primary strongholds in the North Sea. Never considered a sovereign part of France by the government, Malden has never had any representation in French politics. Since the global financial crisis of 2008 this remote island has experienced great hardship and rising unemployment levels which lately has erupted into civil unrest and protests, especially in the less populated western towns.";
 
-class CfgRemoteExec
-{
-	// List of script functions allowed to be sent from client via remoteExec
-	class Functions
-	{
-		mode = 2;
-		jip = 1;
+class CfgRemoteExec {
+    // List of script functions allowed to be sent from client via remoteExec
+    class Functions {
+        mode = 2;
+        jip = 1;
 
-		class vcm_serverask { allowedTargets = 0;jip = 1; };
-		class VCM_PublicScript { allowedTargets = 0;jip = 1; };
-		class BIS_fnc_debugConsoleExec { allowedTargets = 0;jip = 1; };
-		class SpawnScript { allowedTargets = 0;jip = 1; };
-		class enableSimulationGlobal { allowedTargets = 0;jip = 1; };
-		class VCM_fnc_KnowAbout { allowedTargets = 0;jip = 1; };
-	};
+        class vcm_serverask {
+            allowedTargets = 0;
+            jip = 1;
+        };
+        class VCM_PublicScript {
+            allowedTargets = 0;
+            jip = 1;
+        };
+        class BIS_fnc_debugConsoleExec {
+            allowedTargets = 0;
+            jip = 1;
+        };
+        class SpawnScript {
+            allowedTargets = 0;
+            jip = 1;
+        };
+        class enableSimulationGlobal {
+            allowedTargets = 0;
+            jip = 1;
+        };
+        class VCM_fnc_KnowAbout {
+            allowedTargets = 0;
+            jip = 1;
+        };
+    };
 };

@@ -1,7 +1,7 @@
-params ["_jobid","_jobparams"];
+params ["_jobid"];
 
 //Here is where we might randomize the parameters a bit
-private _abandoned = server getVariable ["NATOabandoned",[]];
+private _abandoned = server getVariable ["NATOabandoned", []];
 private _outofspawndistance = [];
 {
     if !([(server getVariable _x)] call OT_fnc_inSpawnDistance) then {
@@ -10,37 +10,34 @@ private _outofspawndistance = [];
             _outofspawndistance pushBack _x;
         };
     };
-}forEach(OT_allTowns);
+} forEach (OT_allTowns);
 private _destinationName = selectRandom _outofspawndistance;
-private _posTown = server getVariable [_destinationName,[]];
+private _posTown = server getVariable [_destinationName, []];
 
-private _building = [_posTown,OT_allHouses] call OT_fnc_getRandomBuilding;
+private _building = [_posTown, OT_allHouses] call OT_fnc_getRandomBuilding;
 private _destination = (_building call BIS_fnc_buildingPositions) call BIS_fnc_selectRandom;
-if (isNil "_destination" || _destination isEqualTo [0,0,0]) then {
+if (isNil "_destination" || _destination isEqualTo [0, 0, 0]) then {
     _destination = _posTown getPos [random 600, random 360];
 };
-private _params = [_destination,_destinationName,_jobid];
+private _params = [_destination, _destinationName, _jobid];
 private _markerPos = _destination; //randomize the marker position a bit
 
 //Build a mission description and title
-private _description = format["A defector from the resistance is hiding in %1 under NATO protection and giving them sensitive information. He needs to be silenced. <br/><br/>Reward: $1500",_destinationName];
-private _title = format["NATO informant in %1",_destinationName];
-
-//This next number multiplies the reward
-private _difficulty = 1.8;
+private _description = format ["A defector from the resistance is hiding in %1 under NATO protection and giving them sensitive information. He needs to be silenced. <br/><br/>Reward: $1500", _destinationName];
+private _title = format ["NATO informant in %1", _destinationName];
 
 //The data below is what is returned to the gun dealer/faction rep, _markerPos is where to put the mission marker, the code in {} brackets is the actual mission code, only run if the player accepts
 [
-    [_title,_description],
+    [_title, _description],
     _markerPos,
     {
         //Spawn a dude and some protection
-        params ["_destination","_destinationName","_jobid"];
+        params ["_destination", "", "_jobid"];
 
         //Spawn the dude
         private _group = createGroup [blufor, true];
-        private _civ = _group createUnit [OT_civType_gunDealer, _destination, [],0, "NONE"];
-        _civ setVariable ["notalk",true,true]; //Tells Overthrow this guy cannot be recruited etc
+        private _civ = _group createUnit [OT_civType_gunDealer, _destination, [], 0, "NONE"];
+        _civ setVariable ["notalk", true, true]; //Tells Overthrow this guy cannot be recruited etc
 
         //Set face,voice and uniform
         [_civ, (OT_faces_western call BIS_fnc_selectRandom)] remoteExecCall ["setFace", 0, _civ];
@@ -52,80 +49,86 @@ private _difficulty = 1.8;
         //Make sure hes in the group
         [_civ] joinSilent nil;
         [_civ] joinSilent _group;
-        _civ setVariable ["NOAI",true,false];
-        _group setVariable ["Vcm_Disable",true,true];
+        _civ setVariable ["NOAI", true, false];
+        _group setVariable ["Vcm_Disable", true, true];
 
         //reward to killer
-        _civ setVariable ["OT_bounty",1500,true];
+        _civ setVariable ["OT_bounty", 1500, true];
 
         //Save him for access later
-        spawner setVariable [format["informant%1",_jobid],_civ,false];
+        spawner setVariable [format ["informant%1", _jobid], _civ, false];
 
         //Goons
-        private _numGoons = 1+round(random 4);
+        private _numGoons = 1 + round (random 4);
         private _count = 0;
         private _bgroup = createGroup [blufor, true];
-        _bgroup setVariable ["VCM_TOUGHSQUAD",true,true];
-        _bgroup setVariable ["VCM_NORESCUE",true,true];
-        while {(_count < _numGoons)} do {
-            private _start = [[[_destination,5]]] call BIS_fnc_randomPos;
+        _bgroup setVariable ["VCM_TOUGHSQUAD", true, true];
+        _bgroup setVariable ["VCM_NORESCUE", true, true];
+        while { (_count < _numGoons) } do {
+            private _start = [[[_destination, 5]]] call BIS_fnc_randomPos;
 
-            _civ = _bgroup createUnit [selectRandom OT_NATO_Units_LevelOne, _start, [],0, "NONE"];
+            _civ = _bgroup createUnit [selectRandom OT_NATO_Units_LevelOne, _start, [], 0, "NONE"];
             [_civ] joinSilent nil;
             [_civ] joinSilent _bgroup;
             _civ setRank "SERGEANT";
             _civ setBehaviour "SAFE";
-            _civ setVariable ["VCOM_NOPATHING_Unit",true,false];
-            [_civ,"HQ"] call OT_fnc_initMilitary;
+            _civ setVariable ["VCOM_NOPATHING_Unit", true, false];
+            [_civ, "HQ"] call OT_fnc_initMilitary;
             _civ disableAI "PATH";
-            _civ addEventHandler ["FiredNear", {params ["_unit"];_unit enableAI "PATH"}];
+            _civ addEventHandler [
+                "FiredNear",
+                {
+                    params ["_unit"];
+                    _unit enableAI "PATH";
+                }
+            ];
 
             _count = _count + 1;
         };
 
-        _wp = _bgroup addWaypoint [_destination,0];
+        private _wp = _bgroup addWaypoint [_destination, 0];
         _wp setWaypointType "GUARD";
-        _wp = _bgroup addWaypoint [_destination,0];
+        _wp = _bgroup addWaypoint [_destination, 0];
         _wp setWaypointType "CYCLE";
-        true
+        true;
     },
     {
         //Fail check...
         //no fail, just set anyone too close wanted
-        params ["_destination","_destinationName","_jobid"];
+        params ["_destination", "", "_jobid"];
 
-        private _civ = spawner getVariable [format["informant%1",_jobid],objNull];
-        private _alreadyAlerted = _civ getVariable ["OT_informantAlerted",false];
+        private _civ = spawner getVariable [format ["informant%1", _jobid], objNull];
+        private _alreadyAlerted = _civ getVariable ["OT_informantAlerted", false];
         private _alerted = false;
         {
-            if((side _x isEqualTo resistance || captive _x) && (_x call OT_fnc_unitSeenNATO)) then {
+            if ((side _x isEqualTo independent || captive _x) && (_x call OT_fnc_unitSeenNATO)) then {
                 _x setCaptive false;
                 _alerted = true;
             };
-        }forEach(_destination nearEntities ["CAManBase",15]);
+        } forEach (_destination nearEntities ["CAManBase", 15]);
 
-        if(_alerted && !_alreadyAlerted) then {
+        if (_alerted && !_alreadyAlerted) then {
             _civ enableAI "MOVE";
-            format ["NATO Informant has been alerted."] remoteExec ["OT_fnc_notifyMinor",0,false];
-            private _wp = (group _civ) addWaypoint [[[[_destination,500]]] call BIS_fnc_randomPos,0];
+            format ["NATO Informant has been alerted."] remoteExec ["OT_fnc_notifyMinor", 0, false];
+            private _wp = (group _civ) addWaypoint [[[[_destination, 500]]] call BIS_fnc_randomPos, 0];
             _wp setWaypointSpeed "FULL";
             _wp setWaypointCombatMode "COMBAT";
-            _civ setVariable ["OT_informantAlerted",true,false];
+            _civ setVariable ["OT_informantAlerted", true, false];
         };
     },
     {
         //Success.. easy.. if target is dedded
-        !alive (spawner getVariable [format["informant%1",_this select 2],objNull]);
+        !alive (spawner getVariable [format ["informant%1", _this select 2], objNull]);
     },
     {
-        params ["_destination","_destinationName","_jobid","_wassuccess"];
+        params ["_destination", "", "_jobid", "_wassuccess"];
 
         //If mission was a success
         if (_wassuccess) then {
-            [{format ["NATO Informant in %1 has been taken care of",_destination call OT_fnc_nearestTown] remoteExec ["OT_fnc_notifyMinor",0,false]},0,2] call CBA_fnc_waitAndExecute;
+            [{ format ["NATO Informant in %1 has been taken care of", _destination call OT_fnc_nearestTown] remoteExec ["OT_fnc_notifyMinor", 0, false] }, 0, 2] call CBA_fnc_waitAndExecute;
         };
         //Clean up
-        spawner setVariable [format["informant%1",_jobid],nil,false];
+        spawner setVariable [format ["informant%1", _jobid], nil, false];
     },
     _params
 ];

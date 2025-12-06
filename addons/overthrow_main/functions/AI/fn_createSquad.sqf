@@ -1,33 +1,33 @@
 private _units = groupSelectedUnits player;
-if(count _units < 2) exitWith {"You must select at least 2 recruits" call OT_fnc_notifyMinor};
-_group = createGroup resistance;
-_cc = player getVariable ["OT_squadcount",1];
+if (count _units < 2) exitWith { "You must select at least 2 recruits" call OT_fnc_notifyMinor };
+private _group = createGroup independent;
+private _cc = player getVariable ["OT_squadcount", 1];
 {
-    if(_x != player) then {
-        _x setVariable ["NOAI",false,false];
+    if (_x != player) then {
+        _x setVariable ["NOAI", false, false];
         [_x] joinSilent _group;
     };
-}forEach(_units);
-_group setGroupIdGlobal [format["S-%1",_cc]];
+} forEach (_units);
+_group setGroupIdGlobal [format ["S-%1", _cc]];
 _cc = _cc + 1;
-player hcSetGroup [_group,groupId _group,"teamgreen"];
+player hcSetGroup [_group, groupId _group, "teamgreen"];
 
-player setVariable ["OT_squadcount",_cc,true];
+player setVariable ["OT_squadcount", _cc, true];
 
-_recruits = server getVariable ["squads",[]];
-_recruits pushBack [getPlayerUID player,"CUSTOM",_group,[]];
-server setVariable ["squads",_recruits,true];
+private _recruits = server getVariable ["squads", []];
+_recruits pushBack [getPlayerUID player, "CUSTOM", _group, []];
+server setVariable ["squads", _recruits, true];
 
-_remove = [];
-_recruits = server getVariable ["recruits",[]];
+private _remove = [];
+_recruits = server getVariable ["recruits", []];
 {
-    if((_x select 2) in _units) then {
+    if ((_x select 2) in _units) then {
         _remove pushBack _x;
     };
-}forEach(_recruits);
+} forEach (_recruits);
 {
     _recruits deleteAt (_recruits find _x);
-}forEach(_remove);
-server setVariable ["recruits",_recruits,true];
+} forEach (_remove);
+server setVariable ["recruits", _recruits, true];
 
 "Squad created, use ctrl + space to command" call OT_fnc_notifyMinor;

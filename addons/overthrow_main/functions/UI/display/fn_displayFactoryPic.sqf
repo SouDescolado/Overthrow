@@ -1,3 +1,3 @@
-params ["_ctrl","_index"];
+params ["_ctrl", "_index"];
 
 disableSerialization;

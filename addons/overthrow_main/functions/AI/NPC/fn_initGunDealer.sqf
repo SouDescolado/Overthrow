@@ -1,8 +1,6 @@
-private ["_unit","_group"];
+private _unit = _this select 0;
 
-_unit = _this select 0;
-
-(group _unit) setVariable ["VCM_Disable",true];
+(group _unit) setVariable ["VCM_Disable", true];
 (group _unit) setVariable ["lambs_danger_disableGroupAI", true];
 
 private _identity = call OT_fnc_randomLocalIdentity;
@@ -16,10 +14,10 @@ removeBackpack _unit;
 removeHeadgear _unit;
 removeVest _unit;
 
-_unit setVariable ["NOAI",true,false];
+_unit setVariable ["NOAI", true, false];
 
-_group = group _unit;
+private _group = group _unit;
 
 _group setBehaviour "CARELESS";
-[_unit,"self"] call OT_fnc_setOwner;
+[_unit, "self"] call OT_fnc_setOwner;
 (group _unit) allowFleeing 0;

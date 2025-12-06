@@ -11,7 +11,7 @@ Author:
 -----------------------------------------------------------------------------*/
 
 private _owner = _this call OT_fnc_getOwner;
-if (!isNil "_owner" && { _owner isEqualType "" } && {_owner != "self"}) exitWith {
-	true
+if (!isNil "_owner" && { _owner isEqualType "" } && { _owner != "self" }) exitWith {
+    true;
 };
-false
+false;

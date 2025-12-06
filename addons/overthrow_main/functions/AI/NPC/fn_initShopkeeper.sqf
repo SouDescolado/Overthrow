@@ -1,6 +1,4 @@
-private ["_unit"];
-
-_unit = _this select 0;
+private _unit = _this select 0;
 
 private _identity = call OT_fnc_randomLocalIdentity;
 _identity set [1, selectRandom OT_clothes_shops];
@@ -15,7 +13,7 @@ removeBackpack _unit;
 removeHeadgear _unit;
 removeVest _unit;
 
-[_unit,"self"] call OT_fnc_setOwner;
+[_unit, "self"] call OT_fnc_setOwner;
 
 _unit disableAI "MOVE";
 _unit disableAI "AUTOCOMBAT";

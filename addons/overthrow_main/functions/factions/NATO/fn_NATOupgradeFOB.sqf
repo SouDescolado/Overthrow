@@ -1,9 +1,9 @@
-params ["_pos","_upgrades"];
+params ["_pos", "_upgrades"];
 
 {
-    if(_x isEqualTo "Barriers") then {
-        _p = _pos getPos [8, 0];
-        _v = OT_NATO_Barrier_Small createVehicle _p;
+    if (_x isEqualTo "Barriers") then {
+        private _p = _pos getPos [8, 0];
+        private _v = OT_NATO_Barrier_Small createVehicle _p;
         _v setDir 180;
 
         sleep 0.3;
@@ -24,11 +24,11 @@ params ["_pos","_upgrades"];
         _v = OT_NATO_Barrier_Large createVehicle _p;
         _v setDir 90;
     };
-    if(_x isEqualTo "HMG") then {
-        _gun = OT_NATO_StaticGarrison_LevelOne select 0;
+    if (_x isEqualTo "HMG") then {
+        private _gun = OT_NATO_StaticGarrison_LevelOne select 0;
 
-        _p = _pos getPos [8.5, 45];
-        _v = _gun createVehicle _p;
+        private _p = _pos getPos [8.5, 45];
+        private _v = _gun createVehicle _p;
         _v setDir 45;
         createVehicleCrew _v;
 
@@ -71,22 +71,22 @@ params ["_pos","_upgrades"];
         _v = OT_NATO_Sandbag_Curved createVehicle _p;
         _v setDir 135;
     };
-    if(_x isEqualTo "Mortar") then {
-        _p = _pos findEmptyPosition [3,50,OT_NATO_Mortar];
-        _v = OT_NATO_Mortar createVehicle _p;
+    if (_x isEqualTo "Mortar") then {
+        private _p = _pos findEmptyPosition [3, 50, OT_NATO_Mortar];
+        private _v = OT_NATO_Mortar createVehicle _p;
         createVehicleCrew _v;
 
-        _g = grpNull;
+        private _g = grpNull;
         {
             _x disableAI "AUTOTARGET";
             _x disableAI "FSM";
             _x disableAI "AUTOCOMBAT";
-            _x setVariable ["NOAI",true,false];
+            _x setVariable ["NOAI", true, false];
             _g = group _x;
-        }forEach(crew _v);
+        } forEach (crew _v);
         _g setCombatMode "BLUE";
-        [_v,_g] spawn OT_fnc_NATOMortar;
+        [_v, _g] spawn OT_fnc_NATOMortar;
     };
 
     sleep 0.3;
-}forEach(_upgrades);
+} forEach (_upgrades);

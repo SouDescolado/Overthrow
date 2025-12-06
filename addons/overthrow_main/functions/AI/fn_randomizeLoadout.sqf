@@ -1,11 +1,11 @@
 params [
     "_loadout",
-    ["_rifles",OT_allBLURifles],
-    ["_glRifles",OT_allBLUGLRifles],
-    ["_machineGuns",OT_allBLUMachineGuns],
-    ["_sniperRifles",OT_allBLUSniperRifles],
-    ["_launchers",OT_allBLULaunchers],
-    ["_handguns",OT_allBLUPistols]
+    ["_rifles", OT_allBLURifles],
+    ["_glRifles", OT_allBLUGLRifles],
+    ["_machineGuns", OT_allBLUMachineGuns],
+    ["_sniperRifles", OT_allBLUSniperRifles],
+    ["_launchers", OT_allBLULaunchers],
+    ["_handguns", OT_allBLUPistols]
 ];
 
 private _cfgWeapons = configFile >> "CfgWeapons";
@@ -13,166 +13,166 @@ private _cfgMagazines = configFile >> "CfgMagazines";
 
 //helper functions
 private _removeMagazines = {
-    params ["_newloadout","_forcls"];
-    private _hasVest = count(_newloadout select 4) > 0;
-    private _hasBackpack = count(_newloadout select 5) > 0;
+    params ["_newloadout", "_forcls"];
+    private _hasVest = (_newloadout select 4) isNotEqualTo [];
+    private _hasBackpack = (_newloadout select 5) isNotEqualTo [];
     private _magazines = getArray (_cfgWeapons >> _forcls >> "magazines");
     {
-        if !(_x isEqualTo "this") then {
-            _magazines = _magazines + getArray (_cfgWeapons >> _forcls >> _x >> "magazines")
+        if (_x isNotEqualTo "this") then {
+            _magazines = _magazines + getArray (_cfgWeapons >> _forcls >> _x >> "magazines");
         };
-    }forEach(getArray (_cfgWeapons >> _forcls >> "muzzles"));
+    } forEach (getArray (_cfgWeapons >> _forcls >> "muzzles"));
     //from uniform
     private _items = (_newloadout select 3) select 1;
     {
-        _x params ["_cls","_num"];
-        if(_cls in _magazines) then {_x set [1,0]};
-    }forEach(_items);
+        _x params ["_cls"];
+        if (_cls in _magazines) then { _x set [1, 0] };
+    } forEach (_items);
 
     //from vest
-    if(_hasVest) then {
+    if (_hasVest) then {
         _items = (_newloadout select 4) select 1;
         {
-            _x params ["_cls","_num"];
-            if(_cls in _magazines) then {_x set [1,0]};
-        }forEach(_items);
+            _x params ["_cls"];
+            if (_cls in _magazines) then { _x set [1, 0] };
+        } forEach (_items);
     };
 
-    if(_hasBackpack) then {
+    if (_hasBackpack) then {
         //from backpack
         _items = (_newloadout select 5) select 1;
         {
-            _x params ["_cls","_num"];
-            if(_cls in _magazines) then {_x set [1,0]};
-        }forEach(_items);
+            _x params ["_cls"];
+            if (_cls in _magazines) then { _x set [1, 0] };
+        } forEach (_items);
     };
 };
 
 private _newloadout = +_loadout; //clone the loadout
 
 //get some basic info about the loadout
-private _hasVest = count(_newloadout select 4) > 0;
-private _hasBackpack = count(_newloadout select 5) > 0;
-private _hasPrimary = count(_newloadout select 0) > 0;
-private _hasLauncher = count(_newloadout select 1) > 0;
-private _hasHandgun = count(_newloadout select 2) > 0;
+private _hasVest = (_newloadout select 4) isNotEqualTo [];
+private _hasBackpack = (_newloadout select 5) isNotEqualTo [];
+private _hasPrimary = (_newloadout select 0) isNotEqualTo [];
+private _hasLauncher = (_newloadout select 1) isNotEqualTo [];
+private _hasHandgun = (_newloadout select 2) isNotEqualTo [];
 
 //replace primary weapon
-if(_hasPrimary) then {
+if (_hasPrimary) then {
     private _primaryWpn = (_loadout select 0) select 0;
     private _base = [_primaryWpn] call BIS_fnc_baseWeapon;
 
     //remove magazines for primary weapon
-    [_newloadout,_primaryWpn] call _removeMagazines;
+    [_newloadout, _primaryWpn] call _removeMagazines;
 
     //replace primary weapon
     private _wpn = _base call {
-        if(_this in _glRifles) exitWith {selectRandom _glRifles};
-        if(_this in _sniperRifles) exitWith {selectRandom _sniperRifles};
-        if(_this in _machineGuns) exitWith {selectRandom _machineGuns};
+        if (_this in _glRifles) exitWith { selectRandom _glRifles };
+        if (_this in _sniperRifles) exitWith { selectRandom _sniperRifles };
+        if (_this in _machineGuns) exitWith { selectRandom _machineGuns };
         selectRandom _rifles;
     };
 
     // Remove all incompatible attachments.
     private _compatItems = compatibleItems _wpn;
     {
-        if !(_x in _compatItems) then {(_newloadout # 0) set [_forEachIndex + 1, ""]};
+        if !(_x in _compatItems) then { (_newloadout # 0) set [_forEachIndex + 1, ""] };
     } forEach [((_newloadout # 0) # 1), ((_newloadout # 0) # 2), ((_newloadout # 0) # 3)];
-    if !(((_newloadout # 0) # 7) in _compatItems) then {(_newloadout # 0) set [7, ""]};
+    if !(((_newloadout # 0) # 7) in _compatItems) then { (_newloadout # 0) set [7, ""] };
 
-    (_newloadout select 0) set [0,_wpn];
+    (_newloadout select 0) set [0, _wpn];
 
-    _magazines = getArray (_cfgWeapons >> _wpn >> "magazines");
+    private _magazines = getArray (_cfgWeapons >> _wpn >> "magazines");
 
-    _mag = "";
+    private _mag = "";
     {
-        _scope = getNumber (_cfgMagazines >> _x >> "scope");
-        if(_scope > 1) exitWith {_mag = _x};
-    }forEach(_magazines call BIS_fnc_arrayShuffle);
+        private _scope = getNumber (_cfgMagazines >> _x >> "scope");
+        if (_scope > 1) exitWith { _mag = _x };
+    } forEach (_magazines call BIS_fnc_arrayShuffle);
 
-    private _count = getNumber(_cfgMagazines >> _mag >> "count");
-    (_newloadout select 0) set [4,[_mag,_count]];
+    private _count = getNumber (_cfgMagazines >> _mag >> "count");
+    (_newloadout select 0) set [4, [_mag, _count]];
 
     //add mags to vest
-    if(_hasVest) then {
-        ((_newloadout select 4) select 1) pushBack [_mag,6,_count];
+    if (_hasVest) then {
+        ((_newloadout select 4) select 1) pushBack [_mag, 6, _count];
     };
 
     //get secondary mags (grenade rounds etc)
 
-    _secondmags = [];
+    private _secondmags = [];
     {
-        if !(_x isEqualTo "this") then {
-            _secondmags = _secondmags + getArray (_cfgWeapons >> _wpn >> _x >> "magazines")
+        if (_x isNotEqualTo "this") then {
+            _secondmags = _secondmags + getArray (_cfgWeapons >> _wpn >> _x >> "magazines");
         };
-    }forEach(getArray (_cfgWeapons >> _wpn >> "muzzles"));
-    if((count _secondmags) > 0) then {
-        if(_hasBackpack) then {
+    } forEach (getArray (_cfgWeapons >> _wpn >> "muzzles"));
+    if (_secondmags isNotEqualTo []) then {
+        if (_hasBackpack) then {
             //add all of them to backpack
             {
-                private _count = getNumber(_cfgMagazines >> _x >> "count");
-                ((_newloadout select 5) select 1) pushBack [_x,4,_count];
-            }forEach(_secondmags);
-        }else{
+                private _count = getNumber (_cfgMagazines >> _x >> "count");
+                ((_newloadout select 5) select 1) pushBack [_x, 4, _count];
+            } forEach (_secondmags);
+        } else {
             //add the first one to vest
-            if(_hasVest) then {
+            if (_hasVest) then {
                 _mag = _secondmags select 0;
-                private _count = getNumber(_cfgMagazines >> _mag >> "count");
-                ((_newloadout select 4) select 1) pushBack [_mag,6,_count];
+                private _count = getNumber (_cfgMagazines >> _mag >> "count");
+                ((_newloadout select 4) select 1) pushBack [_mag, 6, _count];
             };
         };
     };
 };
 
 //replace secondary weapon (launcher)
-if(_hasLauncher) then {
-    [_newloadout,(_newloadout select 1) select 0] call _removeMagazines;
-    _wpn = selectRandom _launchers;
+if (_hasLauncher) then {
+    [_newloadout, (_newloadout select 1) select 0] call _removeMagazines;
+    private _wpn = selectRandom _launchers;
     //we always want the primary mag
-    (_newloadout select 1) set [0,_wpn];
-    _magazines = getArray (_cfgWeapons >> _wpn >> "magazines");
-    _mag = _magazines select 0;
-    private _count = getNumber(_cfgMagazines >> _mag >> "count");
-    private _scope = getNumber(_cfgMagazines >> _mag >> "scope");
-    (_newloadout select 1) set [4,[_mag,_count]];
+    (_newloadout select 1) set [0, _wpn];
+    private _magazines = getArray (_cfgWeapons >> _wpn >> "magazines");
+    private _mag = _magazines select 0;
+    private _count = getNumber (_cfgMagazines >> _mag >> "count");
+    private _scope = getNumber (_cfgMagazines >> _mag >> "scope");
+    (_newloadout select 1) set [4, [_mag, _count]];
 
-    if(_hasBackpack) then {
-        if(_scope < 2) then {
+    if (_hasBackpack) then {
+        if (_scope < 2) then {
             //single-use launcher, remove backpack
-            _newloadout set [5,[]];
-        }else{
-            (_newloadout select 5) set [1,[]]; //Clear backpack
+            _newloadout set [5, []];
+        } else {
+            (_newloadout select 5) set [1, []]; //Clear backpack
             //add more primary mags
-            ((_newloadout select 5) select 1) pushBack [_mag,2,_count];
+            ((_newloadout select 5) select 1) pushBack [_mag, 2, _count];
 
             //add 2 other random ones
             private _c = 0;
             {
-                if(_foreachIndex > 0) then {
-                    private _count = getNumber(_cfgMagazines >> _x >> "count");
-                    ((_newloadout select 5) select 1) pushBack [_x,1,_count];
+                if (_forEachIndex > 0) then {
+                    private _count = getNumber (_cfgMagazines >> _x >> "count");
+                    ((_newloadout select 5) select 1) pushBack [_x, 1, _count];
                     _c = _c + 1;
                 };
-                if(_c isEqualTo 2) exitWith {};
-            }forEach(_magazines call BIS_fnc_arrayShuffle);
+                if (_c isEqualTo 2) exitWith {};
+            } forEach (_magazines call BIS_fnc_arrayShuffle);
         };
     };
 };
 
 //replace handgun
-if(_hasHandgun) then {
-    [_newloadout,((_newloadout select 2) select 0)] call _removeMagazines;
-    _wpn = selectRandom _handguns;
-    (_newloadout select 2) set [0,_wpn];
+if (_hasHandgun) then {
+    [_newloadout, ((_newloadout select 2) select 0)] call _removeMagazines;
+    private _wpn = selectRandom _handguns;
+    (_newloadout select 2) set [0, _wpn];
     //we always want the primary mag
-    _magazines = getArray (_cfgWeapons >> _wpn >> "magazines");
-    _mag = _magazines select 0;
-    private _count = getNumber(_cfgMagazines >> _mag >> "count");
-    (_newloadout select 2) set [4,[_mag,_count]];
+    private _magazines = getArray (_cfgWeapons >> _wpn >> "magazines");
+    private _mag = _magazines select 0;
+    private _count = getNumber (_cfgMagazines >> _mag >> "count");
+    (_newloadout select 2) set [4, [_mag, _count]];
     //add 2 mags to vest
-    if(_hasVest) then {
-        ((_newloadout select 4) select 1) pushBack [_mag,2,_count];
+    if (_hasVest) then {
+        ((_newloadout select 4) select 1) pushBack [_mag, 2, _count];
     };
 };
 
-_newloadout
+_newloadout;

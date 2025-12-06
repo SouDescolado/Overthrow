@@ -10,16 +10,21 @@
 
 params ["_unit"];
 
-if !(isPlayer _unit) exitWith {false};
+if !(isPlayer _unit) exitWith { false };
 
 [
     "Set Unit Money",
-    [[
-        "EDIT",
-        "Set this units money to",
-        "0"
-    ]],
-    {params ["_result", "_unit"]; _unit setVariable ["money", parseNumber (_result # 0), true]},
+    [
+        [
+            "EDIT",
+            "Set this units money to",
+            "0"
+        ]
+    ],
+    {
+        params ["_result", "_unit"];
+        _unit setVariable ["money", parseNumber (_result # 0), true];
+    },
     {},
     _unit
 ] call zen_dialog_fnc_create;

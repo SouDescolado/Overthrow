@@ -1,9 +1,7 @@
-private ["_unit"];
+private _unit = _this select 0;
+_unit setSkill ["courage", 1];
 
-_unit = _this select 0;
-_unit setSkill ["courage",1];
-
-_unit setVariable ["mayor",true,true];
+_unit setVariable ["mayor", true, true];
 
 private _identity = call OT_fnc_randomLocalIdentity;
 _identity set [1, ""]; // We don't want random clothes
@@ -16,5 +14,5 @@ removeBackpack _unit;
 removeHeadgear _unit;
 removeVest _unit;
 
-[_unit,"self"] call OT_fnc_setOwner;
+[_unit, "self"] call OT_fnc_setOwner;
 _unit addEventHandler ["Dammaged", OT_fnc_EnemyDamagedHandler];

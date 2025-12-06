@@ -1,4 +1,3 @@
-
 /*
 =============================================================================================================================
   FILE: fn_removeActionLoop.sqf
@@ -13,8 +12,8 @@ params ["_id"];
 if (isNil "action_loop") exitWith {};
 
 {
-  _x params ["_idLoop",["_condition",{false}],["_code",{}]];
-  if (_idLoop isEqualTo _id) then {
-    action_loop deleteAt _forEachIndex;
-  };
+    _x params ["_idLoop", ["_condition", { false }], ["_code", {}]];
+    if (_idLoop isEqualTo _id) then {
+        action_loop deleteAt _forEachIndex;
+    };
 } forEach action_loop;
