@@ -198,19 +198,6 @@ OT_itemCategoryDefinitions = [
 ];
 
 OT_items = [];
-// No items defined, so the shop jobs are always empty. I'll populate with General things and Surplus things. Either this or populate a list. 
-// The only shop that has something other than this are the clothing shops.
-{
-    _x params ["_category", "_items"];
-    if (_category in ["General", "Surplus"]) then {
-        {
-            if !(_x in OT_items) then {
-                OT_items pushBack _x;
-            };
-        } forEach _items;
-    };
-} forEach OT_itemCategoryDefinitions;
-
 OT_allItems = [];
 OT_craftableItems = [];
 
