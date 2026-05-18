@@ -7,6 +7,7 @@ private _starttown = _startpos call OT_fnc_nearestTown;
 private _destination = [];
 private _destinationName = "";
 private _itemcls = "";
+private _itemList = [];
 
 private _numitems = floor (1 + random 2);
 
@@ -18,7 +19,8 @@ if (_cat isEqualTo "Clothing") then {
 } else {
     {
         if ((_x select 0) isEqualTo _cat) exitWith {
-            _itemcls = selectRandom (_x select 1);
+            _itemList = _x select 1;
+            _itemcls = selectRandom _itemList;
         };
     } forEach (OT_items);
 };
@@ -27,7 +29,7 @@ if (_worth > 20) then {
     _numitems = 1;
 };
 
-private _itemname = _itemcls call OT_fnc_weaponGetName;
+private _itemName = _itemcls call OT_fnc_weaponGetName;
 
 //Find a destination
 {
@@ -49,8 +51,8 @@ private _markerPos = _destination;
 private _params = [_destination, _itemcls, _numitems, _reward, _starttown];
 
 //Build a mission description and title
-private _description = format ["I need someone to deliver %1 x %2 to a customer in %3. You have 6 hours.</t><br/><br/><t size='0.9' align='center'>Reward: $%4, +2 Resistance Support", _numitems, _itemname, _destinationName, _reward];
-private _title = format ["Deliver %1 x %2 for %3 store in %4", _numitems, _itemname, _cat, _starttown];
+private _description = format ["I need someone to deliver %1 x %2 to a customer in %3. You have 6 hours.</t><br/><br/><t size='0.9' align='center'>Reward: $%4, +2 Resistance Support", _numitems, _itemName, _destinationName, _reward];
+private _title = format ["Deliver %1 x %2 for %3 store in %4", _numitems, _itemName, _cat, _starttown];
 
 //The data below is what is returned to the gun dealer/faction rep, _markerPos is where to put the mission marker, the code in {} brackets is the actual mission code, only run if the player accepts
 [
