@@ -1,6 +1,6 @@
 private _civ = OT_interactingWith;
 
-private _cat = ((nearestBuilding player) getVariable ["OT_shopCategory", "General"]);
+private _cat = _civ getVariable "OT_shopCategory";
 
 private _startpos = getPos player;
 private _starttown = _startpos call OT_fnc_nearestTown;
