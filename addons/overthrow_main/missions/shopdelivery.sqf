@@ -22,7 +22,7 @@ if (_cat isEqualTo "Clothing") then {
                 _itemList = _x select 1;
                 _itemcls = selectRandom _itemList;
             };
-        } forEach (OT_items - OT_allBackpacks);
+        } forEach (OT_itemCategoryDefinitions);
 };
 
 private _worth = [_itemcls, OT_Nation, 100, 100] call OT_fnc_getPrice;
