@@ -21,7 +21,7 @@ if (_cat isEqualTo "Clothing") then {
         {
             diag_log format ["Category again: %1", _cat];
             if ((_x select 0) isEqualTo _cat) exitWith {
-                _itemList = (_x select 1)  select { _x != ""  && {!(_x isKindOf ["Bag_Base", configFile >> "CfgVehicles"])};
+                _itemList = (_x select 1) select { _x != "" && {!(_x isKindOf ["Bag_Base", configFile >> "CfgVehicles"])}};
                 diag_log format ["Item list: %1", _itemList];
                 _itemcls = selectRandom _itemList;
                 diag_log format ["Item picked: %1", _itemcls];
