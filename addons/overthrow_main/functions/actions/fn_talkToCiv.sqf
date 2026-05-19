@@ -133,25 +133,13 @@ if (_delivery isNotEqualTo []) then {
                             [player, _itemcls] call {
                                 params ["_unit", "_cls"];
                                 if (_cls isKindOf ["Rifle", configFile >> "CfgWeapons"]) exitWith {
-                                    if (_unit hasWeapon _cls) then {
-                                        _unit removeWeapon _cls;
-                                    } else {
-                                        _unit removeItem _cls;
-                                    }
+                                    _unit removeWeapon _cls;
                                 };
                                 if (_cls isKindOf ["Launcher", configFile >> "CfgWeapons"]) exitWith {
-                                    if (_unit hasWeapon _cls) then {
-                                        _unit removeWeapon _cls;
-                                    } else {
-                                        _unit removeItem _cls;
-                                    }
+                                    _unit removeWeapon _cls;
                                 };
                                 if (_cls isKindOf ["Pistol", configFile >> "CfgWeapons"]) exitWith {
-                                    if (_unit hasWeapon _cls) then {
-                                        _unit removeWeapon _cls;
-                                    } else {
-                                        _unit removeItem _cls;
-                                    }
+                                    _unit removeWeapon _cls;
                                 };
                                 if (_cls isKindOf ["Binocular", configFile >> "CfgWeapons"]) exitWith {
                                     _unit removeItem _cls;
@@ -710,7 +698,6 @@ if (_isShop) then {
         format ["Do you have any jobs for me?"],
         {
             OT_jobsOffered = [];
-            private _town = player call OT_fnc_nearestTown;
             private _support = [_town] call OT_fnc_support;
             if (_support < 0) then {
                 format ["Resistance Support in this town is too low (%1)", _support] call OT_fnc_notifyMinor;
