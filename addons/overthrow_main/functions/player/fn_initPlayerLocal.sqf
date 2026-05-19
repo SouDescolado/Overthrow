@@ -201,7 +201,7 @@ private _newrecruits = [];
             };
         };
     };
-    _newrecruits pushBack [_owner, _name, _civ, _rank, _loadout, _type, _xp];
+    _newrecruits pushBack [_owner, _name, _civ, _rank, _loadout, _type];
 } forEach (_recruits);
 server setVariable ["recruits", _newrecruits, true];
 
