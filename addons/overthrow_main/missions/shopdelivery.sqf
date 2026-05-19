@@ -16,9 +16,11 @@ if (_cat isEqualTo "Clothing") then {
     _numitems = 1;
 } else {
         {
+            diag_log format ["Category again: %1", _cat];
             if ((_x select 0) isEqualTo _cat) exitWith {
                 _itemList = (_x select 1) select { _x != "" && {!(_x isKindOf ["Bag_Base", configFile >> "CfgVehicles"])}};
                 _itemcls = selectRandom _itemList;
+                diag_log format ["Item picked: %1", _itemcls];
             };
         } forEach (OT_items);
 };
