@@ -105,8 +105,11 @@ if !(_quiet) then {
     [_x] call OT_fnc_savePlayerData;
 } forEach ([] call CBA_fnc_players);
 
-private _players = ((allVariables players_NS) select { [players_NS, _x] call _nilFilter }) apply {
-    [_x, players_NS getVariable _x];
+private _players = ((allVariables players_NS) select {
+    private _val = players_NS getVariable _x;
+    [players_NS, _x] call _nilFilter && { !(_val isEqualType taskNull) }
+}) apply {
+    [_x, _val];
 };
 _data pushBack ["players", _players];
 
