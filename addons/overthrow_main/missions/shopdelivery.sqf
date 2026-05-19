@@ -18,7 +18,7 @@ if (_cat isEqualTo "Clothing") then {
     _numitems = 1;
 } else {
     private _i = 0
-    while { _itemcls = "" && _i < 30 } {
+    while { _itemcls = "" && _i < 30 } do {
         {
             if ((_x select 0) isEqualTo _cat) exitWith {
                 _itemList = _x select 1;
