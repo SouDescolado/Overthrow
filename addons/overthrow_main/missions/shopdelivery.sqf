@@ -19,7 +19,7 @@ if (_cat isEqualTo "Clothing") then {
 } else {
         {
             if ((_x select 0) isEqualTo _cat) exitWith {
-                _itemList = _x select 1;
+                _itemList = (_x select 1)  select { _x != "" };
                 _itemcls = selectRandom _itemList;
             };
         } forEach (OT_itemCategoryDefinitions);
