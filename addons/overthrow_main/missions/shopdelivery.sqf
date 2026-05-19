@@ -17,7 +17,7 @@ if (_cat isEqualTo "Clothing") then {
     _itemcls = selectRandom OT_clothes_locals;
     _numitems = 1;
 } else {
-    private _i = 0
+    private _i = 0;
     while { _itemcls = "" && _i < 30 } do {
         {
             if ((_x select 0) isEqualTo _cat) exitWith {
