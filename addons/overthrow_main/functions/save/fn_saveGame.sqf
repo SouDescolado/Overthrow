@@ -109,8 +109,10 @@ private _players = ((allVariables players_NS) select {
     private _val = players_NS getVariable _x;
     [players_NS, _x] call _nilFilter && { !(_val isEqualType taskNull) }
 }) apply {
-    [_x, _val];
+    [_x, players_NS getVariable _x];
 };
+
+
 _data pushBack ["players", _players];
 
 private _cfgVeh = configFile >> "CfgVehicles";
