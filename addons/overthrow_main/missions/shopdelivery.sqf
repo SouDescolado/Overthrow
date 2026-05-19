@@ -10,10 +10,7 @@ private _itemcls = "";
 private _itemList = [];
 
 private _numitems = floor (1 + random 2);
-diag_log "DEBUG DESCOLADO START";
-diag_log format ["Category: %1", _cat];
 //Find an item this store sells
-diag_log format ["Get original list: %1", OT_items];
 if (_cat isEqualTo "Clothing") then {
     _itemcls = selectRandom OT_clothes_locals;
     _numitems = 1;
@@ -22,7 +19,6 @@ if (_cat isEqualTo "Clothing") then {
             diag_log format ["Category again: %1", _cat];
             if ((_x select 0) isEqualTo _cat) exitWith {
                 _itemList = (_x select 1) select { _x != "" && {!(_x isKindOf ["Bag_Base", configFile >> "CfgVehicles"])}};
-                diag_log format ["Item list: %1", _itemList];
                 _itemcls = selectRandom _itemList;
                 diag_log format ["Item picked: %1", _itemcls];
             };
