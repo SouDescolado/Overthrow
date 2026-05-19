@@ -1,6 +1,6 @@
 private _civ = OT_interactingWith;
 
-private _cat = ((nearestBuilding player) getVariable ["OT_shopCategory", "General"]);
+private _cat = _civ getVariable "OT_shopCategory";
 
 private _startpos = getPos player;
 private _starttown = _startpos call OT_fnc_nearestTown;
@@ -19,7 +19,7 @@ if (_cat isEqualTo "Clothing") then {
 } else {
         {
             if ((_x select 0) isEqualTo _cat) exitWith {
-                _itemList = _x select 1;
+                _itemList = (_x select 1)  select { _x != "" };
                 _itemcls = selectRandom _itemList;
             };
         } forEach (OT_itemCategoryDefinitions);
