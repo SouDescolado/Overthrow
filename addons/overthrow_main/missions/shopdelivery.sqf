@@ -17,12 +17,16 @@ if (_cat isEqualTo "Clothing") then {
     _itemcls = selectRandom OT_clothes_locals;
     _numitems = 1;
 } else {
-    {
-        if ((_x select 0) isEqualTo _cat) exitWith {
-            _itemList = _x select 1;
-            _itemcls = selectRandom _itemList;
-        };
-    } forEach (OT_items);
+    private _i = 0
+    while { _itemcls = "" && _i < 30 } {
+        {
+            if ((_x select 0) isEqualTo _cat) exitWith {
+                _itemList = _x select 1;
+                _itemcls = selectRandom _itemList;
+            };
+        } forEach (OT_items);
+        _i = _i + 1
+    }
 };
 private _worth = [_itemcls, OT_Nation, 100, 100] call OT_fnc_getPrice;
 if (_worth > 20) then {
