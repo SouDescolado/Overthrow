@@ -107,11 +107,16 @@ if !(_quiet) then {
 
 private _players = ((allVariables players_NS) select {
     private _val = players_NS getVariable _x;
-    [players_NS, _x] call _nilFilter && { !(_val isEqualType taskNull) } && { (_x find "@") != 0 }
+
+    [players_NS, _x] call _nilFilter
+        && { !(_val isEqualType taskNull) }
+        && {
+            private _lower = toLower _x;
+            !((_lower select [0, 7]) in ["@attack", "@counte", "@assaul"])
+        }
 }) apply {
     [_x, players_NS getVariable _x];
 };
-
 
 _data pushBack ["players", _players];
 
