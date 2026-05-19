@@ -10,19 +10,23 @@ private _itemcls = "";
 private _itemList = [];
 
 private _numitems = floor (1 + random 2);
-
+diag_log "DEBUG DESCOLADO START";
+diag_log format ["Category: %1", _cat];
 //Find an item this store sells
-
+diag_log format ["Get original list: %1", OT_items];
 if (_cat isEqualTo "Clothing") then {
     _itemcls = selectRandom OT_clothes_locals;
     _numitems = 1;
 } else {
         {
+            diag_log format ["Category again: %1", _cat];
             if ((_x select 0) isEqualTo _cat) exitWith {
                 _itemList = (_x select 1)  select { _x != "" };
+                diag_log format ["Item list: %1", _itemList];
                 _itemcls = selectRandom _itemList;
+                diag_log format ["Item picked: %1", _itemcls];
             };
-        } forEach (OT_itemCategoryDefinitions);
+        } forEach (OT_items);
 };
 
 private _worth = [_itemcls, OT_Nation, 100, 100] call OT_fnc_getPrice;
