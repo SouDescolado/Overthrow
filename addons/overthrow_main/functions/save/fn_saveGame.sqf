@@ -107,7 +107,7 @@ if !(_quiet) then {
 
 private _players = ((allVariables players_NS) select {
     private _val = players_NS getVariable _x;
-    [players_NS, _x] call _nilFilter && { !(_val isEqualType taskNull) }
+    [players_NS, _x] call _nilFilter && { !(_val isEqualType taskNull) } && { (_x find "@") != 0 }
 }) apply {
     [_x, players_NS getVariable _x];
 };
