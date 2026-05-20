@@ -111,13 +111,14 @@ private _players = ((allVariables players_NS) select {
     private _val = players_NS getVariable _x;
     if (_val isEqualType []) then {
         _val = _val select {
-            (_x isEqualType [])
-            && { count _x > 0 }
-            && { (_x select 0) isEqualType "" }
-            && { ((_x select 0) select [0,1]) != "@" }
+            !(
+                (_x isEqualType [])
+                && { count _x > 0 }
+                && { (_x select 0) isEqualType "" }
+                && { ((_x select 0) select [0,1]) == "@" }
+            )
         };
     };
-
     [_x, _val];
 };
 
