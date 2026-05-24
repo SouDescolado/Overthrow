@@ -306,6 +306,9 @@ if (!dialog) then {
                     };
                 };
                 call {
+					if (gunner vehicle player == player && {(vehicle player) isKindOf "StaticMortar"}) exitWith {
+						createDialog "OT_dialog_mortarrearm"
+					};
                     if (driver vehicle player != player) exitWith {
                         [] spawn OT_fnc_mainMenu;
                     };

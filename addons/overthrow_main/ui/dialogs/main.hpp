@@ -509,6 +509,66 @@ class OT_dialog_vehiclestore {
     };
 };
 
+class OT_dialog_mortarrearm {
+    idd = -1;
+    movingenable = 0;
+
+    class controlsBackground {
+        class RscStructuredText_1103: RscOverthrowStructuredText {
+            idc = 1103;
+
+            text = "";
+            x = "0 * safeZoneW + safeZoneX";
+            y = "0 * safeZoneH + safeZoneY";
+            w = "0.159844 * safeZoneW";
+            h = "1 * safeZoneH";
+            colorBackground[] = {0.1, 0.1, 0.1, 1};
+        };
+    };
+
+    class controls {
+        ////////////////////////////////////////////////////////
+        // GUI EDITOR OUTPUT START (by ARMAzac, v1.063, #Xeqozy)
+        ////////////////////////////////////////////////////////
+
+        class RscButton_1601: RscOverthrowButton {
+            idc = 1601;
+            text = "Rearm (from Inventory)"; //--- ToDo: Localize;
+            x = "0.005 * safeZoneW + safeZoneX";
+            y = "0.654 * safeZoneH + safeZoneY";
+            w = "0.149531 * safeZoneW";
+            h = "0.077 * safeZoneH";
+            tooltip = "Rearm mortar from inventory"; //--- ToDo: Localize;
+            action = "closeDialog 0; [] call OT_fnc_rearmMortar;";
+        };
+        class RscButton_1602: RscOverthrowButton {
+            idc = 1602;
+            text = "Open Artillery Computer"; //--- ToDo: Localize;
+            x = "0.005 * safeZoneW + safeZoneX";
+            y = "0.566 * safeZoneH + safeZoneY";
+            w = "0.149531 * safeZoneW";
+            h = "0.077 * safeZoneH";
+            tooltip = "Opens Artillery Computer"; //--- ToDo: Localize;
+            action = "closeDialog 0; showArtilleryComputer true;";
+        };
+        class RscButton_1612: RscOverthrowButton {
+            idc = 1612;
+            action = "call OT_fnc_optionsDialog";
+
+            text = "Options"; //--- ToDo: Localize;
+            x = "0.005 * safeZoneW + safeZoneX";
+            y = "0.885 * safeZoneH + safeZoneY";
+            w = "0.149531 * safeZoneW";
+            h = "0.066 * safeZoneH";
+        };
+        ////////////////////////////////////////////////////////
+        // GUI EDITOR OUTPUT END
+        ////////////////////////////////////////////////////////
+
+    };
+};
+
+
 class OT_dialog_command {
     idd = -1;
     movingenable = 0;
