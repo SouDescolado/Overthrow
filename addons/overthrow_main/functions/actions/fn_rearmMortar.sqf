@@ -43,23 +43,23 @@ waitUntil { time > _end };
     switch (_x) do {
 
         case "ACE_1Rnd_82mm_Mo_HE": {
-            _mortar addMagazineTurret ["8Rnd_82mm_Mo_shells", [0]];
+            _mortar addMagazine ["8Rnd_82mm_Mo_shells", [0]];
         };
 
         case "ACE_1Rnd_82mm_Mo_Smoke": {
-            _mortar addMagazineTurret ["8Rnd_82mm_Mo_Smoke_white", [0]];
+            _mortar addMagazine ["8Rnd_82mm_Mo_Smoke_white", [0]];
         };
 
         case "ACE_1Rnd_82mm_Mo_Illum": {
-            _mortar addMagazineTurret ["8Rnd_82mm_Mo_Flare_white", [0]];
+            _mortar addMagazine ["8Rnd_82mm_Mo_Flare_white", [0]];
         };
 
         case "ACE_1Rnd_82mm_Mo_GUIDED": {
-            _mortar addMagazineTurret ["8Rnd_82mm_Mo_guided", [0]];
+            _mortar addMagazine ["8Rnd_82mm_Mo_guided", [0]];
         };
 
         case "ACE_1Rnd_82mm_Mo_LG": {
-            _mortar addMagazineTurret ["8Rnd_82mm_Mo_LG", [0]];
+            _mortar addMagazine ["8Rnd_82mm_Mo_LG", [0]];
         };
     };
 
