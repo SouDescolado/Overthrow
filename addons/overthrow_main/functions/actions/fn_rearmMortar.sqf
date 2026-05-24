@@ -1,5 +1,19 @@
 private _mortar = vehicle player;
 private _shells = [];
+private _allItems = (
+    magazines player +
+    items player +
+    backpackItems player +
+    backpackMagazines player +
+    vestItems player +
+    vestMagazines player +
+    uniformItems player +
+    uniformMagazines player
+);
+
+diag_log format ["MORTAR DEBUG - Artillery Ammo: %1", getArtilleryAmmo [_mortar]];
+diag_log format ["MORTAR DEBUG - Player All Items: %1", _allItems];
+
 {
     if (_x in (getArtilleryAmmo [_mortar])) then {
         _shells pushBack _x;
