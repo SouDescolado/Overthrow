@@ -1,21 +1,16 @@
 private _mortar = vehicle player;
-
-private _allItems = (
-    magazines player +
-    backpackMagazines player +
-    vestMagazines player +
-    uniformMagazines player
-);
-
 private _shells = [];
 
-diag_log format ["MORTAR DEBUG - Player All Items: %1", _allItems];
+private _allMags = magazines player;
+
+diag_log format ["MORTAR DEBUG - Artillery Ammo: %1", getArtilleryAmmo [_mortar]];
+diag_log format ["MORTAR DEBUG - Player Magazines: %1", _allMags];
 
 {
-    if (_x find "ACE_1Rnd_82mm_Mo_" == 0) then {
+    if (_x in (getArtilleryAmmo [_mortar])) then {
         _shells pushBack _x;
     };
-} forEach _allItems;
+} forEach _allMags;
 
 private _count = count _shells;
 private _time = _count * 7;
@@ -28,45 +23,23 @@ format ["Loading %1 mortar shells...", _count] call OT_fnc_notifyMinor;
 
 disableUserInput true;
 
-[] spawn {
-    sleep 10;
-    disableUserInput false;
-    //Fail safe for user input disabled.
-};
-
 [_time, false] call OT_fnc_progressBar;
 
-private _end = time + _time;
-waitUntil { time > _end };
+sleep _time;
 
 {
-    switch (_x) do {
+    diag_log format ["MORTAR DEBUG - Adding shell: %1", _x];
 
-        case "ACE_1Rnd_82mm_Mo_HE": {
-            _mortar addMagazine ["8Rnd_82mm_Mo_shells", [0]];
-        };
-
-        case "ACE_1Rnd_82mm_Mo_Smoke": {
-            _mortar addMagazine ["8Rnd_82mm_Mo_Smoke_white", [0]];
-        };
-
-        case "ACE_1Rnd_82mm_Mo_Illum": {
-            _mortar addMagazine ["8Rnd_82mm_Mo_Flare_white", [0]];
-        };
-
-        case "ACE_1Rnd_82mm_Mo_GUIDED": {
-            _mortar addMagazine ["8Rnd_82mm_Mo_guided", [0]];
-        };
-
-        case "ACE_1Rnd_82mm_Mo_LG": {
-            _mortar addMagazine ["8Rnd_82mm_Mo_LG", [0]];
-        };
-    };
+    _mortar addMagazine [_x, 1];
 
     player removeMagazine _x;
 
 } forEach _shells;
 
+reload _mortar;
+
 disableUserInput false;
 
 format ["Loaded %1 mortar shells", _count] call OT_fnc_notifyMinor;
+
+diag_log format ["MORTAR DEBUG - Mortar magazines after load: %1", magazinesAmmo _mortar];
