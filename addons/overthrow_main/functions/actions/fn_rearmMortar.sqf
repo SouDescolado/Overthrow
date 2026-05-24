@@ -1,24 +1,21 @@
 private _mortar = vehicle player;
-private _shells = [];
+
 private _allItems = (
     magazines player +
-    items player +
-    backpackItems player +
     backpackMagazines player +
-    vestItems player +
     vestMagazines player +
-    uniformItems player +
     uniformMagazines player
 );
 
-diag_log format ["MORTAR DEBUG - Artillery Ammo: %1", getArtilleryAmmo [_mortar]];
+private _shells = [];
+
 diag_log format ["MORTAR DEBUG - Player All Items: %1", _allItems];
 
 {
-    if (_x in (getArtilleryAmmo [_mortar])) then {
+    if (_x find "ACE_1Rnd_82mm_Mo_" == 0) then {
         _shells pushBack _x;
     };
-} forEach magazines player;
+} forEach _allItems;
 
 private _count = count _shells;
 private _time = _count * 7;
@@ -30,6 +27,7 @@ if (_count <= 0) exitWith {
 format ["Loading %1 mortar shells...", _count] call OT_fnc_notifyMinor;
 
 disableUserInput true;
+
 [] spawn {
     sleep 10;
     disableUserInput false;
@@ -37,11 +35,36 @@ disableUserInput true;
 };
 
 [_time, false] call OT_fnc_progressBar;
+
 private _end = time + _time;
 waitUntil { time > _end };
+
 {
-    _mortar addMagazineTurret [_x, [0]];
+    switch (_x) do {
+
+        case "ACE_1Rnd_82mm_Mo_HE": {
+            _mortar addMagazineTurret ["8Rnd_82mm_Mo_shells", [0]];
+        };
+
+        case "ACE_1Rnd_82mm_Mo_Smoke": {
+            _mortar addMagazineTurret ["8Rnd_82mm_Mo_Smoke_white", [0]];
+        };
+
+        case "ACE_1Rnd_82mm_Mo_Illum": {
+            _mortar addMagazineTurret ["8Rnd_82mm_Mo_Flare_white", [0]];
+        };
+
+        case "ACE_1Rnd_82mm_Mo_GUIDED": {
+            _mortar addMagazineTurret ["8Rnd_82mm_Mo_guided", [0]];
+        };
+
+        case "ACE_1Rnd_82mm_Mo_LG": {
+            _mortar addMagazineTurret ["8Rnd_82mm_Mo_LG", [0]];
+        };
+    };
+
     player removeMagazine _x;
+
 } forEach _shells;
 
 disableUserInput false;
