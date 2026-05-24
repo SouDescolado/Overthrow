@@ -539,7 +539,7 @@ class OT_dialog_mortarrearm {
             w = "0.149531 * safeZoneW";
             h = "0.077 * safeZoneH";
             tooltip = "Rearm mortar from inventory"; //--- ToDo: Localize;
-            action = "closeDialog 0; [] spawn OT_fnc_rearmMortar;";
+            action = "closeDialog 0; [player] spawn OT_fnc_rearmMortar;";
         };
         class RscButton_1602: RscOverthrowButton {
             idc = 1602;
