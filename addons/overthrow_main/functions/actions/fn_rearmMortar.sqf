@@ -1,3 +1,4 @@
+params ["_user"];
 private _mortar = vehicle player;
 private _shells = [];
 
@@ -24,11 +25,21 @@ if (_count <= 0) exitWith {
     "No mortar ammo found" call OT_fnc_notifyMinor;
 };
 
-format ["Loading %1 mortar shells...", _count] call OT_fnc_notifyMinor;
-
-disableUserInput true;
-
-[_time, false] call OT_fnc_progressBar;
+private _veh = objectParent _user;
+if (_veh isEqualTo _user) exitWith {};
+if (isPlayer _user) then {
+    _veh enableSimulation false;
+    [_time, _veh] spawn {
+        params ["_time", "_veh"];
+        sleep (_time + 5);
+        _veh enableSimulation true;
+        //Fail safe for user input disabled.
+    };
+    format ["Loading %1 mortar shells...", _count] call OT_fnc_notifyMinor;
+    [_time, false] call OT_fnc_progressBar;
+} else {
+    _user globalChat format ["Loading %1 mortar shells...", _count];
+};
 
 sleep _time;
 
@@ -42,8 +53,12 @@ sleep _time;
 
 reload _mortar;
 
-disableUserInput false;
 
-format ["Loaded %1 mortar shells", _count] call OT_fnc_notifyMinor;
+if (isPlayer _user) then {
+    _veh enableSimulation true;
+    format ["Loaded %1 mortar shells", _count] call OT_fnc_notifyMinor;
+} else {
+    _user globalChat format ["Loaded %1 mortar shells", _count];
+};
 
 diag_log format ["MORTAR DEBUG - Mortar Ammo After: %1", magazinesAmmo _mortar];
