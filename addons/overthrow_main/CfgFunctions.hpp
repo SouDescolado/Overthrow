@@ -280,7 +280,8 @@ class CfgFunctions {
             class dumpIntoWarehouse {};
             class takeStuff {};
             class openArsenal {};
-
+            /* Mortar */
+            class rearmMortar {};
             /* Other */
             class craft {};
             class recruitSoldier {};
