@@ -549,7 +549,7 @@ class OT_dialog_mortarrearm {
             w = "0.149531 * safeZoneW";
             h = "0.077 * safeZoneH";
             tooltip = "Opens Artillery Computer"; //--- ToDo: Localize;
-            action = "closeDialog 0; [vehicle player] call BIS_fnc_showArtilleryComputer;";
+            action = "closeDialog 0; createDialog ""RscDisplayArtillery"";";
         };
         class RscButton_1612: RscOverthrowButton {
             idc = 1612;
