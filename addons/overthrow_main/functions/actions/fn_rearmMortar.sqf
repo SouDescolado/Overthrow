@@ -28,7 +28,7 @@ _veh enableSimulation false;
     {
         params ["_user", "_veh", "_shells", "_time"];
         if (!local _veh) exitWith {
-            [_user, _veh, _shells, _time] remoteExecCall [_thisScript, _veh];
+            [_user, _veh, _shells, _time] remoteExecCall [_this, _veh];
         };
         private _aceAmmoHandling = ["ace_advanced_ammoHandling_enabled"] call CBA_fnc_getSetting;
         sleep _time;
