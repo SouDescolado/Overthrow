@@ -1,5 +1,5 @@
 params ["_user"];
-private _mortar = vehicle player;
+private _mortar = vehicle _user;
 private _shells = [];
 
 private _mortarAmmo = [
@@ -14,7 +14,7 @@ private _mortarAmmo = [
     if (_x in _mortarAmmo) then {
         _shells pushBack _x;
     };
-} forEach magazines player;
+} forEach magazines _user;
 
 diag_log format ["MORTAR DEBUG - Found Shells: %1", _shells];
 
