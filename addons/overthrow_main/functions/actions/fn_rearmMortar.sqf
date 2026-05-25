@@ -45,9 +45,9 @@ sleep _time;
 
 {
     if (_aceAmmoHandling) then {
-        _veh addMagazineTurret [_x, [0]];
+        _mortar addMagazineTurret [_x, [0]];
     } else {
-        _veh addMagazine _x;
+        _mortar addMagazine _x;
     };
     player removeMagazine _x;
 
