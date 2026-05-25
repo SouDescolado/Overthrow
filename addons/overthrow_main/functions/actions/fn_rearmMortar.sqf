@@ -49,7 +49,7 @@ sleep _time;
     } else {
         _mortar addMagazine _x;
     };
-    player removeMagazine _x;
+    _user removeMagazine _x;
 
     diag_log format ["MORTAR DEBUG - Loaded shell: %1", _x];
 
