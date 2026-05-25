@@ -392,9 +392,15 @@ private _hasList_buildableHouses = false;
                     _mrkid setMarkerAlphaLocal 1;
                     _mrkid setMarkerText format ["Camp %1", players_NS getVariable [format ["name%1", _owner], ""]];
                 };
-
+                diag_log ["Trying to filter UAV"];
                 if (_type isKindOf "UAV") then {
-                     _veh setVariable ["OT_spawntrack", true, true];
+                    _veh setVariable ["OT_spawntrack", true, true];
+                    createVehicleCrew _veh;
+                    {
+                        [_x, _owner] call OT_fnc_setOwner;
+                    } forEach (crew _veh);
+                    [_veh, _owner] call OT_fnc_setOwner;
+                    diag_log ["UAV FOUND. TRIED TO SET THE SPAWNTRACK AND CREW"];
                 };
             };
             if (_ccc isEqualTo 10) then {
