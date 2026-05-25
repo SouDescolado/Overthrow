@@ -392,6 +392,10 @@ private _hasList_buildableHouses = false;
                     _mrkid setMarkerAlphaLocal 1;
                     _mrkid setMarkerText format ["Camp %1", players_NS getVariable [format ["name%1", _owner], ""]];
                 };
+
+                if (_type isKindOf "UAV") then {
+                     _veh setVariable ["OT_spawntrack", true, true];
+                };
             };
             if (_ccc isEqualTo 10) then {
                 _ccc = 0;
