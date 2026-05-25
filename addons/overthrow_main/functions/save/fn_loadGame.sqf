@@ -401,7 +401,7 @@ private _hasList_buildableHouses = false;
                         [_x, _owner] call OT_fnc_setOwner;
                     } forEach (crew _veh);
                     [_veh, _owner] call OT_fnc_setOwner;
-                    _owner connectTerminalToUAV _veh;
+                    _owner UAVTerminalHackConnection _veh;
                     diag_log format [
                         "UAV DEBUG - Class: %1 | NetID: %2 | UAV Owner: %3",
                         typeOf _veh,
