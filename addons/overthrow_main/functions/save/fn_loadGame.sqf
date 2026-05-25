@@ -393,7 +393,7 @@ private _hasList_buildableHouses = false;
                     _mrkid setMarkerText format ["Camp %1", players_NS getVariable [format ["name%1", _owner], ""]];
                 };
                 diag_log ["Trying to filter UAV"];
-                diag_log format ["OWNER VAR: %1", _owner]
+                diag_log format ["OWNER VAR: %1", _owner];
                 if (unitIsUAV _veh) then {
                     _veh setVariable ["OT_spawntrack", true, true];
                     createVehicleCrew _veh;
