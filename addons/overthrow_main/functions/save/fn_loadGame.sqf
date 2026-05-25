@@ -393,6 +393,7 @@ private _hasList_buildableHouses = false;
                     _mrkid setMarkerText format ["Camp %1", players_NS getVariable [format ["name%1", _owner], ""]];
                 };
                 diag_log ["Trying to filter UAV"];
+                diag_log format ["OWNER VAR: %1", _owner]
                 if (unitIsUAV _veh) then {
                     _veh setVariable ["OT_spawntrack", true, true];
                     createVehicleCrew _veh;
@@ -400,9 +401,11 @@ private _hasList_buildableHouses = false;
                         [_x, _owner] call OT_fnc_setOwner;
                     } forEach (crew _veh);
                     [_veh, _owner] call OT_fnc_setOwner;
+                    _owner connectTerminalToUAV _veh;
                     diag_log format [
-                        "UAV DEBUG - UAV: %1 | Connected UAV Owner: %2",
-                        vehicleVarName _veh,
+                        "UAV DEBUG - Class: %1 | NetID: %2 | UAV Owner: %3",
+                        typeOf _veh,
+                        netId _veh,
                         UAVControl _veh
                     ];
                     diag_log ["UAV FOUND. TRIED TO SET THE SPAWNTRACK AND CREW"];
