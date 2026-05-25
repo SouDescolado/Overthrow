@@ -400,6 +400,11 @@ private _hasList_buildableHouses = false;
                         [_x, _owner] call OT_fnc_setOwner;
                     } forEach (crew _veh);
                     [_veh, _owner] call OT_fnc_setOwner;
+                    diag_log format [
+                        "UAV DEBUG - UAV: %1 | Connected UAV Owner: %2",
+                        vehicleVarName _veh,
+                        UAVControl _veh
+                    ];
                     diag_log ["UAV FOUND. TRIED TO SET THE SPAWNTRACK AND CREW"];
                 };
             };
