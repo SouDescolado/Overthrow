@@ -1,7 +1,6 @@
 params ["_user"];
-
-private _veh = objectParent _user;
-if (isNull _veh || _veh isEqualTo _user) exitWith {};
+private _mortar = vehicle player;
+private _shells = [];
 
 private _mortarAmmo = [
     "ACE_1Rnd_82mm_Mo_HE",
@@ -11,53 +10,59 @@ private _mortarAmmo = [
     "ACE_1Rnd_82mm_Mo_HE_LaserGuided"
 ];
 
-private _shells = [];
-
 {
     if (_x in _mortarAmmo) then {
         _shells pushBack _x;
     };
-} forEach magazines _user;
+} forEach magazines player;
 
-if (_shells isEqualTo []) exitWith {
-    "No mortar ammo found" call OT_fnc_notifyMinor;
-};
+diag_log format ["MORTAR DEBUG - Found Shells: %1", _shells];
 
 private _count = count _shells;
 private _time = _count * 7;
 
-format ["Loading %1 mortar shells...", _count] call OT_fnc_notifyMinor;
-[_time, false] call OT_fnc_progressBar;
-
-_veh enableSimulation false;
-
-
-[_user, _veh, _shells, _time] remoteExecCall ["TAG_fnc_mortarServer", 2];
-
-TAG_fnc_mortarServer = {
-    params ["_user", "_veh", "_shells", "_time"];
-
-    if (!local _veh) exitWith {
-        [_user, _veh, _shells, _time] remoteExecCall ["TAG_fnc_mortarServer", _veh];
-    };
-
-    private _aceAmmoHandling =
-        ["ace_advanced_ammoHandling_enabled"] call CBA_fnc_getSetting;
-
-    sleep _time;
-
-    {
-        if (_aceAmmoHandling) then {
-            _veh addMagazineTurret [_x, [0]];
-        } else {
-            _veh addMagazine _x;
-        };
-
-        _user removeMagazine _x;
-
-    } forEach _shells;
-
-    reload _veh;
-
-    [_veh, true] remoteExecCall ["enableSimulationGlobal", 0];
+if (_count <= 0) exitWith {
+    "No mortar ammo found" call OT_fnc_notifyMinor;
 };
+
+private _veh = objectParent _user;
+if (_veh isEqualTo _user) exitWith {};
+if (isPlayer _user) then {
+    _veh enableSimulation false;
+    [_time, _veh] spawn {
+        params ["_time", "_veh"];
+        sleep (_time + 5);
+        _veh enableSimulation true;
+        //Fail safe for user input disabled.
+    };
+    format ["Loading %1 mortar shells...", _count] call OT_fnc_notifyMinor;
+    [_time, false] call OT_fnc_progressBar;
+} else {
+    _user globalChat format ["Loading %1 mortar shells...", _count];
+};
+private _aceAmmoHandling =  ["ace_advanced_ammoHandling_enabled"] call CBA_fnc_getSetting;
+sleep _time;
+
+{
+    if (_aceAmmoHandling) then {
+        _veh addMagazineTurret [_x, [0]];
+    } else {
+        _veh addMagazine _x;
+    };
+    player removeMagazine _x;
+
+    diag_log format ["MORTAR DEBUG - Loaded shell: %1", _x];
+
+} forEach _shells;
+
+reload _mortar;
+
+
+if (isPlayer _user) then {
+    _veh enableSimulation true;
+    format ["Loaded %1 mortar shells", _count] call OT_fnc_notifyMinor;
+} else {
+    _user globalChat format ["Loaded %1 mortar shells", _count];
+};
+
+diag_log format ["MORTAR DEBUG - Mortar Ammo After: %1", magazinesAmmo _mortar];
