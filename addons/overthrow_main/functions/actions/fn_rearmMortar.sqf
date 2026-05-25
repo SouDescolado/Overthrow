@@ -40,7 +40,7 @@ if (isPlayer _user) then {
 } else {
     _user globalChat format ["Loading %1 mortar shells...", _count];
 };
-private _aceAmmoHandling =  ["ace_advanced_ammoHandling_enabled"] call CBA_fnc_getSetting;
+private _aceAmmoHandling =  ace_mk6mortar_useAmmoHandling //["ace_mk6mortar_useAmmoHandling"] call CBA_fnc_getSetting;
 sleep _time;
 
 {
